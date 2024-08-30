@@ -2,6 +2,7 @@ import { Router } from "express";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import universitymodels from "../models/universitymodels.js";
+import userModels from "../models/usermodels.js";
 
 const router = Router();
 
@@ -59,4 +60,26 @@ router.post('/logout', async (req, res) => {
         res.status(500).send({ error: true, message: "Internal Server Error" });
   }
 })
+
+// Route to get student details by university ID and student ID
+router.get("/:universityId/student/:studentId", async (req, res) => {
+  const { universityId, studentId } = req.params;
+
+  try {
+    // First, find student by university ID
+    const students = await userModels.find({ universityId, _id: studentId }).select("-password");
+    
+    // Check if any students were found
+    if (students.length === 0) {
+      return res.status(404).json({ error: true, message: "Student not found or does not belong to this university" });
+    }
+
+    // Respond with the student details
+    res.status(200).json({ students });
+  } catch (error) {
+    console.log("Error fetching student details:", error);
+    res.status(500).json({ error: true, message: "Internal Server Error" });
+  }
+});
+
 export default router;

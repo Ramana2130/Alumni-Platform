@@ -8,7 +8,7 @@ const emailRegex = /^[a-zA-Z0-9._%+-]+@(skcet\.ac\.in|gmail\.com)$/;
 
 router.post("/addstudent", async(req, res) => {
     try {
-        const {universityId,currentstudentsname,currentstudentsregisterno,currentstudentsdepartment, currentstudentsyearofjoining, currentstudentsyearofpassing, email} = req.body;
+        const {universityId,currentstudentsname,currentstudentsregisterno,currentstudentsdepartment, currentstudentsyearofjoining, currentstudentsyearofpassing, email,suggestion} = req.body;
         if(!emailRegex.test(email)) {
             return res.status(400).send({ success: false, message: "Invalid Email" });
         }
@@ -25,7 +25,8 @@ router.post("/addstudent", async(req, res) => {
             currentstudentsyearofjoining,
             currentstudentsyearofpassing,
             email,
-            hashedPassword
+            hashedPassword,
+            suggestion
         })
         await newStudents.save();
         return res.status(200).send({success: true, message: "Registred Successfully"});
@@ -79,8 +80,7 @@ router.post('/logout', async (req, res) => {
       res.status(500).send({ error: true, message: "Internal Server Error" });      
     }
   })
-
-  
+ 
   router.delete("/delete/:id", async(req, res) => {
     const studentId = req.params.id;
     try {

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Sidebar from '../../components/Alumni/Sidebar';
 import Card from './Card';
-import Alumniprofile from '../Alumini/AlumniProfile';
 import BentoCard from './BentoCard';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import Alumniprofile from '../Alumini/AlumniProfile';
 
 const StudentGird = () => {
     const [selectedDepartment, setSelectedDepartment] = useState('');

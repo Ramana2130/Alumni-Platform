@@ -15,6 +15,7 @@ function StudentNavbar() {
     console.log('Logging out...');
     localStorage.removeItem("token");
     localStorage.removeItem('_id');
+    localStorage.removeItem('universityId');
     navigate('/studentloginpage');
     toast.success("Logout Successfully")
     // Add your logout logic here
@@ -94,7 +95,7 @@ function StudentNavbar() {
                     <span className="sr-only">Open user menu</span>
                     <img
                       className="size-14 rounded-full"
-                      src={women}
+                      src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=626&ext=jpg&ga=GA1.1.745036993.1725005158&semt=ais_hybrid"
                       alt=""
                     />
                   </button>

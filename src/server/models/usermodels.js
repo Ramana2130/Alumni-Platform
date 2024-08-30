@@ -29,6 +29,9 @@ const userSchema = new mongoose.Schema(
       type:Number,
       required : true
     },
+    suggestion : {
+      type: String
+    },
     email: {
       type: String,
       required: true,

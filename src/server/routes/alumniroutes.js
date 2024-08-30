@@ -141,4 +141,24 @@ res.status(200).send({ success: true, updatealumni,message: 'Alumni Updated Succ
   }
 })
 
+AuthRoutes.get('/:universityId/alumnisyear/:year', async (req, res) => {
+  const { universityId, year } = req.params;
+
+  try {
+      const alumni = await alumniformsmodels.find({
+          universityId,
+          passedoutyear: year, // Filter by year
+      });
+
+      if (alumni.length === 0) {
+          return res.status(404).json({ message: 'No Alumni Found for the selected year' });
+      }
+
+      res.json({alumni});
+  } catch (error) {
+      console.error('Error fetching alumni by year:', error);
+      res.status(500).json({ message: 'Server Error' });
+  }
+});
+
 export default AuthRoutes;
