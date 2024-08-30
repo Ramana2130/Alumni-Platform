@@ -49,7 +49,7 @@ const Sidebar = () => {
                   <i className="fa-solid fa-hand text-white text-2xl"></i>
                 </NavLink>
               </li>
-              <li className="rounded-sm">
+              {/* <li className="rounded-sm">
                 <NavLink
                   to={`/studentsetting/${_id}`}
                   className={({ isActive }) =>
@@ -58,7 +58,7 @@ const Sidebar = () => {
                 >
                   <i className="fa-solid fa-gear text-white text-2xl"></i>
                 </NavLink>
-              </li>
+              </li> */}
               <li className="rounded-sm">
                 <NavLink
                   to={`/studentchat/${_id}`}

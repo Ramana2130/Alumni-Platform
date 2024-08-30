@@ -6,7 +6,7 @@ import Payment from './Payment'
 const Homepage = () => {
   const navigate=useNavigate();
   const page=()=>{
-        navigate('/aluminiloginpage')
+        navigate('/studentloginpage')
   }
   const learnmore=()=>{
     navigate('/aboutpage')

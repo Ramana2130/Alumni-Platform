@@ -78,8 +78,9 @@ const AluminiLoginPage = () => {
           </div>
         </div>
         <div className="relative shadow-custom-shadow flex justify-start items-center w-[50%]  bg-[#4cb5db]">
-          <div className="absolute bottom-40 left-44">
-            <img src={Graduation} alt="" className="h-[300px]" />
+        <div className="absolute bottom-40 left-16">
+
+            <img src={Graduation} alt="" className="h-[500px]" />
           </div>
           <img
             src={studentlogin}
