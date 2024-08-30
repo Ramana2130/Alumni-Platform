@@ -90,7 +90,24 @@
 .green::-webkit-scrollbar-thumb:hover {
   background-color: #555; /* Darker handle color on hover */
 }
+.scrollbar_yellow::-webkit-scrollbar {
+  width: 8px; /* Width of the vertical scrollbar */
+  height: 8px; /* Height of the horizontal scrollbar */
+}
 
+.scrollbar_yellow::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light grey background */
+  border-radius: 6px; /* Round corners of the track */
+}
+
+.scrollbar_yellow::-webkit-scrollbar-thumb {
+  background-color: #FDE047; /* Handle color */
+  border-radius: 6px; /* Round corners of the handle */
+}
+
+.scrollbar_yellow::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Darker handle color on hover */
+}
 /* Hide scrollbar for WebKit browsers */
 .scrollbar::-webkit-scrollbar {
   display: none; /* Hide the scrollbar */
@@ -118,4 +135,198 @@
 
 .scrollbar_blue::-webkit-scrollbar-thumb:hover {
   background-color: #555; /* Darker handle color on hover */
+}
+
+
+.box-icon {
+  display: grid;
+  place-items: center;
+}
+
+.box-label {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  font-size: 14px;
+  letter-spacing: 0.125em;
+}
+
+.box-title {
+  /* white-space: nowrap;
+  display: flex;
+  align-items: center; */
+  writing-mode: vertical-rl;
+  /* text-orientation: mixed;
+  font-size: 24px;
+  padding-top: 16px; */
+}
+
+
+
+.studio-button {
+    
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: 0.35s ease all;
+  overflow: hidden;
+  
+}
+
+.studio-button-icon {
+  position: relative;
+  top: 1px;
+}
+
+.studio-button-label {
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 0 8px;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: 0.25s ease all;
+}
+
+.box:hover {
+  .studio-button {
+    max-width: 100%;
+  }
+  .studio-button-label {
+    opacity: 1;
+    transform: translateX(0);
+    transition: 0.25s 0.1s ease-in opacity, 0.15s 0.1s cubic-bezier(.175, .885, .32, 1.275) transform;
+  }
+}
+/* From Uiverse.io by 0xnihilism */ 
+.card {
+  width: 300px;
+  padding: 20px;
+  background: #fff;
+  border: 6px solid #FDE047
+  ;
+  box-shadow: 12px 12px 0 #FDE047;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translate(-5px, -5px);
+  box-shadow: 17px 17px 0 #CA8A04;
+}
+
+.card__title {
+  font-size: 32px;
+  font-weight: 900;
+  color: #000;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.card__title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 90%;
+  height: 3px;
+  background-color: #000;
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+}
+
+.card:hover .card__title::after {
+  transform: translateX(0);
+}
+
+.card__content {
+  font-size: 16px;
+  line-height: 1.4;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.card__form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.card__form input {
+  padding: 10px;
+  border: 3px solid #000;
+  font-size: 16px;
+  font-family: inherit;
+  transition: transform 0.3s;
+  width: calc(100% - 26px); /* Adjust for padding and border */
+}
+
+.card__form input:focus {
+  outline: none;
+  transform: scale(1.05);
+  background-color: #000;
+  color: #ffffff;
+}
+
+.card__button {
+  border: 3px solid #000;
+  background: #000;
+  color: #fff;
+  padding: 10px;
+  font-size: 18px;
+  left: 20%;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+  width: 50%;
+  height: 100%;
+}
+
+.card__button::before {
+  content: "Sure?";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 105%;
+  background-color: #FDE047;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(100%);
+  transition: transform 0.3s;
+}
+
+.card__button:hover::before {
+  transform: translateY(0);
+}
+
+.card__button:active {
+  transform: scale(0.95);
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(2px, 2px);
+  }
+  25% {
+    transform: translate(-2px, -2px);
+  }
+  50% {
+    transform: translate(-2px, 2px);
+  }
+  75% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(2px, 2px);
+  }
+}
+
+.glitch {
+  animation: glitch 0.3s infinite;
 }

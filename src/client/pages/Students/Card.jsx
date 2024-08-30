@@ -1,6 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Card = ({ alumni }) => {
+  const navigate=useNavigate()
+  const view=()=>{
+    navigate('/studentaluminiprofile')
+  }
   // Extract the first name from the alumni name
   const firstName = alumni.alumniname.split(' ')[0];
   
@@ -8,37 +13,36 @@ const Card = ({ alumni }) => {
   const avatarUrl = `https://avatar.iran.liara.run/username?username=${firstName}`;
 
   return (
-    <div className="hover:bg-[#2596be]/40 shadow-2xl w-[250px] p-5 rounded-xl text-gray-800 overflow-hidden group hover:shadow-2xl hover:shadow-[#2596be]/50 transition-all duration-700">
-      <figure className="relative w-32 h-32 m-0 mx-auto rounded-full outline outline-offset-4 outline-[#2596be] 
-                before:content-[''] before:absolute before:block before:pointer-events-none before:rounded-full before:h-full before:w-full before:bg-[#2596be]/30 before:-z-[1]
-                group-hover:before:scale-[2.5] motion-safe:before:transition-all 
-                motion-safe:transform-gpu motion-safe:before:duration-500 before:origin-center group-hover:outline-[#2596be]/30">
-        <img
-          className="rounded-full block max-w-full bg-[#2596be] object-cover z-10 relative"
-          src={avatarUrl}
-          alt={alumni.alumniname}
-        />
-      </figure>
-      <header className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-        <h2 className="font-semibold text-2xl text-center text-[#2596be] mt-6 group-hover:text-gray-50">
-          {alumni.alumniname}
-        </h2>
-      </header>
+    <div className=''>
 
-      <ul className="flex justify-center space-x-4 mt-2 text-black font-bold">
-        <li className="translate-y-[100px] group-hover:translate-y-0 delay-100 transition">
-          <span>{alumni.department}</span>
-        </li>
-        <li className="translate-y-[100px] group-hover:translate-y-0 delay-100 transition">
-          <span>{alumni.passedoutyear}</span>
-        </li>
-      </ul>
-      <button
-        type="button"
-        className="mt-4 flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md bg-[#2596be] group-hover:bg-[#1E1E1E] text-white"
-      >
-        Read more
-      </button>
+    <div className="box w-[400px] h-[400px] bg-white rounded-2xl grid grid-cols-[64px_1fr] relative">
+    <div className="box-icon flex items-center justify-center">
+   
+    </div>
+    <div className=" flex items-center pl-4 text-sm tracking-wide space-x-3">
+      <h1 className='border border-black rounded-full px-3 uppercase  font-semibold text-lg'>{alumni.department}</h1>
+      <h1 className='border border-black rounded-full px-3 uppercase  font-semibold text-lg'>Coimbatore</h1>
+      <h1 className='border border-black rounded-full px-3 uppercase  font-semibold text-lg'>{alumni.passedoutyear}</h1>
+
+
+    </div>
+    <div className="box-title uppercase  flex items-center justify-center  text-2xl font-semibold ">
+    {alumni.alumniname}
+    </div>
+    <div className="box-image">
+      <img src={avatarUrl} alt=""  className='h-[300px] rounded-lg'/>
+    </div>
+    <div className="studio-button absolute bottom-4 right-4 flex items-center bg-[#EAB308] text-black py-2 px-3 rounded-full shadow-lg transition-all ease-in-out duration-300 overflow-hidden max-w-[45px]">
+      <div className="studio-button-icon relative top-[1px]">
+      <i class="fa-solid fa-chevron-left text-center text-lg"></i>
+      </div>
+      <button  onClick={view}  className="studio-button-label uppercase whitespace-nowrap px-2 opacity-0 translate-x-2 transition-transform duration-250 ease-in-out">
+        View Details
+      </button  >
+    </div>
+  </div>
+
+
     </div>
   );
 };

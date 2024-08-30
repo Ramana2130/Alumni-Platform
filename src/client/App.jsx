@@ -22,7 +22,7 @@ import UniversityChat from "./pages/University/UniversityChat";
 import AluminiStory from "./pages/Alumini/AluminiStory";
 import AluminiList from "./pages/Alumini/AluminiList";
 import AluminiSetting from "./pages/Alumini/AluminiSetting";
-import AluminiChat from "./pages/Students/StudentChat";
+import AluminiChat from "./pages/Alumini/AluminiChat";
 import { Toaster } from "react-hot-toast";
 import PaymentComponent from "./components/PaymentComponent";
 import UniversityAddCurrentStudent from "./pages/University/UniversityAddCurrentStudent";
@@ -31,6 +31,12 @@ import UpdateAlumnidetails from "./pages/University/UpdateAlumnidetails";
 import UpdateStudentsForm from "./components/University/UpdateStudentsForm";
 import StudentDashboard from "./pages/Students/StudentDashboard";
 import StudentDonation from "./pages/Students/StudentDonation";
+import StudentAluminiProfile from "./pages/Students/StudentAluminiProfile";
+import Chat from "./pages/Students/Chat";
+import StudentChat from "./pages/Students/StudentChat";
+import AluminiDashboard from "./pages/Alumini/AluminiDashboard";
+import AluminiJob from "./pages/Alumini/AluminiJob";
+import AluminiDonation from "./pages/Alumini/AluminiDonation";
 
 const App = () => {
   return (
@@ -70,9 +76,14 @@ const App = () => {
         <Route path="/studentrequestform/:_id" element={<StudentDonation/>} />
         <Route path="/aluminisetting/:_id" element={<AluminiSetting/>} />
         <Route path="/aluminichat/:_id" element={<AluminiChat/>} />
+        <Route path="/studentchat/:_id" element={<StudentChat/>} />
         <Route path="/Successstory" element={<AluminiStory/>} />
         <Route path="/payment" element={<PaymentComponent/>} />
-
+        <Route path="/studentaluminiprofile" element={<StudentAluminiProfile/>} />
+        <Route path="/aluminidashboard" element={<AluminiDashboard/>} />
+        <Route path="/aluminijob" element={<AluminiJob/>} />
+        <Route path="/aluminidonationform" element={<AluminiDonation/>} />
+        <Route path="/aluminichat" element={<AluminiChat/>} />
 
 
 

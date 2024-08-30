@@ -1,7 +1,8 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 
 const Sidebar = () => {
+  const {_id} = useParams();
   return (
     <div className="flex h-[867px] items-center p-3 w-[130px] bg-transparent">
       <div className="space-y-3 w-full flex justify-center">
@@ -10,9 +11,9 @@ const Sidebar = () => {
             <ul className="pt-2 pb-4 space-y-3 ml-5 text-sm">
               <li className="rounded-sm">
                 <NavLink
-                  to='/aluminidashboard'
+                  to={`/studentdashboard/${_id}`}
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#2596be]' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#FDE047]' : 'bg-[#1E1E1E]'}`
                   }
                 >
                   <i className="fa-solid fa-house text-white text-2xl"></i>
@@ -20,40 +21,49 @@ const Sidebar = () => {
               </li>
               {/* <li className="rounded-sm">
                 <NavLink
-                  to='/aluministory'
+                  to={`/aluministory/${_id}`}
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#2596be]' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#FDE047]' : 'bg-[#1E1E1E]'}`
                   }
                 >
                   <i className="fa-solid fa-graduation-cap text-white text-2xl"></i>
                 </NavLink>
               </li> */}
-              <li className="rounded-sm">
+              {/* <li className="rounded-sm">
                 <NavLink
-                  to='/aluminijob'
+                  to={`/aluminilist2/${_id}`}
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#2596be]' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#FDE047]' : 'bg-[#1E1E1E]'}`
                   }
                 >
-                  <i className="fa-solid fa-briefcase text-white text-2xl"></i>
+                  <i className="fa-solid fa-user-group text-white text-2xl"></i>
+                </NavLink>
+              </li> */}
+              <li className="rounded-sm">
+                <NavLink
+                  to={`/studentrequestform/${_id}`}
+                  className={({ isActive }) =>
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#FDE047]' : 'bg-[#1E1E1E]'}`
+                  }
+                >
+                  <i className="fa-solid fa-hand text-white text-2xl"></i>
                 </NavLink>
               </li>
               <li className="rounded-sm">
                 <NavLink
-                  to='/aluminidonationform'
+                  to={`/studentsetting/${_id}`}
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#2596be]' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#FDE047]' : 'bg-[#1E1E1E]'}`
                   }
                 >
-                  <i className="fa-solid fa-indian-rupee-sign text-white text-2xl"></i>
+                  <i className="fa-solid fa-gear text-white text-2xl"></i>
                 </NavLink>
               </li>
-           
               <li className="rounded-sm">
                 <NavLink
-                  to='/aluminichat'
+                  to={`/studentchat/${_id}`}
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#2596be]' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#FDE047]' : 'bg-[#1E1E1E]'}`
                   }
                 >
                   <i className="fa-solid fa-comments text-white text-2xl"></i>
@@ -61,9 +71,9 @@ const Sidebar = () => {
               </li>
               <li className="rounded-sm">
                 <NavLink
-                  to='/aluminiloginpage'
+                  to='/studentloginpage'
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#2596be]' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#FDE047]' : 'bg-[#1E1E1E]'}`
                   }
                 >
                   <i className="fa-solid fa-right-from-bracket text-white text-2xl"></i>

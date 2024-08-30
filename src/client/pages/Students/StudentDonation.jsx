@@ -1,7 +1,8 @@
 import React from 'react'
-import Sidebar from '../../components/Alumni/Sidebar'
-import StudentNavbar from '../../components/Alumni/StudentNavbar'
+import StudentNavbar from '../../components/Students/StudentNavbar';
+
 import StudentDonationForm from './StudentDonationForm'
+import Sidebar from '../../components/Students/Sidebar'
 
 const StudentDonation = () => {
   return (

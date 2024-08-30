@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import women from '../../assets/team/kabi.png';
 
-const Alumniprofile = () => {
+const StudentProfile = () => {
   const [step, setStep] = useState(1);
 
   const handleNext = () => {
@@ -357,16 +357,33 @@ const Alumniprofile = () => {
                     type="text"
                     placeholder='university name'
                     required
-                    readOnly
                   />
               <h1 className='text-[#87888C] mt-3 font-bold text-sm uppercase'>Department</h1>
-              <input
-                    id="Name"
-                    className="border p-1 shadow-md placeholder:text-base border-t-0 w-72 bg-transparent border-r-0 border-l-0 border-b-1 mb-2  border-[#87888C] text-white uppercase   focus:outline-none"
-                    type="text"
-                    placeholder='information technology'
-                    required
-                  />
+              <select
+  className="border-[#87888C] bg- border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-2 bg-transparent text-[#87888C] w-full"
+  name="department"
+  id="department"
+>
+  <option value="CSE">Computer Science and Engineering (CSE)</option>
+  <option value="IT">Information Technology (IT)</option>
+  <option value="ECE">Electronics and Communication Engineering (ECE)</option>
+  <option value="EEE">Electrical and Electronics Engineering (EEE)</option>
+  <option value="MECH">Mechanical Engineering (MECH)</option>
+  <option value="CIVIL">Civil Engineering (CIVIL)</option>
+  <option value="CHEM">Chemical Engineering (CHEM)</option>
+  <option value="BIOTECH">Biotechnology (BIOTECH)</option>
+  <option value="AE">Aeronautical Engineering (AE)</option>
+  <option value="AUTO">Automobile Engineering (AUTO)</option>
+  <option value="ARCH">Architecture (ARCH)</option>
+  <option value="BBA">Business Administration (BBA)</option>
+  <option value="MBA">Master of Business Administration (MBA)</option>
+  <option value="BSC">Bachelor of Science (B.Sc)</option>
+  <option value="MSC">Master of Science (M.Sc)</option>
+  <option value="MCA">Master of Computer Applications (MCA)</option>
+  <option value="PHARM">Pharmacy (PHARM)</option>
+  <option value="LAW">Law</option>
+</select>
+
               <h1 className='text-[#87888C] mt-3 font-bold text-sm uppercase'>Location</h1>
               <input
                     id="Name"
@@ -374,7 +391,6 @@ const Alumniprofile = () => {
                     type="text"
                     placeholder='location'
                     required
-                    readOnly
                   />
               <div className='flex space-x-10'>
                 <div>
@@ -385,14 +401,12 @@ const Alumniprofile = () => {
                     type="number"
                     placeholder='2018'
                     required
-                    readOnly
                   />
                 </div>
                 <div>
                   <h1 className='text-[#87888C] mt-3 font-bold text-sm uppercase'>Pass Out</h1>
                   <input
                     id="Name"
-                    readOnly
                     className="border p-1 shadow-md placeholder:text-base border-t-0 bg-transparent border-r-0 border-l-0 border-b-1 mb-2  border-[#87888C] text-white uppercase   focus:outline-none"
                     type="number"
                     placeholder='2024'
@@ -428,4 +442,4 @@ const Alumniprofile = () => {
   );
 };
 
-export default Alumniprofile;
+export default StudentProfile;

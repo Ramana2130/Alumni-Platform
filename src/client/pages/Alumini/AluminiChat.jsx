@@ -1,14 +1,12 @@
 import React from 'react'
-
-import Chat from './Chat'
-import StudentNavbar from '../../components/Students/StudentNavbar';
-
+import AlumniNavbar from '../../components/Alumni/AlumniNavbar'
 import Sidebar from '../../components/Alumni/Sidebar'
+import Chat from './Chat'
 
-const StudentChat = () => {
+const AluminiChat = () => {
   return (
     <div className='bg-[#111111] h-[100vh] overflow-hidden'>
-    <StudentNavbar/>
+    <AlumniNavbar/>
     <div className='flex'>
         <Sidebar/>
         <Chat/>
@@ -20,4 +18,4 @@ const StudentChat = () => {
   )
 }
 
-export default StudentChat
+export default AluminiChat
