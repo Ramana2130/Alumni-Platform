@@ -82,6 +82,13 @@ const AluminiProfile = () => {
                      
                     </form>
                   </div>
+                  <div className="card1 col-span-2" >
+                    <span className="card1__title text-yellow-600 text-center text-xl font-bold mb-4">university name</span>
+                   <h1 className="text-xl font-medium  text-center uppercase">sri krishna engineering college</h1>
+                    <form className="card1__form">
+                     
+                    </form>
+                  </div>
           </div>
         </div>
         <div>
