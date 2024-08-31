@@ -116,23 +116,7 @@ const CurrentStudentsTableList = () => {
             <i className="fa-solid fa-circle-info text-7xl text-[#CFF80B]"></i>
           </div>
 
-          <div className="flex justify-between p-5">
-            <div className="flex items-center space-x-2 border border-[#B1D609]">
-              <input
-                id="input"
-                name="file"
-                type="file"
-                onChange={readUploadFile}
-                accept=".xlsx, .xls, .csv"
-                className="text-white file:bg-[#CFF80B] file:text-black file:px-4 file:py-2 file:rounded-full hover:file:bg-[#B1D609] cursor-pointer"
-              />
-              <label htmlFor="input" className="text-sm text-[#cff80b]">
-                Note: The headers in the Excel file should be as follows: Name,
-                Department, Email, Year of Joining, Year of Passing.
-              </label>
-            </div>
-            {loading && <progress style={{ width: "100%" }}></progress>}
-          </div>
+      
 
           <div className="rounded-2xl py-4 px-4 md:px-8 xl:px-10">
             <div className="sm:flex items-center justify-between">
@@ -206,7 +190,7 @@ const CurrentStudentsTableList = () => {
                 </a>
               </div>
             </div>
-            <div className="mt-7 h-[52vh] overflow-auto">
+            <div className="mt-7 h-[50vh] overflow-auto">
               <table className="w-full whitespace-nowrap">
                 <thead className="text-center">
                   <tr>
@@ -261,15 +245,15 @@ const CurrentStudentsTableList = () => {
                         <td className="text-center">
                           <Link
                             to={`/updatecurrentstudents/${task.universityId}/${task._id}`}
-                            className="px-4 py-2 bg-[#3498DB] text-white rounded-full mr-2"
+                            className="px-4 py-2 ] text-white rounded-full mr-2"
                           >
-                            Edit
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-2"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
                           </Link>
                           <button
                             onClick={() => handleDelete(task._id)}
                             className="px-4 py-2 bg-[#E74C3C] text-white rounded-full"
                           >
-                            Delete
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                           </button>
                         </td>
                       </tr>
@@ -284,21 +268,39 @@ const CurrentStudentsTableList = () => {
                 </tbody>
               </table>
             </div>
-            <div className="flex justify-between items-center mt-4">
+              <div className="flex justify-between p-5">
+            <div className="flex items-center space-x-2 border border-[#B1D609]">
+              <input
+                id="input"
+                name="file"
+                type="file"
+                onChange={readUploadFile}
+                accept=".xlsx, .xls, .csv"
+                className="text-white file:bg-[#CFF80B] file:text-black file:px-4 file:py-2 file:rounded-full hover:file:bg-[#B1D609] cursor-pointer"
+              />
+              <label htmlFor="input" className="text-sm text-[#cff80b]">
+                Note: The headers in the Excel file should be as follows: Name,
+                Department, Email, Year of Joining, Year of Passing.
+              </label>
+            </div>
+            {loading && <progress style={{ width: "100%" }}></progress>}
+          </div>
+            
+            <div className="flex justify-center space-x-2 items-center mt-1">
               <button
                 onClick={prevPage}
                 disabled={currentPage === 1}
-                className="py-2 px-4 bg-[#CFF80B] text-black rounded-full"
-              >
-                Previous
-              </button>
-              <p className="text-white">Page {currentPage}</p>
+                className="px-3 py-1 bg-[#B1D609] text-black rounded-full font-bold"
+                >
+                  <i class="fa-solid text-xl fa-caret-left"></i>
+                </button>
+
               <button
                 onClick={nextPage}
                 disabled={currentTasks.length < tasksPerPage}
-                className="py-2 px-4 bg-[#CFF80B] text-black rounded-full"
+                className="py-1 px-3 bg-[#CFF80B] text-black rounded-full"
               >
-                Next
+                <i class="fa-solid text-xl fa-caret-right"></i>
               </button>
             </div>
           </div>

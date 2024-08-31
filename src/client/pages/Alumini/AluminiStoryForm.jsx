@@ -26,7 +26,7 @@ const AluminiStoryForm = () => {
           <div className="h-[700px] w-[500px] p-5">
             <h1 className="text-white  font-semibold text-5xl uppercase">
  
-              Let's TEll full <span className='text-[#2596be]'>  Story!</span> 
+              Let's  fill <span className='text-[#2596be]'>  form!</span> 
             </h1>
             <div className='mt-24'>
 
@@ -44,47 +44,51 @@ const AluminiStoryForm = () => {
             <div className="h-[700px] bg-[#111111]  relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
               <div>
                 <h1 className="text-white font-extrabold text-6xl uppercase">
-                  Let's tell Story 
+                 Personal Form
                 </h1>
 
                 <form action="#" method="post" className="space-y-4  w-[500px]">
                   <div className="mt-10 ">
                     <label htmlFor="alumniName" className="text-sm font-semibold text-[#87888C]">
-                      University Name
+                      Alumni Name
                     </label>
                     <input
                       id="alumniName"
                       className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
                       type="text"
-                      placeholder="University name"
+                      placeholder="alumni name"
                       required
                     />
                     <div className="grid">
                       <label htmlFor="department" className="text-sm font-semibold text-[#87888C]">
-                        Department
+                        About
                       </label>
-                      <select
-                        className="border-[#87888C] bg- border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 bg-[#111111] text-[#87888C] w-full"
-                        name="department"
-                        id="department"
-                      >
-                        <option value="IT">IT</option>
-                        <option value="CSE">CSE</option>
-                        <option value="AIDS">AIDS</option>
-                        <option value="MECH">MECH</option>
-
-
-                        
-                      </select>
+                      <input
+                      id="alumniName"
+                      className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
+                      type="text"
+                      placeholder="about"
+                      required
+                    />
                     </div>
                     <label htmlFor="passout" className="text-sm font-semibold text-[#87888C]">
-                      Passout Year
+                      City
+                    </label>
+                    <input
+                      id="passout"
+                      className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
+                      type="text"
+                      placeholder="city"
+                      required
+                    />
+                     <label htmlFor="passout" className="text-sm font-semibold text-[#87888C]">
+                      Mobile
                     </label>
                     <input
                       id="passout"
                       className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
                       type="number"
-                      placeholder="passout year"
+                      placeholder="mobile no"
                       required
                     />
                      <button
@@ -104,7 +108,7 @@ const AluminiStoryForm = () => {
             <div className="h-[700px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
               <div>
                 <h1 className="text-white font-extrabold text-6xl uppercase">
-                  Alumni Form
+                  Personal Form
                 </h1>
                 <button
                 className="bg-[#2596be] mt-5 px-5 py-2 shadow-lg p-2 text-black font-semibold rounded-lg hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
@@ -131,26 +135,16 @@ const AluminiStoryForm = () => {
 
                         
                       </select>
-                    <label htmlFor="confirmPassword" className="text-sm font-semibold text-[#87888C]">
-                     Company Name
+                      <label htmlFor="email" className="text-sm font-semibold text-[#87888C]">
+                    Story
                     </label>
-                    <input
-                      id="confirmPassword"
-                      className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
-                      type="text"
-                      placeholder="Company Name"
-                      required
+                    <textarea
+                        className="border-[#87888C] bg-  rounded-lg border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 bg-[#111111] text-[#87888C] w-full"
+                        name="department"
+                        rows={5}
+                        id="department"
                     />
-                    <label htmlFor="password" className="text-sm font-semibold text-[#87888C]">
-                      Salary
-                    </label>
-                    <input
-                      id="password"
-                      className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
-                      type="text"
-                      placeholder="Salary"
-                      required
-                    />
+                  
                   </div>
                 </form>
 
@@ -169,7 +163,7 @@ const AluminiStoryForm = () => {
             <div className="h-[700px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
               <div>
                 <h1 className="text-white font-extrabold text-6xl uppercase">
-                  Alumni Form
+                  Personal Form
                 </h1>
                 <button
                 className="bg-[#2596be] mt-5 px-5 py-2 shadow-lg p-2 text-black font-semibold rounded-lg hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
@@ -181,25 +175,16 @@ const AluminiStoryForm = () => {
 
                 <form action="#" method="post" className="w-[500px]">
                   <div className="mt-10 ">
-                    <label htmlFor="email" className="text-sm font-semibold text-[#87888C]">
-                     Inspire Story
+                    
+                
+                    <label htmlFor="confirmPassword" className="text-sm font-semibold text-[#87888C]">
+                    Tips
                     </label>
                     <textarea
                         className="border-[#87888C] bg-  rounded-lg border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 bg-[#111111] text-[#87888C] w-full"
                         name="department"
-                        row={3}
+                        rows={2}
                         id="department"
-                    />
-                
-                    <label htmlFor="confirmPassword" className="text-sm font-semibold text-[#87888C]">
-                     Online Platform
-                    </label>
-                    <input
-                      id="confirmPassword"
-                      className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
-                      type="text"
-                      placeholder="Online Platform Link"
-                      required
                     />
                     {/* <label htmlFor="password" className="text-sm font-semibold text-[#87888C]">
                       Salary
@@ -219,14 +204,14 @@ const AluminiStoryForm = () => {
                   type="submit"
                   onClick={handleNext}
                 >
-                  Next
+                  Submit
                 </button>
               </div>
             </div>
           )}
           
           {step === 4 && (
-            <div className="h-[700px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
+            <div className="h-[700px] w-[450px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
               <div className="text-center">
                 <h1 className="text-white font-extrabold text-6xl uppercase">
                   Success!

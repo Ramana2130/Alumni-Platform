@@ -19,6 +19,18 @@ const Sidebar = () => {
         <div>
           <div className="flex justify-start mt-8">
             <ul className="pt-2 pb-4 space-y-3 ml-5 text-sm">
+            <li className="rounded-sm">
+                <NavLink
+                  to={`/aluministory/${id}`}
+                  className={({ isActive }) =>
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${
+                      isActive ? "bg-[#2596be]" : "bg-[#1E1E1E]"
+                    }`
+                  }
+                >
+                  <i className="fa-solid fa-file text-white text-2xl"></i>
+                </NavLink>
+              </li>  
               <li className="rounded-sm">
                 <NavLink
                   to={`/aluminidashboard/${id}`}
@@ -65,7 +77,7 @@ const Sidebar = () => {
                   <i className="fa-solid fa-indian-rupee-sign text-white text-2xl"></i>
                 </NavLink>
               </li>
-
+                    
               <li className="rounded-sm">
                 <NavLink
                   to={`/aluminichat/${id}`}

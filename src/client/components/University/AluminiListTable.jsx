@@ -9,7 +9,7 @@ const AlumniListTable = () => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
-  const tasksPerPage = 5;
+  const tasksPerPage = 6;
   const { _id } = useParams();
 
   useEffect(() => {
@@ -110,23 +110,7 @@ const AlumniListTable = () => {
             <h1 className="text-white font-semibold text-4xl uppercase">
               Alumni List
             </h1>
-            <Fragment>
-              <div className="flex items-center space-x-2 border border-[#B1D609]">
-                <input
-                  id="input"
-                  name="file"
-                  type="file"
-                  onChange={readUploadFile}
-                  accept=".xlsx, .xls, .csv"
-                  className="text-white file:bg-[#CFF80B] file:text-black file:px-4 file:py-2 file:rounded-full hover:file:bg-[#B1D609] cursor-pointer"
-                />
-                <label htmlFor="input" className="text-sm text-[#cff80b]">
-                  Note: The headers in the Excel file should be as follows:
-                  Name, Department, Email, Year of Joining, Year of Passing.
-                </label>
-              </div>
-              {loading && <progress style={{ width: "100%" }}></progress>}
-            </Fragment>
+      
             <i className="fa-solid fa-circle-info text-7xl text-[#CFF80B]"></i>
           </div>
 
@@ -156,7 +140,7 @@ const AlumniListTable = () => {
             </div>
             <div className="mt-7 h-[52vh] overflow-auto">
               <table className="w-full whitespace-nowrap">
-                <thead className="text-center bg-gray-800">
+                <thead className="text-center ">
                   <tr>
                     <th className="text-sm text-white uppercase py-2 px-4">
                       Name
@@ -256,33 +240,13 @@ const AlumniListTable = () => {
                             {task.alumnimobilenumber}
                           </p>
                         </td>
-                        <td className="text-center py-2 px-4">
+                        <td className="text-center  ">
+                          
                           <Link
                             to={`/updatealumnidetails/${task.universityId}/${task._id}`}
-                            className="text-yellow-400 hover:text-yellow-600"
+                            className="text-yellow-400  hover:text-yellow-600"
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-pencil"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              strokeWidth="2"
-                              stroke="currentColor"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path
-                                stroke="none"
-                                d="M0 0h24v24H0z"
-                                fill="none"
-                              />
-                              <path d="M12 5l7 7l-5 5l-7 -7z" />
-                              <path d="M13 5l6 6" />
-                              <path d="M13 5l-5 5" />
-                              <path d="M2 21h15a2 2 0 0 0 2 -2v-2l-12 -12" />
-                            </svg>
+                          <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-2"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
                           </Link>
                           <button
                             onClick={() => handleDelete(task._id)}
@@ -325,19 +289,38 @@ const AlumniListTable = () => {
                   )}
                 </tbody>
               </table>
+              
             </div>
-            <div className="flex items-center justify-between mt-7">
+            <Fragment>
+              <div className="flex items-center space-x-2 border border-[#B1D609]">
+                <input
+                  id="input"
+                  name="file"
+                  type="file"
+                  onChange={readUploadFile}
+                  accept=".xlsx, .xls, .csv"
+                  className="text-white file:bg-[#CFF80B] file:text-black file:px-4 file:py-2 file:rounded-full hover:file:bg-[#B1D609] cursor-pointer"
+                />
+                <label htmlFor="input" className="text-sm text-[#cff80b]">
+                  Note: The headers in the Excel file should be as follows:
+                  Name, Department, Email, Year of Joining, Year of Passing.
+                </label>
+              </div>
+              {loading && <progress style={{ width: "100%" }}></progress>}
+    </Fragment>  
+            <div className="flex space-x-2 items-center justify-center mt-5">
+              
               <button
                 onClick={prevPage}
-                className="px-6 py-3 bg-[#B1D609] text-black rounded-full font-bold"
+                className="px-3 py-1 bg-[#B1D609] text-black rounded-full font-bold"
               >
-                Previous
+                <i class="fa-solid text-xl fa-caret-left"></i>
               </button>
               <button
                 onClick={nextPage}
-                className="px-6 py-3 bg-[#B1D609] text-black rounded-full font-bold"
+                className="px-3 py-1 bg-[#B1D609] text-black rounded-full font-bold"
               >
-                Next
+                <i class="fa-solid text-xl fa-caret-right"></i>
               </button>
             </div>
           </div>
