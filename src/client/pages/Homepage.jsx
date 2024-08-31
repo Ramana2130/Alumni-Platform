@@ -35,7 +35,7 @@ const Homepage = () => {
 
       <h1 className='text-6xl font-thin sans text-white z'>From    <span className='text-yellow-500'>Alumni </span>Dreams to Your Reality</h1>
       <h1 className='text-6xl font-thin sans text-white mt-5'> Shape Your<span className='text-yellow-500'>Future</span> .</h1>
-      <p className='text-lg font-medium  text-white mt-14 '>Your dream job is out there—let us help you discover it.</p>
+      <p className='text-lg font-medium  text-white mt-8 '>Your dream job is out there  let us help you discover it.</p>
       <div className='absolute left-[500px] top-[500px]'>
       <img src={arrow} alt="" className='h-28' />
       </div>
