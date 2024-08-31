@@ -9,7 +9,7 @@ const AluminiProfile = () => {
         <div>
           <h1 className="text-white pt-24 font-semibold text-5xl uppercase">
             Success
-            <span className="text-[#FDE047]"> Stories!</span>
+            <span className="text-yellow-500"> Stories!</span>
           </h1>
 
           <p className="pt-10 text-xl text-white font-medium">
@@ -17,7 +17,7 @@ const AluminiProfile = () => {
           </p>
           <h1 className="text-white  pt-10 font-semibold text-5xl uppercase">
             Tips
-            <span className="text-[#FDE047]">!</span>
+            <span className="text-yellow-500">!</span>
           </h1>
           <p className="pt-5 text-xl text-white font-medium">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas quos nulla quaerat modi, non ratione dolores, beatae sequi excepturi maxime quisquam eum cum rerum adipisci consequatur magni quasi, inventore ut!
@@ -75,7 +75,7 @@ const AluminiProfile = () => {
         <div>
         <div>
         <h1 className="text-white pt-24 font-semibold text-5xl uppercase">
-            university <span className="text-[#FDE047]"> details!</span>
+            university <span className="text-yellow-500"> details!</span>
           </h1>
           <div className="grid grid-cols-2 gap-10 mx-10 pt-20 mt-5">
           <div className="card1" >

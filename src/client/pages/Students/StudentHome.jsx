@@ -48,9 +48,7 @@ const StudentHome = () => {
 
     return (
         <div className="flex p-4 h-[85vh] bg-[#111111] justify-center gap-5 px-14 py-5">
-            <div className="relative h-[85vh] w-[8vw] rounded-2xl">
-                <Sidebar />
-            </div>
+          
 
             <div className="flex justify-center">
                 {currentPage === 1 ? (
@@ -64,7 +62,7 @@ const StudentHome = () => {
 
                         <button
                             onClick={handleBackButtonClick}
-                            className="mb-4 px-4 py-2 bg-[#FDE047] text-white rounded-md self-start"
+                            className="mb-4 px-4 py-2 bg-yellow text-white rounded-md self-start"
                         >
                             <i class="fa-solid fa-chevron-left"></i>
                         </button>
