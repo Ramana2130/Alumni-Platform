@@ -3,46 +3,198 @@ import express from "express";
 import alumniformsmodels from "../models/alumniform.js";
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import universitymodels from "../models/universitymodels.js";
+import multer from "multer";
+import { read, utils } from "xlsx";
+import mongoose from "mongoose";
 const AuthRoutes = express.Router();
 
+const upload = multer({ storage: multer.memoryStorage() });
+
+
 // AuthRoutes.post("/register", register);
-AuthRoutes.post("/addalumni", async (req, res) => {
-    try {
-      const {
-        universityId,
-        alumniname,
-        department,
-        passedoutyear,
-        alumniemail,
-        password,
-        yearofjoining,
-      } = req.body;
-      const existingalumni = await alumniformsmodels.findOne({ alumniemail });
-      if (existingalumni) {
-       return  res.status(400).send({ success: false, message: "User Already Exists" });
-      }
-      const hashedPassword = await bcryptjs.hash(password, 10);      
-      const newAlumni = new alumniformsmodels({
-        universityId: universityId,
-        alumniname,
-        department,
-        passedoutyear,
-        alumniemail,
-        password: hashedPassword,
-        yearofjoining,
-      });
-      await newAlumni.save();
-     return res
-        .status(200)
-        .send({ success: true, message: "Alumni registerd Succesfully" });
-    } catch (error) {
-      console.log(error);
-      return res
-        .status(500)
-        .send({ success: false, message: "Internal Server Error", error });
+AuthRoutes.post('/addexcelfile/:universityId', upload.single('file'), async (req, res) => {
+  try {
+    const file = req.file;
+    const { universityId } = req.params;
+
+    if (!file) {
+      return res.status(400).send('No file uploaded.');
     }
-  });
+
+    if (!mongoose.Types.ObjectId.isValid(universityId)) {
+      return res.status(400).send('Invalid University ID.');
+    }
+
+    const universityObjectId = new mongoose.Types.ObjectId(universityId);
+
+    // Read the file buffer using xlsx
+    const workbook = read(file.buffer, { type: 'buffer' });
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+    const json = utils.sheet_to_json(worksheet);
+    // Hash the passwords and transform the data
+    const saltRounds = 10; // You can adjust the salt rounds as needed
+    const alumniDataPromises = json.map(async row => {
+      const password = typeof row['RegisterNo'] === 'string' ? row['RegisterNo'].trim() : String(row['RegisterNo']);
+      const hashedPassword = await bcryptjs.hash(password, saltRounds);
+
+      return {
+        universityId: universityObjectId,
+        alumniname: typeof row['Name'] === 'string' ? row['Name'].trim() : row['Name'],
+        department: typeof row['Department'] === 'string' ? row['Department'].trim() : row['Department'],
+        alumniemail: typeof row['Email'] === 'string' ? row['Email'].trim() : row['Email'],
+        yearofjoining: typeof row['Year of Joining'] === 'string' ? row['Year of Joining'].trim() : row['Year of Joining'],
+        passedoutyear: typeof row['Year of Passing'] === 'string' ? row['Year of Passing'].trim() : row['Year of Passing'],
+        alumniregisterno: typeof row['RegisterNo'] === 'string' ? row['RegisterNo'].trim() : row['RegisterNo'],
+        alumnimobilenumber: typeof row['Mobile Number'] === 'string' ? row['Mobile Number'].trim() : row['Mobile Number'],
+        password: hashedPassword // Set hashed password
+      };
+    });
+
+    const alumniData = (await Promise.all(alumniDataPromises)).filter(row =>
+      row &&
+      row.alumniname &&
+      row.department &&
+      row.alumniemail &&
+      row.yearofjoining &&
+      row.passedoutyear &&
+      row.alumniregisterno &&
+      row.alumnimobilenumber &&
+      row.password 
+    );
+
+    if (alumniData.length === 0) {
+      return res.status(400).json({ error: 'No valid data to save.' });
+    }
+
+    await alumniformsmodels.insertMany(alumniData);
+
+    res.status(200).json({ message: 'Data uploaded and saved successfully.' });
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    res.status(500).json({ error: 'Error uploading file.' });
+  }
+});
+
+ // Set up multer for file upload
+ AuthRoutes.post('/addexcelfile/:universityId', upload.single('file'), async (req, res) => {
+  try {
+    const file = req.file;
+    const { universityId } = req.params;
+
+    if (!file) {
+      return res.status(400).send('No file uploaded.');
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(universityId)) {
+      return res.status(400).send('Invalid University ID.');
+    }
+
+    const universityObjectId = new mongoose.Types.ObjectId(universityId);
+
+    // Read the file buffer using xlsx
+    const workbook = read(file.buffer, { type: 'buffer' });
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+    const json = utils.sheet_to_json(worksheet);
+
+    console.log("Parsed Excel Data:", json);
+
+    // Hash the password and transform the data
+    const saltRounds = 10; // You can adjust the salt rounds as needed
+    const alumniData = await Promise.all(json.map(async row => {
+      // Ensure RegisterNo is a string
+      const password = typeof row['RegisterNo'] === 'string' ? row['RegisterNo'].trim() : String(row['RegisterNo']);
+
+      // Debug logs
+      console.log(`Original Password: ${password}`);
+
+      try {
+        const hashedPassword = await bcryptjs.hash(password, saltRounds);
+
+        return {
+          universityId: universityObjectId,
+          alumniname: typeof row['Name'] === 'string' ? row['Name'].trim() : row['Name'],
+          department: typeof row['Department'] === 'string' ? row['Department'].trim() : row['Department'],
+          alumniemail: typeof row['Email'] === 'string' ? row['Email'].trim() : row['Email'],
+          yearofjoining: typeof row['Year of Joining'] === 'string' ? row['Year of Joining'].trim() : row['Year of Joining'],
+          passedoutyear: typeof row['Year of Passing'] === 'string' ? row['Year of Passing'].trim() : row['Year of Passing'],
+          alumniregisterno: typeof row['RegisterNo'] === 'string' ? row['RegisterNo'].trim() : row['RegisterNo'],
+          alumnimobilenumber: typeof row['Mobile Number'] === 'string' ? row['Mobile Number'].trim() : row['Mobile Number'],
+          password: hashedPassword // Set hashed password
+        };
+      } catch (err) {
+        console.error('Error hashing password:', err);
+        return null; // Skip the row if password hashing fails
+      }
+    })).filter(row =>
+      row &&
+      row.alumniname &&
+      row.department &&
+      row.alumniemail &&
+      row.yearofjoining &&
+      row.passedoutyear &&
+      row.alumniregisterno &&
+      row.alumnimobilenumber &&
+      row.password // Ensure password is included
+    );
+
+    if (alumniData.length === 0) {
+      return res.status(400).json({ error: 'No valid data to save.' });
+    }
+
+    await alumniformsmodels.insertMany(alumniData);
+
+    res.status(200).json({ message: 'Data uploaded and saved successfully.' });
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    res.status(500).json({ error: 'Error uploading file.' });
+  }
+});
+AuthRoutes.post("/login", async (req, res) => {
+  try {
+    const { alumniemail, alumniregisterno } = req.body;
+
+    // Find the alumni by email
+    const alumni = await alumniformsmodels.findOne({ alumniemail });
+    if (!alumni) {
+      return res.status(400).send({ success: false, message: "Invalid Email or Register Number" });
+    }
+
+    // Check if the provided register number matches the stored hashed password
+    const isMatch = await bcryptjs.compare(alumniregisterno.toString(), alumni.password);
+    if (!isMatch) {
+      return res.status(400).send({ success: false, message: "Invalid Email or Register Number" });
+    }
+
+    // Create a JWT token
+    const token = jwt.sign({ id: alumni._id, alumniname: alumni.alumniname }, 'your_jwt_secret', {
+      expiresIn: '1h',
+    });
+
+    // Return the token and user information
+    return res.status(200).send({
+      success: true,
+      message: "Login successful",
+      token,
+      alumni: {
+        id: alumni._id,
+        alumniname: alumni.alumniname,
+        universityId: alumni.universityId,
+        department: alumni.department,
+        passedoutyear: alumni.passedoutyear,
+        alumniemail: alumni.alumniemail,
+        alumniregisterno: alumni.alumniregisterno,
+        alumnimobilenumber: alumni.alumnimobilenumber,
+        yearofjoining: alumni.yearofjoining,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({ success: false, message: "Internal Server Error", error });
+  }
+});
+
   AuthRoutes.get("/getalumni", async (req, res) => {
     try {
       const alumnidetails = await alumniformsmodels.find({});

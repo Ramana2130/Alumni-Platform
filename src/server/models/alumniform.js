@@ -26,10 +26,19 @@ const alumniformschema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    alumniregisterno: {
+      type: String,
+      required: true,
+    },
+    alumnimobilenumber : {
+      type: Number,
+      required: true
+    },
     password: {
       type: String,
       required: true,
-    }
+      default: function() { return this.alumniregisterno; } 
+    },
   },
   { timestamps: true }
 );

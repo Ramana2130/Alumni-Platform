@@ -11,7 +11,7 @@ dotenv.config();
 //mongodb
 mongoDb();
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: true }));
 //authroutes
 app.use("/alumni", AuthRoutes);
 app.use('/university',universityRoutes);

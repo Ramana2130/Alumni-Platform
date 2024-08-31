@@ -36,6 +36,8 @@ router.post("/addstudent", async(req, res) => {
     }
 })
 
+
+
 router.post('/login', async (req, res) => {
     try {
         const {email, currentstudentsregisterno} = req.body;
@@ -126,5 +128,6 @@ router.post('/logout', async (req, res) => {
           res.status(500).send({ error: true, message: 'Internal Server Error' });
     }
   })
+  
 
 export default router;

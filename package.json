@@ -11,13 +11,15 @@
   "dependencies": {
     "axios": "^1.7.5",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.428.0",
-    "mongoose": "^8.5.3",
+    "mongoose": "^8.6.0",
+    "multer": "^1.4.5-lts.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
@@ -25,7 +27,8 @@
     "react-router-dom": "^6.26.1",
     "styled-components": "^6.1.12",
     "vite-express": "*",
-    "vite-react-starter": "file:"
+    "vite-react-starter": "file:",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
