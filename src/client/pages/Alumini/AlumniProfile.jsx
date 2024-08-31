@@ -444,7 +444,7 @@ const Alumniprofile = () => {
                   University Details
                 </h1>
                 <button onClick={handleEditClick}>
-                  <i className="fa-solid fa-pencil text-white bg-[#2596be] size-9 flex justify-center items-center rounded-xl text-lg"></i>
+                  <i className="fa-solid fa-check font-bold text-white bg-[#2596be] size-9 flex justify-center items-center rounded-xl text-xl"></i>
                 </button>
               </div>
 
