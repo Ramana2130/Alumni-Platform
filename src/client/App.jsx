@@ -96,7 +96,7 @@ const App = () => {
         <Route path="/universitysetting/:_id" element={<UniversitySetting />} />
         <Route path="/chat/:_id" element={<UniversityChat />} />
         <Route path="/studentdashboard/:_id" element={<StudentDashboard />} />
-        <Route path="/aluministory/:_id" element={<AluminiStory />} />
+        <Route path="/aluministory/:id" element={<AluminiStory />} />
         <Route path="/aluminilist2/:_id" element={<AluminiList />} />
         <Route path="/studentrequestform/:_id" element={<StudentDonation />} />
         <Route path="/aluminisetting/:_id" element={<AluminiSetting />} />

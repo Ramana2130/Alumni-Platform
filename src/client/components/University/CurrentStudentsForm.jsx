@@ -163,6 +163,7 @@ const CurrentstudentsForm = () => {
                       onChange={(e) => setEmail(e.target.value)}
                       required
                     />
+                    
                     <label htmlFor="passout" className="text-sm font-semibold text-[#87888C]">
                       Passout Year
                     </label>

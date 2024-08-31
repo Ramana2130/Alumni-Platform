@@ -392,45 +392,7 @@ const Alumniprofile = () => {
                         required
                       />
                     </div>
-                    <h1 className="text-white mt-5 text-2xl font-semibold">
-                      Skills
-                    </h1>
-                    <div className="mx-5">
-                      <ul className="mt-5 space-y-3 font-medium">
-                        <li className="flex items-start mt-5 lg:col-span-1 lg:mt-0">
-                          <div className="flex-shrink-0">
-                            <svg
-                              className="w-5 h-5 text-blue-500"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                clipRule="evenodd"
-                              ></path>
-                            </svg>
-                          </div>
-                          <p className="ml-3 leading-5 text-white">Node Js</p>
-                        </li>
-                        <li className="flex items-start mt-5 lg:col-span-1 lg:mt-0">
-                          <div className="flex-shrink-0">
-                            <svg
-                              className="w-5 h-5 text-blue-500"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                clipRule="evenodd"
-                              ></path>
-                            </svg>
-                          </div>
-                          <p className="ml-3 leading-5 text-white">React Js</p>
-                        </li>
-                      </ul>
-                    </div>
+               
                   </div>
                 </div>
               </div>
@@ -444,7 +406,7 @@ const Alumniprofile = () => {
                   University Details
                 </h1>
                 <button onClick={handleEditClick}>
-                  <i className="fa-solid fa-pencil text-white bg-[#2596be] size-9 flex justify-center items-center rounded-xl text-lg"></i>
+                  <i className="fa-solid fa-check font-bold text-white bg-[#2596be] size-9 flex justify-center items-center rounded-xl text-xl"></i>
                 </button>
               </div>
 

@@ -29,7 +29,7 @@ const AluminiLoginPage = () => {
         localStorage.setItem("token", token);
         localStorage.setItem("_id", id);
         localStorage.setItem("universityId", universityId);
-        navigate(`/aluminidashboard/${id}`);
+        navigate(`/aluministory/${id}`);
       }
     } catch (error) {
       if (error.response && error.response.data) {
