@@ -1,5 +1,5 @@
 import React from 'react'
-import AlumniNavbar from '../../components/Alumni/StudentNavbar'
+import AlumniNavbar from '../../components/Alumni/AlumniNavbar'
 import Sidebar from '../../components/Alumni/Sidebar'
 import AluminiStoryForm from './AluminiStoryForm'
 import AluminiCardList from './AluminiCardList'

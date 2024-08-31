@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import add from '../../assets/mega.svg'
-const AluminiStoryForm = () => {
+const AluminiJobForm = () => {
   const [step, setStep] = useState(1);
 
   const handleNext = () => {
@@ -16,7 +16,7 @@ const AluminiStoryForm = () => {
   };
   const navigate = useNavigate()
   const dashboard = ()=>{
-      navigate('/universitydashboard')
+      navigate('/aluminidashboard')
   }
 
   return (
@@ -26,7 +26,7 @@ const AluminiStoryForm = () => {
           <div className="h-[700px] w-[500px] p-5">
             <h1 className="text-white  font-semibold text-5xl uppercase">
  
-              Let's TEll full <span className='text-[#2596be]'>  Story!</span> 
+              Let's create Job <span className='text-[#2596be]'>  Posting!</span> 
             </h1>
             <div className='mt-24'>
 
@@ -44,47 +44,41 @@ const AluminiStoryForm = () => {
             <div className="h-[700px] bg-[#111111]  relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
               <div>
                 <h1 className="text-white font-extrabold text-6xl uppercase">
-                  Let's tell Story 
+                  Let's create job 
                 </h1>
 
                 <form action="#" method="post" className="space-y-4  w-[500px]">
                   <div className="mt-10 ">
                     <label htmlFor="alumniName" className="text-sm font-semibold text-[#87888C]">
-                      University Name
+                    Company Name
                     </label>
                     <input
                       id="alumniName"
                       className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
                       type="text"
-                      placeholder="University name"
+                      placeholder="company name"
                       required
                     />
                     <div className="grid">
                       <label htmlFor="department" className="text-sm font-semibold text-[#87888C]">
-                        Department
+                        Role
                       </label>
-                      <select
-                        className="border-[#87888C] bg- border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 bg-[#111111] text-[#87888C] w-full"
-                        name="department"
-                        id="department"
-                      >
-                        <option value="IT">IT</option>
-                        <option value="CSE">CSE</option>
-                        <option value="AIDS">AIDS</option>
-                        <option value="MECH">MECH</option>
-
-
-                        
-                      </select>
+                      <input
+                      id="passout"
+                      className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
+                      type="text"
+                      placeholder="role"
+                      required
+                    />
                     </div>
                     <label htmlFor="passout" className="text-sm font-semibold text-[#87888C]">
-                      Passout Year
+                      Location
                     </label>
                     <input
                       id="passout"
                       className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
-                      type="number"
-                      placeholder="passout year"
+                      type="text"
+                      placeholder="location"
                       required
                     />
                      <button
@@ -103,8 +97,8 @@ const AluminiStoryForm = () => {
           {step === 2 && (
             <div className="h-[700px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
               <div>
-                <h1 className="text-white font-extrabold text-6xl uppercase">
-                  Alumni Form
+              <h1 className="text-white font-extrabold text-6xl uppercase">
+                  Let's create job 
                 </h1>
                 <button
                 className="bg-[#2596be] mt-5 px-5 py-2 shadow-lg p-2 text-black font-semibold rounded-lg hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
@@ -117,28 +111,24 @@ const AluminiStoryForm = () => {
                 <form action="#" method="post" className="w-[500px]">
                   <div className="mt-10 ">
                     <label htmlFor="email" className="text-sm font-semibold text-[#87888C]">
-                     Current Status
+                    Description
                     </label>
-                    <select
-                        className="border-[#87888C] bg- border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 bg-[#111111] text-[#87888C] w-full"
-                        name="department"
-                        id="department"
-                      >
-                        <option value="Working">Working</option>
-                        <option value="High Studies">High Studies</option>
-       
-
-
-                        
-                      </select>
+                    <textarea
+                      id="passout"
+                      rows={3}
+                      className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
+                      type="text"
+                      placeholder="Description"
+                      required
+                    />
                     <label htmlFor="confirmPassword" className="text-sm font-semibold text-[#87888C]">
-                     Company Name
+                     Link
                     </label>
                     <input
                       id="confirmPassword"
                       className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
                       type="text"
-                      placeholder="Company Name"
+                      placeholder="url"
                       required
                     />
                     <label htmlFor="password" className="text-sm font-semibold text-[#87888C]">
@@ -164,85 +154,24 @@ const AluminiStoryForm = () => {
               </div>
             </div>
           )}
-          
           {step === 3 && (
-            <div className="h-[700px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
-              <div>
-                <h1 className="text-white font-extrabold text-6xl uppercase">
-                  Alumni Form
-                </h1>
-                <button
-                className="bg-[#2596be] mt-5 px-5 py-2 shadow-lg p-2 text-black font-semibold rounded-lg hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
-                onClick={handlePrev}
-                type="button"
-              >
-               <i class="fa-solid fa-arrow-left text-xl"></i>
-              </button>
-
-                <form action="#" method="post" className="w-[500px]">
-                  <div className="mt-10 ">
-                    <label htmlFor="email" className="text-sm font-semibold text-[#87888C]">
-                     Inspire Story
-                    </label>
-                    <textarea
-                        className="border-[#87888C] bg-  rounded-lg border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 bg-[#111111] text-[#87888C] w-full"
-                        name="department"
-                        row={3}
-                        id="department"
-                    />
-                
-                    <label htmlFor="confirmPassword" className="text-sm font-semibold text-[#87888C]">
-                     Online Platform
-                    </label>
-                    <input
-                      id="confirmPassword"
-                      className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
-                      type="text"
-                      placeholder="Online Platform Link"
-                      required
-                    />
-                    {/* <label htmlFor="password" className="text-sm font-semibold text-[#87888C]">
-                      Salary
-                    </label>
-                    <input
-                      id="password"
-                      className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
-                      type="text"
-                      placeholder="Salary"
-                      required
-                    /> */}
-                  </div>
-                </form>
-
-                <button
-                  className="bg-[#2596be] shadow-lg mt-10 p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
-                  type="submit"
-                  onClick={handleNext}
-                >
-                  Next
-                </button>
-              </div>
-            </div>
-          )}
-          
-          {step === 4 && (
             <div className="h-[700px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
               <div className="text-center">
                 <h1 className="text-white font-extrabold text-6xl uppercase">
                   Success!
                 </h1>
-                <p className=" mt-4 text-lg text-[#2596be]">Story  has been successfully created.</p>
+                <p className=" mt-4 text-lg text-[#2596be]">Job Posting has been successfully created.</p>
                 <div className='flex space-x-4'>
 
                 <button
-                  className="border-2 border-[#2596be] shadow-lg mt-10 p-2 text-[#2596be] font-semibold rounded-lg w-full hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
+                  className="border-2 border-[#2596be] shadow-lg mt-10 p-2 text-[#2596be] font-semibold rounded-lg w-full hover:scale-100 hover:text-black  hover:bg-[#2596be] transition duration-300 ease-in-out"
                   type="button"
                   onClick={firstpage}
                 >
                   Add New
                 </button>
                 <button
-                  className="bg-[#2596be] shadow-lg mt-10 p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:border-2 hover:bg-transparent hover:border-[#87888C] transition duration-300 ease-in-out"
+                  className="bg-[#2596be] shadow-lg mt-10 p-2 text-black  font-semibold rounded-lg w-full hover:scale-100 hover:border-2 hover:bg-transparent hover:border-[#2596be] transition duration-300 ease-in-out"
                   type="button"
                   onClick={dashboard}
                 >
@@ -252,10 +181,11 @@ const AluminiStoryForm = () => {
               </div>
             </div>
           )}
+
         </div>
       </div>
     </div>
   );
 };
 
-export default AluminiStoryForm;
+export default AluminiJobForm;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import studentlogin from '../../assets/studentlogin.png';
-import vector from '../../assets/Vector.png';
+import vector from '../../assets/vector.svg';
 import Navbar from '../../components/Navbar';
 import { Link } from 'react-router-dom';
 import Tab from '../../components/Tab';
@@ -62,7 +62,7 @@ const AluminiLoginPage = () => {
                   <input
                   name='email'
                     id="email"
-                    className="border p-1 shadow-md placeholder:text-base border-t-0 bg-transparent border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C]   w-96"
+                    className="border text-white focus:outline-none p-1 shadow-md placeholder:text-base border-t-0 bg-transparent border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C]   w-96"
                     type="text"
                     placeholder="Student Email"
                     onChange={(e) => setEmail(e.target.value)}
@@ -72,7 +72,7 @@ const AluminiLoginPage = () => {
                 {/* <div className="mb-5 mt-10">
                   <input
                     id="email"
-                    className="border p-1 shadow-md placeholder:text-base border-t-0 border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C] bg-  w-96"
+                    className="border text-white focus:outline-none p-1 shadow-md placeholder:text-base border-t-0 border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C] bg-  w-96"
                     type="email"
                     placeholder="University Email"
                     required
@@ -82,9 +82,9 @@ const AluminiLoginPage = () => {
                   <input
                   name='currentstudentsregisterno'
                     id="passwcurrentstudentsregisternord"
-                    className="border p-1 shadow-md placeholder:text-base bg-transparent border-t-0 border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C] bg-  w-96"
+                    className="border text-white focus:outline-none p-1 shadow-md placeholder:text-base bg-transparent border-t-0 border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C] bg-  w-96"
                     type="password"
-                    placeholder="Enter password"
+                    placeholder="password"
                     onChange={(e) => setCurrentstudentsregisterno(e.target.value)}
                     required
                   />
@@ -103,27 +103,16 @@ const AluminiLoginPage = () => {
                 >
                   Login
                 </button>
-                <div className="flex flex-col mt-10 items-center justify-center text-sm">
-            <h3 className='text-white'>
-            don't have an account?
-              <a
-                className="group  text-yellow-500 ml-2  font-bold transition-all duration-100 ease-in-out"
-                href="/studentsignuppage"
-              >
-                <span className="bg-left-bottom bg-gradient-to-r bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">
-                  Sign in
-                </span>
-              </a>
-            </h3>
-          </div>
+     
               </form>
          
             </div>
           </div>
         </div>
         <div className="relative shadow-custom-shadow flex justify-start items-center w-[50%]  bg-[#FDE047]">
-          <div className="absolute bottom-40 left-44">
-            <img src={vector} alt="" className="h-[300px]" />
+          <div className="absolute bottom-40 left-16">
+
+            <img src={vector} alt="" className="h-[500px]" />
           </div>
           <img
             src={studentlogin}

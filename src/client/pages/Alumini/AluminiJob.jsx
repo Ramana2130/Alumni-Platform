@@ -1,15 +1,18 @@
 import React from 'react'
 import AlumniNavbar from '../../components/Alumni/AlumniNavbar'
 import Sidebar from '../../components/Alumni/Sidebar'
-import AluminiSettingCard from './AluminiSettingCard'
+import AluminiJobForm from './AluminiJobForm'
 
-const AluminiSetting = () => {
+
+
+const AluminiJob = () => {
   return (
     <div className='bg-[#111111] h-[100vh] overflow-hidden'>
     <AlumniNavbar/>
     <div className='flex'>
         <Sidebar/>
-        <AluminiSettingCard/>
+        <AluminiJobForm/>
+      
 
     </div>
 
@@ -18,4 +21,4 @@ const AluminiSetting = () => {
   )
 }
 
-export default AluminiSetting
+export default AluminiJob

@@ -10,15 +10,15 @@ const Chat = () => {
   return (
     <div className="flex h-[90vh] mt-2 overflow-hidden">
       {/* Sidebar */}
-      <div className="w-[40%] overflow-x-auto scrollbar_yellow bg-[#1E1E1E] border-r border-gray-300">
+      <div className="w-[40%] overflow-x-auto scrollbar_blue bg-[#1E1E1E] border-r border-gray-300">
         {/* Sidebar Header */}
         <header className="p-4  flex justify-between items-center  text-white">
-          <h1 className="text-2xl font-semibold">Students</h1>
+          <h1 className="text-2xl font-semibold">Alumni</h1>
  
         </header>
 
         {/* Contact List */}
-        <div className="overflow-y-auto scrollbar_yellow h-screen p-3 mb-9 pb-20">
+        <div className="overflow-y-auto scrollbar_blue h-screen p-3 mb-9 pb-20">
           {[
             {
               name: "Alice",
@@ -117,7 +117,7 @@ const Chat = () => {
 
           {/* Outgoing Message */}
           <div className="flex justify-end mb-4 cursor-pointer">
-            <div className="flex max-w-96 bg-yellow-500 text-black rounded-lg p-3 gap-3">
+            <div className="flex max-w-96 bg-[#2596be] text-black rounded-lg p-3 gap-3">
               <p>Hi Alice! I'm good, just finished a great book. How about you?</p>
             </div>
             <div className="w-9 h-9 rounded-full flex items-center justify-center ml-2">
@@ -147,7 +147,7 @@ const Chat = () => {
 
           {/* Outgoing Message */}
           <div className="flex justify-end mb-4 cursor-pointer">
-            <div className="flex max-w-96 bg-yellow-500 text-black rounded-lg p-3 gap-3">
+            <div className="flex max-w-96 bg-[#2596be] text-black rounded-lg p-3 gap-3">
               <p>It's about an astronaut stranded on Mars, trying to survive. Gripping stuff!</p>
             </div>
             <div className="w-9 h-9 rounded-full flex items-center justify-center ml-2">
@@ -179,10 +179,10 @@ const Chat = () => {
           <div className="flex items-center">
             <input
               type="text"
-              className="flex-1 py-2 px-4 bg-[#E1E1E1E1] placeholder:text-black rounded-full border border-gray-300 focus:outline-none focus:border-yellow-500"
+              className="flex-1 py-2 px-4 bg-[#E1E1E1E1] placeholder:text-black rounded-full border border-gray-300 focus:outline-none focus:border-[#2596be]"
     black     placeholder="Type a message"
             />
-            <button className="ml-4 size-12 bg-yellow-500 text-black rounded-full">
+            <button className="ml-4 size-12 bg-[#2596be] text-black rounded-full">
             <i class="fa-solid fa-arrow-right font-extrabold"></i>
             </button>
           </div>

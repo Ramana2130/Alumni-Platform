@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import women from '../../assets/women.png';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-
+import man from '../../assets/man.png'
 function StudentNavbar() {
   const [open, setOpen] = useState(false);
 
@@ -95,7 +95,7 @@ function StudentNavbar() {
                     <span className="sr-only">Open user menu</span>
                     <img
                       className="size-14 rounded-full"
-                      src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=626&ext=jpg&ga=GA1.1.745036993.1725005158&semt=ais_hybrid"
+                     src={man}
                       alt=""
                     />
                   </button>

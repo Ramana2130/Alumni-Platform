@@ -57,27 +57,18 @@ const UniversitySignupPage = () => {
                   <input
                   name='universityid'
                     id="universityid"
-                    className="border p-1 shadow-md placeholder:text-base border-t-0 bg-transparent focus:outline-none text-white border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C]   w-96"
+                    className="border  p-1 shadow-md placeholder:text-base border-t-0 bg-transparent focus:outline-none text-white border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C]   w-96"
                     type="text"
-                    placeholder="Enter university Id"
+                    placeholder="University Email"
                     onChange={(e) => setUniversityId(e.target.value)}
                     required
                   />
                 </div>
-                {/* <div className="mb-5 mt-10">
-                  <input
-                    id="email"
-                    className="border p-1 shadow-md placeholder:text-base border-t-0 border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C] bg-  w-96"
-                    type="email"
-                    placeholder="University Email"
-                    required
-                  />
-                </div> */}
                 <div className="">
                   <input
                   name='universitypassword'
                     id="universitypassword"
-                    className="border p-1 shadow-md placeholder:text-base bg-transparent focus:outline-none text-white border-t-0 border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C] bg-  w-96"
+                    className="border  p-1 shadow-md placeholder:text-base bg-transparent focus:outline-none text-white border-t-0 border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C] bg-  w-96"
                     type="password"
                     placeholder="password"
                     onChange={(e) => setUniversitypassword(e.target.value)}
@@ -119,8 +110,8 @@ const UniversitySignupPage = () => {
           </div>
         </div>
         <div className="relative shadow-custom-shadow flex justify-start items-center w-[50%]  bg-[#DBF851]">
-          <div className="absolute bottom-28 left-44">
-            <img src={Smart} alt="" className="h-[300px]" />
+          <div className="absolute bottom-40 left-16">
+            <img src={Smart} alt="" className="h-[500px]" />
           </div>
           <img
             src={UniversityLogin}
