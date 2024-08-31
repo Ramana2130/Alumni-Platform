@@ -240,11 +240,11 @@ const AlumniListTable = () => {
                             {task.alumnimobilenumber}
                           </p>
                         </td>
-                        <td className="text-center  ">
+                        <td className="text-center flex justify-center pt-5">
                           
                           <Link
                             to={`/updatealumnidetails/${task.universityId}/${task._id}`}
-                            className="text-yellow-400  hover:text-yellow-600"
+                            className="text-[#CFF80B]  hover:text-[#CFF80B]"
                           >
                           <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-2"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
                           </Link>

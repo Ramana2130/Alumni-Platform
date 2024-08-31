@@ -21,7 +21,7 @@ const DonationDashboard = () => {
       
       <div>
         <h1 className="text-2xl mt-20 font-semibold">
-          Designed by leaders in AI so you can build with confidence
+          {/* Designed by leaders in AI so you can build with confidence */}
         </h1>
       </div>
     </div>
