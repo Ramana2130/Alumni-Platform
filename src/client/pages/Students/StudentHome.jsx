@@ -48,9 +48,7 @@ const StudentHome = () => {
 
     return (
         <div className="flex p-4 h-[85vh] bg-[#111111] justify-center gap-5 px-14 py-5">
-            <div className="relative h-[85vh] w-[8vw] rounded-2xl">
-                <Sidebar />
-            </div>
+          
 
             <div className="flex justify-center">
                 {currentPage === 1 ? (

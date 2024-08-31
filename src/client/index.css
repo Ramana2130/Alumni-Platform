@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+.sans {
+  font-family: "Shantell Sans", cursive;
+  font-optical-sizing: auto;
+  /* font-weight: 800; */
+  font-style: normal;
+  font-variation-settings:
+    "BNCE" 0,
+    "INFM" 0,
+    "SPAC" 0;
+}
+.black{
+  background-color: #000;
+}
 /* Anchor link style */
 .a {
   position: relative;

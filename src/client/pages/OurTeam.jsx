@@ -52,11 +52,11 @@ const OurTeam = () => {
   ];
 
   return (
-    <div>
+    <div className='black h-screen'>
         <Navbar/>
-    <div className="flex flex-col items-center justify-center px-5 py-8 text-slate-800 xl:px-10 xl:py-0">
+    <div className="flex flex-col items-center justify-center px-5 py-8 text-white xl:px-10 xl:py-0">
       <div className="mb-16 text-center md:mb">
-        <h2 className="mb-6 text-xl text-grey font-extrabold md:text-4xl lg:text-7xl">Our Team</h2>
+        <h2 className="mb-6 text-xl text-white font-extrabold md:text-4xl lg:text-7xl">Our Team</h2>
         <p className="text-grey">
           We're fueled by a passion for our work and a belief in making a positive impact. Let our team's dedication and drive accelerate your success.
         </p>
