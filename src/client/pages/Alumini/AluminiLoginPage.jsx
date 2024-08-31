@@ -1,59 +1,91 @@
-import React from 'react';
-import studentlogin from '../../assets/aluminiLoginpage.png';
-import Graduation from '../../assets/Graduation.png';
-import Navbar from '../../components/Navbar';
-import { Link } from 'react-router-dom';
-import Tab from '../../components/Tab';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import studentlogin from "../../assets/aluminiLoginpage.png";
+import Graduation from "../../assets/Graduation.png";
+import Navbar from "../../components/Navbar";
+import { Link } from "react-router-dom";
+import Tab from "../../components/Tab";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
 const AluminiLoginPage = () => {
-  const navigate=useNavigate()
-  const dashboard=()=>{
-    navigate('/aluminidashboard')
-  } 
+  const [alumniemail, setAlumniemail] = useState();
+  const [alumniregisterno, setAlumniregisterno] = useState();
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3000/alumni/login", {
+        alumniemail,
+        alumniregisterno,
+      });
+      const values = response.data;
+      console.log(values);
+      const token = response.data.token;
+      const id = response.data.alumni.id;
+      console.log(id);
+      const universityId = response.data.alumni.universityId;
+      if (values.success) {
+        toast.success(values.message);
+        localStorage.setItem("token", token);
+        localStorage.setItem("_id", id);
+        localStorage.setItem("universityId", universityId);
+        navigate(`/aluminidashboard/${id}`);
+      }
+    } catch (error) {
+      if (error.response && error.response.data) {
+        toast.error(
+          error.response.data.message || "An error occurred. Please try again."
+        );
+      } else {
+        // If error is not from the backend
+        toast.error("An unexpected error occurred. Please try again.");
+      }
+    }
+  };
+  // const dashboard=()=>{
+  //   navigate('/aluminidashboard')
+  // }
   return (
-    <div className='alumni'>
+    <div className="alumni">
       <Navbar />
-      <div className='flex justify-center shadow-2xl bg-[#111111]'>
-        
-
+      <div className="flex justify-center shadow-2xl bg-[#111111]">
         <div
           id="back-div"
           className="h-[90vh] w-[50%]  flex justify-end items-center rounded-[26px]"
         >
           <div className="h-[700px]  relative shadow-custom-shadow  border-r-0 flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
-          <div className='absolute top-3 right-8'>
-            <Tab/>
-
-          </div>
+            <div className="absolute top-3 right-8">
+              <Tab />
+            </div>
             <div>
               <h1 className="pt-8 pb-6 font-extrabold text-white text-6xl text-center cursor-default">
                 Login
               </h1>
-              <form action="#" method="post" className="space-y-4 w-[400px]">
+              <form
+                onSubmit={handleSubmit}
+                action="#"
+                method="post"
+                className="space-y-4 w-[400px]"
+              >
                 <div className="mb-5 mt-10">
                   <input
-                    id="Name"
+                    name="alumniemail"
+                    id="alumniemail"
                     className="border text-white focus:outline-none p-1 shadow-md placeholder:text-base border-t-0 bg-transparent border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C]   w-96"
-                    type="text"
+                    type="email"
                     placeholder="Alumni Email"
+                    onChange={(e) => setAlumniemail(e.target.value)}
                     required
                   />
                 </div>
-                {/* <div className="mb-5 mt-10">
-                  <input
-                    id="email"
-                    className="border text-white focus:outline-none p-1 shadow-md placeholder:text-base border-t-0 border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C] bg-  w-96"
-                    type="email"
-                    placeholder="University Email"
-                    required
-                  />
-                </div> */}
                 <div className="">
                   <input
-                    id="password"
+                    name="alumniregisterno"
+                    id="alumniregisterno"
                     className="border text-white focus:outline-none p-1 shadow-md placeholder:text-base bg-transparent border-t-0 border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C] bg-  w-96"
                     type="password"
                     placeholder="password"
+                    onChange={(e) => setAlumniregisterno(e.target.value)}
                     required
                   />
                 </div>
@@ -66,20 +98,17 @@ const AluminiLoginPage = () => {
                   </span>
                 </a>
                 <button
-                onClick={dashboard}
                   className="bg-[#2596be] shadow-lg mt-24 p-2 text-black font-bold rounded-lg w-full hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
                   type="submit"
                 >
                   Login
                 </button>
               </form>
-         
             </div>
           </div>
         </div>
         <div className="relative shadow-custom-shadow flex justify-start items-center w-[50%]  bg-[#4cb5db]">
-        <div className="absolute bottom-40 left-16">
-
+          <div className="absolute bottom-40 left-16">
             <img src={Graduation} alt="" className="h-[500px]" />
           </div>
           <img
@@ -89,7 +118,6 @@ const AluminiLoginPage = () => {
           />
         </div>
       </div>
-    
     </div>
   );
 };

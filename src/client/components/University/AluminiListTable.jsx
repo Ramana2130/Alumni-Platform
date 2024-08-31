@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useParams } from "react-router-dom";
-import LoadingOverlay from "../LoadingOverlay";
 
 const AlumniListTable = () => {
   const [loading, setLoading] = useState(false);
@@ -57,7 +56,7 @@ const AlumniListTable = () => {
         toast.success("File uploaded successfully.");
         setTimeout(() => {
           window.location.reload();
-        }, 100);
+        }, 1000);
         // Process the response if needed
         const updatedAlumniData = response.data.alumnis || [];
         setData(updatedAlumniData); // Update data with the response data

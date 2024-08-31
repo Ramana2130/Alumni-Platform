@@ -4,33 +4,34 @@ const userSchema = new mongoose.Schema(
   {
     universityId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'university-details',
+      ref: "university-details",
     },
     currentstudentsname: {
-      type:String,
-      required : true
+      type: String,
+      required: true,
     },
     currentstudentsregisterno: {
-      type:String,
-      required : true
+      type: String,
+      required: true,
     },
     hashedPassword: {
       type: String,
     },
     currentstudentsdepartment: {
-      type:String,
-      required : true
+      type: String,
+      required: true,
     },
     currentstudentsyearofjoining: {
-      type:Number,
-      required : true
+      type: Number,
+      required: true,
     },
     currentstudentsyearofpassing: {
-      type:Number,
-      required : true
+      type: Number,
+      required: true,
     },
-    suggestion : {
-      type: String
+    currentstudentsmobilenumber: {
+      type: String,
+      required: true,
     },
     email: {
       type: String,

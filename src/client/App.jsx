@@ -18,7 +18,7 @@ import UniversityDonation from "./pages/University/UniversityDonation";
 import UniversityAcceptDonationForm from "./pages/University/UniversityAcceptDonationForm";
 import UniversityFullHistory from "./pages/University/UniversityFullHistory";
 import UniversitySetting from "./pages/University/UniversitySetting";
-import UniversityChat from "./pages/University/UniversityChat"; 
+import UniversityChat from "./pages/University/UniversityChat";
 import AluminiStory from "./pages/Alumini/AluminiStory";
 import AluminiList from "./pages/Alumini/AluminiList";
 import AluminiSetting from "./pages/Alumini/AluminiSetting";
@@ -42,7 +42,7 @@ import AluminiProfile from "./pages/Students/AluminiProfile";
 const App = () => {
   return (
     <BrowserRouter>
-          <Toaster />
+      <Toaster />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/team" element={<TeamPage />} />
@@ -58,39 +58,61 @@ const App = () => {
         <Route path="/aluminiLoginpage" element={<AluminiLoginPage />} />
         <Route path="/aboutpage" element={<AboutPage />} />
         <Route path="/ourteam" element={<OurTeam />} />
-        <Route path="/universitydashboard/:_id" element={<UniversityDashboard />} />
+        <Route
+          path="/universitydashboard/:_id"
+          element={<UniversityDashboard />}
+        />
         {/* <Route path="/dataform" element={<AlumniForm />} /> */}
         <Route path="/addalumini/:_id" element={<UniversityAddAlumini />} />
-        <Route path="/updatealumnidetails/:universityId/:_id" element={<UpdateAlumnidetails/>} />
-        <Route path="/updatecurrentstudents/:universityId/:_id" element={<UpdateStudentsForm />} />
+        <Route
+          path="/updatealumnidetails/:universityId/:_id"
+          element={<UpdateAlumnidetails />}
+        />
+        <Route
+          path="/updatecurrentstudents/:universityId/:_id"
+          element={<UpdateStudentsForm />}
+        />
         <Route path="/aluminilist/:_id" element={<UniversityAlumniList />} />
-        <Route path="/universitydonation/:_id" element={<UniversityDonation />} />
-        <Route path="/universityacceptdonation" element={<UniversityAcceptDonationForm />} />
-        <Route path="/universitydonationfullstatement" element={<UniversityFullHistory />} />
-        <Route path="/addcurretntstudents/:_id" element={<UniversityAddCurrentStudent/>} />
-        <Route path="/currentstudentslist/:_id" element={<StudentsTableList/>} />
+        <Route
+          path="/universitydonation/:_id"
+          element={<UniversityDonation />}
+        />
+        <Route
+          path="/universityacceptdonation"
+          element={<UniversityAcceptDonationForm />}
+        />
+        <Route
+          path="/universitydonationfullstatement"
+          element={<UniversityFullHistory />}
+        />
+        <Route
+          path="/addcurretntstudents/:_id"
+          element={<UniversityAddCurrentStudent />}
+        />
+        <Route
+          path="/currentstudentslist/:_id"
+          element={<StudentsTableList />}
+        />
         <Route path="/universitysetting/:_id" element={<UniversitySetting />} />
-        <Route path="/chat/:_id" element={<UniversityChat/>} />
-        <Route path="/studentdashboard/:_id" element={<StudentDashboard/>} />
-        <Route path="/aluministory/:_id" element={<AluminiStory/>} />
-        <Route path="/aluminilist2/:_id" element={<AluminiList/>} />
-        <Route path="/studentrequestform/:_id" element={<StudentDonation/>} />
-        <Route path="/aluminisetting/:_id" element={<AluminiSetting/>} />
-        <Route path="/aluminichat/:_id" element={<AluminiChat/>} />
-        <Route path="/studentchat/:_id" element={<StudentChat/>} />
-        <Route path="/Successstory" element={<AluminiStory/>} />
-        <Route path="/payment" element={<PaymentComponent/>} />
-        <Route path="/studentaluminiprofile" element={<StudentAluminiProfile/>} />
-        <Route path="/aluminidashboard" element={<AluminiDashboard/>} />
-        <Route path="/aluminijob" element={<AluminiJob/>} />
-        <Route path="/aluminidonationform" element={<AluminiDonation/>} />
-        <Route path="/aluminichat" element={<AluminiChat/>} />
-        <Route path="/aluminiprofile2" element={<AluminiProfile/>} />
-
-
-
-
-        
+        <Route path="/chat/:_id" element={<UniversityChat />} />
+        <Route path="/studentdashboard/:_id" element={<StudentDashboard />} />
+        <Route path="/aluministory/:_id" element={<AluminiStory />} />
+        <Route path="/aluminilist2/:_id" element={<AluminiList />} />
+        <Route path="/studentrequestform/:_id" element={<StudentDonation />} />
+        <Route path="/aluminisetting/:_id" element={<AluminiSetting />} />
+        {/* <Route path="/aluminichat/:_id" element={<AluminiChat />} /> */}
+        <Route path="/studentchat/:_id" element={<StudentChat />} />
+        <Route path="/Successstory" element={<AluminiStory />} />
+        <Route path="/payment" element={<PaymentComponent />} />
+        <Route
+          path="/studentaluminiprofile"
+          element={<StudentAluminiProfile />}
+        />
+        <Route path="/aluminidashboard/:id" element={<AluminiDashboard />} />
+        <Route path="/aluminijob/:id" element={<AluminiJob />} />
+        <Route path="/aluminidonationform/:id" element={<AluminiDonation />} />
+        <Route path="/aluminichat/:id" element={<AluminiChat />} />
+        <Route path="/aluminiprofile2/:id" element={<AluminiProfile />} />
       </Routes>
     </BrowserRouter>
   );
