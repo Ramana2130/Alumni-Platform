@@ -17,10 +17,10 @@ const Homepage = () => {
   return (
     <div className='overflow-hidden relative black h-[100vh]'>
       <Navbar/>
-      <div className='absolute top-96 right-44' style={{ transform: 'rotate(15deg)' }}>
+      <div className='absolute blur-sm top-96 right-44' style={{ transform: 'rotate(15deg)' }}>
             <img src={card} alt="" />
         </div>
-        <div className='absolute top-72 z-50 left-44' style={{ transform: 'rotate(-25deg)' }}>
+        <div className='absolute blur-sm top-72 z-50 left-44' style={{ transform: 'rotate(-25deg)' }}>
    <img src={card} alt="" />
         </div>
         <div className='absolute blur-sm bottom-52 z-50 left-[1100px]' style={{ transform: 'rotate(-25deg)' }}>

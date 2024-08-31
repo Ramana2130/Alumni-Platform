@@ -79,7 +79,8 @@ const Sidebar = () => {
                 </NavLink>
               </li>
               <li className="rounded-sm">
-                <button
+                <NavLink
+                  to='/aluminiloginpage'
                   onClick={handleLogout}
                   className={({ isActive }) =>
                     `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${
@@ -88,7 +89,8 @@ const Sidebar = () => {
                   }
                 >
                   <i className="fa-solid fa-right-from-bracket text-white text-2xl"></i>
-                </button>
+                </NavLink
+                >
               </li>
             </ul>
           </div>

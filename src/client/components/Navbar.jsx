@@ -25,7 +25,7 @@ const Navbar = () => {
 			</li>
 		</ul>
 			{/* <button className="self-center px-8 py-3 rounded font-semibold border-black border-2">Sign in</button> */}
-			<Link to='/aluminisignuppage' className="self-center px-8 py-3 font-semibold rounded  border-black bg-yellow-500  text-white hover:bg-transparent  hover:border-yellow-500 hover:text-yellow-500 border-2">Get Started</Link>
+			<Link to='/studentloginpage' className="self-center px-8 py-3 font-semibold rounded   bg-white  text-black hover:bg-transparent  hover:border-yellow-500 hover:text-yellow-500 hover:border-2">Get Started</Link>
 		</div>
 		<button className="p-4 lg:hidden">
 			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 text-gray-800">
