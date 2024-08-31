@@ -62,32 +62,47 @@ const AluminiProfile = () => {
           </div>
 
         </div>
-        <div className="pt-24">
-        <img src="https://idp.skcet.ac.in/assets/images/slides/img1.jpg?1725092231535" alt=""  className="rounded-lg h-[500px] w-[600px]"/>
-
-        </div>
         </div>
         <div className="p-2  w-1/2">
         <div className="h-[90vh]">
         <div className=" h-full items-center flex">
         <img src={women} alt=""  className="rounded-lg"/></div>
+        <div className="grid grid-cols-2 gap-10">
+          <div className="card1" >
+                    <span className="card1__title text-yellow-600 text-center text-xl font-bold mb-4">Role</span>
+                   <h1 className="text-xl font-medium  text-center uppercase">Frontend Devloper</h1>
+                    <form className="card1__form">
+                     
+                    </form>
+                  </div>
+                  <div className="card1" >
+                    <span className="card1__title text-yellow-600 text-center text-xl font-bold mb-4">Pass Out</span>
+                   <h1 className="text-xl font-medium  text-center uppercase">2014</h1>
+                    <form className="card1__form">
+                     
+                    </form>
+                  </div>
+          </div>
         </div>
         <div>
-        <div>
-        <h1 className="text-white pt-24 font-semibold text-5xl uppercase">
-            university <span className="text-yellow-500"> details!</span>
+        </div>
+        </div>
+      </div>
+               <div>
+        <h1 className="text-white p-5 pt-44 font-semibold text-5xl uppercase">
+            Job Posting<span className="text-yellow-500"> details!</span>
           </h1>
-          <div className="grid grid-cols-2 gap-10 mx-10 pt-20 mt-5">
+          <div className="grid grid-cols-2 gap-10 mx-10 pt-5 mt-5">
           <div className="card1" >
-                    <span className="card1__title text-yellow-600 text-center text-xl font-bold mb-4">University Name</span>
-                   <h1 className="text-xl font-medium  text-center uppercase">Sri Krishna Enginnering College</h1>
+                    <span className="card1__title text-yellow-600 text-center text-xl font-bold mb-4">Company Name</span>
+                   <h1 className="text-xl font-medium  text-center uppercase">Google</h1>
                     <form className="card1__form">
                       
                     </form>
                   </div>
                   <div className="card1" >
-                    <span className="card1__title text-yellow-600 text-center text-xl font-bold mb-4">Department</span>
-                   <h1 className="text-xl font-medium  text-center uppercase">Information Technology</h1>
+                    <span className="card1__title text-yellow-600 text-center text-xl font-bold mb-4">Role</span>
+                   <h1 className="text-xl font-medium  text-center uppercase">JAva developer</h1>
                     <form className="card1__form">
                      
                     </form>
@@ -100,8 +115,15 @@ const AluminiProfile = () => {
                     </form>
                   </div>
                   <div className="card1" >
-                    <span className="card1__title text-yellow-600 text-center text-xl font-bold mb-4">Pass Out</span>
-                   <h1 className="text-xl font-medium  text-center uppercase">2022</h1>
+                    <span className="card1__title text-yellow-600 text-center text-xl font-bold mb-4">description</span>
+                   <h1 className="text-md font-medium  text-center uppercase">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro numquam minima aspernatur aliquam alias impedit ducimus labore culpa, eius odit asperiores cumque facilis? Dolorem minima rerum alias excepturi vitae quod.</h1>
+                    <form className="card1__form">
+                     
+                    </form>
+                  </div>
+                  <div className="card1 col-span-2" >
+                    <span className="card1__title text-yellow-600 text-center text-xl font-bold mb-4">Link</span>
+                   <h1 className="text-xl font-medium text-blue-600 text-center ">www.google.com</h1>
                     <form className="card1__form">
                      
                     </form>
@@ -110,9 +132,6 @@ const AluminiProfile = () => {
           </div>
 
         </div>
-        </div>
-        </div>
-      </div>
     </div>
   );
 };
