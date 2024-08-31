@@ -1,11 +1,13 @@
 import React from 'react'
 import radio from '../../assets/radio.svg'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,useParams } from 'react-router-dom'
 
-const UniversityTotalJob = (id) => {
+const UniversityTotalJob = () => {
+  const { _id } = useParams();
+
   const navigate=useNavigate()
   const student=()=>{
-    navigate(`/currentstudentslist/${id}`)
+    navigate(`/currentstudentslist/${_id}`)
   }
   return (
     <div className='h-[200px]  '>

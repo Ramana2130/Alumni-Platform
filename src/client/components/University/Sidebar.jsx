@@ -1,8 +1,11 @@
-import React from 'react'
-import { NavLink, useParams } from 'react-router-dom'
+import React, { useState } from 'react';
+import { NavLink, useParams } from 'react-router-dom';
 
 const Sidebar = () => {
-  const {_id} = useParams();
+  const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
+  const { _id } = useParams();
+  const path = _id ? `/addalumini/${_id}` : `/addcurretntstudents/${_id}`;
   return (
     <div className="flex h-[867px] items-center p-3 w-[130px] bg-transparent">
       <div className="space-y-3">
@@ -15,50 +18,87 @@ const Sidebar = () => {
                   `rounded-full flex items-center p-3 px-5 ${isActive ? 'bg-[#CFF80B] text-black' : 'bg-[#1E1E1E] text-white'}`
                 }
               >
-                <i className="fa-solid fa-house  text-2xl"></i>
+                <i className="fa-solid fa-house text-2xl"></i>
               </NavLink>
             </li>
-            <li className="rounded-sm">
+            <li
+              className="rounded-sm relative"
+              onMouseEnter={() => setOpen(true)}
+              onMouseLeave={() => setOpen(false)}
+            >
               <NavLink
-                to={`/addalumini/${_id}`}
+                to={path}
                 className={({ isActive }) =>
                   `rounded-full flex items-center p-3 px-5 ${isActive ? 'bg-[#CFF80B] text-black' : 'bg-[#1E1E1E] text-white'}`
                 }
               >
-                <i className="fa-solid fa-graduation-cap  text-2xl"></i>
+                <i className="fa-solid fa-graduation-cap text-2xl"></i>
               </NavLink>
+              <div
+                className={`${
+                  open ? 'block' : 'hidden'
+                } absolute left-16 top-5 z-10 mt-2 w-32 origin-top-right rounded-md bg-[#1E1E1E] py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
+                role="menu"
+              >
+                <NavLink
+                  to={`/addcurretntstudents/${_id}`}
+                  className={({ isActive }) =>
+                    ` flex items-center p-3 px-5 ${isActive ? 'bg-[#CFF80B] text-black' : 'bg-[#1E1E1E] text-white'}`
+                  }
+                  role="menuitem"
+                >
+                  Students
+                </NavLink>
+                <NavLink
+                  to={`/addalumini/${_id}`}
+                  className={({ isActive }) =>
+                    ` flex items-center p-3 px-5 ${isActive ? 'bg-[#CFF80B] text-black' : 'bg-[#1E1E1E] text-white'}`
+                  }
+                  role="menuitem"
+                >
+                  Alumnis
+                </NavLink>
+              </div>
             </li>
-            <li className="rounded-sm">
+            <li
+              className="rounded-sm relative"
+              onMouseEnter={() => setOpen1(true)}
+              onMouseLeave={() => setOpen1(false)}
+            >
               <NavLink
                 to={`/aluminilist/${_id}`}
                 className={({ isActive }) =>
                   `rounded-full flex items-center p-3 px-5 ${isActive ? 'bg-[#CFF80B] text-black' : 'bg-[#1E1E1E] text-white'}`
                 }
               >
-                <i className="fa-solid fa-bars  text-2xl"></i>
-              </NavLink>
-            </li>
-            <li className="rounded-sm">
-              <NavLink
-                to={`/addcurretntstudents/${_id}`}
-                className={({ isActive }) =>
-                  `rounded-full flex items-center p-3 px-5 ${isActive ? 'bg-[#CFF80B] text-black' : 'bg-[#1E1E1E] text-white'}`
-                }
-              >
-                <i className="fa-solid fa-user-plus text-2xl"></i>
-              </NavLink>
-            </li>
-            <li className="rounded-sm">
-              <NavLink
-                to={`/currentstudentslist/${_id}`}
-                className={({ isActive }) =>
-                  `rounded-full flex items-center p-3 px-5 ${isActive ? 'bg-[#CFF80B] text-black' : 'bg-[#1E1E1E] text-white'}`
-                }
-              >
                 <i className="fa-solid fa-clipboard text-2xl"></i>
               </NavLink>
+              <div
+                className={`${
+                  open1 ? 'block' : 'hidden'
+                } absolute left-16 top-5 z-10 mt-2 w-32 origin-top-right rounded-md bg-[#1E1E1E] py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
+                role="menu"
+              >
+                <NavLink
+                  to={`/aluminilist/${_id}`}
+                  className={({ isActive }) =>
+                    `flex items-center p-3 px-5 ${isActive ? 'bg-[#CFF80B] text-black' : 'bg-[#1E1E1E] text-white'}`
+                  }
+                  role="menuitem"
+                >
+                  Alumnis
+                </NavLink>
+                <NavLink
+                  to={`/currentstudentslist/${_id}`}
+                  className={({ isActive }) =>
+                    `flex items-center p-3 px-5 ${isActive ? 'bg-[#CFF80B] text-black' : 'bg-[#1E1E1E] text-white'}`
+                  }
+                  role="menuitem"
+                >
+                  Students
+                </NavLink>
+              </div>
             </li>
-            
             <li className="rounded-sm">
               <NavLink
                 to={`/universitydonation/${_id}`}
@@ -66,7 +106,7 @@ const Sidebar = () => {
                   `rounded-full flex items-center p-3 px-5 ${isActive ? 'bg-[#CFF80B] text-black' : 'bg-[#1E1E1E] text-white'}`
                 }
               >
-                <i className="fa-solid fa-indian-rupee-sign  text-2xl"></i>
+                <i className="fa-solid fa-indian-rupee-sign text-2xl"></i>
               </NavLink>
             </li>
             <li className="rounded-sm">
@@ -76,7 +116,7 @@ const Sidebar = () => {
                   `rounded-full flex items-center p-3 px-5 ${isActive ? 'bg-[#CFF80B] text-black' : 'bg-[#1E1E1E] text-white'}`
                 }
               >
-                <i className="fa-solid fa-gear  text-2xl"></i>
+                <i className="fa-solid fa-gear text-2xl"></i>
               </NavLink>
             </li>
             <li className="rounded-sm">
@@ -86,24 +126,24 @@ const Sidebar = () => {
                   `rounded-full flex items-center p-3 px-5 ${isActive ? 'bg-[#CFF80B] text-black' : 'bg-[#1E1E1E] text-white'}`
                 }
               >
-                <i className="fa-solid fa-comments  text-2xl"></i>
+                <i className="fa-solid fa-comments text-2xl"></i>
               </NavLink>
             </li>
             <li className="rounded-sm">
               <NavLink
-                to='/universitysignuppage'
+                to="/universitysignuppage"
                 className={({ isActive }) =>
                   `rounded-full flex items-center p-3 px-5 ${isActive ? 'bg-[#CFF80B] text-black' : 'bg-[#1E1E1E] text-white'}`
                 }
               >
-                <i className="fa-solid fa-right-from-bracket  text-2xl"></i>
+                <i className="fa-solid fa-right-from-bracket text-2xl"></i>
               </NavLink>
             </li>
           </ul>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

@@ -13,7 +13,7 @@ const Sidebar = () => {
                 <NavLink
                   to={`/studentdashboard/${_id}`}
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#FDE047]' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-yellow-500' : 'bg-[#1E1E1E]'}`
                   }
                 >
                   <i className="fa-solid fa-house text-white text-2xl"></i>
@@ -23,7 +23,7 @@ const Sidebar = () => {
                 <NavLink
                   to={`/aluministory/${_id}`}
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#FDE047]' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-yellow-500' : 'bg-[#1E1E1E]'}`
                   }
                 >
                   <i className="fa-solid fa-graduation-cap text-white text-2xl"></i>
@@ -33,7 +33,7 @@ const Sidebar = () => {
                 <NavLink
                   to={`/aluminilist2/${_id}`}
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#FDE047]' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-yellow-500' : 'bg-[#1E1E1E]'}`
                   }
                 >
                   <i className="fa-solid fa-user-group text-white text-2xl"></i>
@@ -43,7 +43,7 @@ const Sidebar = () => {
                 <NavLink
                   to={`/studentrequestform/${_id}`}
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#FDE047]' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-yellow-500' : 'bg-[#1E1E1E]'}`
                   }
                 >
                   <i className="fa-solid fa-hand text-white text-2xl"></i>
@@ -53,7 +53,7 @@ const Sidebar = () => {
                 <NavLink
                   to={`/studentsetting/${_id}`}
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#FDE047]' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-yellow-500' : 'bg-[#1E1E1E]'}`
                   }
                 >
                   <i className="fa-solid fa-gear text-white text-2xl"></i>
@@ -63,7 +63,7 @@ const Sidebar = () => {
                 <NavLink
                   to={`/studentchat/${_id}`}
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#FDE047]' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-yellow-500' : 'bg-[#1E1E1E]'}`
                   }
                 >
                   <i className="fa-solid fa-comments text-white text-2xl"></i>
@@ -73,7 +73,7 @@ const Sidebar = () => {
                 <NavLink
                   to='/studentloginpage'
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-[#FDE047]' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-yellow-500' : 'bg-[#1E1E1E]'}`
                   }
                 >
                   <i className="fa-solid fa-right-from-bracket text-white text-2xl"></i>

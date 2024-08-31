@@ -97,7 +97,7 @@ Report any complaint or issue here
             <div className="h-[700px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
               <div>
                 <h1 className="text-white font-extrabold text-6xl uppercase">
-                  Donation Form
+                 Report Here
                 </h1>
 
 

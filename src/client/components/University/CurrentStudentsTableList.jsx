@@ -190,21 +190,21 @@ const CurrentStudentsTableList = () => {
                         </div>
 
                         {/* Pagination Controls */}
-                        <div className="flex justify-end items-center py-3 space-x-3">
-                            <button
-                                className="bg-[#CFF80B] text-black px-4 py-2 rounded-full hover:bg-[#B1D609] disabled:bg-gray-500"
+                        <div className="flex justify-center items-center py-3 space-x-3">
+                        <button
+                                className="bg-[#CFF80B] text-black px-4 py-1 rounded-full hover:bg-[#B1D609] disabled:bg-gray-500"
                                 onClick={prevPage}
                                 disabled={currentPage === 1}
                             >
-                                Previous
+                                <i className="fa-solid text-xl fa-caret-left" ></i>
                             </button>
-                            <span className="text-white">{`Page ${currentPage}`}</span>
+                           
                             <button
-                                className="bg-[#CFF80B] text-black px-4 py-2 rounded-full hover:bg-[#B1D609] disabled:bg-gray-500"
+                                className="bg-[#CFF80B] text-black px-4 py-1 rounded-full hover:bg-[#B1D609] disabled:bg-gray-500"
                                 onClick={nextPage}
                                 disabled={currentTasks.length < tasksPerPage}
                             >
-                                Next
+                                <i className="fa-solid text-xl fa-caret-right "></i>
                             </button>
                         </div>
                     </div>

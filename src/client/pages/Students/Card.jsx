@@ -32,7 +32,7 @@ const Card = ({ alumni }) => {
     <div className="box-image">
       <img src={avatarUrl} alt=""  className='h-[300px] rounded-lg'/>
     </div>
-    <div className="studio-button absolute bottom-4 right-4 flex items-center bg-[#EAB308] text-black py-2 px-3 rounded-full shadow-lg transition-all ease-in-out duration-300 overflow-hidden max-w-[45px]">
+    <div className="studio-button absolute bottom-4 right-4 flex items-center bg-yellow-500 text-black py-2 px-3 rounded-full shadow-lg transition-all ease-in-out duration-300 overflow-hidden max-w-[45px]">
       <div className="studio-button-icon relative top-[1px]">
       <i class="fa-solid fa-chevron-left text-center text-lg"></i>
       </div>

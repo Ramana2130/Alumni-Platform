@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import add from '../../assets/add.svg';
+import add from '../../assets/vc.svg';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 

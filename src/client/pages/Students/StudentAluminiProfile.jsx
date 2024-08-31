@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import women from '../../assets/team/kabi.png';
 import Sidebar from '../../components/Students/Sidebar';
 import StudentNavbar from '../../components/Students/StudentNavbar';
+import AluminiProfile from './AluminiProfile';
 
 const StudentAluminiProfile = () => {
     return (<div className='bg-[#111111] h-[100vh] overflow-hidden'>
@@ -11,9 +11,9 @@ const StudentAluminiProfile = () => {
         <Sidebar />
     </div>
 
- <div className="relative  p-5  h-[85vh] w-[70vw] rounded-2xl bg-[#1E1E1E]">
+ <div className="relative  p-5  h-[85vh] w-[70vw] scrollbar_yellow overflow-x-auto rounded-2xl bg-[#1E1E1E]">
        
-    <div className='w-full'>
+    {/* <div className='w-full'>
       
       <div className='flex'>
           <div className='w-1/2'>
@@ -136,7 +136,8 @@ const StudentAluminiProfile = () => {
 
 
 
-    </div>
+    </div> */}
+    <AluminiProfile/>
     </div>
 
 </div>

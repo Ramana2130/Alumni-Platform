@@ -3,7 +3,7 @@ import React from 'react'
 import Chat from './Chat'
 import StudentNavbar from '../../components/Students/StudentNavbar';
 
-import Sidebar from '../../components/Alumni/Sidebar'
+import Sidebar from '../../components/Students/Sidebar'
 
 const StudentChat = () => {
   return (

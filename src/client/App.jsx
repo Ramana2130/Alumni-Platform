@@ -37,6 +37,7 @@ import StudentChat from "./pages/Students/StudentChat";
 import AluminiDashboard from "./pages/Alumini/AluminiDashboard";
 import AluminiJob from "./pages/Alumini/AluminiJob";
 import AluminiDonation from "./pages/Alumini/AluminiDonation";
+import AluminiProfile from "./pages/Students/AluminiProfile";
 
 const App = () => {
   return (
@@ -84,6 +85,7 @@ const App = () => {
         <Route path="/aluminijob" element={<AluminiJob/>} />
         <Route path="/aluminidonationform" element={<AluminiDonation/>} />
         <Route path="/aluminichat" element={<AluminiChat/>} />
+        <Route path="/aluminiprofile2" element={<AluminiProfile/>} />
 
 
 

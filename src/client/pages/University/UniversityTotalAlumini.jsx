@@ -1,10 +1,12 @@
 import React from 'react'
 import radio from '../../assets/radio.svg'
-import { useNavigate } from 'react-router-dom'
-const UniversityTotalAlumini = ({id}) => {
+import { useNavigate,useParams } from 'react-router-dom'
+const UniversityTotalAlumini = ({}) => {
+  const { _id } = useParams();
+
   const navigate=useNavigate()
   const alumni=()=>{
-    navigate(`/aluminilist/${id}`)
+    navigate(`/aluminilist/${_id}`)
   }
   
   return (
