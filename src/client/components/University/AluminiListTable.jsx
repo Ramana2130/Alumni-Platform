@@ -7,7 +7,7 @@ const AlumniListTable = () => {
     const [data, setData] = useState([]);
     const [filter, setFilter] = useState("All");
     const [currentPage, setCurrentPage] = useState(1);
-    const tasksPerPage = 5;
+    const tasksPerPage = 7;
 
     const { _id } = useParams();
     
@@ -85,92 +85,93 @@ const AlumniListTable = () => {
                             </div>
                         </div>
                         <div className="mt-7 h-[52vh] overflow-auto">
-                            <table className="w-full whitespace-nowrap">
-                                <thead className="text-center">
-                                    <tr>
-                                        <th className="text-sm text-white uppercase">Name</th>
-                                        <th className="text-sm text-white uppercase">Department</th>
-                                        <th className="text-sm text-white uppercase">Year of Joining</th>
-                                        <th className="text-sm text-white uppercase">Email</th>
-                                        <th className="text-sm text-white uppercase">Year of Passing</th>
-                                        <th className="text-sm text-white uppercase">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {currentTasks.map((task) => (
-                                        <tr className="h-16 border-b" key={task._id}>
-                                            <td>
-                                                <div className="flex items-center justify-center">
-                                                    <p className="text-base font-medium leading-none text-gray-300 uppercase mr-2">{task.alumniname}</p>
-                                                </div>
-                                            </td>
-                                            <td className="overflow-hidden">
-                                                <div className="flex items-center justify-center">
-                                                    <a className="text-base text-center leading-none text-[#CFF80B] font-bold ml-2 w-96">{task.department}</a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div className="flex ml-20">
-                                                    <input
-                                                        value={task.yearofjoining}
-                                                        className="text-center text-sm leading-none text-white bg-transparent border-none focus:outline-none"
-                                                        readOnly
-                                                    />
-                                                </div>
-                                            </td>
-                                            <td className="flex justify-evenly mt-5 ml-10">
-                                                <div className="flex items-center justify-center">
-                                                    <p className="text-sm leading-none text-white">{task.alumniemail}</p>
-                                                </div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" onClick={() => handleCopyPassword(task.alumniemail)} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-copy text-white cursor-pointer hover:text-indigo-800">
-                                                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-                                                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-                                                </svg>
-                                            </td>
-                                            <td>
-                                                <p className="text-base font-bold leading-none text-white ml-2">{task.passedoutyear}</p>
-                                            </td>
-                                            <td>
-                                                <div className="flex items-center space-x-5 justify-center ml-5">
-                                                    <Link to={`/updatealumnidetails/${task.universityId}/${task._id}`} className="mr-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white hover:text-indigo-800 cursor-pointer lucide lucide-settings-2">
-                                                            <path d="M20 7h-9" />
-                                                            <path d="M14 17H5" />
-                                                            <circle cx="17" cy="17" r="3" />
-                                                            <circle cx="7" cy="7" r="3" />
-                                                        </svg>
-                                                    </Link>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" onClick={() => handleDelete(task._id)} width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white hover:text-red-700 cursor-pointer lucide lucide-trash-2">
-                                                        <path d="M3 6h18" />
-                                                        <path d="M19 6l-1.29 12.9A2 2 0 0 1 15.72 21H8.28a2 2 0 0 1-1.99-2.1L5 6" />
-                                                        <path d="M10 11v6" />
-                                                        <path d="M14 11v6" />
-                                                        <rect width="20" height="20" x="2" y="3" rx="2" ry="2" />
-                                                    </svg>
-                                                </div>
-                                            </td>
+                            {currentTasks.length > 0 ? (
+                                <table className="w-full whitespace-nowrap">
+                                    <thead className="text-center">
+                                        <tr>
+                                            <th className="text-sm text-white uppercase">Name</th>
+                                            <th className="text-sm text-white uppercase">Department</th>
+                                            <th className="text-sm text-white uppercase">Year of Joining</th>
+                                            <th className="text-sm text-white uppercase">Email</th>
+                                            <th className="text-sm text-white uppercase">Year of Passing</th>
+                                            <th className="text-sm text-white uppercase">Actions</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {currentTasks.map((task) => (
+                                            <tr className="h-16 border-b" key={task._id}>
+                                                <td>
+                                                    <div className="flex items-center justify-center">
+                                                        <p className="text-base font-medium leading-none text-gray-300 uppercase mr-2">{task.alumniname}</p>
+                                                    </div>
+                                                </td>
+                                                <td className="overflow-hidden">
+                                                    <div className="flex items-center justify-center">
+                                                        <a className="text-base text-center leading-none text-[#CFF80B] font-bold ml-2 w-96">{task.department}</a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div className="flex ml-20">
+                                                        <input
+                                                            value={task.yearofjoining}
+                                                            className="text-center text-sm leading-none text-white bg-transparent border-none focus:outline-none"
+                                                            readOnly
+                                                        />
+                                                    </div>
+                                                </td>
+                                                <td className="flex justify-evenly mt-5 ml-10">
+                                                    <div className="flex items-center justify-center">
+                                                        <p className="text-sm leading-none text-white">{task.alumniemail}</p>
+                                                    </div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" onClick={() => handleCopyPassword(task.alumniemail)} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-copy text-white cursor-pointer hover:text-indigo-800">
+                                                        <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                                                        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                                                    </svg>
+                                                </td>
+                                                <td>
+                                                    <p className="text-base font-bold leading-none text-white ml-2">{task.passedoutyear}</p>
+                                                </td>
+                                                <td>
+                                                    <div className="flex items-center space-x-5 justify-center ml-5">
+                                                        <Link to={`/updatealumnidetails/${task.universityId}/${task._id}`} className="mr-2">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white hover:text-[#CFF80B] cursor-pointer lucide lucide-settings-2">
+                                                                <path d="M20 7h-9" />
+                                                                <path d="M14 17H5" />
+                                                                <circle cx="17" cy="17" r="3" />
+                                                                <circle cx="7" cy="7" r="3" />
+                                                            </svg>
+                                                        </Link>
+                                                      
+                                                        <i className="fa-solid fa-trash text-white hover:text-red-500 text-xl " onClick={() => handleDelete(task._id)}></i>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <div className="text-center text-white mt-10">
+                                    <p>Data not available</p>
+                                </div>
+                            )}
                         </div>
 
                         {/* Pagination Controls */}
-                        <div className="flex justify-end items-center py-3 space-x-3">
+                        <div className="flex justify-center items-center py-3 space-x-3">
                             <button
-                                className="bg-[#CFF80B] text-black px-4 py-2 rounded-full hover:bg-[#B1D609] disabled:bg-gray-500"
+                                className="bg-[#CFF80B] text-black px-4 py-1 rounded-full hover:bg-[#B1D609] disabled:bg-gray-500"
                                 onClick={prevPage}
                                 disabled={currentPage === 1}
                             >
-                                Previous
+                                <i className="fa-solid text-xl fa-caret-left" ></i>
                             </button>
-                            <span className="text-white">{`Page ${currentPage}`}</span>
+                           
                             <button
-                                className="bg-[#CFF80B] text-black px-4 py-2 rounded-full hover:bg-[#B1D609] disabled:bg-gray-500"
+                                className="bg-[#CFF80B] text-black px-4 py-1 rounded-full hover:bg-[#B1D609] disabled:bg-gray-500"
                                 onClick={nextPage}
                                 disabled={currentTasks.length < tasksPerPage}
                             >
-                                Next
+                                <i className="fa-solid text-xl fa-caret-right "></i>
                             </button>
                         </div>
                     </div>

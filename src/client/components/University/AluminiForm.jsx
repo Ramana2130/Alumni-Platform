@@ -29,7 +29,6 @@ const AluminiForm = () => {
       });
       if (response.status === 200) {
         toast.success("Alumni added successfully");
-        navigate(`/aluminilist/${_id}`)
         setStep(3);
       }
     } catch (error) {
@@ -101,10 +100,11 @@ const AluminiForm = () => {
                         id="department"
                         onChange={(e) => setDepartment(e.target.value)}
                       >
-                        <option value="IT">IT</option>
-                        <option value="CSE">CSE</option>
-                        <option value="AIDS">AIDS</option>
-                        <option value="MECH">MECH</option>
+                        <option className='text-black' value="Department">Department</option>
+                        <option className='text-black' value="IT">IT</option>
+                        <option className='text-black' value="CSE">CSE</option>
+                        <option className='text-black' value="AIDS">AIDS</option>
+                        <option className='text-black' value="MECH">MECH</option>
                       </select>
                     </div>
                     <label htmlFor="password" className="text-sm font-semibold text-[#87888C]">

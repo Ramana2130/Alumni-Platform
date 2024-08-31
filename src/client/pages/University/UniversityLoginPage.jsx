@@ -60,27 +60,19 @@ const UniversitySignupPage = () => {
                   <input
                   name='universityid'
                     id="universityid"
-                    className="border p-1 shadow-md placeholder:text-base border-t-0 bg-transparent border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C]   w-96"
+                    className="border text-white focus:outline-none p-1 shadow-md placeholder:text-base border-t-0 bg-transparent border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C]   w-96"
                     type="text"
-                    placeholder="university ID"
+                    placeholder="University Email"
                     onChange={(e) => setUniversityid(e.target.value)}
                     required
                   />
                 </div>
-                {/* <div className="mb-5 mt-10">
-                  <input
-                    id="email"
-                    className="border p-1 shadow-md placeholder:text-base border-t-0 border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C] bg-  w-96"
-                    type="email"
-                    placeholder="University Email"
-                    required
-                  />
-                </div> */}
+
                 <div className="">
                   <input
                   name='universitypassword'
                     id="universitypassword"
-                    className="border p-1 shadow-md placeholder:text-base bg-transparent border-t-0 border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C] bg-  w-96"
+                    className="border text-white focus:outline-none p-1 shadow-md placeholder:text-base bg-transparent border-t-0 border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C] bg-  w-96"
                     type="password"
                     placeholder="password"
                     onChange={(e) => setUniversitypassword(e.target.value)}

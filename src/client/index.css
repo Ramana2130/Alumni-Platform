@@ -42,7 +42,7 @@
   background: linear-gradient(
     to right,
     #111111 0%,
-    #111111 50%,
+    hsl(0, 0%, 7%) 50%,
     #DBF851 50%,
     #d2eb55 100%
   );
