@@ -1,16 +1,18 @@
 import express from "express";
+import jobDetailsmodels from "../models/jobdetailsmodels.js";
+import alumnipersonaldetails from "../models/alumnipersonaldata.js";
+import alumniformsmodels from "../models/alumniform.js";
 const router = express.Router();
 
 // Route to submit alumni personal details
 router.post('/personaldetails/:alumniId', async (req, res) => {
     try {
         const { alumniId } = req.params;
-        const { about, city, nationality, currentstatus, role, companyname, currentcity, successstories, fromlearn } = req.body;
+        const { about, nationality, currentstatus, role, companyname, currentcity, successstories, fromlearn } = req.body;
 
         const newDetails = new alumnipersonaldetails({
-            alumniId,
+            alumniId: alumniId,
             about,
-            city,
             nationality,
             currentstatus,
             role,
@@ -98,12 +100,13 @@ router.delete('/personaldetails/:alumniId', async (req, res) => {
     }
 });
 
-router.post('/addjob', async (req, res) => {
+router.post('/addjob/:alumniId', async (req, res) => {
     try {
-        const { alumniId, ...jobData } = req.body;
+        const { alumniId } = req.params; // Extract alumniId from URL parameters
+        const jobData = req.body;
 
-        const job = new JobDetails({
-            alumniId,  // Save the alumniId
+        const job = new jobDetailsmodels({
+            alumniId,  // Save the alumniId from URL parameters
             ...jobData // Spread the rest of the job details from the request body
         });
 
@@ -114,5 +117,37 @@ router.post('/addjob', async (req, res) => {
         res.status(500).send({ error: true, message: 'Internal Server Error' });
     }
 });
+router.get('/getjob/:alumniId', async (req, res) => {
+    try {
+        const { alumniId } = req.params;
 
+        // Find job details associated with the given alumniId
+        const jobs = await jobDetailsmodels.find({ alumniId });
+
+        if (!jobs || jobs.length === 0) {
+            return res.status(404).send({ error: true, message: 'No jobs found for this alumni ID' });
+        }
+
+        res.status(200).send({ success: true, jobs });
+    } catch (error) {
+        console.error("Error in fetching job details:", error);
+        res.status(500).send({ error: true, message: 'Internal Server Error' });
+    }
+});
+
+router.get('/getalljobs', async (req, res) => {
+    try {
+        // Fetch all job details from the database
+        const jobs = await jobDetailsmodels.find().populate('alumniId');
+
+        if (!jobs || jobs.length === 0) {
+            return res.status(404).send({ error: true, message: 'No jobs found' });
+        }
+
+        res.status(200).send({ success: true, jobs });
+    } catch (error) {
+        console.error("Error in fetching job details:", error);
+        res.status(500).send({ error: true, message: 'Internal Server Error' });
+    }
+});
 export default router;

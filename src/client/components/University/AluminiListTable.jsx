@@ -23,7 +23,6 @@ const AlumniListTable = () => {
       const result = await axios.get(
         `http://localhost:3000/alumni/${universityId}/alumnis`
       );
-      console.log(result.data);
       setData(result.data.alumnis); // Ensure this points to the correct data structure
       setLoading(false);
     } catch (error) {
@@ -110,7 +109,23 @@ const AlumniListTable = () => {
             <h1 className="text-white font-semibold text-4xl uppercase">
               Alumni List
             </h1>
-      
+            <Fragment>
+              <div className="flex items-center space-x-2 border border-[#B1D609]">
+                <input
+                  id="input"
+                  name="file"
+                  type="file"
+                  onChange={readUploadFile}
+                  accept=".xlsx, .xls, .csv"
+                  className="text-white file:bg-[#CFF80B] file:text-black file:px-4 file:py-2 file:rounded-full hover:file:bg-[#B1D609] cursor-pointer"
+                />
+                <label htmlFor="input" className="text-sm text-[#cff80b]">
+                  Note: The headers in the Excel file should be as follows:
+                  Name, Department, Email, Year of Joining, Year of Passing.
+                </label>
+              </div>
+              {loading && <progress style={{ width: "100%" }}></progress>}
+            </Fragment>
             <i className="fa-solid fa-circle-info text-7xl text-[#CFF80B]"></i>
           </div>
 
@@ -241,12 +256,27 @@ const AlumniListTable = () => {
                           </p>
                         </td>
                         <td className="text-center  ">
-                          
                           <Link
                             to={`/updatealumnidetails/${task.universityId}/${task._id}`}
                             className="text-yellow-400  hover:text-yellow-600"
                           >
-                          <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-2"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              class="lucide lucide-settings-2"
+                            >
+                              <path d="M20 7h-9" />
+                              <path d="M14 17H5" />
+                              <circle cx="17" cy="17" r="3" />
+                              <circle cx="7" cy="7" r="3" />
+                            </svg>
                           </Link>
                           <button
                             onClick={() => handleDelete(task._id)}
@@ -289,27 +319,9 @@ const AlumniListTable = () => {
                   )}
                 </tbody>
               </table>
-              
             </div>
-            <Fragment>
-              <div className="flex items-center space-x-2 border border-[#B1D609]">
-                <input
-                  id="input"
-                  name="file"
-                  type="file"
-                  onChange={readUploadFile}
-                  accept=".xlsx, .xls, .csv"
-                  className="text-white file:bg-[#CFF80B] file:text-black file:px-4 file:py-2 file:rounded-full hover:file:bg-[#B1D609] cursor-pointer"
-                />
-                <label htmlFor="input" className="text-sm text-[#cff80b]">
-                  Note: The headers in the Excel file should be as follows:
-                  Name, Department, Email, Year of Joining, Year of Passing.
-                </label>
-              </div>
-              {loading && <progress style={{ width: "100%" }}></progress>}
-    </Fragment>  
+
             <div className="flex space-x-2 items-center justify-center mt-5">
-              
               <button
                 onClick={prevPage}
                 className="px-3 py-1 bg-[#B1D609] text-black rounded-full font-bold"

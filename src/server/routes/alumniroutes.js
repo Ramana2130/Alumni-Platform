@@ -81,16 +81,18 @@ AuthRoutes.post('/addexcelfile/:universityId', upload.single('file'), async (req
 
     // Hash the password and transform the data
     const saltRounds = 10; // You can adjust the salt rounds as needed
-    const alumniData = await Promise.all(json.map(async row => {
-      // Ensure RegisterNo is a string
-      const password = typeof row['RegisterNo'] === 'string' ? row['RegisterNo'].trim() : String(row['RegisterNo']);
-
-      // Debug logs
-      console.log(`Original Password: ${password}`);
-
+    const alumniDataPromises = json.map(async row => {
       try {
+        // Ensure RegisterNo is a string
+        const password = typeof row['RegisterNo'] === 'string' ? row['RegisterNo'].trim() : String(row['RegisterNo']);
+
+        // Debug logs
+        console.log(`Original Password: ${password}`);
+
+        // Hash the password
         const hashedPassword = await bcryptjs.hash(password, saltRounds);
 
+        // Return the transformed data object
         return {
           universityId: universityObjectId,
           alumniname: typeof row['Name'] === 'string' ? row['Name'].trim() : row['Name'],
@@ -103,10 +105,13 @@ AuthRoutes.post('/addexcelfile/:universityId', upload.single('file'), async (req
           password: hashedPassword // Set hashed password
         };
       } catch (err) {
-        console.error('Error hashing password:', err);
-        return null; // Skip the row if password hashing fails
+        console.error('Error processing row:', err);
+        return null; // Return null if there's an error, so it can be filtered out later
       }
-    })).filter(row =>
+    });
+
+    // Resolve all promises and filter out any null values
+    const alumniData = (await Promise.all(alumniDataPromises)).filter(row =>
       row &&
       row.alumniname &&
       row.department &&
@@ -115,7 +120,7 @@ AuthRoutes.post('/addexcelfile/:universityId', upload.single('file'), async (req
       row.passedoutyear &&
       row.alumniregisterno &&
       row.alumnimobilenumber &&
-      row.password // Ensure password is included
+      row.password // Ensure all required fields are present
     );
 
     if (alumniData.length === 0) {
@@ -188,7 +193,7 @@ AuthRoutes.get("/getalumni", async (req, res) => {
 AuthRoutes.get("/getalumni/:_id", async (req, res) => {
   try {
     const _id = req.params._id;
-    const alumnidetails = await alumniformsmodels.findOne({ _id: _id });
+    const alumnidetails = await alumniformsmodels.findOne({ _id: _id }).select("-password");
     if (!alumnidetails) {
       return res.status(404).send({ error: true, message: "Alumni not found" });
     }

@@ -30,14 +30,14 @@ const alumniformschema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    alumnimobilenumber : {
+    alumnimobilenumber: {
       type: Number,
       required: true
     },
     password: {
       type: String,
       required: true,
-      default: function() { return this.alumniregisterno; } 
+      default: function () { return this.alumniregisterno; }
     },
   },
   { timestamps: true }

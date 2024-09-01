@@ -1,9 +1,14 @@
 import mongoose from "mongoose";
 const alumniPersonalschema = new mongoose.Schema({
     // Other fields
-    city: {
+    alumniId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'alumnidetails', // Assuming you have an 'Alumni' model
+        required: true
+    },
+    about: {
         type: String,
-        required: false, // Make it optional
+        required: false,
     },
     nationality: {
         type: String,
@@ -18,13 +23,21 @@ const alumniPersonalschema = new mongoose.Schema({
         required: false, // Make it optional
     },
     // Job details fields
-    companyname: String,
-    role: String,
-    joblocation: String,
-    applyurl: String,
-    jobworktype: {
+    companyname: {
         type: String,
-        enum: ["full time", "part time", "internship"],
+        required: true
+    },
+    role: {
+        type: String,
+        required: true
+    },
+    successstories: {
+        type: String,
+        required: true
+    },
+    fromlearn: {
+        type: String,
+        required: true
     },
 });
 

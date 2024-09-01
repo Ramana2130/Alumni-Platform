@@ -1,56 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import add from '../../assets/add.svg';
-import axios from 'axios';
-import toast from 'react-hot-toast';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import add from "../../assets/add.svg";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const UpdateAluminiForm = () => {
-  const [alumniname, setAlumniname] = useState('');
-  const [department, setDepartment] = useState('');
-  const [alumniemail, setAlumniemail] = useState('');
-  const [yearofjoining, setYearofjoining] = useState('');
-  const [passedoutyear, setPassedoutyear] = useState('');
-  const [password, setPassword] = useState('');
+  const [alumniname, setAlumniname] = useState("");
+  const [department, setDepartment] = useState("");
+  const [alumniemail, setAlumniemail] = useState("");
+  const [yearofjoining, setYearofjoining] = useState("");
+  const [passedoutyear, setPassedoutyear] = useState("");
+  const [password, setPassword] = useState("");
 
   const { universityId, _id } = useParams();
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
 
   // Store universityId and _id in localStorage if available
-  useEffect(() => {
-    if (universityId && _id) {
-      localStorage.setItem("universityId", universityId);
-      localStorage.setItem('_id', _id);
-    }
-  }, [universityId, _id]);
-  useEffect(() => {
-    if (universityId && _id) {
-      axios.get(`http://localhost:3000/alumni/${universityId}/alumnis`)
-        .then(response => {
-          const alumni = response.data.alumnis.find(alumni => alumni._id === _id);
-          if (alumni) {
-            setAlumniname(alumni.alumniname);
-            setDepartment(alumni.department);
-            setPassedoutyear(alumni.passedoutyear);
-            setYearofjoining(alumni.yearofjoining);
-            setPassword(alumni.password);
-            setAlumniemail(alumni.alumniemail);
-          }
-        })
-        .catch(error => console.log(error));
-    }
-  }, [universityId, _id]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:3000/alumni/${universityId}/update/${_id}`, {
-        alumniname, alumniemail, yearofjoining, passedoutyear, department, password
-      });
-      console.log(response.data);
+      const response = await axios.put(
+        `http://localhost:3000/alumni/${universityId}/update/${_id}`,
+        {
+          alumniname,
+          alumniemail,
+          yearofjoining,
+          passedoutyear,
+          department,
+          password,
+        }
+      );
+
       if (response.status === 200) {
         toast.success("Alumni Updated successfully");
-        navigate(`/aluminilist/${universityId}`);
+        navigate(`/universitydashboard/${universityId}`);
+
+        // Re-fetch the updated alumni details
+        await fetchAlumniDetails();
+
+        // Proceed to the success step
         setStep(3);
       }
     } catch (error) {
@@ -58,6 +47,32 @@ const UpdateAluminiForm = () => {
       console.error(error);
     }
   };
+
+  const fetchAlumniDetails = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/alumni/${universityId}/alumnis`
+      );
+      const alumni = response.data.alumnis.find((alumni) => alumni._id === _id);
+      if (alumni) {
+        setAlumniname(alumni.alumniname);
+        setDepartment(alumni.department);
+        setPassedoutyear(alumni.passedoutyear);
+        setYearofjoining(alumni.yearofjoining);
+        setPassword(alumni.password);
+        setAlumniemail(alumni.alumniemail);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // In the useEffect hook, replace the fetching code with a call to fetchAlumniDetails
+  useEffect(() => {
+    if (universityId && _id) {
+      fetchAlumniDetails();
+    }
+  }, [universityId, _id]);
 
   const handleNext = () => {
     setStep((prevStep) => prevStep + 1);
@@ -81,15 +96,19 @@ const UpdateAluminiForm = () => {
         <div className="relative w-[35%]">
           <div className="h-[700px] w-[500px] p-5">
             <h1 className="text-white font-semibold text-4xl uppercase">
-              Let's Update Alumni <span className='text-[#CFF80B]'>Account!</span> 
+              Let's Update Alumni{" "}
+              <span className="text-[#CFF80B]">Account!</span>
             </h1>
-            <div className='mt-24'>
-              <img src={add} alt="" className='h-[300px]' />
+            <div className="mt-24">
+              <img src={add} alt="" className="h-[300px]" />
             </div>
           </div>
         </div>
 
-        <div id="back-div" className="w-[65%] flex justify-center rounded-[26px]">
+        <div
+          id="back-div"
+          className="w-[65%] flex justify-center rounded-[26px]"
+        >
           {/* Step 1 */}
           {step === 1 && (
             <div className="h-[700px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
@@ -100,7 +119,10 @@ const UpdateAluminiForm = () => {
 
                 <form className="space-y-4 w-[400px]">
                   <div className="mt-10 ">
-                    <label htmlFor="alumniName" className="text-sm font-semibold text-[#87888C]">
+                    <label
+                      htmlFor="alumniName"
+                      className="text-sm font-semibold text-[#87888C]"
+                    >
                       Alumni Name
                     </label>
                     <input
@@ -114,7 +136,10 @@ const UpdateAluminiForm = () => {
                       required
                     />
                     <div className="grid">
-                      <label htmlFor="department" className="text-sm font-semibold text-[#87888C]">
+                      <label
+                        htmlFor="department"
+                        className="text-sm font-semibold text-[#87888C]"
+                      >
                         Department
                       </label>
                       <select
@@ -130,7 +155,10 @@ const UpdateAluminiForm = () => {
                         <option value="MECH">MECH</option>
                       </select>
                     </div>
-                    <label htmlFor="yearofjoining" className="text-sm font-semibold text-[#87888C]">
+                    <label
+                      htmlFor="yearofjoining"
+                      className="text-sm font-semibold text-[#87888C]"
+                    >
                       Year of Joining
                     </label>
                     <input
@@ -173,7 +201,10 @@ const UpdateAluminiForm = () => {
 
                 <form className="w-[400px]" onSubmit={handleSubmit}>
                   <div className="mt-10 ">
-                    <label htmlFor="email" className="text-sm font-semibold text-[#87888C]">
+                    <label
+                      htmlFor="email"
+                      className="text-sm font-semibold text-[#87888C]"
+                    >
                       Alumni Email
                     </label>
                     <input
@@ -186,7 +217,10 @@ const UpdateAluminiForm = () => {
                       onChange={(e) => setAlumniemail(e.target.value)}
                       required
                     />
-                    <label htmlFor="passout" className="text-sm font-semibold text-[#87888C]">
+                    <label
+                      htmlFor="passout"
+                      className="text-sm font-semibold text-[#87888C]"
+                    >
                       Passout Year
                     </label>
                     <input
@@ -199,8 +233,11 @@ const UpdateAluminiForm = () => {
                       onChange={(e) => setPassedoutyear(e.target.value)}
                       required
                     />
-                    
-                    <label htmlFor="password" className="text-sm font-semibold text-[#87888C]">
+
+                    <label
+                      htmlFor="password"
+                      className="text-sm font-semibold text-[#87888C]"
+                    >
                       Password
                     </label>
                     <input

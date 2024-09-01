@@ -1,9 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import women from "../../assets/team/kabi.png";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
 const Alumniprofile = () => {
   const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState("");
+  const [olddata, setOlddata] = useState("");
+  const [universitydetails, setUniversitydetails] = useState("");
 
+  const { _id } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const alumniId = localStorage.getItem("_id");
+        const universityId = localStorage.getItem("universityId");
+        if (!alumniId) {
+          throw new Error("Alumni ID not found in localStorage");
+        }
+
+        const response = await axios.get(
+          `http://localhost:3000/current/personaldetails/${alumniId}`
+        );
+        setData(response.data.details); // Use response.data instead of result.data
+
+        const oldvalues = await axios.get(
+          `http://localhost:3000/alumni/getalumni/${alumniId}`
+        );
+        console.log(oldvalues.data.alumnidetails);
+        setOlddata(oldvalues.data.alumnidetails);
+
+        const collegedetails = await axios.get(
+          `http://localhost:3000/university/getcollege/${universityId}`
+        );
+        setUniversitydetails(collegedetails.data.university);
+
+        setLoading(false); // Set loading to false after successful fetch
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setError("Server Error");
+        toast.error("Server Error");
+        setLoading(false); // Set loading to false even if there's an error
+      }
+    };
+
+    fetchData();
+  }, [_id]);
   const handleNext = () => {
     setStep((prevStep) => prevStep + 1);
   };
@@ -38,34 +83,34 @@ const Alumniprofile = () => {
               </h1>
               <div className="mt-5 flex">
                 <img
-                  src={women}
+                  src="https://cdn-icons-png.flaticon.com/128/1177/1177568.png"
                   alt="Profile"
-                  className="size-80 rounded-2xl"
+                  className="size-60 rounded-2xl"
                 />
                 <div className="mx-5 mt-5 w-full">
                   <h1 className="text-[#87888C] font-bold text-sm uppercase">
                     Name
                   </h1>
                   <p className="text-white font-medium uppercase text-lg">
-                    kabi krishna
+                    {olddata.alumniname}
                   </p>
                   <h1 className="text-[#87888C] mt-3 font-bold text-sm uppercase">
                     About
                   </h1>
                   <p className="text-white font-medium uppercase text-lg">
-                    Developer
+                    {data.about}
                   </p>
                   <h1 className="text-[#87888C] mt-3 font-bold text-sm uppercase">
                     City
                   </h1>
                   <p className="text-white font-medium uppercase text-lg">
-                    thanjavur
+                    {data.currentcity}
                   </p>
                   <h1 className="text-[#87888C] mt-3 font-bold text-sm uppercase">
                     Nationality
                   </h1>
                   <p className="text-white font-medium uppercase text-lg">
-                    India
+                    {data.nationality}
                   </p>
                 </div>
               </div>
@@ -79,25 +124,25 @@ const Alumniprofile = () => {
                       Current Status
                     </h1>
                     <p className="text-white font-medium uppercase text-lg">
-                      Working or Bussiness
+                      {data.currentstatus}
                     </p>
                     <h1 className="text-[#87888C] mt-3 font-bold text-sm uppercase">
                       Role
                     </h1>
                     <p className="text-white font-medium uppercase text-lg">
-                      Role
+                      {data.role}
                     </p>
                     <h1 className="text-[#87888C] mt-3 font-bold text-sm uppercase">
                       Company Name
                     </h1>
                     <p className="text-white font-medium uppercase text-lg">
-                      Company Name
+                      {data.companyname}
                     </p>
                     <h1 className="text-[#87888C] mt-3 font-bold text-sm uppercase">
                       Current City
                     </h1>
                     <p className="text-white font-medium uppercase text-lg">
-                      India
+                      {data.currentcity}
                     </p>
                   </div>
                 </div>
@@ -111,13 +156,13 @@ const Alumniprofile = () => {
                         Phone Number
                       </h1>
                       <p className="text-white font-medium uppercase text-lg">
-                        1234567890
+                        {olddata.alumnimobilenumber}
                       </p>
                       <h1 className="text-[#87888C] mt-3 font-bold text-sm uppercase">
                         Email
                       </h1>
                       <p className="text-white font-medium uppercase text-lg">
-                        kabikrishna@gmail.com
+                        {olddata.alumniemail}
                       </p>
                     </div>
                   </div>
@@ -142,19 +187,19 @@ const Alumniprofile = () => {
                   University Name
                 </h1>
                 <p className="text-white font-medium uppercase text-lg">
-                  Sri Krishna Enginnering College
+                  {universitydetails.universityname || "Sri Krishna"}
                 </p>
                 <h1 className="text-[#87888C] mt-3 font-bold text-sm uppercase">
                   Department
                 </h1>
                 <p className="text-white font-medium uppercase text-lg">
-                  Information Technology
+                  {olddata.department}
                 </p>
                 <h1 className="text-[#87888C] mt-3 font-bold text-sm uppercase">
                   Location
                 </h1>
                 <p className="text-white font-medium uppercase text-lg">
-                  Coimbatore
+                  {universitydetails.universitylocation || "cbe"}
                 </p>
                 <div className="flex space-x-10">
                   <div>
@@ -162,7 +207,7 @@ const Alumniprofile = () => {
                       Join In
                     </h1>
                     <p className="text-white font-medium uppercase text-lg">
-                      2018
+                      {olddata.yearofjoining}
                     </p>
                   </div>
                   <div>
@@ -170,7 +215,7 @@ const Alumniprofile = () => {
                       Pass Out
                     </h1>
                     <p className="text-white font-medium uppercase text-lg">
-                      2022
+                      {olddata.passedoutyear}
                     </p>
                   </div>
                 </div>
@@ -188,6 +233,7 @@ const Alumniprofile = () => {
                   name="story"
                   rows={7}
                   id="story"
+                  value={data.successstories}
                   readOnly
                 />
                 <h1 className="text-[#87888C] mt-3 font-bold text-sm uppercase">
@@ -198,6 +244,7 @@ const Alumniprofile = () => {
                   name="tips"
                   rows={3}
                   id="tips"
+                  value={data.fromlearn}
                   readOnly
                 />
               </div>
@@ -392,7 +439,6 @@ const Alumniprofile = () => {
                         required
                       />
                     </div>
-               
                   </div>
                 </div>
               </div>

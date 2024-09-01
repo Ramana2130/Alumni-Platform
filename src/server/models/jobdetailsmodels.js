@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const jobDetailsSchema = new mongoose.Schema({
     alumniId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Alumni',
+        ref: 'alumnidetails',
         required: true,
     },
     companyname: {
@@ -27,7 +27,7 @@ const jobDetailsSchema = new mongoose.Schema({
         enum: ["full time", "part time", "internship"],
         required: true,
     },
-});
+}, { timestamps: true });
 
 const jobDetailsmodels = mongoose.model("JobDetails", jobDetailsSchema);
 export default jobDetailsmodels;

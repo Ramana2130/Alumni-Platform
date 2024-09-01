@@ -1,29 +1,35 @@
-import React, { useState } from 'react';
-import UniversityLogin from '../../assets/UniversityLogin.png';
-import Smart from '../../assets/Smart .png';
-import Navbar from '../../components/Navbar';
-import { Link } from 'react-router-dom';
-import Tab from '../../components/Tab';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import toast from 'react-hot-toast';
+import React, { useState } from "react";
+import UniversityLogin from "../../assets/UniversityLogin.png";
+import Smart from "../../assets/Smart .png";
+import Navbar from "../../components/Navbar";
+import { Link } from "react-router-dom";
+import Tab from "../../components/Tab";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
 const UniversitySignupPage = () => {
+  const [universityname, setUniversityname] = useState("");
+  const [universitylocation, setUniversitylocation] = useState("");
   const [universityid, setUniversityId] = useState("");
   const [universitypassword, setUniversitypassword] = useState("");
-  const navigate=useNavigate();
-
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/university/addcollege", {
-        universityid,
-        universitypassword
-      })
-      console.log(response)
-      if(response.status === 200) {
-        toast.success("University Registered Successfully")
-        navigate('/universitydashboard')
+      const response = await axios.post(
+        "http://localhost:3000/university/addcollege",
+        {
+          universityname,
+          universitylocation,
+          universityid,
+          universitypassword,
+        }
+      );
+      console.log(response);
+      if (response.status === 200) {
+        toast.success("University Registered Successfully");
+        navigate("/universityLoginpage");
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -32,41 +38,65 @@ const UniversitySignupPage = () => {
         toast.error("An error occurred. Please try again.");
       }
     }
-  }
+  };
   return (
-    <div className='bg'>
+    <div className="bg">
       <Navbar />
-      <div className='flex justify-center shadow-2xl bg-[#111111]'>
-        
-
+      <div className="flex justify-center shadow-2xl bg-[#111111]">
         <div
           id="back-div"
           className="h-[90vh] w-[50%]  flex justify-end items-center rounded-[26px]"
         >
           <div className="h-[700px]  relative shadow-custom-shadow  border-r-0 flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
-          <div className='absolute top-3 right-8'>
-            <Tab/>
-
-          </div>
+            <div className="absolute top-3 right-8">
+              <Tab />
+            </div>
             <div>
               <h1 className="pt-8 pb-6 font-extrabold text-white text-6xl text-center cursor-default">
                 Sign Up
               </h1>
-              <form onSubmit={handleSubmit} action="#" method="post" className="space-y-4 w-[400px]">
+              <form
+                onSubmit={handleSubmit}
+                action="#"
+                method="post"
+                className="space-y-4 w-[400px]"
+              >
                 <div className="mb-5 mt-10">
                   <input
-                  name='universityid'
+                    name="universityname"
+                    id="universityname"
+                    className="border  p-1 shadow-md placeholder:text-base border-t-0 bg-transparent focus:outline-none text-white border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C]   w-96"
+                    type="text"
+                    placeholder="Enter University Name"
+                    onChange={(e) => setUniversityname(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-5 mt-10">
+                  <input
+                    name="universityid"
                     id="universityid"
                     className="border  p-1 shadow-md placeholder:text-base border-t-0 bg-transparent focus:outline-none text-white border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C]   w-96"
                     type="text"
-                    placeholder="University Email"
+                    placeholder="University Id"
                     onChange={(e) => setUniversityId(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-5 mt-10">
+                  <input
+                    name="universitylocation"
+                    id="universitylocation"
+                    className="border  p-1 shadow-md placeholder:text-base border-t-0 bg-transparent focus:outline-none text-white border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C]   w-96"
+                    type="text"
+                    placeholder="Enter University Location"
+                    onChange={(e) => setUniversitylocation(e.target.value)}
                     required
                   />
                 </div>
                 <div className="">
                   <input
-                  name='universitypassword'
+                    name="universitypassword"
                     id="universitypassword"
                     className="border  p-1 shadow-md placeholder:text-base bg-transparent focus:outline-none text-white border-t-0 border-r-0 border-l-0 border-b-1 mb-5  border-[#87888C] bg-  w-96"
                     type="password"
@@ -120,7 +150,6 @@ const UniversitySignupPage = () => {
           />
         </div>
       </div>
-    
     </div>
   );
 };

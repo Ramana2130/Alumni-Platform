@@ -14,10 +14,11 @@ const AluminiJobForm = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const alumniId = localStorage.getItem("_id");
       const response = await axios.post(
-        `http://localhost:3000/current/personaldetails/${alumniId}`,
+        `http://localhost:3000/current/addjob/${alumniId}`,
         {
           companyname,
           role,
@@ -28,6 +29,7 @@ const AluminiJobForm = () => {
       );
       if (response.status === 200) {
         toast.success("Job Posted successfully");
+        navigate(`/aluminidashboard/${alumniId}`);
       }
     } catch (error) {
       toast.error("An error occurred while posting Job");

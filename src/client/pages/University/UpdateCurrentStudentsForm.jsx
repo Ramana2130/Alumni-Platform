@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import add from '../../assets/add.svg';
-import axios from 'axios';
-import toast from 'react-hot-toast';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import add from "../../assets/add.svg";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const UpdateCurrentStudentsForm = () => {
-  const [currentstudentsname, setCurrentstudentsname] = useState('');
-  const [currentstudentsregisterno, setCurrentstudentsregisterno] = useState('');
-  const [hashedPassword, setHashedPassword] = useState('');
-  const [currentstudentsdepartment, setCurrentstudentsdepartment] = useState('');
-  const [currentstudentsyearofjoining, setCurrentstudentsyearofjoining] = useState('');
-  const [currentstudentsyearofpassing, setCurrentstudentsyearofpassing] = useState('');
-  const [email, setEmail] = useState('');
+  const [currentstudentsname, setCurrentstudentsname] = useState("");
+  const [currentstudentsregisterno, setCurrentstudentsregisterno] =
+    useState("");
+  const [hashedPassword, setHashedPassword] = useState("");
+  const [currentstudentsdepartment, setCurrentstudentsdepartment] =
+    useState("");
+  const [currentstudentsyearofjoining, setCurrentstudentsyearofjoining] =
+    useState("");
+  const [currentstudentsyearofpassing, setCurrentstudentsyearofpassing] =
+    useState("");
+  const [email, setEmail] = useState("");
 
   const { universityId, _id } = useParams();
   const [step, setStep] = useState(1);
@@ -20,65 +24,87 @@ const UpdateCurrentStudentsForm = () => {
   // Store universityId and _id in localStorage if available
   useEffect(() => {
     if (universityId && _id) {
-      localStorage.setItem('universityId', universityId);
-      localStorage.setItem('_id', _id);
+      localStorage.setItem("universityId", universityId);
+      localStorage.setItem("_id", _id);
     }
   }, [universityId, _id]);
 
   // Fetch the student details on component mount or when universityId or _id changes
   useEffect(() => {
     if (universityId && _id) {
-      axios.get(`http://localhost:3000/student/${universityId}/students`)
-        .then(response => {
-          const student = response.data.students.find(student => student._id === _id);
+      axios
+        .get(`http://localhost:3000/student/${universityId}/students`)
+        .then((response) => {
+          const student = response.data.students.find(
+            (student) => student._id === _id
+          );
           if (student) {
             setCurrentstudentsname(student.currentstudentsname);
             setCurrentstudentsdepartment(student.currentstudentsdepartment);
-            setCurrentstudentsyearofjoining(student.currentstudentsyearofjoining);
-            setCurrentstudentsyearofpassing(student.currentstudentsyearofpassing);
+            setCurrentstudentsyearofjoining(
+              student.currentstudentsyearofjoining
+            );
+            setCurrentstudentsyearofpassing(
+              student.currentstudentsyearofpassing
+            );
             setCurrentstudentsregisterno(student.currentstudentsregisterno);
             setEmail(student.email);
             setHashedPassword(student.hashedPassword);
           }
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
     }
   }, [universityId, _id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:3000/student/${universityId}/update/${_id}`, {
-        currentstudentsname,
-        currentstudentsregisterno,
-        hashedPassword,
-        currentstudentsdepartment,
-        currentstudentsyearofjoining,
-        currentstudentsyearofpassing,
-        email,
-      });
+      const response = await axios.put(
+        `http://localhost:3000/student/${universityId}/update/${_id}`,
+        {
+          currentstudentsname,
+          currentstudentsregisterno,
+          hashedPassword,
+          currentstudentsdepartment,
+          currentstudentsyearofjoining,
+          currentstudentsyearofpassing,
+          email,
+        }
+      );
       if (response.status === 200) {
-        toast.success('Student Updated successfully');
+        toast.success("Student Updated successfully");
+        navigate(`/universitydashboard/${universityId}`);
         // Refetch the updated student details
-        axios.get(`http://localhost:3000/student/${universityId}/students`)
-          .then(response => {
-            const updatedStudent = response.data.students.find(student => student._id === _id);
-            console.log(updatedStudent)
+        axios
+          .get(`http://localhost:3000/student/${universityId}/students`)
+          .then((response) => {
+            const updatedStudent = response.data.students.find(
+              (student) => student._id === _id
+            );
+            console.log(updatedStudent);
             if (updatedStudent) {
               setCurrentstudentsname(updatedStudent.currentstudentsname);
-              setCurrentstudentsdepartment(updatedStudent.currentstudentsdepartment);
-              setCurrentstudentsyearofjoining(updatedStudent.currentstudentsyearofjoining);
-              setCurrentstudentsyearofpassing(updatedStudent.currentstudentsyearofpassing);
-              setCurrentstudentsregisterno(updatedStudent.currentstudentsregisterno);
+              setCurrentstudentsdepartment(
+                updatedStudent.currentstudentsdepartment
+              );
+              setCurrentstudentsyearofjoining(
+                updatedStudent.currentstudentsyearofjoining
+              );
+              setCurrentstudentsyearofpassing(
+                updatedStudent.currentstudentsyearofpassing
+              );
+              setCurrentstudentsregisterno(
+                updatedStudent.currentstudentsregisterno
+              );
               setEmail(updatedStudent.email);
               setHashedPassword(updatedStudent.hashedPassword);
             }
           })
-          .catch(error => console.log(error));
+          .catch((error) => console.log(error));
         setStep(3); // Move to the success step
       }
     } catch (error) {
-      toast.error('An error occurred while updating the student');
+      toast.error("An error occurred while updating the student");
       console.error(error);
     }
   };
@@ -105,15 +131,19 @@ const UpdateCurrentStudentsForm = () => {
         <div className="relative w-[35%]">
           <div className="h-[700px] w-[500px] p-5">
             <h1 className="text-white font-semibold text-4xl uppercase">
-              Let's Update Student <span className='text-[#CFF80B]'>Account!</span> 
+              Let's Update Student{" "}
+              <span className="text-[#CFF80B]">Account!</span>
             </h1>
-            <div className='mt-24'>
-              <img src={add} alt="" className='h-[300px]' />
+            <div className="mt-24">
+              <img src={add} alt="" className="h-[300px]" />
             </div>
           </div>
         </div>
 
-        <div id="back-div" className="w-[65%] flex justify-center rounded-[26px]">
+        <div
+          id="back-div"
+          className="w-[65%] flex justify-center rounded-[26px]"
+        >
           {/* Step 1 */}
           {step === 1 && (
             <div className="h-[700px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
@@ -124,7 +154,10 @@ const UpdateCurrentStudentsForm = () => {
 
                 <form className="space-y-4 w-[400px]">
                   <div className="mt-10 ">
-                    <label htmlFor="currentstudentsname" className="text-sm font-semibold text-[#87888C]">
+                    <label
+                      htmlFor="currentstudentsname"
+                      className="text-sm font-semibold text-[#87888C]"
+                    >
                       Student Name
                     </label>
                     <input
@@ -138,7 +171,10 @@ const UpdateCurrentStudentsForm = () => {
                       required
                     />
                     <div className="grid">
-                      <label htmlFor="department" className="text-sm font-semibold text-[#87888C]">
+                      <label
+                        htmlFor="department"
+                        className="text-sm font-semibold text-[#87888C]"
+                      >
                         Department
                       </label>
                       <select
@@ -146,7 +182,9 @@ const UpdateCurrentStudentsForm = () => {
                         name="currentstudentsdepartment"
                         id="currentstudentsdepartment"
                         value={currentstudentsdepartment}
-                        onChange={(e) => setCurrentstudentsdepartment(e.target.value)}
+                        onChange={(e) =>
+                          setCurrentstudentsdepartment(e.target.value)
+                        }
                       >
                         <option value="IT">IT</option>
                         <option value="CSE">CSE</option>
@@ -154,7 +192,10 @@ const UpdateCurrentStudentsForm = () => {
                         <option value="MECH">MECH</option>
                       </select>
                     </div>
-                    <label htmlFor="yearofjoining" className="text-sm font-semibold text-[#87888C]">
+                    <label
+                      htmlFor="yearofjoining"
+                      className="text-sm font-semibold text-[#87888C]"
+                    >
                       Year of Joining
                     </label>
                     <input
@@ -164,7 +205,9 @@ const UpdateCurrentStudentsForm = () => {
                       className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
                       type="text"
                       placeholder="Enter Year of Joining"
-                      onChange={(e) => setCurrentstudentsyearofjoining(e.target.value)}
+                      onChange={(e) =>
+                        setCurrentstudentsyearofjoining(e.target.value)
+                      }
                       required
                     />
                     <button
@@ -197,7 +240,10 @@ const UpdateCurrentStudentsForm = () => {
 
                 <form className="space-y-4 w-[400px]">
                   <div className="mt-5 ">
-                    <label htmlFor="yearofpassing" className="text-sm font-semibold text-[#87888C]">
+                    <label
+                      htmlFor="yearofpassing"
+                      className="text-sm font-semibold text-[#87888C]"
+                    >
                       Year of Passing
                     </label>
                     <input
@@ -207,11 +253,16 @@ const UpdateCurrentStudentsForm = () => {
                       className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
                       type="text"
                       placeholder="Enter Year of Passing"
-                      onChange={(e) => setCurrentstudentsyearofpassing(e.target.value)}
+                      onChange={(e) =>
+                        setCurrentstudentsyearofpassing(e.target.value)
+                      }
                       required
                     />
 
-                    <label htmlFor="registerno" className="text-sm font-semibold text-[#87888C]">
+                    <label
+                      htmlFor="registerno"
+                      className="text-sm font-semibold text-[#87888C]"
+                    >
                       Register Number
                     </label>
                     <input
@@ -221,10 +272,15 @@ const UpdateCurrentStudentsForm = () => {
                       className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
                       type="text"
                       placeholder="Enter Register Number"
-                      onChange={(e) => setCurrentstudentsregisterno(e.target.value)}
+                      onChange={(e) =>
+                        setCurrentstudentsregisterno(e.target.value)
+                      }
                       required
                     />
-                    <label htmlFor="email" className="text-sm font-semibold text-[#87888C]">
+                    <label
+                      htmlFor="email"
+                      className="text-sm font-semibold text-[#87888C]"
+                    >
                       Email
                     </label>
                     <input
