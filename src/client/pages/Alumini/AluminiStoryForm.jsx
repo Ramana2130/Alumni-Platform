@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import add from "../../assets/mega.svg";
-import axios from "axios";
-import toast from "react-hot-toast";
-
-=======
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
+import { useNavigate,useParams } from 'react-router-dom';
 import add from '../../assets/form.svg'
->>>>>>> 0a58d0c6fb478bb955e627917158d9b26e6c37b1
+import toast from "react-hot-toast";
 const AluminiStoryForm = () => {
   const [step, setStep] = useState(1);
   const { _id } = useParams();
@@ -77,7 +70,7 @@ const AluminiStoryForm = () => {
             <h1 className="text-white font-semibold text-5xl uppercase">
               Let's fill <span className="text-[#2596be]"> form!</span>
             </h1>
-            <p className="text-[#be2525]">
+            <p className="text-red-500 w-[60%]">
               If already submitted these details, ignore this form.
             </p>
             <div className="mt-24">
@@ -93,7 +86,7 @@ const AluminiStoryForm = () => {
           <div className="h-[700px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
             <div>
               <h1 className="text-white font-extrabold text-6xl uppercase">
-                Form
+                Personal Details
               </h1>
               <form onSubmit={handleSubmit} className="space-y-4 w-[500px]">
                 {/* Step 1 */}
@@ -109,7 +102,7 @@ const AluminiStoryForm = () => {
                       <input
                         name="about"
                         id="about"
-                        className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
+                        className="border-[#87888C] text-white bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
                         type="text"
                         placeholder="Eg: Developer, Tester, manager"
                         onChange={(e) => setAbout(e.target.value)}
@@ -126,7 +119,7 @@ const AluminiStoryForm = () => {
                       <input
                         name="nationality"
                         id="nationality"
-                        className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
+                        className="border-[#87888C] text-white bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
                         type="text"
                         placeholder="Enter Nationality"
                         onChange={(e) => setNationality(e.target.value)}
@@ -143,7 +136,7 @@ const AluminiStoryForm = () => {
                       <input
                         name="city"
                         id="city"
-                        className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
+                        className="border-[#87888C] text-white bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
                         type="text"
                         placeholder="Enter Current city"
                         onChange={(e) => setCurrentcity(e.target.value)}
@@ -160,7 +153,7 @@ const AluminiStoryForm = () => {
                       <input
                         name="companyname"
                         id="companyname"
-                        className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
+                        className="border-[#87888C] text-white bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
                         type="text"
                         placeholder="Enter Current Working company"
                         onChange={(e) => setCompanyname(e.target.value)}
@@ -180,6 +173,13 @@ const AluminiStoryForm = () => {
                 {/* Step 2 */}
                 {step === 2 && (
                   <div>
+                    <button
+                      className="bg-[#2596be] px-3 shadow-lg mt-10 p-2 text-black font-semibold rounded-lg  hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
+                      type="button"
+                      onClick={handlePrev}
+                    >
+                      <i className="fa-solid fa-arrow-left text-xl"></i> 
+                    </button>
                     <div className="mt-10">
                       <label
                         htmlFor="currentstatus"
@@ -188,7 +188,7 @@ const AluminiStoryForm = () => {
                         Current Status
                       </label>
                       <select
-                        className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
+                        className="border-[#87888C] text-white bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
                         name="currentstatus"
                         id="currentstatus"
                         onChange={(e) => setCurrentstatus(e.target.value)}
@@ -208,7 +208,7 @@ const AluminiStoryForm = () => {
                       <input
                         name="role"
                         id="role"
-                        className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
+                        className="border-[#87888C] text-white bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
                         type="text"
                         placeholder="Enter Current Role"
                         onChange={(e) => setRole(e.target.value)}
@@ -231,15 +231,9 @@ const AluminiStoryForm = () => {
                         onChange={(e) => setSuccessstories(e.target.value)}
                       />
                     </div>
+                  
                     <button
-                      className="bg-[#2596be] shadow-lg mt-10 p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
-                      type="button"
-                      onClick={handlePrev}
-                    >
-                      <i className="fa-solid fa-arrow-left text-xl"></i> Back
-                    </button>
-                    <button
-                      className="bg-[#2596be] shadow-lg mt-10 p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
+                      className="bg-[#2596be] shadow-lg mt-3 p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
                       type="button"
                       onClick={handleNext}
                     >
@@ -251,6 +245,13 @@ const AluminiStoryForm = () => {
                 {/* Step 3 */}
                 {step === 3 && (
                   <div>
+                     <button
+                        className="bg-[#2596be] shadow-lg mt-10 p-2 text-black font-semibold rounded-lg px-3 hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
+                        type="button"
+                        onClick={handlePrev}
+                      >
+                        <i className="fa-solid fa-arrow-left text-xl"></i> 
+                      </button>
                     <div className="mt-10">
                       <label
                         htmlFor="fromlearn"
@@ -267,23 +268,17 @@ const AluminiStoryForm = () => {
                         onChange={(e) => setFromlearn(e.target.value)}
                       />
                     </div>
-                    <div className="flex justify-between">
+                     
                       <button
-                        className="bg-[#2596be] shadow-lg mt-10 p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
-                        type="button"
-                        onClick={handlePrev}
-                      >
-                        <i className="fa-solid fa-arrow-left text-xl"></i> Back
-                      </button>
-                      <button
-                        className="bg-[#2596be] shadow-lg mt-10 p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
+                        className="bg-[#2596be] shadow-lg mt-8   p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
                         type="submit"
                       >
                         Submit
                       </button>
                     </div>
-                  </div>
+                
                 )}
+                
               </form>
             </div>
           </div>

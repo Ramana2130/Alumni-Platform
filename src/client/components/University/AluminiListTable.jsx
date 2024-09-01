@@ -255,12 +255,7 @@ const AlumniListTable = () => {
                             {task.alumnimobilenumber}
                           </p>
                         </td>
-<<<<<<< HEAD
                         <td className="text-center  ">
-=======
-                        <td className="text-center flex justify-center pt-5">
-                          
->>>>>>> 0a58d0c6fb478bb955e627917158d9b26e6c37b1
                           <Link
                             to={`/updatealumnidetails/${task.universityId}/${task._id}`}
                             className="text-[#CFF80B]  hover:text-[#CFF80B]"
