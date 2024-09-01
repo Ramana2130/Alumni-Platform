@@ -23,7 +23,7 @@ const AlumniListTable = () => {
       const result = await axios.get(
         `http://localhost:3000/alumni/${universityId}/alumnis`
       );
-      setData(result.data.alumnis); // Ensure this points to the correct data structure
+      setData(result.data.alumnis || []);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -56,9 +56,7 @@ const AlumniListTable = () => {
         setTimeout(() => {
           window.location.reload();
         }, 1000);
-        // Process the response if needed
-        const updatedAlumniData = response.data.alumnis || [];
-        setData(updatedAlumniData); // Update data with the response data
+        setData(response.data.alumnis || []);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -255,89 +253,44 @@ const AlumniListTable = () => {
                             {task.alumnimobilenumber}
                           </p>
                         </td>
-<<<<<<< HEAD
-                        <td className="text-center  ">
-=======
-                        <td className="text-center flex justify-center pt-5">
-                          
->>>>>>> 0a58d0c6fb478bb955e627917158d9b26e6c37b1
+                        <td className="text-center py-2 px-4">
                           <Link
-                            to={`/updatealumnidetails/${task.universityId}/${task._id}`}
-                            className="text-[#CFF80B]  hover:text-[#CFF80B]"
+                            to={`/admin/alumni/edit/${task._id}`}
+                            className="mr-2 text-white cursor-pointer hover:text-green-400"
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="lucide lucide-settings-2"
-                            >
-                              <path d="M20 7h-9" />
-                              <path d="M14 17H5" />
-                              <circle cx="17" cy="17" r="3" />
-                              <circle cx="7" cy="7" r="3" />
-                            </svg>
+                            <i className="fa-solid fa-edit"></i>
                           </Link>
-                          <button
+                          <i
+                            className="fa-solid fa-trash text-red-500 cursor-pointer"
                             onClick={() => handleDelete(task._id)}
-                            className="text-red-500 hover:text-red-700 ml-2"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-trash"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              strokeWidth="2"
-                              stroke="currentColor"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path
-                                stroke="none"
-                                d="M0 0h24v24H0z"
-                                fill="none"
-                              />
-                              <path d="M4 7l16 0" />
-                              <path d="M10 11l0 6" />
-                              <path d="M14 11l0 6" />
-                              <path d="M5 7l1 12.905c.072 .81 .364 1.25 .905 1.5c.541 .25 1.079 .095 1.5 -.405" />
-                              <path d="M14 19c.421 .5 .959 .655 1.5 .405c.541 -.25 .833 -.69 .905 -1.5l1 -12.905" />
-                              <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                            </svg>
-                          </button>
+                          ></i>
                         </td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="8" className="text-center text-white">
-                        No data available
+                      <td colSpan="8" className="text-center py-4 text-white">
+                        No data available.
                       </td>
                     </tr>
                   )}
                 </tbody>
               </table>
             </div>
-
-            <div className="flex space-x-2 items-center justify-center mt-5">
+            <div className="flex justify-between py-2 px-4">
               <button
                 onClick={prevPage}
-                className="px-3 py-1 bg-[#B1D609] text-black rounded-full font-bold"
+                disabled={currentPage === 1}
+                className="bg-[#CFF80B] text-black py-2 px-4 rounded-lg disabled:bg-gray-600"
               >
-                <i class="fa-solid text-xl fa-caret-left"></i>
+                Previous
               </button>
               <button
                 onClick={nextPage}
-                className="px-3 py-1 bg-[#B1D609] text-black rounded-full font-bold"
+                disabled={currentTasks.length < tasksPerPage}
+                className="bg-[#CFF80B] text-black py-2 px-4 rounded-lg disabled:bg-gray-600"
               >
-                <i class="fa-solid text-xl fa-caret-right"></i>
+                Next
               </button>
             </div>
           </div>

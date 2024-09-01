@@ -6,6 +6,8 @@ import AuthRoutes from "./routes/alumniroutes.js";
 import universityRoutes from "./routes/university.js";
 import studentsRoutes from "./routes/studentroutes.js";
 import alumnipersonaldata from './routes/alumnicurrentdetails.js'
+import http from 'http';
+import { Server } from "socket.io";
 const app = express();
 dotenv.config();
 
@@ -22,6 +24,27 @@ app.use('/current', alumnipersonaldata)
 app.get("/hello", (req, res) => {
   res.send("Hello Vite + React!");
 });
+
+const server = http.createServer(app);
+const io = new Server(server);
+
+
+// Socket.IO connection and event handling
+io.on('connection', (socket) => {
+  console.log('A user connected', socket.id);
+
+  // Handle incoming messages
+  // socket.on('sendMessage', (message) => {
+  //   // Broadcast the message to all connected clients
+  //   io.emit('message', message);
+  // });
+
+  // Handle disconnection
+  // socket.on('disconnect', () => {
+  //   console.log('User disconnected');
+  // });
+});
+
 
 ViteExpress.listen(app, 3000, () =>
   console.log("Server is listening on port 3000...")

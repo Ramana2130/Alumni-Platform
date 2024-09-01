@@ -165,7 +165,8 @@ const Sidebar = () => {
             </li>
             <li className="rounded-sm">
               <NavLink
-                to={`/chat/${_id}`}
+                to="/universityloginpage" // Assuming you have a route for logout, otherwise remove or replace this.
+                onClick={handleLogout}
                 className={({ isActive }) =>
                   `rounded-full flex items-center p-3 px-5 ${
                     isActive
@@ -174,23 +175,9 @@ const Sidebar = () => {
                   }`
                 }
               >
-                <i className="fa-solid fa-comments text-2xl"></i>
+                <i className="fa-solid fa-right-from-bracket text-2xl"></i>
               </NavLink>
             </li>
-            <li className="rounded-sm">
-  <NavLink
-    to="/universityloginpage"  // Assuming you have a route for logout, otherwise remove or replace this.
-    onClick={handleLogout}
-    className={({ isActive }) =>
-      `rounded-full flex items-center p-3 px-5 ${
-        isActive ? "bg-[#CFF80B] text-black" : "bg-[#1E1E1E] text-white"
-      }`
-    }
-  >
-    <i className="fa-solid fa-right-from-bracket text-2xl"></i>
-  </NavLink>
-</li>
-
           </ul>
         </div>
       </div>

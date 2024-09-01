@@ -19,7 +19,7 @@ const CurrentStudentsTableList = () => {
           `http://localhost:3000/student/${_id}/students`
         );
         console.log("Fetched Data:", response.data); // Debug line
-        setData(response.data.students); // Ensure data is always an array
+        setData(response.data.students || []); // Ensure data is always an array
       } catch (error) {
         console.log("Error fetching data:", error);
       }
@@ -37,12 +37,10 @@ const CurrentStudentsTableList = () => {
 
   console.log("Filtered Data:", filteredData); // Debug line
 
-  const currentTasks = Array.isArray(filteredData)
-    ? filteredData.slice(
-        (currentPage - 1) * tasksPerPage,
-        currentPage * tasksPerPage
-      )
-    : []; // Ensure currentTasks is always an array
+  const currentTasks = filteredData.slice(
+    (currentPage - 1) * tasksPerPage,
+    currentPage * tasksPerPage
+  );
 
   console.log("Current Tasks:", currentTasks); // Debug line
 
@@ -65,10 +63,8 @@ const CurrentStudentsTableList = () => {
   };
 
   const handleEdit = (id) => {
-    // Replace with the actual edit logic, e.g., navigate to an edit page
     console.log("Edit student with ID:", id);
-    // For example, using React Router to navigate to an edit page:
-    // navigate(`/edit-student/${id}`);
+    // Add logic to navigate to edit page if needed
   };
 
   const readUploadFile = async (e) => {
@@ -85,16 +81,9 @@ const CurrentStudentsTableList = () => {
         const response = await axios.post(
           `http://localhost:3000/student/addexcelfile/currentstudents/${_id}`,
           formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
+          { headers: { "Content-Type": "multipart/form-data" } }
         );
         toast.success("File uploaded successfully.");
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
         setData(response.data.students || []); // Update data with the response data
         setLoading(false);
       } catch (error) {
@@ -128,8 +117,8 @@ const CurrentStudentsTableList = () => {
                   Name, Department, Email, Year of Joining, Year of Passing.
                 </label>
               </div>
-              {loading && <progress style={{ width: "100%" }}></progress>}
-              <i className="fa-solid fa-circle-info text-7xl text-[#CFF80B]"></i>
+              {loading && <progress style={{ width: "100%" }} />}
+              <i className="fa-solid fa-circle-info text-7xl text-[#CFF80B]" />
             </div>
           </div>
 
@@ -137,72 +126,23 @@ const CurrentStudentsTableList = () => {
             <div className="sm:flex items-center justify-between">
               <div className="flex items-center">
                 {/* Filter buttons */}
-                <a href="javascript:void(0)" onClick={() => setFilter("All")}>
-                  <div
-                    className={`py-2 px-8 ${
-                      filter === "All"
-                        ? "bg-[#CFF80B] text-black"
-                        : "border-[#CFF80B] border text-white hover:text-black hover:bg-[#CFF80B]"
-                    } rounded-full uppercase `}
+                {["All", "IT", "CSE", "AIDS", "EEE", "MECH"].map((dept) => (
+                  <a
+                    href="javascript:void(0)"
+                    onClick={() => setFilter(dept)}
+                    key={dept}
                   >
-                    <p>All</p>
-                  </div>
-                </a>
-                <a href="javascript:void(0)" onClick={() => setFilter("IT")}>
-                  <div
-                    className={`py-2 px-8 ${
-                      filter === "IT"
-                        ? "bg-[#CFF80B] text-black"
-                        : "border-[#CFF80B] border text-white hover:text-black hover:bg-[#CFF80B]"
-                    } rounded-full uppercase ml-4 sm:ml-8`}
-                  >
-                    <p>IT</p>
-                  </div>
-                </a>
-                <a href="javascript:void(0)" onClick={() => setFilter("CSE")}>
-                  <div
-                    className={`py-2 px-8 ${
-                      filter === "CSE"
-                        ? "bg-[#CFF80B] text-black"
-                        : "border-[#CFF80B] border text-white hover:text-black hover:bg-[#CFF80B]"
-                    } rounded-full uppercase ml-4 sm:ml-8`}
-                  >
-                    <p>CSE</p>
-                  </div>
-                </a>
-                <a href="javascript:void(0)" onClick={() => setFilter("AIDS")}>
-                  <div
-                    className={`py-2 px-8 ${
-                      filter === "AIDS"
-                        ? "bg-[#CFF80B] text-black"
-                        : "border-[#CFF80B] border text-white hover:text-black hover:bg-[#CFF80B]"
-                    } rounded-full uppercase ml-4 sm:ml-8`}
-                  >
-                    <p>AIDS</p>
-                  </div>
-                </a>
-                <a href="javascript:void(0)" onClick={() => setFilter("EEE")}>
-                  <div
-                    className={`py-2 px-8 ${
-                      filter === "EEE"
-                        ? "bg-[#CFF80B] text-black"
-                        : "border-[#CFF80B] border text-white hover:text-black hover:bg-[#CFF80B]"
-                    } rounded-full uppercase ml-4 sm:ml-8`}
-                  >
-                    <p>EEE</p>
-                  </div>
-                </a>
-                <a href="javascript:void(0)" onClick={() => setFilter("MECH")}>
-                  <div
-                    className={`py-2 px-8 ${
-                      filter === "MECH"
-                        ? "bg-[#CFF80B] text-black"
-                        : "border-[#CFF80B] border text-white hover:text-black hover:bg-[#CFF80B]"
-                    } rounded-full uppercase ml-4 sm:ml-8`}
-                  >
-                    <p>MECH</p>
-                  </div>
-                </a>
+                    <div
+                      className={`py-2 px-8 ${
+                        filter === dept
+                          ? "bg-[#CFF80B] text-black"
+                          : "border-[#CFF80B] border text-white hover:text-black hover:bg-[#CFF80B]"
+                      } rounded-full uppercase ml-4 sm:ml-8`}
+                    >
+                      <p>{dept}</p>
+                    </div>
+                  </a>
+                ))}
               </div>
             </div>
             <div className="mt-7 h-[50vh] overflow-auto">
@@ -228,16 +168,11 @@ const CurrentStudentsTableList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {Array.isArray(currentTasks) && currentTasks.length > 0 ? (
+                  {currentTasks.length > 0 ? (
                     currentTasks.map((task) => (
                       <tr className="h-16 border-b" key={task._id}>
-                        {/* Render task details */}
-                        <td>
-                          <div className="flex items-center justify-center">
-                            <p className="text-base font-medium leading-none text-gray-300 uppercase mr-2">
-                              {task.currentstudentsname}
-                            </p>
-                          </div>
+                        <td className="text-base font-medium leading-none text-gray-300 uppercase mr-2 text-center">
+                          {task.currentstudentsname}
                         </td>
                         <td className="text-center text-sm text-white uppercase">
                           {task.currentstudentsdepartment}
@@ -260,10 +195,8 @@ const CurrentStudentsTableList = () => {
                         <td className="text-center flex justify-center pt-5">
                           <Link
                             to={`/updatecurrentstudents/${task.universityId}/${task._id}`}
-                            className="text-[#CFF80B]  hover:text-[#CFF80B]"
-
+                            className="text-[#CFF80B] hover:text-[#CFF80B]"
                           >
-<<<<<<< HEAD
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
@@ -271,27 +204,21 @@ const CurrentStudentsTableList = () => {
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="lucide lucide-settings-2"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="lucide lucide-settings-2"
                             >
                               <path d="M20 7h-9" />
                               <path d="M14 17H5" />
                               <circle cx="17" cy="17" r="3" />
                               <circle cx="7" cy="7" r="3" />
                             </svg>
-=======
-                                                    <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-2"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
-
->>>>>>> 0a58d0c6fb478bb955e627917158d9b26e6c37b1
                           </Link>
                           <button
                             onClick={() => handleDelete(task._id)}
                             className="text-red-500 hover:text-red-700 ml-2"
-
                           >
-<<<<<<< HEAD
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
@@ -299,41 +226,16 @@ const CurrentStudentsTableList = () => {
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="lucide lucide-trash-2"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="lucide lucide-trash-2"
                             >
                               <path d="M3 6h18" />
                               <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
                               <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-                              <line x1="10" x2="10" y1="11" y2="17" />
-                              <line x1="14" x2="14" y1="11" y2="17" />
-=======
-                           <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-trash"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              strokeWidth="2"
-                              stroke="currentColor"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path
-                                stroke="none"
-                                d="M0 0h24v24H0z"
-                                fill="none"
-                              />
-                              <path d="M4 7l16 0" />
-                              <path d="M10 11l0 6" />
-                              <path d="M14 11l0 6" />
-                              <path d="M5 7l1 12.905c.072 .81 .364 1.25 .905 1.5c.541 .25 1.079 .095 1.5 -.405" />
-                              <path d="M14 19c.421 .5 .959 .655 1.5 .405c.541 -.25 .833 -.69 .905 -1.5l1 -12.905" />
-                              <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
->>>>>>> 0a58d0c6fb478bb955e627917158d9b26e6c37b1
+                              <path d="M10 11v6" />
+                              <path d="M14 11v6" />
                             </svg>
                           </button>
                         </td>
@@ -341,29 +243,26 @@ const CurrentStudentsTableList = () => {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="8" className="text-center text-gray-500">
-                        No Data Available
+                      <td colSpan="8" className="text-center text-white">
+                        No students found
                       </td>
                     </tr>
                   )}
                 </tbody>
               </table>
             </div>
-            <div className="flex justify-center space-x-2 items-center mt-1">
+            <div className="mt-4 flex justify-between items-center">
               <button
                 onClick={prevPage}
-                disabled={currentPage === 1}
-                className="px-3 py-1 bg-[#B1D609] text-black rounded-full font-bold"
+                className="bg-[#CFF80B] px-4 py-2 rounded text-black hover:bg-[#B1D609]"
               >
-                <i class="fa-solid text-xl fa-caret-left"></i>
+                Previous
               </button>
-
               <button
                 onClick={nextPage}
-                disabled={currentTasks.length < tasksPerPage}
-                className="py-1 px-3 bg-[#CFF80B] text-black rounded-full"
+                className="bg-[#CFF80B] px-4 py-2 rounded text-black hover:bg-[#B1D609]"
               >
-                <i class="fa-solid text-xl fa-caret-right"></i>
+                Next
               </button>
             </div>
           </div>
