@@ -14,15 +14,15 @@ const CaseStudies = () => {
         </div>
         <div className='mx-40 p-2'>
             <div className='p-3 grid grid-cols-3 gap-10 rounded-md py-8 bg-yellow-500'>
-                    <div className='border-r-2 p-3'>
+                    <div className='border-r-2 border-black p-3'>
                         <h1 className='text-2xl  font-extrabold'>Empowering Students Through Alumni Guidance</h1>
                         <p className='font-medium pt-5'>Student, a Computer Science student, connected with alumni at top tech firms through our platform. Their advice and job links helped her land an internship, showcasing the value of alumni mentorship.</p>
                     </div>
-                    <div className='border-r-2 p-3'>
+                    <div className='border-r-2 border-black p-3'>
                         <h1 className='text-2xl  font-extrabold'>Financial Support for Students in Need</h1>
                         <p className='font-medium pt-5'>Student, an engineering student facing financial hardships, received crucial support from alumni through our donation feature, covering his tuition and living expenses, and keeping him on track for graduation.</p>
                     </div>
-                    <div className='border-r-2 p-3'>
+                    <div className='border-r-2 border-black p-3'>
                         <h1 className='text-2xl  font-extrabold'>Streamlined Account Management</h1>
                         <p className='font-medium pt-5'>Student, an engineering student facing financial hardships, received crucial support from alumni through our donation feature, covering his tuition and living expenses, and keeping him on track for graduation.</p>
                     </div>
