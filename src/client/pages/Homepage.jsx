@@ -5,7 +5,11 @@ import box from '../assets/box.png'
 import arrow from '../assets/arrow.svg'
 import { useNavigate } from 'react-router-dom'
 import card from '../assets/card.svg'
-import '../App.css'
+import OurTeam from './OurTeam'
+import ServicePage from './ServicePage'
+import CaseStudies from './CaseStudies'
+import AboutPage from './AboutPage'
+import FooterPage from './FooterPage'
 const Homepage = () => {
   const navigate=useNavigate();
   const page=()=>{
@@ -15,7 +19,9 @@ const Homepage = () => {
     navigate('/aboutpage')
 }
   return (
-    <div className='overflow-hidden relative black h-[100vh]'>
+    <div className='scrollbar_yellow'>
+
+    <div className=' relative black '>
       <Navbar/>
       <div className='absolute blur-sm top-96 right-44' style={{ transform: 'rotate(15deg)' }}>
             <img src={card} alt="" />
@@ -50,7 +56,17 @@ const Homepage = () => {
 
           </div>
       </div>
+    <div className='mt-10 pt-20 bg-black'>
+      <ServicePage/>
+      <CaseStudies/>
+      <AboutPage/>
+      <OurTeam/>
+      <FooterPage/>
+
     </div>
+    </div>
+    </div>
+
   )
 }
 
