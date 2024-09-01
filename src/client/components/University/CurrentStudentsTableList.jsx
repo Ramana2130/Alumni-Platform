@@ -257,11 +257,13 @@ const CurrentStudentsTableList = () => {
                         <td className="text-center text-sm text-white uppercase">
                           {task.currentstudentsregisterno}
                         </td>
-                        <td className="text-center">
+                        <td className="text-center flex justify-center pt-5">
                           <Link
                             to={`/updatecurrentstudents/${task.universityId}/${task._id}`}
-                            className="px-4 py-2 ] text-white rounded-full mr-2"
+                            className="text-[#CFF80B]  hover:text-[#CFF80B]"
+
                           >
+<<<<<<< HEAD
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
@@ -279,11 +281,17 @@ const CurrentStudentsTableList = () => {
                               <circle cx="17" cy="17" r="3" />
                               <circle cx="7" cy="7" r="3" />
                             </svg>
+=======
+                                                    <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-2"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+
+>>>>>>> 0a58d0c6fb478bb955e627917158d9b26e6c37b1
                           </Link>
                           <button
                             onClick={() => handleDelete(task._id)}
-                            className="px-4 py-2 bg-[#E74C3C] text-white rounded-full"
+                            className="text-red-500 hover:text-red-700 ml-2"
+
                           >
+<<<<<<< HEAD
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
@@ -301,6 +309,31 @@ const CurrentStudentsTableList = () => {
                               <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
                               <line x1="10" x2="10" y1="11" y2="17" />
                               <line x1="14" x2="14" y1="11" y2="17" />
+=======
+                           <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-trash"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              strokeWidth="2"
+                              stroke="currentColor"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                              />
+                              <path d="M4 7l16 0" />
+                              <path d="M10 11l0 6" />
+                              <path d="M14 11l0 6" />
+                              <path d="M5 7l1 12.905c.072 .81 .364 1.25 .905 1.5c.541 .25 1.079 .095 1.5 -.405" />
+                              <path d="M14 19c.421 .5 .959 .655 1.5 .405c.541 -.25 .833 -.69 .905 -1.5l1 -12.905" />
+                              <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+>>>>>>> 0a58d0c6fb478bb955e627917158d9b26e6c37b1
                             </svg>
                           </button>
                         </td>

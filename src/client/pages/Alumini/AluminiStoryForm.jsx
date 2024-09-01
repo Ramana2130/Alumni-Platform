@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import add from "../../assets/mega.svg";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+=======
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import add from '../../assets/form.svg'
+>>>>>>> 0a58d0c6fb478bb955e627917158d9b26e6c37b1
 const AluminiStoryForm = () => {
   const [step, setStep] = useState(1);
   const { _id } = useParams();

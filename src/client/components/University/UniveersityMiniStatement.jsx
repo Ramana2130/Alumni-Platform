@@ -86,6 +86,167 @@ const UniversityMiniStatement = () => {
                     </td>
                   </tr>
                 )}
+
+                <tr>
+                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
+                    kabi krishna
+                    {/* /argon/charts.html */}
+                  </th>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    2019
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    CSE
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    <i class="fa-solid fa-book mr-4 text-[#CFF80B] text-lg"></i>{" "}
+                    High Studies
+                  </td>
+                </tr>
+                <tr>
+                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
+                    kabi krishna
+                    {/* /argon/tables.html */}
+                  </th>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    1994
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    IT
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    <i class="fa-solid fa-briefcase text-[#CFF80B] text-lg mr-4"></i>{" "}
+                    Working
+                  </td>
+                </tr>
+                <tr>
+                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
+                    kabi krishna
+                    {/* /argon/tables.html */}
+                  </th>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    1994
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    IT
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    <i class="fa-solid fa-briefcase text-[#CFF80B] text-lg mr-4"></i>{" "}
+                    Working
+                  </td>
+                </tr>
+                <tr>
+                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
+                    kabi krishna
+                    {/* /argon/tables.html */}
+                  </th>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    1994
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    IT
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    <i class="fa-solid fa-briefcase text-[#CFF80B] text-lg mr-4"></i>{" "}
+                    Working
+                  </td>
+                </tr>
+                <tr>
+                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
+                    kabi krishna
+                    {/* /argon/tables.html */}
+                  </th>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    1994
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    IT
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    <i class="fa-solid fa-briefcase text-[#CFF80B] text-lg mr-4"></i>{" "}
+                    Working
+                  </td>
+                </tr>
+                <tr>
+                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
+                    kabi krishna
+                    {/* /argon/tables.html */}
+                  </th>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    1994
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    IT
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    <i class="fa-solid fa-briefcase text-[#CFF80B] text-lg mr-4"></i>{" "}
+                    Working
+                  </td>
+                </tr>
+                <tr>
+                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
+                    kabi krishna
+                    {/* /argon/tables.html */}
+                  </th>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    1994
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    IT
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    <i class="fa-solid fa-briefcase text-[#CFF80B] text-lg mr-4"></i>{" "}
+                    Working
+                  </td>
+                </tr>
+                <tr>
+                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
+                    kabi krishna
+                    {/* /argon/tables.html */}
+                  </th>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    1994
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    IT
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    <i class="fa-solid fa-briefcase text-[#CFF80B] text-lg mr-4"></i>{" "}
+                    Working
+                  </td>
+                </tr>
+                <tr>
+                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
+                    kabi krishna
+                    {/* /argon/tables.html */}
+                  </th>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    1994
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    IT
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    <i class="fa-solid fa-briefcase text-[#CFF80B] text-lg mr-4"></i>{" "}
+                    Working
+                  </td>
+                </tr>
+                <tr>
+                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
+                    kabi krishna
+                    {/* /argon/tables.html */}
+                  </th>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    1994
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    IT
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    <i class="fa-solid fa-briefcase text-[#CFF80B] text-lg mr-4"></i>{" "}
+                    Working
+                  </td>
+                </tr>
               </tbody>
             </table>
             <div>
