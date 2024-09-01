@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const UniversityNeedDonationTable = () => {
   // Sample data (you should replace this with your actual data)
   const data = [
-    { name: 'Ramana', year: '2019', department: 'CSE' ,no:'1234567890'},
+    { name: 'kabi', year: '2019', department: 'CSE' ,no:'1234567890'},
     { name: 'Sita', year: '2018', department: 'ECE' ,no:'1234567890'},
     { name: 'John', year: '2017', department: 'IT' ,no:'1234567890'},
     { name: 'Doe', year: '2016', department: 'MECH' ,no:'1234567890'},
