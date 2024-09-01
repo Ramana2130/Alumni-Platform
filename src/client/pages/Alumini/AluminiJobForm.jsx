@@ -13,6 +13,8 @@ const AluminiJobForm = () => {
   const { _id } = useParams();
   const navigate = useNavigate();
 
+  const [step, setStep] = useState(1);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -29,15 +31,14 @@ const AluminiJobForm = () => {
       );
       if (response.status === 200) {
         toast.success("Job Posted successfully");
-        navigate(`/aluminidashboard/${alumniId}`);
+        // Move to the next step (Step 2)
+        setStep(2);
       }
     } catch (error) {
       toast.error("An error occurred while posting Job");
       console.error(error);
     }
   };
-
-  const [step, setStep] = useState(1);
 
   const handleNext = () => {
     setStep((prevStep) => prevStep + 1);
@@ -158,10 +159,11 @@ const AluminiJobForm = () => {
                     <select
                       name="jobworktype"
                       id="jobworktype"
-                      className="border-[#87888C] bg-transparent border-2 p-3 shadow-lg outline-none mb-5 text-[#87888C] w-full"
+                      className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg outline-none mb-5 text-[#87888C] w-full"
                       onChange={(e) => setJobworktype(e.target.value)}
                       required
                     >
+                      <option value="">Work Type</option>
                       <option value="full time">Full Time</option>
                       <option value="part time">Part Time</option>
                       <option value="internship">Internship</option>
@@ -179,8 +181,8 @@ const AluminiJobForm = () => {
           )}
 
           {step === 2 && (
-            <div className="h-[700px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
-              <div className="text-center">
+            <div className="h-[700px] w-[600px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
+              <div className="text-center  mx-auto">
                 <h1 className="text-white font-extrabold text-6xl uppercase">
                   Success!
                 </h1>
@@ -188,13 +190,13 @@ const AluminiJobForm = () => {
                   Job Posting has been successfully created.
                 </p>
                 <div className="flex space-x-4">
-                  <button
+                  {/* <button
                     className="border-2 border-[#2596be] shadow-lg mt-10 p-2 text-[#2596be] font-semibold rounded-lg w-full hover:scale-100 hover:text-black hover:bg-[#2596be] transition duration-300 ease-in-out"
                     type="button"
                     onClick={firstpage}
                   >
                     Add New
-                  </button>
+                  </button> */}
                   <button
                     className="bg-[#2596be] shadow-lg mt-10 p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:border-2 hover:bg-transparent hover:border-[#2596be] transition duration-300 ease-in-out"
                     type="button"
