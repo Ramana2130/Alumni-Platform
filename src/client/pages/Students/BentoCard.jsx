@@ -2,6 +2,8 @@ import React from "react";
 import aero from "../../assets/aero.svg";
 import eee from "../../assets/eee.svg";
 import it from "../../assets/it.svg";
+import cse from "../../assets/cse.svg";
+
 import datascience from "../../assets/datascience.svg";
 import cyber from "../../assets/cyber.svg";
 import media from "../../assets/media.svg";
@@ -9,13 +11,13 @@ import media from "../../assets/media.svg";
 const BentoCard = ({ handlePageChange }) => {
   const categories = [
     { id: "IT", src: it, text: "Information Technology" },
-    { id: "CSE", src: it, text: "Computer scienec enginnering" },
-    { id: "ME", src: aero, text: "Mechanical Engineering" },
+    { id: "CSE", src: cse, text: "Computer scienec enginnering" },
     { id: "CS", src: cyber, text: "Cyber Security" },
     { id: "EEE", src: eee, text: "Electrical Electronic Engineering" },
     { id: "AE", src: aero, text: "Aeronautical Engineering" },
     { id: "DS", src: datascience, text: "Data Science" },
     { id: "ECE", src: media, text: "Electrical Communication & Engineering" },
+    { id: "ME", src: aero, text: "Mechanical Engineering" },
     { id: "AIDS", src: it, text: "Artificial Intelligence & Data Science" },
   ];
 

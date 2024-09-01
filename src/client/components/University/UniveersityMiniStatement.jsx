@@ -43,7 +43,7 @@ const UniversityMiniStatement = () => {
              
                 <tr>
                   <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
-                  Ramana
+                  kabi krishna
                     {/* /argon/charts.html */}
                   </th>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -58,7 +58,7 @@ const UniversityMiniStatement = () => {
                 </tr>
                 <tr>
                   <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
-                  Ramana
+                  kabi krishna
                     {/* /argon/tables.html */}
                   </th>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -73,7 +73,7 @@ const UniversityMiniStatement = () => {
                 </tr>
                 <tr>
                   <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
-                  Ramana
+                  kabi krishna
                     {/* /argon/tables.html */}
                   </th>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -88,7 +88,7 @@ const UniversityMiniStatement = () => {
                 </tr>
                 <tr>
                   <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
-                  Ramana
+                  kabi krishna
                     {/* /argon/tables.html */}
                   </th>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -103,7 +103,7 @@ const UniversityMiniStatement = () => {
                 </tr>
                 <tr>
                   <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
-                  Ramana
+                  kabi krishna
                     {/* /argon/tables.html */}
                   </th>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -118,7 +118,7 @@ const UniversityMiniStatement = () => {
                 </tr>
                 <tr>
                   <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
-                  Ramana
+                  kabi krishna
                     {/* /argon/tables.html */}
                   </th>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -133,7 +133,7 @@ const UniversityMiniStatement = () => {
                 </tr>
                 <tr>
                   <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
-                  Ramana
+                  kabi krishna
                     {/* /argon/tables.html */}
                   </th>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -148,7 +148,7 @@ const UniversityMiniStatement = () => {
                 </tr>
                 <tr>
                   <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
-                  Ramana
+                  kabi krishna
                     {/* /argon/tables.html */}
                   </th>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -163,7 +163,7 @@ const UniversityMiniStatement = () => {
                 </tr>
                 <tr>
                   <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
-                  Ramana
+                  kabi krishna
                     {/* /argon/tables.html */}
                   </th>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -178,7 +178,7 @@ const UniversityMiniStatement = () => {
                 </tr>
                 <tr>
                   <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-white  ">
-                  Ramana
+                  kabi krishna
                     {/* /argon/tables.html */}
                   </th>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
