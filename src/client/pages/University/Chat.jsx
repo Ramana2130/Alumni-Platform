@@ -13,7 +13,7 @@ const Chat = () => {
       <div className="w-[40%] overflow-x-auto green bg-[#1E1E1E] border-r border-gray-300">
         {/* Sidebar Header */}
         <header className="p-4  flex justify-between items-center  text-white">
-          <h1 className="text-2xl font-semibold">Alumni</h1>
+          <h1 className="text-2xl font-semibold">University</h1>
  
         </header>
 

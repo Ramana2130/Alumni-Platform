@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import add from '../../assets/mega.svg'
+import add from '../../assets/form.svg'
 const AluminiStoryForm = () => {
   const [step, setStep] = useState(1);
 

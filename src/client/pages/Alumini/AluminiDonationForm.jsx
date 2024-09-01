@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import add from '../../assets/money.svg'
+import add from '../../assets/money1.svg'
 const AluminiDonationForm = () => {
   const [step, setStep] = useState(1);
 
