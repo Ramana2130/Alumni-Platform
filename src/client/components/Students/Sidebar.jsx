@@ -85,17 +85,20 @@ const Sidebar = () => {
                 </NavLink>
               </li>
               <li className="rounded-sm">
-                <button
-                  onClick={handleLogout}
-                  className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${
-                      isActive ? "bg-yellow-500" : "bg-[#1E1E1E]"
-                    }`
-                  }
-                >
-                  <i className="fa-solid fa-right-from-bracket text-white text-2xl"></i>
-                </button>
-              </li>
+              <NavLink
+                to="/studentloginpage" // Assuming you have a route for logout, otherwise remove or replace this.
+                onClick={handleLogout}
+                className={({ isActive }) =>
+                  `rounded-full flex items-center p-3 px-5 ${
+                    isActive
+                      ? "bg-yellow-500 text-black"
+                      : "bg-[#1E1E1E] text-white"
+                  }`
+                }
+              >
+                <i className="fa-solid fa-right-from-bracket text-2xl"></i>
+              </NavLink>
+            </li>
             </ul>
           </div>
         </div>
