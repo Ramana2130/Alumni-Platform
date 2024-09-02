@@ -3,6 +3,10 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import add from "../../assets/form.svg";
 import toast from "react-hot-toast";
+<<<<<<< HEAD
+=======
+
+>>>>>>> a272a499c2890163b67abdf44b977e2e1fafecea
 const AluminiStoryForm = () => {
   const [step, setStep] = useState(1);
   const { _id } = useParams();

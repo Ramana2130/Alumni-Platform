@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import women from '../../assets/women.png';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-
+// import { useNavigate } from 'react-router-dom';
 function UniversityNavbar() {
+  // const navigate=useNavigate()
   const [open, setOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -19,6 +20,9 @@ function UniversityNavbar() {
     toast.success("Logout Successfully");
     // Add your logout logic here
   };
+  const studentrequestlist =()=>{
+    navigate('/studentrequestlist')
+  }
 
   return (
     <nav className="bg-transparent">
@@ -75,9 +79,9 @@ function UniversityNavbar() {
             <div className="flex items-center">
               <button
                 type="button"
+                onClick={studentrequestlist}
                 className="flex-shrink-0 rounded-full bg-transparent p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-50"
               >
-                <span className="sr-only">View notifications</span>
                 <i className="fa-solid fa-bell text-white text-3xl mr-2"></i>
               </button>
 
