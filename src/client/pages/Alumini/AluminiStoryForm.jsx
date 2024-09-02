@@ -1,17 +1,8 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import add from "../../assets/mega.svg";
 import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import add from "../../assets/form.svg";
 import toast from "react-hot-toast";
-
-=======
-import React, { useState } from 'react';
-import axios from 'axios'
-import { useNavigate,useParams } from 'react-router-dom';
-import add from '../../assets/form.svg'
-import toast from "react-hot-toast";
->>>>>>> 049de8d95f4a088c270adfac3b76fde56cd1cb21
 const AluminiStoryForm = () => {
   const [step, setStep] = useState(1);
   const { _id } = useParams();
@@ -187,7 +178,7 @@ const AluminiStoryForm = () => {
                       type="button"
                       onClick={handlePrev}
                     >
-                      <i className="fa-solid fa-arrow-left text-xl"></i> 
+                      <i className="fa-solid fa-arrow-left text-xl"></i>
                     </button>
                     <div className="mt-10">
                       <label
@@ -240,7 +231,7 @@ const AluminiStoryForm = () => {
                         onChange={(e) => setSuccessstories(e.target.value)}
                       />
                     </div>
-                  
+
                     <button
                       className="bg-[#2596be] shadow-lg mt-3 p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
                       type="button"
@@ -254,13 +245,13 @@ const AluminiStoryForm = () => {
                 {/* Step 3 */}
                 {step === 3 && (
                   <div>
-                     <button
-                        className="bg-[#2596be] shadow-lg mt-10 p-2 text-black font-semibold rounded-lg px-3 hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
-                        type="button"
-                        onClick={handlePrev}
-                      >
-                        <i className="fa-solid fa-arrow-left text-xl"></i> 
-                      </button>
+                    <button
+                      className="bg-[#2596be] shadow-lg mt-10 p-2 text-black font-semibold rounded-lg px-3 hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
+                      type="button"
+                      onClick={handlePrev}
+                    >
+                      <i className="fa-solid fa-arrow-left text-xl"></i>
+                    </button>
                     <div className="mt-10">
                       <label
                         htmlFor="fromlearn"
@@ -277,17 +268,15 @@ const AluminiStoryForm = () => {
                         onChange={(e) => setFromlearn(e.target.value)}
                       />
                     </div>
-                     
-                      <button
-                        className="bg-[#2596be] shadow-lg mt-8   p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
-                        type="submit"
-                      >
-                        Submit
-                      </button>
-                    </div>
-                
+
+                    <button
+                      className="bg-[#2596be] shadow-lg mt-8   p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
+                      type="submit"
+                    >
+                      Submit
+                    </button>
+                  </div>
                 )}
-                
               </form>
             </div>
           </div>

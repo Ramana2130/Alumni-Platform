@@ -21,10 +21,11 @@ router.post("/addstudent", async (req, res) => {
       currentstudentsyearofpassing,
       email,
       currentstudentsmobilenumber,
+      suggestion
     } = req.body;
-    if (!emailRegex.test(email)) {
-      return res.status(400).send({ success: false, message: "Invalid Email" });
-    }
+    // if (!emailRegex.test(email)) {
+    //   return res.status(400).send({ success: false, message: "Invalid Email" });
+    // }
     const existingStudent = await userModels.findOne({ email });
     if (existingStudent) {
       return res
@@ -45,6 +46,7 @@ router.post("/addstudent", async (req, res) => {
       email,
       hashedPassword,
       currentstudentsmobilenumber,
+      suggestion
     });
     await newStudents.save();
     return res

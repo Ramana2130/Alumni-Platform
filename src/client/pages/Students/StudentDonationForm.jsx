@@ -50,11 +50,13 @@ const StudentDonationForm = () => {
       );
 
       if (response.data.success) {
+        toast.success("Report Submiited Successfully");
         setStep(3); // Move to success step
       } else {
         toast.error(response.data.message);
       }
     } catch (error) {
+      console.log(error);
       toast.error("An error occurred while submitting the request.");
     }
   };
@@ -121,7 +123,7 @@ const StudentDonationForm = () => {
             <div className="flex space-x-4">
               <button
                 className="bg-yellow-500 shadow-lg p-2 text-black font-semibold rounded-lg w-full hover:bg-[#1e90ff] transition duration-300 ease-in-out"
-                onClick={() => navigate('/thankyou')}
+                onClick={() => navigate("/thankyou")}
               >
                 Go to Dashboard
               </button>

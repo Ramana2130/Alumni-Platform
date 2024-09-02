@@ -55,7 +55,7 @@ const AlumniListTable = () => {
         toast.success("File uploaded successfully.");
         setTimeout(() => {
           window.location.reload();
-        }, 1000);
+        }, 100);
         setData(response.data.alumnis || []);
         setLoading(false);
       } catch (error) {
@@ -253,13 +253,9 @@ const AlumniListTable = () => {
                             {task.alumnimobilenumber}
                           </p>
                         </td>
-<<<<<<< HEAD
-                        <td className="text-center py-2 px-4">
-=======
                         <td className="text-center  ">
->>>>>>> 049de8d95f4a088c270adfac3b76fde56cd1cb21
                           <Link
-                            to={`/admin/alumni/edit/${task._id}`}
+                            to={`/updatealumnidetails/${task.universityId}/${task._id}`}
                             className="mr-2 text-white cursor-pointer hover:text-green-400"
                           >
                             <i className="fa-solid fa-edit"></i>

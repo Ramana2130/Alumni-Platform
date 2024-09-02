@@ -6,6 +6,10 @@ const alumniformschema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'university-details',
     },
+    alumniId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'AlumniPersonalDetails' // Name of the model storing personal details
+    },
     alumniname: {
       type: String,
       required: true,

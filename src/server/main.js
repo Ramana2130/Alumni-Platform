@@ -8,6 +8,7 @@ import studentsRoutes from "./routes/studentroutes.js";
 import alumnipersonaldata from './routes/alumnicurrentdetails.js'
 import http from 'http';
 import { Server } from "socket.io";
+import Message from "./models/messagemodels.js";
 const app = express();
 dotenv.config();
 
@@ -33,16 +34,24 @@ const io = new Server(server);
 io.on('connection', (socket) => {
   console.log('A user connected', socket.id);
 
-  // Handle incoming messages
-  // socket.on('sendMessage', (message) => {
-  //   // Broadcast the message to all connected clients
-  //   io.emit('message', message);
-  // });
 
-  // Handle disconnection
-  // socket.on('disconnect', () => {
-  //   console.log('User disconnected');
-  // });
+  // Join a room for a particular recipient
+  socket.on('joinRoom', (recipient) => {
+    socket.join(recipient);
+  });
+
+  // Handle incoming messages
+  socket.on('sendMessage', async (newMessage) => {
+    const message = new Message(newMessage);
+    await message.save();
+    io.to(newMessage.recipient).emit('message', newMessage);
+    io.to(newMessage.sender).emit('message', newMessage); // Ensure sender also receives the message
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected:', socket.id);
+  });
+
 });
 
 

@@ -1,8 +1,17 @@
-import React from 'react'
-import { NavLink, useParams } from 'react-router-dom'
+import React from "react";
+import toast from "react-hot-toast";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 
 const Sidebar = () => {
-  const {_id} = useParams();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("_id");
+    localStorage.removeItem("universityId");
+    navigate("/studentloginpage");
+    toast.success("Logout Successfully");
+  };
+  const { _id } = useParams();
   return (
     <div className="flex h-[867px] items-center p-3 w-[130px] bg-transparent">
       <div className="space-y-3 w-full flex justify-center">
@@ -13,7 +22,9 @@ const Sidebar = () => {
                 <NavLink
                   to={`/studentdashboard/${_id}`}
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-yellow-500' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${
+                      isActive ? "bg-yellow-500" : "bg-[#1E1E1E]"
+                    }`
                   }
                 >
                   <i className="fa-solid fa-house text-white text-2xl"></i>
@@ -43,7 +54,9 @@ const Sidebar = () => {
                 <NavLink
                   to={`/studentrequestform/${_id}`}
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-yellow-500' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${
+                      isActive ? "bg-yellow-500" : "bg-[#1E1E1E]"
+                    }`
                   }
                 >
                   <i className="fa-solid fa-hand text-white text-2xl"></i>
@@ -63,28 +76,32 @@ const Sidebar = () => {
                 <NavLink
                   to={`/studentchat/${_id}`}
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-yellow-500' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${
+                      isActive ? "bg-yellow-500" : "bg-[#1E1E1E]"
+                    }`
                   }
                 >
                   <i className="fa-solid fa-comments text-white text-2xl"></i>
                 </NavLink>
               </li>
               <li className="rounded-sm">
-                <NavLink
-                  to='/studentloginpage'
+                <button
+                  onClick={handleLogout}
                   className={({ isActive }) =>
-                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${isActive ? 'bg-yellow-500' : 'bg-[#1E1E1E]'}`
+                    `space-x-3 rounded-full flex items-center p-3 px-5 py-3 ${
+                      isActive ? "bg-yellow-500" : "bg-[#1E1E1E]"
+                    }`
                   }
                 >
                   <i className="fa-solid fa-right-from-bracket text-white text-2xl"></i>
-                </NavLink>
+                </button>
               </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import women from '../../assets/women.png';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import women from "../../assets/women.png";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function AlumniNavbar() {
   const [open, setOpen] = useState(false);
@@ -8,13 +9,17 @@ function AlumniNavbar() {
   const toggleDropdown = () => {
     setOpen(!open);
   };
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const handleLogout = () => {
-navigate('/aluminiloginpage')
+    localStorage.removeItem("token");
+    localStorage.removeItem("_id");
+    localStorage.removeItem("universityId");
+    navigate("/aluminiloginpage");
+    toast.success("Logout Successfully");
   };
- const chat =()=>{
-  navigate('/aluminichat')
- }
+  const chat = () => {
+    navigate("/aluminichat");
+  };
   return (
     <nav className="bg-transparent">
       <div className="px-4 sm:px-6 lg:px-8 pt-5">
@@ -69,7 +74,7 @@ navigate('/aluminiloginpage')
           <div className="hidden lg:ml-4 lg:block">
             <div className="flex items-center">
               <button
-              onClick={chat}
+                onClick={chat}
                 type="button"
                 className="flex-shrink-0 rounded-full bg-transparent p-1 text-gray-400 hover:text-gray-500 "
               >
@@ -88,26 +93,19 @@ navigate('/aluminiloginpage')
                     onClick={toggleDropdown}
                   >
                     <span className="sr-only">Open user menu</span>
-                    <img
-                      className="size-14 rounded-full"
-                      src={women}
-                      alt=""
-                    />
+                    <img className="size-14 rounded-full" src={women} alt="" />
                   </button>
                 </div>
                 <div
                   className={`${
-                    open ? 'block' : 'hidden'
+                    open ? "block" : "hidden"
                   } absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-[#1E1E1E] py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="user-menu-button"
                   tabIndex={-1}
                 >
-               
-            
                   <button
-             
                     className="block px-4 py-2 text-sm text-white"
                     role="menuitem"
                     tabIndex={-1}

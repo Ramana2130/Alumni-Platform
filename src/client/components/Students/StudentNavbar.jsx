@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import women from '../../assets/women.png';
-import { Link, useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import man from '../../assets/man.png'
+import React, { useState } from "react";
+import women from "../../assets/women.png";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import man from "../../assets/man.png";
 function StudentNavbar() {
   const [open, setOpen] = useState(false);
 
@@ -12,12 +12,11 @@ function StudentNavbar() {
 
   const navigate = useNavigate();
   const handleLogout = () => {
-    console.log('Logging out...');
     localStorage.removeItem("token");
-    localStorage.removeItem('_id');
-    localStorage.removeItem('universityId');
-    navigate('/studentloginpage');
-    toast.success("Logout Successfully")
+    localStorage.removeItem("_id");
+    localStorage.removeItem("universityId");
+    navigate("/studentloginpage");
+    toast.success("Logout Successfully");
     // Add your logout logic here
   };
 
@@ -93,25 +92,20 @@ function StudentNavbar() {
                     onClick={toggleDropdown}
                   >
                     <span className="sr-only">Open user menu</span>
-                    <img
-                      className="size-14 rounded-full"
-                     src={man}
-                      alt=""
-                    />
+                    <img className="size-14 rounded-full" src={man} alt="" />
                   </button>
                 </div>
                 <div
                   className={`${
-                    open ? 'block' : 'hidden'
+                    open ? "block" : "hidden"
                   } absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-[#1E1E1E] py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="user-menu-button"
                   tabIndex={-1}
                 >
-               
                   <Link
-                   to='/universitysetting'
+                    to="/universitysetting"
                     className="block px-4 py-2 text-sm text-white"
                     role="menuitem"
                     tabIndex={-1}

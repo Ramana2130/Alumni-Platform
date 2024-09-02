@@ -24,7 +24,9 @@ const StudentHome = () => {
         `http://localhost:3000/alumni/${universityId}/alumnis/${department}`
       );
       const data = response.data;
-
+      // const set = localStorage.setItem(data._id);
+      // console.log(set);
+      console.log(data);
       // Check if the response is an array and is empty
       if (Array.isArray(data) && data.length === 0) {
         toast.info("No Alumni Found for the given department", { icon: "🔔" });

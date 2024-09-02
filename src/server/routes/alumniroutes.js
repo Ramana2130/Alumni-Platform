@@ -7,6 +7,7 @@ import multer from "multer";
 import { read, utils } from "xlsx";
 import mongoose from "mongoose";
 const AuthRoutes = express.Router();
+import alumnipersonaldetails from "../models/alumnipersonaldata.js";
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -85,9 +86,6 @@ AuthRoutes.post('/addexcelfile/:universityId', upload.single('file'), async (req
       try {
         // Ensure RegisterNo is a string
         const password = typeof row['RegisterNo'] === 'string' ? row['RegisterNo'].trim() : String(row['RegisterNo']);
-
-        // Debug logs
-        console.log(`Original Password: ${password}`);
 
         // Hash the password
         const hashedPassword = await bcryptjs.hash(password, saltRounds);
@@ -231,16 +229,32 @@ AuthRoutes.delete("/delete/:id", async (req, res) => {
 AuthRoutes.get("/:universityId/alumnis/:department", async (req, res) => {
   const { universityId, department } = req.params;
   try {
+    // Find alumni in the specified university and department
     const alumnis = await alumniformsmodels.find({
       universityId: universityId,
       department: department
-    }).select("-password");
+    });
 
     if (alumnis.length === 0) {
       return res.status(404).send({ error: true, message: "No Alumni Found for the given department" });
     }
 
-    return res.status(200).json(alumnis);
+    // Use the _id to fetch alumni personal details
+    const alumniDetailsPromises = alumnis.map(async (alumni) => {
+      // Fetch personal details using the alumni's _id
+      const personalDetails = await alumnipersonaldetails.findOne({ alumniId: alumni._id });
+
+      // Merge the alumni details with their personal details
+      return {
+        ...alumni.toObject(),  // Convert Mongoose document to plain object
+        personalDetails
+      };
+    });
+
+    // Resolve all promises and return the response
+    const alumniWithDetails = await Promise.all(alumniDetailsPromises);
+
+    return res.status(200).json(alumniWithDetails);
   } catch (error) {
     console.log("Error in getting alumni by department", error);
     return res.status(500).send({ error: true, message: "Internal Server Error" });

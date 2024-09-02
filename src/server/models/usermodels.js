@@ -8,34 +8,37 @@ const userSchema = new mongoose.Schema(
     },
     currentstudentsname: {
       type: String,
-      required: true,
+      // required: true,
     },
     currentstudentsregisterno: {
       type: String,
-      required: true,
+      // required: true,
     },
     hashedPassword: {
       type: String,
     },
     currentstudentsdepartment: {
       type: String,
-      required: true,
+      // required: true,
     },
     currentstudentsyearofjoining: {
       type: Number,
-      required: true,
+      // required: true,
     },
     currentstudentsyearofpassing: {
       type: Number,
-      required: true,
+      // required: true,
     },
     currentstudentsmobilenumber: {
       type: String,
-      required: true,
+      // required: true,
+    },
+    suggestion: {
+      type: String
     },
     email: {
       type: String,
-      required: true,
+      // required: true,
       unique: true,
       match: [
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/,

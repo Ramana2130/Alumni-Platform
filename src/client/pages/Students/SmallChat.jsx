@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
+// Initialize socket connection
 const socket = io("http://localhost:3000");
 
-const SmallChat = ({ recipient, currentUser }) => {
-  // Added `currentUser` prop
+const SmallChat = ({ recipient }) => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
+    if (!recipient || !recipient.name) return; // Check if recipient is defined
+
+    // Join the chat room for the recipient
+    socket.emit("joinRoom", recipient.name);
+
     // Listener for incoming messages
     socket.on("message", (newMessage) => {
-      // Add the message if it is for the current recipient or if it's from the current user
       if (
-        (newMessage.recipient === recipient.name &&
-          newMessage.sender === currentUser.name) ||
-        (newMessage.sender === recipient.name &&
-          newMessage.recipient === currentUser.name)
+        newMessage.recipient === recipient.name ||
+        newMessage.sender === recipient.name
       ) {
         setMessages((prevMessages) => [...prevMessages, newMessage]);
       }
@@ -25,13 +27,13 @@ const SmallChat = ({ recipient, currentUser }) => {
     return () => {
       socket.off("message");
     };
-  }, [recipient, currentUser]);
+  }, [recipient]);
 
   const handleSendMessage = () => {
-    if (message.trim()) {
+    if (message.trim() && recipient) {
       const newMessage = {
         text: message,
-        sender: currentUser.name, // Use current student's name
+        sender: "student", // Replace with the actual student name or ID
         recipient: recipient.name,
         timestamp: new Date(),
       };
@@ -41,45 +43,41 @@ const SmallChat = ({ recipient, currentUser }) => {
   };
 
   return (
-    <div className="w-full max-w-md bg-gray-100 dark:bg-gray-800 rounded-2xl z-50 neo-shadow p-6 space-y-6">
-      {/* Chat header */}
+    <div className="w-full max-w-md bg-gray-100 dark:bg-gray-800 rounded-2xl p-6 space-y-6">
       <div className="flex items-center space-x-4">
-        <div className="w-12 h-12 rounded-full neo-shadow flex items-center justify-center">
+        <div className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center">
           <span className="text-xl font-semibold text-gray-700 dark:text-gray-300">
-            {recipient.name[0]}{" "}
-            {/* Display the first letter of the recipient's name */}
+            {recipient ? recipient.name[0] : "?"}
           </span>
         </div>
         <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
-          Chat with {recipient.name}
+          Chat with {recipient ? recipient.name : "Loading..."}
         </h1>
       </div>
 
-      {/* Chat messages area */}
-      <div className="h-96 overflow-y-auto neo-inset p-4 rounded-xl space-y-4">
+      <div className="h-96 overflow-y-auto p-4 rounded-xl space-y-4">
         {messages.map((msg, index) => (
           <div
             key={index}
             className={`flex items-start space-x-2 ${
-              msg.sender === currentUser.name ? "justify-end" : ""
+              msg.sender === "student" ? "justify-end" : ""
             }`}
           >
-            {msg.sender !== currentUser.name && (
-              <div className="w-8 h-8 rounded-full neo-shadow flex-shrink-0 flex items-center justify-center">
+            {msg.sender !== "student" && (
+              <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center">
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {msg.sender[0]}{" "}
-                  {/* Display the first letter of the sender's name */}
+                  {msg.sender[0]}
                 </span>
               </div>
             )}
             <div
               className={`bg-${
-                msg.sender === currentUser.name ? "blue-500" : "white"
-              } p-3 rounded-lg neo-shadow max-w-xs`}
+                msg.sender === "student" ? "blue-500" : "white"
+              } p-3 rounded-lg max-w-xs`}
             >
               <p
                 className={`text-sm ${
-                  msg.sender === currentUser.name
+                  msg.sender === "student"
                     ? "text-white"
                     : "text-gray-700 dark:text-gray-300"
                 }`}
@@ -91,24 +89,21 @@ const SmallChat = ({ recipient, currentUser }) => {
         ))}
       </div>
 
-      {/* Message input area */}
       <div className="flex items-center space-x-4">
-        <div className="flex-grow">
-          <input
-            type="text"
-            placeholder="Type your message..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="w-full p-4 rounded-xl neo-inset bg-transparent text-gray-700 dark:text-gray-300 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none"
-          />
-        </div>
+        <input
+          type="text"
+          placeholder="Type your message..."
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          className="w-full p-4 rounded-xl bg-transparent text-gray-700 dark:text-gray-300 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none"
+        />
         <button
           onClick={handleSendMessage}
-          className="p-4 rounded-xl neo-shadow neo-button focus:outline-none"
+          className="p-4 rounded-xl bg-blue-500 text-white focus:outline-none"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-blue-500"
+            className="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

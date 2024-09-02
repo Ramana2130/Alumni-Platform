@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 
-// Replace with your server URL
+// Connect to your Socket.IO server
 const socket = io("http://localhost:3000");
 
 const Chat = () => {
@@ -12,6 +12,10 @@ const Chat = () => {
   const [currentStudentName, setCurrentStudentName] = useState("John Doe"); // Example student name
 
   useEffect(() => {
+    if (currentContact) {
+      socket.emit("joinRoom", currentContact.name);
+    }
+
     socket.on("message", (newMessage) => {
       if (
         newMessage.recipient === currentContact?.name ||
