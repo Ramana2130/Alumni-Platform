@@ -9,7 +9,7 @@ const AlumniListTable = () => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
-  const tasksPerPage = 6;
+  const tasksPerPage = 7;
   const { _id } = useParams();
 
   useEffect(() => {

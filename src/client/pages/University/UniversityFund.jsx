@@ -4,6 +4,7 @@ import UniversityTotalAlumini from './UniversityTotalAlumini';
 import UniversityTotalJob from './UniversityTotalJob';
 import UniversityFundresponse from './UniversityFundresponse';
 import UniversityJobPosting from './UniversityJobPosting';
+import PieChart from './PieChart';
 
 
 const UniversityFund = () => {
@@ -15,8 +16,8 @@ const UniversityFund = () => {
       <div className="grid h-full w-full grid-cols-3 gap-4">
         <div className="col-span-1 row-span-4">
           <div className="flex h-full w-full  gap-6 rounded-3xl bg-[#1E1E1E] px-12 text-">
-         <UniversityFundresponse/>
-          
+         {/* <UniversityFundresponse/> */}
+         <PieChart/>
           </div>
         </div>
         <div className="col-span- row-span-2">
