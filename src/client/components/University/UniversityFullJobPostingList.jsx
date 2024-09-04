@@ -54,7 +54,7 @@ const UniversityFullJobPostingList = () => {
               <tbody>
                 {jobData.length > 0 ? (
                   jobData.map((job) => (
-                    <tr key={job._id} className="bg-gray-100">
+                    <tr key={job._id} className="">
                       <td className="border-t border-gray-300 px-6 py-4 whitespace-nowrap text-lg font-medium text-gray-900">
                         {job.alumniId.alumniname}
                       </td>
@@ -86,7 +86,10 @@ const UniversityFullJobPostingList = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="7" className="text-center font-medium text-lg text-[#CFF80B] py-4 ">
+                    <td
+                      colSpan="7"
+                      className="text-center font-medium text-lg text-[#CFF80B] py-4 "
+                    >
                       No data available
                     </td>
                   </tr>

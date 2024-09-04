@@ -78,8 +78,6 @@ AuthRoutes.post('/addexcelfile/:universityId', upload.single('file'), async (req
     const worksheet = workbook.Sheets[sheetName];
     const json = utils.sheet_to_json(worksheet);
 
-    console.log("Parsed Excel Data:", json);
-
     // Hash the password and transform the data
     const saltRounds = 10; // You can adjust the salt rounds as needed
     const alumniDataPromises = json.map(async row => {

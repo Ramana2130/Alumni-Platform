@@ -277,20 +277,18 @@ const AlumniListTable = () => {
                 </tbody>
               </table>
             </div>
-            <div className="flex justify-between py-2 px-4">
+            <div className="mt-4 flex justify-center space-x-1 items-center">
               <button
                 onClick={prevPage}
-                disabled={currentPage === 1}
-                className="bg-[#CFF80B] text-black py-2 px-4 rounded-lg disabled:bg-gray-600"
+                className="bg-[#CFF80B] px-4 py-2 rounded-full text-black hover:bg-[#B1D609]"
               >
-                Previous
+                <i class="fa-solid fa-caret-left"></i>
               </button>
               <button
                 onClick={nextPage}
-                disabled={currentTasks.length < tasksPerPage}
-                className="bg-[#CFF80B] text-black py-2 px-4 rounded-lg disabled:bg-gray-600"
+                className="bg-[#CFF80B] px-4 py-2 rounded-full text-black hover:bg-[#B1D609]"
               >
-                Next
+                <i class="fa-solid fa-caret-right"></i>
               </button>
             </div>
           </div>

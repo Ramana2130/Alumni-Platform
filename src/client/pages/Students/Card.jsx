@@ -33,9 +33,9 @@ const Card = ({ alumni }) => {
 
   return (
     <div className="">
-      <div className="box w-[400px] h-[400px] bg-white rounded-2xl grid grid-cols-[64px_1fr] relative">
-        <div className="box-icon flex items-center justify-center"></div>
-        <div className=" flex items-center pl-4 text-sm tracking-wide space-x-3">
+      <div className="box w-[400px] h-[400px] my-2 bg-white rounded-2xl grid grid-cols-[64px_1fr] relative">
+        <div className="box-icon my-5  flex items-center justify-center"></div>
+        <div className=" flex items-center pl-4 my-3 text-sm tracking-wide space-x-3">
           <h1 className="border border-black rounded-full px-3 uppercase  font-semibold text-lg">
             {alumni.department}
           </h1>

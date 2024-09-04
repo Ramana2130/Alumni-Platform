@@ -9,6 +9,7 @@ import alumnipersonaldata from './routes/alumnicurrentdetails.js'
 import http from 'http';
 import { Server } from "socket.io";
 import Message from "./models/messagemodels.js";
+import razorpayRoutes from './routes/payment.js'
 const app = express();
 dotenv.config();
 
@@ -20,7 +21,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/alumni", AuthRoutes);
 app.use('/university', universityRoutes);
 app.use('/student', studentsRoutes);
-app.use('/current', alumnipersonaldata)
+app.use('/current', alumnipersonaldata);
+app.use('/razorpay', razorpayRoutes);
+
 
 app.get("/hello", (req, res) => {
   res.send("Hello Vite + React!");

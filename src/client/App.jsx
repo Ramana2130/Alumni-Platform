@@ -38,6 +38,7 @@ import AluminiDonation from "./pages/Alumini/AluminiDonation";
 import AluminiProfile from "./pages/Students/AluminiProfile";
 import UniversityStudentRequest from "./pages/University/UniversityStudentRequest";
 import UniversityFullJobPosting from "./pages/University/UniversityFullJobPosting";
+import Payment from "./components/PAyment";
 
 const App = () => {
   return (
@@ -49,41 +50,88 @@ const App = () => {
           <Route path="/team" element={<TeamPage />} />
           <Route path="/studentloginpage" element={<StudentLoginPage />} />
           <Route path="/studentsignuppage" element={<StudentSignupPage />} />
-          <Route path="/universitysignuppage" element={<UniversitySignupPage />} />
-          <Route path="/universityLoginpage" element={<UniversityLoginPage />} />
+          <Route
+            path="/universitysignuppage"
+            element={<UniversitySignupPage />}
+          />
+          <Route
+            path="/universityLoginpage"
+            element={<UniversityLoginPage />}
+          />
           <Route path="/aluminiLoginpage" element={<AluminiLoginPage />} />
           <Route path="/aboutpage" element={<AboutPage />} />
           <Route path="/ourteam" element={<OurTeam />} />
-          <Route path="/universitydashboard/:_id" element={<UniversityDashboard />} />
+          <Route
+            path="/universitydashboard/:_id"
+            element={<UniversityDashboard />}
+          />
           <Route path="/addalumini/:_id" element={<UniversityAddAlumini />} />
-          <Route path="/updatealumnidetails/:universityId/:_id" element={<UpdateAlumnidetails />} />
-          <Route path="/updatecurrentstudents/:universityId/:_id" element={<UpdateStudentsForm />} />
+          <Route
+            path="/updatealumnidetails/:universityId/:_id"
+            element={<UpdateAlumnidetails />}
+          />
+          <Route
+            path="/updatecurrentstudents/:universityId/:_id"
+            element={<UpdateStudentsForm />}
+          />
           <Route path="/aluminilist/:_id" element={<UniversityAlumniList />} />
-          <Route path="/universitydonation/:_id" element={<UniversityDonation />} />
-          <Route path="/universityacceptdonation" element={<UniversityAcceptDonationForm />} />
-          <Route path="/universitydonationfullstatement" element={<UniversityFullHistory />} />
-          <Route path="/addcurretntstudents/:_id" element={<UniversityAddCurrentStudent />} />
-          <Route path="/currentstudentslist/:_id" element={<StudentsTableList />} />
-          <Route path="/universitysetting/:_id" element={<UniversitySetting />} />
+          <Route
+            path="/universitydonation/:_id"
+            element={<UniversityDonation />}
+          />
+          <Route
+            path="/universityacceptdonation"
+            element={<UniversityAcceptDonationForm />}
+          />
+          <Route
+            path="/universitydonationfullstatement"
+            element={<UniversityFullHistory />}
+          />
+          <Route
+            path="/addcurretntstudents/:_id"
+            element={<UniversityAddCurrentStudent />}
+          />
+          <Route
+            path="/currentstudentslist/:_id"
+            element={<StudentsTableList />}
+          />
+          <Route
+            path="/universitysetting/:_id"
+            element={<UniversitySetting />}
+          />
           <Route path="/chat/:_id" element={<UniversityChat />} />
           <Route path="/studentdashboard/:_id" element={<StudentDashboard />} />
           <Route path="/aluministory/:id" element={<AluminiStory />} />
           <Route path="/aluminilist2/:_id" element={<AluminiList />} />
-          <Route path="/studentrequestform/:_id" element={<StudentDonation />} />
+          <Route
+            path="/studentrequestform/:_id"
+            element={<StudentDonation />}
+          />
           <Route path="/aluminisetting/:_id" element={<AluminiSetting />} />
           <Route path="/studentchat/:_id" element={<StudentChat />} />
           <Route path="/Successstory" element={<AluminiStory />} />
           <Route path="/payment" element={<PaymentComponent />} />
-          <Route path="/studentaluminiprofile" element={<StudentAluminiProfile />} />
+          <Route
+            path="/studentaluminiprofile"
+            element={<StudentAluminiProfile />}
+          />
           <Route path="/aluminidashboard/:id" element={<AluminiDashboard />} />
           <Route path="/aluminijob/:id" element={<AluminiJob />} />
-          <Route path="/aluminidonationform/:id" element={<AluminiDonation />} />
+          <Route
+            path="/aluminidonationform/:id"
+            element={<AluminiDonation />}
+          />
           <Route path="/aluminichat/:id" element={<AluminiChat />} />
           <Route path="/aluminiprofile2/:id" element={<AluminiProfile />} />
-          <Route path="/studentrequestlist/" element={<UniversityStudentRequest />} />
-          <Route path="/alumnijobposting/" element={<UniversityFullJobPosting    />} />
-
-
+          <Route
+            path="/studentrequestlist/"
+            element={<UniversityStudentRequest />}
+          />
+          <Route
+            path="/alumnijobposting/"
+            element={<UniversityFullJobPosting />}
+          />
+          <Route path="/payment" element={<Payment />} />
         </Routes>
       </div>
     </BrowserRouter>

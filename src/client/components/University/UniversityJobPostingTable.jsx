@@ -54,23 +54,23 @@ const UniversityJobPostingTable = () => {
               <tbody>
                 {jobData.length > 0 ? (
                   jobData.map((job) => (
-                    <tr key={job._id} className="bg-gray-100">
-                      <td className="border-t border-gray-300 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <tr key={job._id} className="">
+                      <td className=" px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                         {job.alumniId.alumniname}
                       </td>
-                      <td className="border-t border-gray-300 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td className=" px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                         {job.companyname}
                       </td>
-                      <td className="border-t border-gray-300 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td className=" px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                         {job.role}
                       </td>
-                      <td className="border-t border-gray-300 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td className=" px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                         {job.jobworktype}
                       </td>
-                      <td className="border-t border-gray-300 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td className=" px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                         {job.joblocation}
                       </td>
-                      <td className="border-t border-gray-300 px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600">
+                      <td className=" px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                         <a
                           href={job.applyurl}
                           target="_blank"
@@ -79,14 +79,17 @@ const UniversityJobPostingTable = () => {
                           {job.applyurl}
                         </a>
                       </td>
-                      <td className="border-t border-gray-300 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td className=" px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                         {new Date(job.createdAt).toLocaleDateString()}
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="7" className="text-center font-medium text-lg text-[#CFF80B] py-4 ">
+                    <td
+                      colSpan="7"
+                      className="text-center font-medium text-lg text-[#CFF80B] py-4 "
+                    >
                       No data available
                     </td>
                   </tr>

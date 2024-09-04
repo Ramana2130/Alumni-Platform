@@ -2,24 +2,56 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import add from "../../assets/money1.svg";
 import toast from "react-hot-toast";
-const AluminiDonationForm = () => {
-  const [step, setStep] = useState(1);
-  const alumniId = localStorage.getItem("_id");
-  const handleNext = () => {
-    navigate(`/aluminidashboard/${alumniId}`);
-    toast.success("Request Submited Successfully");
-    setStep((prevStep) => prevStep + 1);
-  };
+import axios from "axios";
 
-  const handlePrev = () => {
-    setStep((prevStep) => prevStep - 1);
-  };
-  const firstpage = () => {
-    setStep((prevStep) => 1);
-  };
+const AluminiDonationForm = () => {
+  const [amount, setAmount] = useState("");
+  const alumniId = localStorage.getItem("_id");
   const navigate = useNavigate();
-  const dashboard = () => {
-    navigate("/aluminidashboard");
+
+  const handlePayment = async () => {
+    try {
+      const orderUrl = "/razorpay/createOrder";
+      const { data } = await axios.post(orderUrl, { amount });
+
+      const options = {
+        key: import.meta.env.REACT_APP_RAZORPAY_KEY_ID, // Access the key from .env file
+        amount: data.amount,
+        currency: data.currency,
+        name: "Alumni Donation",
+        description: "Test Transaction",
+        order_id: data.id,
+        handler: async (response) => {
+          try {
+            const paymentId = response.razorpay_payment_id;
+            const url = `/razorpay/verifyPayment`;
+            const { data } = await axios.post(url, {
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: paymentId,
+              razorpay_signature: response.razorpay_signature,
+            });
+            if (data.status === "success") {
+              toast.success("Donation successful");
+              navigate(`/aluminidashboard/${alumniId}`);
+            } else {
+              toast.error("Payment verification failed");
+            }
+          } catch (error) {
+            console.error(error);
+            toast.error("Payment verification error");
+          }
+        },
+        theme: {
+          color: "#2596be",
+        },
+      };
+
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to initiate payment");
+    }
   };
 
   return (
@@ -28,11 +60,11 @@ const AluminiDonationForm = () => {
         <div className="relative w-[35%]">
           <div className="h-[700px] w-[500px] p-5">
             <h1 className="text-white font-semibold text-4xl w-[500px] uppercase">
-              Let's Donation University{" "}
+              Let's Donate to University{" "}
               <span className="text-[#2596be]">Account!</span>
             </h1>
             <div className="mt-24">
-              <img src={add} alt="" className="h-[300px]" />
+              <img src={add} alt="Donation" className="h-[300px]" />
             </div>
           </div>
         </div>
@@ -41,141 +73,40 @@ const AluminiDonationForm = () => {
           id="back-div"
           className="w-[65%] flex justify-center rounded-[26px]"
         >
-          {/* Top Navigation Buttons */}
+          <div className="h-[700px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
+            <div>
+              <h1 className="text-white font-extrabold text-6xl uppercase">
+                Donation Form
+              </h1>
 
-          {step === 1 && (
-            <div className="h-[700px] bg-[#111111]  relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
-              <div>
-                <h1 className="text-white font-extrabold text-6xl uppercase">
-                  Alumni Request Form
-                </h1>
-
-                <form action="#" method="post" className="space-y-4 w-[400px]">
-                  <div className="mt-10 ">
-                    <label
-                      htmlFor="alumniName"
-                      className="text-sm font-semibold text-[#87888C]"
-                    >
-                      Enter request
-                    </label>
-                    <textarea
-                      id="StudentName"
-                      className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
-                      type="text"
-                      placeholder="Enter Request"
-                      required
-                    />
-                    {/* <div className="grid">
-                      <label htmlFor="department" className="text-sm font-semibold text-[#87888C]">
-                        Department
-                      </label>
-                      <input
-                      id="department"
-                      className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
-                      type="text"
-                      placeholder="department"
-                      required
-                    />
-                    </div>
-                    <label htmlFor="passout" className="text-sm font-semibold text-[#87888C]">
-                       Year
-                    </label>
-                    <input
-                      id="passout"
-                      className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
-                      type="number"
-                      placeholder="year"
-                      required
-                    /> */}
-                    {/* <label
-                      htmlFor="email"
-                      className="text-sm font-semibold text-[#87888C]"
-                    >
-                      Mobile No
-                    </label>
-                    <input
-                      id="mobileno"
-                      className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
-                      type="number"
-                      placeholder=" mobile no"
-                      required
-                    /> */}
-                    <button
-                      className="bg-[#2596be] shadow-lg mt-2 p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
-                      type="submit"
-                      onClick={handleNext}
-                    >
-                      Verify the correct details
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          )}
-
-          {/* {step === 2 && (
-            <div className="h-[700px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
-              <div>
-                <h1 className="text-white font-extrabold text-6xl uppercase">
-                  Donation Form
-                </h1>
-                <button
-                  className="bg-[#2596be] mt-5 px-5 py-2 shadow-lg p-2 text-black font-semibold rounded-lg hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
-                  onClick={handlePrev}
-                  type="button"
-                >
-                  <i class="fa-solid fa-arrow-left text-xl"></i>
-                </button>
-
-                <form action="#" method="post" className="w-[400px]">
-                  <div className="mt-10 ">
-                    <label
-                      htmlFor="password"
-                      className="text-sm font-semibold text-[#87888C]"
-                    >
-                      Amount Donated
-                    </label>
-                    <input
-                      id="password"
-                      className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
-                      type="number"
-                      placeholder="$"
-                      required
-                    />
-                    <button
-                      className="bg-[#2596be] shadow-lg mt-2 p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
-                      type="submit"
-                      onClick={handleNext}
-                    >
-                      Verify the correct details
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          )} */}
-
-          {/* {step === 3 && (
-            <div className="h-[700px] bg-[#111111] relative flex items-center rounded-[20px] xl:p-10 2xl:p-16 lg:p-10 md:p-10 sm:p-2">
-              <div className="text-center">
-                <h1 className="text-white font-extrabold text-6xl uppercase">
-                  Success!
-                </h1>
-                <p className=" mt-4 text-lg text-[#2596be]">
-                  University account donated has been successfully.
-                </p>
-                <div className="flex space-x-4">
-                  <button
-                    className="bg-[#2596be] shadow-lg mt-10 p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:border-2 hover:bg-transparent hover:border-[#87888C] transition duration-300 ease-in-out"
-                    type="button"
-                    onClick={dashboard}
+              <form className="space-y-4 w-[400px]">
+                <div className="mt-10">
+                  <label
+                    htmlFor="amount"
+                    className="text-sm font-semibold text-[#87888C]"
                   >
-                    Go to Home Page
+                    Donation Amount
+                  </label>
+                  <input
+                    id="amount"
+                    className="border-[#87888C] bg-transparent border-t-0 border-r-0 border-l-0 border-2 p-3 shadow-lg placeholder:text-base outline-none mb-5 text-[#87888C] w-full"
+                    type="number"
+                    placeholder="Enter amount"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                    required
+                  />
+                  <button
+                    className="bg-[#2596be] shadow-lg mt-2 p-2 text-black font-semibold rounded-lg w-full hover:scale-100 hover:bg-[#2596be] transition duration-300 ease-in-out"
+                    type="button"
+                    onClick={handlePayment}
+                  >
+                    Proceed to Pay
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
-          )} */}
+          </div>
         </div>
       </div>
     </div>
