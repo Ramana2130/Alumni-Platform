@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "companyName": "TechNova Solutions",
+    "jobTitle": "Frontend Developer",
+    "location": "Bangalore, India",
+    "hiringStatus": "Open",
+    "noOfOpenings": 5,
+    "salaryPackage": "7 LPA"
+  },
+  {
+    "id": 2,
+    "companyName": "CloudWorks Inc.",
+    "jobTitle": "Backend Engineer",
+    "location": "Hyderabad, India",
+    "hiringStatus": "Closed",
+    "noOfOpenings": 3,
+    "salaryPackage": "9 LPA"
+  },
+  {
+    "id": 3,
+    "companyName": "DataForge Analytics",
+    "jobTitle": "Data Scientist",
+    "location": "Pune, India",
+    "hiringStatus": "Open",
+    "noOfOpenings": 4,
+    "salaryPackage": "12 LPA"
+  },
+  {
+    "id": 4,
+    "companyName": "Innovent Labs",
+    "jobTitle": "Full Stack Developer",
+    "location": "Chennai, India",
+    "hiringStatus": "Open",
+    "noOfOpenings": 6,
+    "salaryPackage": "8.5 LPA"
+  },
+  {
+    "id": 5,
+    "companyName": "QuantumTech Pvt Ltd",
+    "jobTitle": "AI Engineer",
+    "location": "Mumbai, India",
+    "hiringStatus": "Closed",
+    "noOfOpenings": 2,
+    "salaryPackage": "15 LPA"
+  },
+  {
+    "id": 6,
+    "companyName": "NextGen Systems",
+    "jobTitle": "DevOps Engineer",
+    "location": "Delhi, India",
+    "hiringStatus": "Open",
+    "noOfOpenings": 3,
+    "salaryPackage": "10 LPA"
+  },
+  {
+    "id": 7,
+    "companyName": "Skyline Technologies",
+    "jobTitle": "Product Manager",
+    "location": "Bangalore, India",
+    "hiringStatus": "Open",
+    "noOfOpenings": 1,
+    "salaryPackage": "18 LPA"
+  },
+  {
+    "id": 8,
+    "companyName": "Cybernet Solutions",
+    "jobTitle": "Security Analyst",
+    "location": "Hyderabad, India",
+    "hiringStatus": "Closed",
+    "noOfOpenings": 2,
+    "salaryPackage": "9 LPA"
+  }
+]
