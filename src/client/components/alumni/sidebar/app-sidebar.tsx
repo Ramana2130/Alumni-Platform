@@ -118,7 +118,7 @@ const data = {
   navSecondary: [
     {
       title: "Settings",
-      url: "#",
+      url: "/alumni/profile",
       icon: IconSettings,
     },
     {
@@ -155,7 +155,7 @@ const data = {
     },
     {
       name: "Chat",
-      url: "#",
+      url: "/alumni/chat",
       icon: MessageCircle,
     },
   ],

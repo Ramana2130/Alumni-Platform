@@ -1,5 +1,7 @@
 import DashboardLayout from "@/components/alumni/sidebar/layout";
+import AlumniChatPage from "@/pages/alumni/AlumniChatPage";
 import AlumniHomePage from "@/pages/alumni/AlumniHomePage";
+import AlumniPersonalProfile from "@/pages/alumni/AlumniPersonalProfile";
 import AlumniProfileList, { alumniProfileListLoader } from "@/pages/alumni/AlumniProfileList";
 import JobPostingPage from "@/pages/alumni/JobPostingPage";
 import StudentProfileList from "@/pages/alumni/StudentProfileList";
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
             {
                 path: "job-posting",
                 element: <JobPostingPage />
+            },
+            {
+                path: "chat",
+                element: <AlumniChatPage />
+            },
+            {
+                path: "profile",
+                element: <AlumniPersonalProfile />
             }
         ],
     }
