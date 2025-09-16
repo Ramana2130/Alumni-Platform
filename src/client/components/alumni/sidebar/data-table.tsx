@@ -106,6 +106,9 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { BookCheck, CircleX } from "lucide-react"
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import JobPostingPage from "@/pages/alumni/JobPostingPage"
+import JobApplyForm from "../job-posting/JobApplyForm"
 
 export const schema = z.object({
   id: z.number(),
@@ -415,10 +418,17 @@ export function DataTable({
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button variant="default" size="sm">
-            <IconPlus />
-            <span className="hidden lg:inline">Job Post</span>
-          </Button>
+          <Dialog>
+  <DialogTrigger asChild>
+    <Button variant="default" size="sm">
+      <IconPlus />
+      <span className="hidden lg:inline">Job Post</span>
+    </Button>
+  </DialogTrigger>
+  <DialogContent>   
+    <JobApplyForm />
+  </DialogContent>
+</Dialog>
         </div>
       </div>
       <TabsContent

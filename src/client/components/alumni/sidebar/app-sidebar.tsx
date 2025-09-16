@@ -135,22 +135,22 @@ const data = {
   documents: [
     {
       name: "Dashboard",
-      url: "#",
+      url: "/alumni/dashboard",
       icon: House,
     },
     {
       name: "Alumni Profile's",
-      url: "#",
+      url: "/alumni/alumni-profiles",
       icon: GraduationCap,
     },
     {
       name: "Job Posting",
-      url: "#",
+      url: "/alumni/job-posting",
       icon: BellPlus,
     },
     {
       name: "Student Profile's",
-      url: "#",
+      url: "/alumni/student-profiles",
       icon: Users,
     },
     {

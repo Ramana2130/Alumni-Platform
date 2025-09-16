@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { ModeToggle } from "@/components/alumni/sidebar/mode-toggle"
 import { ThemeSelector } from "@/components/alumni/sidebar/theme-selector"
-import { ArrowRightFromLine } from "lucide-react"
+import { ArrowRightFromLine, BellDot } from "lucide-react"
 
 export function SiteHeader() {
   return (
@@ -16,17 +16,16 @@ export function SiteHeader() {
         />
         <h1 className="text-base font-medium">Welcome Ram</h1>
         <div className="ml-auto flex items-center gap-2">
-          <Button variant="default" asChild size="default" className="hidden sm:flex">
+          {/* <Button variant="ghost" asChild size="default" className="hidden sm:flex"> */}
             <a
               href="https://github.com/shadcn-ui/ui/tree/main/apps/v4/app/(examples)/dashboard"
               rel="noopener noreferrer"
               target="_blank"
               className="dark:text-foreground"
             >
-            <ArrowRightFromLine />
-             Job Post
+            <BellDot className="text-red-500 size-6"/>
             </a>
-          </Button>
+          {/* </Button> */}
           {/* <ThemeSelector /> */}
           {/* <ModeToggle /> */}
         </div>
