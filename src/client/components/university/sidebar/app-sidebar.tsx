@@ -135,7 +135,7 @@ const data = {
   documents: [
     {
       name: "Dashboard",
-      url: "/alumni/dashboard",
+      url: "/university/dashboard",
       icon: House,
     },
     {
@@ -148,14 +148,14 @@ const data = {
       url: "/university/job-list",
       icon: BellPlus,
     },
-    {
-      name: "Student Profile's",
-      url: "/alumni/student-profiles",
-      icon: Users,
-    },
+    // {
+    //   name: "Student Profile's",
+    //   url: "/alumni/student-profiles",
+    //   icon: Users,
+    // },
     {
       name: "Fund Reports",
-      url: "/alumni/chat",
+      url: "/university/fund-reports",
       icon: HandCoins,
     },
   ],

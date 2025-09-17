@@ -150,7 +150,7 @@ const data = {
     },
     {
       name: "Fund Request",
-      url: "/alumni/student-profiles",
+      url: "/students/fund-request",
       icon: HandCoins,
     },
     {

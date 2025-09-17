@@ -31,7 +31,7 @@ import { NavDocuments } from "./nav-documents"
 import { NavUser } from "./nav-user"
 import { NavSecondary } from "./nav-secondary"
 import logo from '../../../../client/assets/skcet-logo.jpg'
-import { BellPlus, GraduationCap, House, MessageCircle, Users } from "lucide-react"
+import { BellPlus, GraduationCap, Hand, HandCoins, House, MessageCircle, Users } from "lucide-react"
 
 
 const data = {
@@ -147,11 +147,21 @@ const data = {
       name: "Job Posting",
       url: "/alumni/job-posting",
       icon: BellPlus,
-    },
+    },    
     {
       name: "Student Profile's",
       url: "/alumni/student-profiles",
       icon: Users,
+    },
+    {
+      name: "Fund Donated",
+      url: "/alumni/fund-donated",
+      icon: HandCoins,
+    },
+    {
+      name: "Event Posting",
+      url: "/alumni/event-posting",
+      icon: BellPlus,
     },
     {
       name: "Chat",
