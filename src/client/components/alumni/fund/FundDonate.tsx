@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ArrowLeft, Heart, DollarSign, Clock, GraduationCap, Filter, Search } from "lucide-react"
+import { ArrowLeft, Heart, DollarSign, Clock, GraduationCap, Filter, Search, BadgeCheck } from "lucide-react"
 import { toast } from "sonner"
 
 interface AlumniPortalProps {
@@ -120,7 +120,7 @@ export default function FundDonate({ onBack }: AlumniPortalProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-50">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -227,7 +227,7 @@ export default function FundDonate({ onBack }: AlumniPortalProps) {
                   </div>
                   <div className="w-full bg-slate-200 rounded-full h-3">
                     <div
-                      className="bg-emerald-600 h-3 rounded-full transition-all duration-300"
+                      className="bg-[#d56f2c] h-3 rounded-full transition-all duration-300"
                       style={{ width: `${getProgressPercentage(request.raised, request.goal)}%` }}
                     ></div>
                   </div>
@@ -247,7 +247,7 @@ export default function FundDonate({ onBack }: AlumniPortalProps) {
                   </div>
                   <Button
                     onClick={() => handleDonate(request.id, request.studentName)}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm"
+                    className="bg-[#d56f2c] hover:bg-[#c65a2c] text-white shadow-sm"
                   >
                     <Heart className="h-4 w-4 mr-2" />
                     Donate Now
@@ -256,8 +256,9 @@ export default function FundDonate({ onBack }: AlumniPortalProps) {
 
                 {/* Verification Badge */}
                 <div className="mt-4 pt-4 border-t border-slate-200">
-                  <div className="flex items-center text-sm text-emerald-600">
-                    <div className="w-2 h-2 bg-emerald-600 rounded-full mr-2"></div>
+                  <div className="flex items-center text-sm text-green-600">
+                    <BadgeCheck className="size-4 gap-6" /> 
+                    {/* <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div> */}
                     Verified by University Administration on {new Date(request.verificationDate).toLocaleDateString()}
                   </div>
                 </div>

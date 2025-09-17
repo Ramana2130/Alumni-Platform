@@ -108,7 +108,7 @@ import {
 import { BookCheck, CircleX } from "lucide-react"
 import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import JobPostingPage from "@/pages/alumni/JobPostingPage"
-import JobApplyForm from "../job-posting/JobApplyForm"
+import { JobApplyForm } from "../job-posting/JobApplyForm"
 
 export const schema = z.object({
   id: z.number(),
@@ -196,9 +196,9 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     <div className="flex items-center gap-1">
       {row.original.hiringStatus === "Open" ? (
         // <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
-        <BookCheck className="text-green-500" />
+        <BookCheck className="text-green-500 size-3" />
       ) : (
-        <CircleX className="text-red-500" />
+        <CircleX className="text-red-500 size-3" />
       )}
       {row.original.hiringStatus}
     </div>
@@ -359,7 +359,8 @@ export function DataTable({
         <Label htmlFor="view-selector" className="sr-only">
           View
         </Label>
-        <Select defaultValue="outline">
+        <h2 className=" text-2xl font-semibold text-[#9f2d00]">Job Details</h2>
+        {/* <Select defaultValue="outline">
           <SelectTrigger
             className="flex w-fit @4xl/main:hidden"
             // size="sm"
@@ -373,7 +374,7 @@ export function DataTable({
             <SelectItem value="key-personnel">Key Personnel</SelectItem>
             <SelectItem value="focus-documents">Focus Documents</SelectItem>
           </SelectContent>
-        </Select>
+        </Select> */}
         <TabsList className="**:data-[slot=badge]:bg-muted-foreground/30 hidden **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex">
           <TabsTrigger value="outline">Outline</TabsTrigger>
           <TabsTrigger value="past-performance">
@@ -419,14 +420,14 @@ export function DataTable({
             </DropdownMenuContent>
           </DropdownMenu>
           <Dialog>
-  <DialogTrigger asChild>
+  {/* <DialogTrigger asChild>
     <Button variant="default" size="sm">
       <IconPlus />
       <span className="hidden lg:inline">Job Post</span>
     </Button>
-  </DialogTrigger>
+  </DialogTrigger> */}
   <DialogContent>   
-    <JobApplyForm />
+    {/* <JobApplyForm /> */}
   </DialogContent>
 </Dialog>
         </div>

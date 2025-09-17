@@ -48,7 +48,7 @@ export default function ProfilePage() {
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Personal Information Section */}
-          <Card>
+          <Card className="bg-[#fff5ed]">
             <CardHeader>
               <CardTitle className="text-primary">Personal Information</CardTitle>
               <CardDescription>Basic details about yourself</CardDescription>
@@ -80,7 +80,7 @@ export default function ProfilePage() {
           </Card>
 
           {/* Academic Details Section */}
-          <Card>
+          <Card className="bg-[#fff5ed]">
             <CardHeader>
               <CardTitle className="text-primary">Academic Details</CardTitle>
               <CardDescription>Information about your academic journey</CardDescription>
@@ -146,7 +146,7 @@ export default function ProfilePage() {
           </Card>
 
           {/* Career Information Section */}
-          <Card>
+          <Card className="bg-[#fff5ed]">
             <CardHeader>
               <CardTitle className="text-primary">Career Information</CardTitle>
               <CardDescription>Details about your professional journey</CardDescription>
@@ -200,7 +200,7 @@ export default function ProfilePage() {
           </Card>
 
           {/* Success Stories Section */}
-          <Card>
+          <Card className="bg-[#fff5ed]">
             <CardHeader>
               <CardTitle className="text-primary">Success Stories</CardTitle>
               <CardDescription>Share your achievements and inspiring moments</CardDescription>
@@ -230,7 +230,7 @@ export default function ProfilePage() {
             >
               Save Progress
             </Button>
-            <Button type="submit" className="w-full sm:w-auto bg-primary hover:bg-primary/90">
+            <Button type="submit" className="w-full sm:w-auto bg-[#d56f2c] text-white hover:bg-[#bf5e26]">
               Submit Profile
             </Button>
           </div>

@@ -139,7 +139,7 @@ const data = {
       icon: House,
     },
     {
-      name: "Alumni Profile's",
+      name: "Connections",
       url: "/alumni/alumni-profiles",
       icon: GraduationCap,
     },
@@ -148,11 +148,11 @@ const data = {
       url: "/alumni/job-posting",
       icon: BellPlus,
     },    
-    {
-      name: "Student Profile's",
-      url: "/alumni/student-profiles",
-      icon: Users,
-    },
+    // {
+    //   name: "Student Profile's",
+    //   url: "/alumni/student-profiles",
+    //   icon: Users,
+    // },
     {
       name: "Fund Donated",
       url: "/alumni/fund-donated",

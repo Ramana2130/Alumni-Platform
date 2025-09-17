@@ -17,10 +17,10 @@ import {
 export const description = "A pie chart with a legend"
 
 const chartData = [
-  { browser: "chrome", visitors: 275, fill: "#ffb86a" },
-  { browser: "safari", visitors: 200, fill: "#ff6900" },
-  { browser: "firefox", visitors: 187, fill: "#f54a00" },
-  { browser: "edge", visitors: 173, fill: "#ca3500" },
+  { browser: "Job", visitors: 275, fill: "#ffb86a" },
+  { browser: "HigherStudeis", visitors: 200, fill: "#ff6900" },
+  { browser: "Business", visitors: 187, fill: "#f54a00" },
+  { browser: "startupOwner", visitors: 173, fill: "#ca3500" },
   { browser: "other", visitors: 90, fill: "#9f2d00" },
 ]
 
@@ -28,20 +28,20 @@ const chartConfig = {
   visitors: {
     label: "Visitors",
   },
-  chrome: {
-    label: "Chrome",
+  Job: {
+    label: "Job",
     color: "var(--chart-1)",
   },
-  safari: {
-    label: "Safari",
+  HigherStudeis: {
+    label: "HigherStudeis",
     color: "var(--chart-2)",
   },
-  firefox: {
-    label: "Firefox",
+  Business: {
+    label: "Business",
     color: "var(--chart-3)",
   },
-  edge: {
-    label: "Edge",
+  startupOwner: {
+    label: "startupOwner",
     color: "var(--chart-4)",
   },
   other: {
@@ -54,8 +54,8 @@ export function JobChart() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Legend</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Alumni Chart</CardTitle>
+        <CardDescription>This chart based on alumni proffesionals</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer

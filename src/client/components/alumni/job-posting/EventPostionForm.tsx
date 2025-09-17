@@ -34,7 +34,7 @@ export function EventPostingForm() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
+    <div className="max-w-8xl mx-auto p-4">
     <Card className="w-full bg-card border-orange-200 shadow-lg">
       <CardHeader className="bg-orange-50 border-b border-orange-200">
         <CardTitle className="text-2xl font-bold text-card-foreground flex items-center gap-2">

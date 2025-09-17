@@ -8,6 +8,7 @@ import { GraduationCap } from "lucide-react"
 import { JobChart } from "@/components/alumni/alumni-profiles/job-bar"
 import { HigherStudiesChart } from "@/components/alumni/alumni-profiles/higher-studies-chart"
 import { ComapreProfiles } from "@/components/alumni/alumni-profiles/compare-profiles"
+import { AlumniList } from "@/components/alumni/alumni-profiles/AlumniList"
 
 
 export const metadata = {
@@ -40,25 +41,26 @@ export default  function AlumniProfileList() {
           className="hidden dark:block"
         />
       </div>
-      <div className="px-8 pt-6 flex justify-between">
-        <div className="flex gap-2">
+      <div className="px-8 py-6 flex justify-between">
+        <AlumniList />
+        {/* <div className="flex gap-2">
         <GraduationCap className="size-8" />
         <h1 className="mb-2 text-2xl font-bold tracking-tight">Alumni Profiles</h1>
-        </div>
-        <div className="flex gap-3">
+        </div> */}
+        {/* <div className="flex gap-3">
           <h1 className="font-bold text-xl tracking-tight">Higher-Studies Profile : 300+</h1>
           <h1 className="font-bold text-xl tracking-tight">Job Profile : 300+</h1>
-        </div>
+        </div> */}
       </div>
       <div className="px-8 pt-6">
-        <ComapreProfiles />
+        {/* <ComapreProfiles /> */}
       </div>
       <div className="grid grid-cols-2 gap-4 px-8 py-6">
-        <JobChart />
-        <HigherStudiesChart />
+        {/* <JobChart />
+        <HigherStudiesChart /> */}
       </div>
       <div className="hidden h-full flex-1 flex-col gap-8 p-8 md:flex">
-        <DataTable data={tasks} columns={columns} />
+        {/* <DataTable data={tasks} columns={columns} /> */}
       </div>
     </>
   )

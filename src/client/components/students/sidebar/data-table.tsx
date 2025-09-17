@@ -108,7 +108,6 @@ import {
 import { BookCheck, CircleX } from "lucide-react"
 import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import JobPostingPage from "@/pages/alumni/JobPostingPage"
-import JobApplyForm from "@/components/alumni/job-posting/JobApplyForm"
 
 export const schema = z.object({
   id: z.number(),
@@ -426,7 +425,7 @@ export function DataTable({
     </Button>
   </DialogTrigger>
   <DialogContent>   
-    <JobApplyForm />
+    {/* <JobApplyForm /> */}
   </DialogContent>
 </Dialog>
         </div>
