@@ -31,7 +31,7 @@ import { NavDocuments } from "./nav-documents"
 import { NavUser } from "./nav-user"
 import { NavSecondary } from "./nav-secondary"
 import logo from '../../../../client/assets/skcet-logo.jpg'
-import { BellPlus, GraduationCap, House, MessageCircle, Users } from "lucide-react"
+import { BellPlus, GraduationCap, HandCoins, House, MessageCircle, Users } from "lucide-react"
 
 
 const data = {
@@ -135,27 +135,27 @@ const data = {
   documents: [
     {
       name: "Dashboard",
-      url: "/alumni/dashboard",
+      url: "/students/dashboard",
       icon: House,
     },
     {
       name: "Alumni Profile's",
-      url: "/alumni/alumni-profiles",
+      url: "/students/alumni-profiles",
       icon: GraduationCap,
     },
     {
-      name: "Job Posting",
-      url: "/alumni/job-posting",
+      name: "Apply Jobs",
+      url: "/students/apply-job",
       icon: BellPlus,
     },
     {
-      name: "Student Profile's",
+      name: "Fund Request",
       url: "/alumni/student-profiles",
-      icon: Users,
+      icon: HandCoins,
     },
     {
       name: "Chat",
-      url: "/alumni/chat",
+      url: "/students/chat",
       icon: MessageCircle,
     },
   ],
@@ -169,7 +169,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5 py-7 bg-[#FFE8DB]"
+              className="data-[slot=sidebar-menu-button]:!p-1.5 py-7 "
             >
               <a href="#">
                 {/* <IconInnerShadowTop className="!size-5" /> */}

@@ -15,17 +15,6 @@ export const metadata = {
   description: "A task and issue tracker build using Tanstack Table.",
 }
 
-// Simulate a database read for tasks.
-// async function getTasks() {
-//   const data = await fs.readFile(
-//     path.join(process.cwd(), "components/data/alumni-profiles/tasks.json")
-//   )
-
-//   const tasks = JSON.parse(data.toString())
-
-//   return z.array(taskSchema).parse(tasks)
-// }
-
 export async function alumniProfileListLoader() {
   return z.array(taskSchema).parse(tasks);
 }
