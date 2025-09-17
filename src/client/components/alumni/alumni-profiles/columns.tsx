@@ -39,7 +39,9 @@ export const columns: ColumnDef<Task>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Task" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
+    cell: ({ row }) => <div className="w-[80px]">
+       <a href="/alumni/personal-details" className="hover:underline">{row.getValue("id")}</a>
+      </div>,
     enableSorting: false,
     enableHiding: false,
   },
