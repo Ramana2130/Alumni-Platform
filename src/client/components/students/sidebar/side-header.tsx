@@ -1,6 +1,6 @@
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
-import {  BellDot } from "lucide-react"
+import {  ArrowRightFromLine, BellDot } from "lucide-react"
 
 export function SiteHeader() {
   return (
@@ -20,7 +20,7 @@ export function SiteHeader() {
               target="_blank"
               className="dark:text-foreground"
             >
-            <BellDot className="text-red-500 size-6"/>
+              <ArrowRightFromLine />
             </a>
           {/* </Button> */}
           {/* <ThemeSelector /> */}

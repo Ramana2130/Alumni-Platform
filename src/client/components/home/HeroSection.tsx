@@ -13,10 +13,7 @@ const HeroSection = () => {
 </h2>
 
           <h3 className="mt-6 md:mt-10 text-md lg:text-xl text-center md:text-left text-black/60 font-light tracking-wider leading-relaxed">
-            Our project uses <span className="text-[#006BFF] font-semibold">AI and hand-tracking</span> 
-            to detect and recognize sign language gestures in real-time. 
-            Helping break the communication barrier between the hearing and speech-impaired 
-            community and the rest of the world.
+            Our Alumni Platform bridges the gap between graduates and the university, fostering lifelong connections. It enables alumni to share career opportunities, mentorship, and success stories with current students. Designed as a hub for networking, learning, and growth, it strengthens the bond between past and present.
           </h3>
           <div className="mt-10 flex flex-col sm:flex-row justify-center md:justify-start">
             <button className="w-full sm:w-40 px-4 py-3 rounded font-semibold text-lg bg-[#006BFF] text-white border-2 border-[#006BFF]">

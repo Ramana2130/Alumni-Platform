@@ -184,27 +184,6 @@ export function AlumniList() {
   return (
     <div className="max-w-7xl mx-auto space-y-6">
       {/* Header */}
-      <div className="text-center space-y-4">
-        <div className="flex items-center justify-center gap-3">
-          <GraduationCap className="h-8 w-8 text-primary" />
-          <h1 className="text-4xl font-bold text-foreground">Alumni Network</h1>
-        </div>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Connect with fellow alumni from your university. Discover where your classmates are now and expand your
-          professional network.
-        </p>
-        <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <Users className="h-4 w-4" />
-            <span>{mockFriends.length} Alumni Connected</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="h-2 w-2 bg-green-500 rounded-full"></div>
-            <span>{mockFriends.filter((f) => f.isOnline).length} Online Now</span>
-          </div>
-        </div>
-      </div>
-
       {/* Search and Filters */}
       <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
         <div className="relative flex-1 max-w-md">
@@ -224,7 +203,7 @@ export function AlumniList() {
               variant={selectedFilter === "all" ? "default" : "outline"}
               size="sm"
               onClick={() => setSelectedFilter("all")}
-              className="bg-[#1E93AB]"
+              className="bg-[#e7000b]"
             >
               All
             </Button>
@@ -310,12 +289,12 @@ export function AlumniList() {
 
                 {/* Action Buttons */}
                 <div className="flex gap-2 pt-2 ">
-                  <Button size="sm" className="flex-1 bg-[#1E93AB] hover:bg-[#1E93AB]">
+                  <Button size="sm" className="flex-1 bg-[#e7000b] hover:bg-[#e7000b]">
                     <MessageSquare className="h-4 w-4 mr-2" />
                     Chat
                   </Button>
                   <Button size="sm" variant="outline">
-                    <a href="/alumni/personal-details">
+                    <a href="/students/student-alumni-details">
                     <ArrowRight className="h-4 w-4" />
 
                     </a>

@@ -63,17 +63,17 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gray-100">
+      <div className="container mx-auto px-4 py-3">
         {/* Header */}
-        <div className="flex items-center mb-8">
-          <div className="pl-44">
-            <h1 className="text-3xl font-bold text-slate-900">Student Fund Request</h1>
+        <div className="flex items-center mb-4">
+          <div className="px-4">
+            <h1 className="text-2xl font-bold text-[#e7000b]">Student Fund Request Form</h1>
             <p className="text-slate-600 mt-1">Complete all sections to submit your funding request</p>
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="max-w-4xl mx-auto space-y-8">
+        <form onSubmit={handleSubmit} className="w-[1210px] mx-auto space-y-8">
           {/* Personal Information */}
           <Card className="bg-white border-slate-200 shadow-sm">
             <CardHeader className="bg-slate-50 border-b border-slate-200">
@@ -335,7 +335,7 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
             >
               Cancel
             </Button>
-            <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-8 shadow-sm">
+            <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white px-8 shadow-sm">
               Submit Request
             </Button>
           </div>

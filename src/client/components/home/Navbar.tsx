@@ -8,7 +8,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
             <div className="flex shrink-0">
                 <a aria-current="page" className="flex items-center" href="/">
-                    <p className="font-bold text-xl  ">GestureConnect</p>
+                    <p className="font-bold text-xl  ">Alumni Platform</p>
                 </a>
             </div>
             <div className="hidden md:flex md:items-center md:justify-center md:gap-5">

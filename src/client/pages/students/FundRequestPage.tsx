@@ -3,7 +3,7 @@ import React from 'react'
 
 const FundRequestPage = () => {
   return (
-    <div>
+    <div className=''>
         <FundRequest onBack={() => { /* handle back action here */ }} />
     </div>
   )

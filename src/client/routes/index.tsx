@@ -1,7 +1,9 @@
 import DashboardLayout from "@/components/alumni/sidebar/layout";
 import AlumniDesp from "@/components/common/AlumniDesp";
 import JobDesp from "@/components/common/JobDesp";
+import StudentsJobDesp from "@/components/students/job/StudentsJobDesp";
 import StudentDashboardLayout from "@/components/students/sidebar/layout";
+import StudentAlumniDesp from "@/components/students/StudentAlumniDesp";
 import UniversityAlumniDesp from "@/components/university/alumnidetails/UniversityAlumniDesp";
 import UniversityDashboardLayout from "@/components/university/sidebar/layout";
 import AlumniChatPage from "@/pages/alumni/AlumniChatPage";
@@ -17,6 +19,7 @@ import LoginPage from "@/pages/login/LoginPage";
 import AlumniPersonalProfilePage from "@/pages/students/AlumniPersonalProfile";
 import StudentAlumniProfileList from "@/pages/students/AlumniProfileList";
 import FundRequestPage from "@/pages/students/FundRequestPage";
+import StudentPersonalProfile from "@/pages/students/StudentPersonalProfile";
 import StudentsChatPage from "@/pages/students/StudentsChatPage";
 import StudentHomePage from "@/pages/students/StudentsHomePage";
 import StudentsJobApplyPage from "@/pages/students/StudentsJobApplyPage";
@@ -108,6 +111,18 @@ const router = createBrowserRouter([
             {
                 path: "fund-request",
                 element: <FundRequestPage />
+            },
+            {
+                path:"job-description",
+                element: <StudentsJobDesp />
+            },
+            {
+                path: "student-alumni-details",
+                element: <StudentAlumniDesp />
+            },
+            {
+                path: "student-personal-details",
+                element: <StudentPersonalProfile />
             }
         ]
     },
