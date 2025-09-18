@@ -167,10 +167,10 @@ export function AlumniAddForm() {
       <CardContent className="p-6">
         <Tabs defaultValue="manual" className="w-full">
           <TabsList className="grid w-full grid-cols-2 bg-slate-100">
-            <TabsTrigger value="manual" className="data-[state=active]:bg-green-700 data-[state=active]:text-white">
+            <TabsTrigger value="manual" className="data-[state=active]:bg-emerald-700 data-[state=active]:text-white">
               Manual Entry
             </TabsTrigger>
-            <TabsTrigger value="upload" className="data-[state=active]:bg-green-700 data-[state=active]:text-white">
+            <TabsTrigger value="upload" className="data-[state=active]:bg-emerald-700 data-[state=active]:text-white">
               Excel Upload
             </TabsTrigger>
           </TabsList>
@@ -181,7 +181,7 @@ export function AlumniAddForm() {
                 {/* Personal Information */}
                 <div className="space-y-4 bg-white p-4 rounded-lg border border-slate-200">
                   <h3 className="text-lg font-semibold flex items-center gap-2 text-gray-800 border-b border-slate-200 pb-2">
-                    <User className="h-5 w-5 text-[#00c951]" />
+                    <User className="h-5 w-5 text-emerald-700" />
                     Personal Information
                   </h3>
 
@@ -208,7 +208,7 @@ export function AlumniAddForm() {
                       onChange={(e) => handleInputChange("alumni_reg_no", e.target.value)}
                       placeholder="Enter registration number"
                       required
-                      className="border-slate-300 focus:border-indigo-500 focus:ring-indigo-500"
+                      className="border-slate-300 focus:border-emerald-500 focus:ring-emerald-500"
                     />
                   </div>
 
@@ -221,7 +221,7 @@ export function AlumniAddForm() {
                       value={formData.alumni_location}
                       onChange={(e) => handleInputChange("alumni_location", e.target.value)}
                       placeholder="City, Country"
-                      className="border-slate-300 focus:border-indigo-500 focus:ring-indigo-500"
+                      className="border-slate-300 focus:border-emerald-500 focus:ring-emerald-500"
                     />
                   </div>
                 </div>
@@ -229,7 +229,7 @@ export function AlumniAddForm() {
                 {/* Academic Information */}
                 <div className="space-y-4 bg-white p-4 rounded-lg border border-slate-200">
                   <h3 className="text-lg font-semibold flex items-center gap-2 text-gray-800 border-b border-slate-200 pb-2">
-                    <Calendar className="h-5 w-5 text-[#00c951]" />
+                    <Calendar className="h-5 w-5 text-emerald-700" />
                     Academic Information
                   </h3>
 
@@ -241,12 +241,12 @@ export function AlumniAddForm() {
                       value={formData.alumni_dept}
                       onValueChange={(value) => handleInputChange("alumni_dept", value)}
                     >
-                      <SelectTrigger className="border-slate-300 focus:border-indigo-500 focus:ring-indigo-500">
+                      <SelectTrigger className="border-slate-300 focus:border-emerald-500 focus:ring-emerald-500">
                         <SelectValue placeholder="Select department" />
                       </SelectTrigger>
                       <SelectContent className="bg-white border-slate-200">
                         {departments.map((dept) => (
-                          <SelectItem key={dept} value={dept} className="hover:bg-indigo-50">
+                          <SelectItem key={dept} value={dept} className="hover:bg-emerald-50">
                             {dept}
                           </SelectItem>
                         ))}
@@ -266,7 +266,7 @@ export function AlumniAddForm() {
                       value={formData.alumni_year_of_joining}
                       onChange={(e) => handleInputChange("alumni_year_of_joining", e.target.value)}
                       placeholder="e.g., 2018"
-                      className="border-slate-300 focus:border-indigo-500 focus:ring-indigo-500"
+                      className="border-slate-300 focus:border-emerald-500 focus:ring-emerald-500"
                     />
                   </div>
 
@@ -283,7 +283,7 @@ export function AlumniAddForm() {
                       onChange={(e) => handleInputChange("alumni_year_of_passing", e.target.value)}
                       placeholder="e.g., 2022"
                       required
-                      className="border-slate-300 focus:border-indigo-500 focus:ring-indigo-500"
+                      className="border-slate-300 focus:border-emerald-500 focus:ring-emerald-500"
                     />
                   </div>
                 </div>
@@ -291,7 +291,7 @@ export function AlumniAddForm() {
 
               <Button
                 type="submit"
-                className="w-full bg-green-700 hover:bg-green-700 text-white font-medium py-3"
+                className="w-full bg-emerald-700 hover:bg-emerald-600 text-white font-medium py-3"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Adding Alumni..." : "Add Alumni"}
@@ -301,8 +301,8 @@ export function AlumniAddForm() {
 
           <TabsContent value="upload" className="space-y-6 mt-6">
             <div className="text-center space-y-4">
-              <div className="border-2 border-dashed border-indigo-300 bg-indigo-50 rounded-lg p-8">
-                <FileSpreadsheet className="h-12 w-12 text-[#00c951] mx-auto mb-4" />
+              <div className="border-2 border-dashed border-emerald-300 bg-emerald-50 rounded-lg p-8">
+                <FileSpreadsheet className="h-12 w-12 text-emerald-700 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold mb-2 text-gray-800">Upload Excel File</h3>
                 <p className="text-gray-600 mb-4">Upload an Excel file (.xlsx or .xls) containing alumni information</p>
 
@@ -312,7 +312,7 @@ export function AlumniAddForm() {
                     type="file"
                     accept=".xlsx,.xls"
                     onChange={handleFileChange}
-                    className="max-w-sm mx-auto border-slate-300 focus:border-indigo-500 focus:ring-indigo-500"
+                    className="max-w-sm mx-auto border-slate-300 focus:border-emerald-500 focus:ring-emerald-500"
                   />
 
                   {selectedFile && <div className="text-sm text-gray-600">Selected: {selectedFile.name}</div>}
@@ -333,7 +333,7 @@ export function AlumniAddForm() {
                 <Button
                   type="submit"
                   disabled={!selectedFile || isSubmitting}
-                  className="w-full bg-[#00c951] hover:bg-indigo-700 text-white font-medium py-3"
+                  className="w-full bg-emerald-700 hover:bg-emerald-600 text-white font-medium py-3"
                 >
                   <Upload className="h-4 w-4 mr-2" />
                   {isSubmitting ? "Processing File..." : "Upload and Process"}

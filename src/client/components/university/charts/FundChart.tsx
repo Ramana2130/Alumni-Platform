@@ -22,31 +22,31 @@ import {
 export const description = "A donut chart with text"
 
 const chartData = [
-  { browser: "chrome", visitors: 275, fill: "#00c951" },
-  { browser: "safari", visitors: 200, fill: "#7bf1a8" },
-  { browser: "firefox", visitors: 287, fill: "#00a63e" },
-  { browser: "edge", visitors: 173, fill: "#008236" },
-  { browser: "other", visitors: 190, fill: "#016630" },
+  { browser: "IT", visitors: 275, fill: "#46edd5" },
+  { browser: "NonIT", visitors: 200, fill: "#00bba7" },
+  { browser: "corecompany", visitors: 287, fill: "#009689" },
+  { browser: "business", visitors: 173, fill: "#00786f" },
+  { browser: "other", visitors: 190, fill: "#005f5a" },
 ]
 
 const chartConfig = {
   visitors: {
     label: "Visitors",
   },
-  chrome: {
-    label: "Chrome",
+  IT: {
+    label: "IT",
     color: "var(--chart-1)",
   },
-  safari: {
-    label: "Safari",
+  NonIT: {
+    label: "NonIT",
     color: "var(--chart-2)",
   },
-  firefox: {
-    label: "Firefox",
+  corecompany: {
+    label: "corecompany",
     color: "var(--chart-3)",
   },
-  edge: {
-    label: "Edge",
+  business: {
+    label: "business",
     color: "var(--chart-4)",
   },
   other: {
@@ -63,7 +63,7 @@ export function FundChart() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Donut with Text</CardTitle>
+        <CardTitle>Fund Donated</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
@@ -105,7 +105,7 @@ export function FundChart() {
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          Donators
                         </tspan>
                       </text>
                     )
@@ -121,7 +121,7 @@ export function FundChart() {
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
+          Showing total donators for the last 6 months
         </div>
       </CardFooter>
     </Card>

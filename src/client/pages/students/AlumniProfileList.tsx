@@ -1,13 +1,8 @@
 import { z } from "zod"
 import { taskSchema } from "../../components/data/alumni-profiles/schema"
-import { columns } from "@/components/alumni/alumni-profiles/columns"
 import { useLoaderData } from "react-router-dom"
 import tasks from "../../components/data/alumni-profiles/tasks.json"
 import { Check, ChevronsUpDown, GraduationCap } from "lucide-react"
-import { JobChart } from "@/components/alumni/alumni-profiles/job-bar"
-import { HigherStudiesChart } from "@/components/alumni/alumni-profiles/higher-studies-chart"
-import { ComapreProfiles } from "@/components/alumni/alumni-profiles/compare-profiles"
-import { DataTable } from "@/components/alumni/alumni-profiles/data-table"
 import { Button } from "@/components/ui/button"
 import React from "react";
 import { cn } from "@/lib/utils"
@@ -24,6 +19,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { AlumniList } from "@/components/students/alumni-profiles/AlumniList"
 
 
 export const metadata = {
@@ -81,14 +77,10 @@ export default  function StudentAlumniProfileList() {
           className="hidden dark:block"
         />
       </div>
-      <div className="px-8 pt-6 flex justify-between">
-        <div className="flex gap-2">
-        <GraduationCap className="size-8" />
-        <h1 className="mb-2 text-2xl font-bold tracking-tight">Alumni Profiles</h1>
-        </div>
+      <div className="px-8 pt-6 flex justify-end">
         <div className="flex gap-3">
            <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+        <PopoverTrigger asChild>
         <Button
           variant="outline"
           role="combobox"
@@ -132,15 +124,8 @@ export default  function StudentAlumniProfileList() {
     </Popover>
         </div>
       </div>
-      {/* <div className="px-8 pt-6">
-        <ComapreProfiles />
-      </div>
-      <div className="grid grid-cols-2 gap-4 px-8 py-6">
-        <JobChart />
-        <HigherStudiesChart />
-      </div> */}
       <div className="hidden h-full flex-1 flex-col gap-8 p-8 md:flex">
-        <DataTable data={tasks} columns={columns} />
+        <AlumniList />
       </div>
     </>
   )

@@ -1,9 +1,6 @@
-import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
-import { ModeToggle } from "@/components/alumni/sidebar/mode-toggle"
-import { ThemeSelector } from "@/components/alumni/sidebar/theme-selector"
-import { ArrowRightFromLine, BellDot } from "lucide-react"
+import {  BellDot } from "lucide-react"
 
 export function SiteHeader() {
   return (

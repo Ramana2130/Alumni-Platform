@@ -19,11 +19,11 @@ export default function JobDesp() {
 
   return (
     <main className="min-h-screen bg-background p-1">
-      <div className="container mx-auto py-8">
-        <div className="text-center mb-8">
+      <div className="container mx-auto py-2">
+        {/* <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-foreground mb-2">Job Details Summary</h1>
           <p className="text-muted-foreground">Professional job listing with alumni connections</p>
-        </div>
+        </div> */}
 
         <JobDetailsSummary {...sampleJobData} />
       </div>

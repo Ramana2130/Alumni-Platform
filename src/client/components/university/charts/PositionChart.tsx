@@ -21,35 +21,35 @@ import {
 export const description = "A pie chart with a label"
 
 const chartData = [
-  { browser: "chrome", visitors: 275, fill: "#7bf1a8" },
-  { browser: "safari", visitors: 200, fill: "#00c951" },
-  { browser: "firefox", visitors: 187, fill: "#00a63e" },
-  { browser: "edge", visitors: 173, fill: "#008236" },
-  { browser: "other", visitors: 90, fill: "#016630" },
+  { browser: "IT", visitors: 275, fill: "#46edd5" },
+  { browser: "NonIT", visitors: 200, fill: "#00bba7" },
+  { browser: "corecompany", visitors: 187, fill: "#009689" },
+  { browser: "startup", visitors: 173, fill: "#00786f" },
+  { browser: "patnership", visitors: 90, fill: "#005f5a" },
 ]
 
 const chartConfig = {
   visitors: {
     label: "Visitors",
   },
-  chrome: {
-    label: "Chrome",
+  IT: {
+    label: "IT",
     color: "var(--chart-1)",
   },
-  safari: {
-    label: "Safari",
+  NonIT: {
+    label: "NonIT",
     color: "var(--chart-2)",
   },
-  firefox: {
-    label: "Firefox",
+  corecompany: {
+    label: "corecompany",
     color: "var(--chart-3)",
   },
-  edge: {
-    label: "Edge",
+  startup: {
+    label: "startup",
     color: "var(--chart-4)",
   },
-  other: {
-    label: "Other",
+  patnership: {
+    label: "patnership",
     color: "var(--chart-5)",
   },
 } satisfies ChartConfig
@@ -58,8 +58,8 @@ export function PositionChart() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Label</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Students Working based on Roles</CardTitle>
+        <CardDescription>IT, Non - IT, Core Comapanies, Start-up, Paternship</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer

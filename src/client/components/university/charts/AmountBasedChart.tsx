@@ -21,17 +21,17 @@ import {
 export const description = "A radar chart with dots"
 
 const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 273 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
+  { month: "January", fund: 186 },
+  { month: "February", fund: 305 },
+  { month: "March", fund: 237 },
+  { month: "April", fund: 273 },
+  { month: "May", fund: 209 },
+  { month: "June", fund: 214 },
 ]
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  fund: {
+    label: "fund",
     color: "var(--chart-1)",
   },
 } satisfies ChartConfig
@@ -40,9 +40,9 @@ export function AmountBasedChart() {
   return (
     <Card>
       <CardHeader className="items-center">
-        <CardTitle>Radar Chart - Dots</CardTitle>
+        <CardTitle>Students Request the Fund</CardTitle>
         <CardDescription>
-          Showing total visitors for the last 6 months
+          Showing total funds for the last 6 months
         </CardDescription>
       </CardHeader>
       <CardContent className="pb-0">
@@ -55,8 +55,8 @@ export function AmountBasedChart() {
             <PolarAngleAxis dataKey="month" />
             <PolarGrid />
             <Radar
-              dataKey="desktop"
-              fill="#539a6e"
+              dataKey="fund"
+              fill="#00bba7"
               fillOpacity={0.6}
               dot={{
                 r: 4,

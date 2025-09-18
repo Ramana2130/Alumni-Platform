@@ -14,7 +14,7 @@ export function SectionCards() {
     <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-4 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription className="font-semibold tetx-xl text-black">Total Webinar</CardDescription>
+          <CardDescription className="font-semibold tetx-xl text-black">Total Webinar </CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
             1,250+
           </CardTitle>                 
@@ -30,9 +30,9 @@ export function SectionCards() {
       </Card>
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription className="font-semibold tetx-xl text-black">Students guidence</CardDescription>
+          <CardDescription className="font-semibold tetx-xl text-black">Total Event</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            1,234
+            1,234+
           </CardTitle>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
@@ -46,9 +46,9 @@ export function SectionCards() {
       </Card>
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription className="font-semibold tetx-xl text-black">Job Poting</CardDescription>
+          <CardDescription className="font-semibold tetx-xl text-black">Connectionss</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            45,678
+            430+
           </CardTitle>
           
             {/* <Badge variant="outline">
@@ -66,9 +66,9 @@ export function SectionCards() {
       </Card>
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription className="font-semibold tetx-xl text-black">University Alerts</CardDescription>
+          <CardDescription className="font-semibold tetx-xl text-black">Job Applied</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            4.5%
+            4+
           </CardTitle>
           
             {/* <Badge variant="outline">

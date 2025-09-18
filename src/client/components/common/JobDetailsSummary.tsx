@@ -34,7 +34,7 @@ export function JobDetailsSummary({
   otherStuff = [],
 }: JobDetailsSummaryProps) {
   return (
-    <Card className="w-full max-w-4xl mx-auto bg-white border-gray-200 shadow-lg">
+    <Card className="w-[1200px] mx-auto bg-white border-gray-200 shadow-lg">
       <CardHeader className="pb-4">
         <div className="flex items-start justify-between">
           <div className="space-y-2">

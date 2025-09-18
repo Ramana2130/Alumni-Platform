@@ -128,11 +128,11 @@ export default function FundList({ onBack }: UniversityDashboardProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50">
+    <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="pb-4">
-            <h1 className="text-2xl font-bold tracking-tight">Fund Reports</h1>
+            <h1 className="text-2xl font-bold tracking-tight text-emerald-700">Fund Reports</h1>
         </div>
 
         <Tabs defaultValue="pending" className="space-y-6">

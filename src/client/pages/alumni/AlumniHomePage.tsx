@@ -1,6 +1,7 @@
 import { ComapreProfiles } from "@/components/alumni/alumni-profiles/compare-profiles";
 import { HigherStudiesChart } from "@/components/alumni/alumni-profiles/higher-studies-chart";
 import { JobChart } from "@/components/alumni/alumni-profiles/job-bar";
+import { JobList } from "@/components/alumni/job-posting/JobList";
 import { ChartAreaInteractive } from "@/components/alumni/sidebar/chart-area-interactive";
 import { DataTable } from "@/components/alumni/sidebar/data-table";
 import { SectionCards } from "@/components/alumni/sidebar/section-cards";
@@ -21,7 +22,11 @@ export default function Page() {
           <ChartAreaInteractive />
           {/* <ComapreProfiles /> */}
         </div>
-        <DataTable data={data} />
+        {/* <DataTable data={data} /> */}
+        <div className="">
+            <h1 className="px-8 font-bold tracking-tight text-2xl py-2">Job List</h1>
+          <JobList />
+        </div>
       </div>
     </div>
   )

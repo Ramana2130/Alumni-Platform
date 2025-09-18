@@ -118,7 +118,7 @@ const data = {
   navSecondary: [
     {
       title: "Settings",
-      url: "/alumni/profile",
+      url: "/university/settings",
       icon: IconSettings,
     },
     {
@@ -126,11 +126,11 @@ const data = {
       url: "#",
       icon: IconHelp,
     },
-    {
-      title: "Search",
-      url: "#",
-      icon: IconSearch,
-    },
+    // {
+    //   title: "Search",
+    //   url: "#",
+    //   icon: IconSearch,
+    // },
   ],
   documents: [
     {
@@ -173,7 +173,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
               <a href="#">
                 {/* <IconInnerShadowTop className="!size-5" /> */}
-                <img src={logo} alt="" className="size-10" />
+                {/* <img src={logo} alt="" className="size-10" /> */}
+                <GraduationCap className="" />
                 <span className="text-base font-semibold">Alumni Platform</span>
               </a>
             </SidebarMenuButton>

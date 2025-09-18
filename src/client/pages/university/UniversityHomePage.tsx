@@ -1,4 +1,5 @@
 
+import { JobList } from "@/components/alumni/job-posting/JobList";
 import  data from "@/components/data/data.json";
 import { AllComapreCharts } from "@/components/university/charts/AllCompareCharts";
 import { AmountBasedChart } from "@/components/university/charts/AmountBasedChart";
@@ -7,6 +8,7 @@ import { JobStudiesCompareCharts } from "@/components/university/charts/JobStudi
 import { PositionChart } from "@/components/university/charts/PositionChart";
 import { DataTable } from "@/components/university/sidebar/data-table";
 import { SectionCards } from "@/components/university/sidebar/section-cards";
+import { UniversityJobList } from "@/components/university/UniversityJobList";
 
 
 
@@ -21,7 +23,11 @@ export default function UniversityHomePage() {
           <FundChart />
           <PositionChart />
         </div>
-        <DataTable data={data} />
+        {/* <DataTable data={data} /> */}
+        <div>
+          <h1 className="px-8 text-2xl font-bold tracking-tight py-2 text-emerald-700">Job List</h1>
+          <UniversityJobList />
+        </div>
       </div>
     </div>
   )

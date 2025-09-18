@@ -2,6 +2,7 @@ import DashboardLayout from "@/components/alumni/sidebar/layout";
 import AlumniDesp from "@/components/common/AlumniDesp";
 import JobDesp from "@/components/common/JobDesp";
 import StudentDashboardLayout from "@/components/students/sidebar/layout";
+import UniversityAlumniDesp from "@/components/university/alumnidetails/UniversityAlumniDesp";
 import UniversityDashboardLayout from "@/components/university/sidebar/layout";
 import AlumniChatPage from "@/pages/alumni/AlumniChatPage";
 import AlumniHomePage from "@/pages/alumni/AlumniHomePage";
@@ -23,6 +24,7 @@ import FundPage from "@/pages/university/FundPage";
 import UniverSityAlumniPage from "@/pages/university/UniverSityAlumniPage";
 import UniversityHomePage from "@/pages/university/UniversityHomePage";
 import UniversityJobPage from "@/pages/university/UniversityJobPage";
+import UniversityProfilePage from "@/pages/university/UniversityProfilePage";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -132,6 +134,14 @@ const router = createBrowserRouter([
             {
                 path: "fund-reports",
                 element: <FundPage />
+            },
+            {
+                path: "alumni-personal-details",
+                element: <UniversityAlumniDesp />
+            },
+            {
+                path: "settings",
+                element: <UniversityProfilePage />
             }
         ]
     }

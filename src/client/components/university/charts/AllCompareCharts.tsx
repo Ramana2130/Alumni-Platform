@@ -19,25 +19,25 @@ import {
 export const description = "A pie chart with a legend"
 
 const chartData = [
-  { browser: "chrome", visitors: 275, fill: "#7bf1a8" },
-  { browser: "safari", visitors: 200, fill: "#00c951" },
-  { browser: "firefox", visitors: 187, fill: "#016630" },  
+  { browser: "job", visitors: 275, fill: "#4bd5c5" },
+  { browser: "higherstudies", visitors: 200, fill: "#00bba7" },
+  { browser: "business", visitors: 187, fill: "#005f5a" },  
 ]
 
 const chartConfig = {
   visitors: {
     label: "Visitors",
   },
-  chrome: {
-    label: "Chrome",
+  job: {
+    label: "job",
     color: "var(--chart-1)",
   },
-  safari: {
-    label: "Safari",
+  higherstudies: {
+    label: "higherstudies",
     color: "var(--chart-2)",
   },
-  firefox: {
-    label: "Firefox",
+  business: {
+    label: "business",
     color: "var(--chart-3)",
   },
   edge: {
@@ -54,8 +54,8 @@ export function AllComapreCharts() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Legend</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Students Report</CardTitle>
+        <CardDescription>Report based on Students</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
