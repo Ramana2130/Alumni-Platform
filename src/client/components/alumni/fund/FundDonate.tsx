@@ -245,13 +245,16 @@ export default function FundDonate({ onBack }: AlumniPortalProps) {
                       {(request.goal - request.raised).toLocaleString()} needed
                     </div>
                   </div>
+                  <a href="/alumni/payment-gateway">
                   <Button
                     onClick={() => handleDonate(request.id, request.studentName)}
                     className="bg-[#d56f2c] hover:bg-[#c65a2c] text-white shadow-sm"
                   >
                     <Heart className="h-4 w-4 mr-2" />
                     Donate Now
+                      
                   </Button>
+                    </a>
                 </div>
 
                 {/* Verification Badge */}

@@ -1,6 +1,7 @@
 import DashboardLayout from "@/components/alumni/sidebar/layout";
 import AlumniDesp from "@/components/common/AlumniDesp";
 import JobDesp from "@/components/common/JobDesp";
+import { Payment } from "@/components/payment/Payment";
 import StudentsJobDesp from "@/components/students/job/StudentsJobDesp";
 import StudentDashboardLayout from "@/components/students/sidebar/layout";
 import StudentAlumniDesp from "@/components/students/StudentAlumniDesp";
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
             {
                 path: "event-posting",
                 element: <EventPostingPage />
+            },
+            {
+                path: "payment-gateway",
+                element: <Payment />
             }
         ],
     },
