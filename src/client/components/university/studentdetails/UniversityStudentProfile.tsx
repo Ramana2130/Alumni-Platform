@@ -210,7 +210,7 @@ export const columns: ColumnDef<Student>[] = [
   {
     accessorKey: "name",
     header: () => <div className="">Name</div>,
-    cell: ({ row }) => <div>{row.getValue("name")}</div>,
+    cell: ({ row }) => <div><a href="/university/student-personal-details" className="underline">{row.getValue("name")}</a></div>,
   },
   {
     accessorKey: "email",

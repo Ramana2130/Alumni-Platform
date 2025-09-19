@@ -7,6 +7,7 @@ import jobRoutes from "./routes/Jobpostingroutes.js";
 import eventRoutes from "./routes/Eventpostingroutes.js";
 import currentalumnidetailsRoutes from "./routes/Alumnicurrentdetailsroutes.js"
 import alumnidetailsRoutes from "./routes/Alumnidetailsroutes.js"
+import studentsRoutes from "./routes/Studentdetailsroutes.js"
 
 const app = express();
 app.use(express.json());
@@ -24,6 +25,7 @@ app.use("/job", jobRoutes);
 app.use("/event", eventRoutes);
 app.use("/current-alumni-details", currentalumnidetailsRoutes);
 app.use("/alumni-details", alumnidetailsRoutes);
+app.use("/student-details", studentsRoutes);
 
 
 ViteExpress.listen(app, 3000, () =>
