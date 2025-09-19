@@ -274,7 +274,7 @@ export const columns: ColumnDef<Student>[] = [
   },
 ]
 
-export function UniversityAlumniProfile() {
+export function UniversityStudentProfile() {
   const [departmentFilter, setDepartmentFilter] = React.useState("")
   const [yearFilter, setYearFilter] = React.useState<number | null>(null)
   const [nameFilter, setNameFilter] = React.useState("")

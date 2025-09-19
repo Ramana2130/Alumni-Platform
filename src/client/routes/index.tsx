@@ -6,6 +6,7 @@ import StudentDashboardLayout from "@/components/students/sidebar/layout";
 import StudentAlumniDesp from "@/components/students/StudentAlumniDesp";
 import UniversityAlumniDesp from "@/components/university/alumnidetails/UniversityAlumniDesp";
 import UniversityDashboardLayout from "@/components/university/sidebar/layout";
+import UniversityStudentDesp from "@/components/university/studentdetails/UniversityStudentDesp";
 import AlumniChatPage from "@/pages/alumni/AlumniChatPage";
 import AlumniHomePage from "@/pages/alumni/AlumniHomePage";
 import AlumniPersonalProfile from "@/pages/alumni/AlumniPersonalProfile";
@@ -28,6 +29,7 @@ import UniverSityAlumniPage from "@/pages/university/UniverSityAlumniPage";
 import UniversityHomePage from "@/pages/university/UniversityHomePage";
 import UniversityJobPage from "@/pages/university/UniversityJobPage";
 import UniversityProfilePage from "@/pages/university/UniversityProfilePage";
+import UniverSityStudentPage from "@/pages/university/UniversityStudentPage";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -139,6 +141,10 @@ const router = createBrowserRouter([
                 element: <UniverSityAlumniPage />
             },
             {
+                path: "student-list",
+                element: <UniverSityStudentPage />
+            },
+            {
                 path: "job-list",
                 element: <UniversityJobPage />
             },
@@ -153,6 +159,10 @@ const router = createBrowserRouter([
             {
                 path: "alumni-personal-details",
                 element: <UniversityAlumniDesp />
+            },
+            {
+                path: "student-personal-details",
+                element: <UniversityStudentDesp />
             },
             {
                 path: "settings",

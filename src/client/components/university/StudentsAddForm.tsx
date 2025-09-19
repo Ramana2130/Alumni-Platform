@@ -14,17 +14,13 @@ import { Upload, FileSpreadsheet, User, Building, Calendar, Briefcase } from "lu
 import { toast } from "sonner"
 
 interface AlumniData {
-  alumni_name: string
-  alumni_dept: string
-  alumni_reg_no: string
-  alumni_year_of_joining: string
-  alumni_year_of_passing: string
-  alumni_current_status: string
-  alumni_company_name: string
-  alumni_designation: string
-  alumni_job_location: string
-  success_stories: string
-  alumni_location: string
+  student_name: string
+  student_dept: string
+  student_regno: string
+  student_yearOfJoining: string
+  student_yearOfPassword: string
+  student_currentStatus: string
+  student_location: string
 }
 
 const departments = [
@@ -50,19 +46,15 @@ const currentStatusOptions = [
   "Other",
 ]
 
-export function AlumniAddForm() {
+export function StudentsAddForm() {
   const [formData, setFormData] = useState<AlumniData>({
-    alumni_name: "",
-    alumni_dept: "",
-    alumni_reg_no: "",
-    alumni_year_of_joining: "",
-    alumni_year_of_passing: "",
-    alumni_current_status: "",
-    alumni_company_name: "",
-    alumni_designation: "",
-    alumni_job_location: "",
-    success_stories: "",
-    alumni_location: "",
+    student_name: "",
+    student_dept: "",
+    student_regno: "",
+    student_yearOfJoining: "",
+    student_yearOfPassword: "",
+    student_currentStatus: "",
+    student_location: "",
   })
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -91,7 +83,7 @@ export function AlumniAddForm() {
     setIsSubmitting(true)
 
     // Validate required fields
-    const requiredFields = ["alumni_name", "alumni_dept", "alumni_reg_no", "alumni_year_of_passing"]
+    const requiredFields = ["student_name", "student_dept", "student_regno", "student_yearOfPassword"]
     const missingFields = requiredFields.filter((field) => !formData[field as keyof AlumniData])
 
     if (missingFields.length > 0) {
@@ -104,21 +96,17 @@ export function AlumniAddForm() {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
-      toast("Alumni Added Successfully. The alumni information has been added to the database.")
+      toast("Student Added Successfully. The alumni information has been added to the database.")
 
       // Reset form
       setFormData({
-        alumni_name: "",
-        alumni_dept: "",
-        alumni_reg_no: "",
-        alumni_year_of_joining: "",
-        alumni_year_of_passing: "",
-        alumni_current_status: "",
-        alumni_company_name: "",
-        alumni_designation: "",
-        alumni_job_location: "",
-        success_stories: "",
-        alumni_location: "",
+        student_name: "",
+        student_dept: "",
+        student_regno: "",
+        student_yearOfJoining: "",
+        student_yearOfPassword: "",
+        student_currentStatus: "",
+        student_location: "",
       })
     } catch (error) {
       toast.error("Failed to add alumni information. Please try again.")
@@ -186,26 +174,26 @@ export function AlumniAddForm() {
                   </h3>
 
                   <div className="space-y-2">
-                    <Label htmlFor="alumni_name" className="text-gray-700 font-medium">
+                    <Label htmlFor="student_name" className="text-gray-700 font-medium">
                       Full Name *
                     </Label>
                     <Input
-                      id="alumni_name"
-                      value={formData.alumni_name}
-                      onChange={(e) => handleInputChange("alumni_name", e.target.value)}
+                      id="student_name"
+                      value={formData.student_name}
+                      onChange={(e) => handleInputChange("student_name", e.target.value)}
                       placeholder="Enter full name"
                       required
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="alumni_reg_no" className="text-gray-700 font-medium">
+                    <Label htmlFor="student_regno" className="text-gray-700 font-medium">
                       Registration Number *
                     </Label>
                     <Input
-                      id="alumni_reg_no"
-                      value={formData.alumni_reg_no}
-                      onChange={(e) => handleInputChange("alumni_reg_no", e.target.value)}
+                      id="student_regno"
+                      value={formData.student_regno}
+                      onChange={(e) => handleInputChange("student_regno", e.target.value)}
                       placeholder="Enter registration number"
                       required
                       className="border-slate-300 focus:border-emerald-500 focus:ring-emerald-500"
@@ -213,14 +201,14 @@ export function AlumniAddForm() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="alumni_email" className="text-gray-700 font-medium">
-                      Email
+                    <Label htmlFor="student_email" className="text-gray-700 font-medium">
+                      Email *
                     </Label>
                     <Input
-                      id="alumni_location"
-                      value={formData.alumni_location}
-                      onChange={(e) => handleInputChange("alumni_location", e.target.value)}
-                      placeholder="Entere email address"
+                      id="student_location"
+                      value={formData.student_location}
+                      onChange={(e) => handleInputChange("student_location", e.target.value)}
+                      placeholder="Enter email address"
                       className="border-slate-300 focus:border-emerald-500 focus:ring-emerald-500"
                     />
                   </div>
@@ -234,12 +222,12 @@ export function AlumniAddForm() {
                   </h3>
 
                   <div className="space-y-2">
-                    <Label htmlFor="alumni_dept" className="text-gray-700 font-medium">
+                    <Label htmlFor="student_dept" className="text-gray-700 font-medium">
                       Department *
                     </Label>
                     <Select
-                      value={formData.alumni_dept}
-                      onValueChange={(value) => handleInputChange("alumni_dept", value)}
+                      value={formData.student_dept}
+                      onValueChange={(value) => handleInputChange("student_dept", value)}
                     >
                       <SelectTrigger className="border-slate-300 focus:border-emerald-500 focus:ring-emerald-500">
                         <SelectValue placeholder="Select department" />
@@ -255,32 +243,32 @@ export function AlumniAddForm() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="alumni_year_of_joining" className="text-gray-700 font-medium">
+                    <Label htmlFor="student_yearOfJoining" className="text-gray-700 font-medium">
                       Year of Joining
                     </Label>
                     <Input
-                      id="alumni_year_of_joining"
+                      id="student_yearOfJoining"
                       type="number"
                       min="1950"
                       max="2030"
-                      value={formData.alumni_year_of_joining}
-                      onChange={(e) => handleInputChange("alumni_year_of_joining", e.target.value)}
+                      value={formData.student_yearOfJoining}
+                      onChange={(e) => handleInputChange("student_yearOfJoining", e.target.value)}
                       placeholder="e.g., 2018"
                       className="border-slate-300 focus:border-emerald-500 focus:ring-emerald-500"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="alumni_year_of_passing" className="text-gray-700 font-medium">
+                    <Label htmlFor="student_yearOfPassword" className="text-gray-700 font-medium">
                       Year of Passing *
                     </Label>
                     <Input
-                      id="alumni_year_of_passing"
+                      id="student_yearOfPassword"
                       type="number"
                       min="1950"
                       max="2030"
-                      value={formData.alumni_year_of_passing}
-                      onChange={(e) => handleInputChange("alumni_year_of_passing", e.target.value)}
+                      value={formData.student_yearOfPassword}
+                      onChange={(e) => handleInputChange("student_yearOfPassword", e.target.value)}
                       placeholder="e.g., 2022"
                       required
                       className="border-slate-300 focus:border-emerald-500 focus:ring-emerald-500"
@@ -294,7 +282,7 @@ export function AlumniAddForm() {
                 className="w-full bg-emerald-700 hover:bg-emerald-600 text-white font-medium py-3"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Adding Alumni..." : "Add Alumni"}
+                {isSubmitting ? "Adding student..." : "Add student"}
               </Button>
             </form>
           </TabsContent>
@@ -322,8 +310,8 @@ export function AlumniAddForm() {
               <div className="bg-slate-100 border border-slate-200 rounded-lg p-4 text-left">
                 <h4 className="font-semibold mb-2 text-gray-800">Excel File Format Requirements:</h4>
                 <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• Column headers should match: alumni_name, alumni_dept, alumni_reg_no, etc.</li>
-                  <li>• Required fields: alumni_name, alumni_dept, alumni_reg_no, alumni_year_of_passing</li>
+                  <li>• Column headers should match: student_name, student_dept, student_regno, etc.</li>
+                  <li>• Required fields: student_name, student_dept, student_regno, student_yearOfPassword</li>
                   <li>• Date format: YYYY for years (e.g., 2022)</li>
                   <li>• File size limit: 10MB</li>
                 </ul>
