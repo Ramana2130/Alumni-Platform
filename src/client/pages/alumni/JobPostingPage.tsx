@@ -10,16 +10,16 @@ const JobPostingPage = () => {
     <div className='py-6'>
         {/* <JobApplyForm /> */}
         <div className='px-4 pb-12'>
+        <JobList />
         {/* <JobPostingChart /> */}
-        <JobApplyForm />
         </div>
+        <JobApplyForm />
         {/* <DataTable
           data={data.map((item) => ({
             ...item,
             hiringStatus: item.hiringStatus === 'Open' ? 'Open' : 'Closed',
           }))}
         /> */}
-        <JobList />
     </div>
   )
 }

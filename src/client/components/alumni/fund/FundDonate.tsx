@@ -121,7 +121,7 @@ export default function FundDonate({ onBack }: AlumniPortalProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-50">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container max-w-6xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center">           

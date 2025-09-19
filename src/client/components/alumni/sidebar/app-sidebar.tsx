@@ -158,11 +158,11 @@ const data = {
       url: "/alumni/event-posting",
       icon: BellPlus,
     },
-    {
-      name: "Chat",
-      url: "/alumni/chat",
-      icon: MessageCircle,
-    },
+    // {
+    //   name: "Chat",
+    //   url: "/alumni/chat",
+    //   icon: MessageCircle,
+    // },
   ],
 }
 

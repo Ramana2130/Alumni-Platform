@@ -25,7 +25,7 @@ export default  function AlumniProfileList() {
 
   return (
     <>
-      <div className="md:hidden">
+      {/* <div className="md:hidden">
         <img
           src="/examples/tasks-light.png"
           width={1280}
@@ -40,7 +40,7 @@ export default  function AlumniProfileList() {
           alt="Playground"
           className="hidden dark:block"
         />
-      </div>
+      </div> */}
       <div className="px-8 py-6 flex justify-between">
         <AlumniList />
         {/* <div className="flex gap-2">
@@ -51,16 +51,6 @@ export default  function AlumniProfileList() {
           <h1 className="font-bold text-xl tracking-tight">Higher-Studies Profile : 300+</h1>
           <h1 className="font-bold text-xl tracking-tight">Job Profile : 300+</h1>
         </div> */}
-      </div>
-      <div className="px-8 pt-6">
-        {/* <ComapreProfiles /> */}
-      </div>
-      <div className="grid grid-cols-2 gap-4 px-8 py-6">
-        {/* <JobChart />
-        <HigherStudiesChart /> */}
-      </div>
-      <div className="hidden h-full flex-1 flex-col gap-8 p-8 md:flex">
-        {/* <DataTable data={tasks} columns={columns} /> */}
       </div>
     </>
   )

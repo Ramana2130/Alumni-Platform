@@ -1,10 +1,19 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Search, MessageCircle, UserPlus, MapPin, Building2, GraduationCap, Filter, Users, MessageSquare, ArrowRight } from "lucide-react"
+import {
+  Search,
+  Users,
+  GraduationCap,
+  Filter,
+  Building2,
+  MapPin,
+  MessageSquare,
+  ArrowRight,
+} from "lucide-react"
 
 // Mock data for alumni friends
 const mockFriends = [
@@ -164,11 +173,28 @@ const mockFriends = [
     isOnline: false,
     tags: ["Security", "Privacy", "Defense"],
   },
+  {
+    id: 13,
+    name: "Robert Taylor",
+    avatar: "/professional-white-man-glasses.jpg",
+    title: "Cybersecurity Specialist",
+    company: "Palantir",
+    location: "Denver, CO",
+    graduationYear: "BE - CSE",
+    major: "Cybersecurity",
+    mutualFriends: 5,
+    isOnline: false,
+    tags: ["Security", "Privacy", "Defense"],
+  },
 ]
 
 export function AlumniList() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedFilter, setSelectedFilter] = useState("all")
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 12
 
   const filteredFriends = mockFriends.filter((friend) => {
     const matchesSearch =
@@ -177,23 +203,47 @@ export function AlumniList() {
       friend.title.toLowerCase().includes(searchQuery.toLowerCase())
 
     if (selectedFilter === "online") return matchesSearch && friend.isOnline
-    if (selectedFilter === "recent") return matchesSearch && Number.parseInt(friend.graduationYear) >= 2018
+    if (selectedFilter === "recent") {
+      // Extract only the year from graduationYear string and compare
+      // Handles formats like "B.Tech - IT" which won't parse to number (skip those)
+      const year = parseInt(friend.graduationYear.match(/\d{4}/)?.[0] || "0")
+      return matchesSearch && year >= 2018
+    }
     return matchesSearch
   })
 
+  // Calculate total pages
+  const totalPages = Math.ceil(filteredFriends.length / itemsPerPage)
+
+  // Get current page's alumni slice
+  const displayedFriends = filteredFriends.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  )
+
+  // Handle page change
+  const goToPage = (page: number) => {
+    if (page < 1) page = 1
+    else if (page > totalPages) page = totalPages
+    setCurrentPage(page)
+  }
+
+  // Reset page to 1 when filters or searchQuery changes
+  // so user doesn't land on empty page after filtering
+  // Using useEffect to track changes
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchQuery, selectedFilter])
+
   return (
-    <div className="max-w-7xl mx-auto space-y-6">
+    <div className="max-w-6xl mx-auto space-y-6">
       {/* Header */}
-      <div className="text-center space-y-4">
-        <div className="flex items-center justify-center gap-3">
+      <div className="text-start space-y-4 flex justify-between">
+        <div className="flex items-center justify-start gap-3">
           <GraduationCap className="h-8 w-8 text-primary" />
-          <h1 className="text-4xl font-bold text-foreground">Alumni Network</h1>
+          <h1 className="text-2xl font-bold text-foreground">Alumni Network</h1>
         </div>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Connect with fellow alumni from your university. Discover where your classmates are now and expand your
-          professional network.
-        </p>
-        <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
+        <div className="flex items-center justify-start gap-6 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <Users className="h-4 w-4" />
             <span>{mockFriends.length} Alumni Connected</span>
@@ -248,8 +298,11 @@ export function AlumniList() {
 
       {/* Friends Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {filteredFriends.map((friend) => (
-          <Card key={friend.id} className="group hover:shadow-lg transition-all duration-200 border-border bg-[#fff5ed]">
+        {displayedFriends.map((friend) => (
+          <Card
+            key={friend.id}
+            className="group hover:shadow-lg transition-all duration-200 border-border bg-gray-50"
+          >
             <CardContent className="p-6">
               <div className="space-y-4">
                 {/* Avatar and Online Status */}
@@ -316,8 +369,7 @@ export function AlumniList() {
                   </Button>
                   <Button size="sm" variant="outline">
                     <a href="/alumni/personal-details">
-                    <ArrowRight className="h-4 w-4" />
-
+                      <ArrowRight className="h-4 w-4" />
                     </a>
                   </Button>
                 </div>
@@ -326,6 +378,43 @@ export function AlumniList() {
           </Card>
         ))}
       </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center gap-2 py-4">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </Button>
+
+          {[...Array(totalPages)].map((_, idx) => {
+            const pageNum = idx + 1
+            return (
+              <Button
+                key={pageNum}
+                size="sm"
+                variant={pageNum === currentPage ? "default" : "outline"}
+                onClick={() => goToPage(pageNum)}
+              >
+                {pageNum}
+              </Button>
+            )
+          })}
+
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </Button>
+        </div>
+      )}
 
       {/* Empty State */}
       {filteredFriends.length === 0 && (
