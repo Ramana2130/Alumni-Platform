@@ -5,7 +5,7 @@ import { createAlumni, deleteAlumni, getAllAlumni, getAlumniById, updateAlumni }
 const router = express.Router();
 
 // Create alumni detail
-router.post("/add-current-alumni-details", async (req, res) => {
+router.post("/add", async (req, res) => {
   try {
     const id = await createAlumni(req.body);
     res.status(201).json({ id, message: "Alumni detail created successfully" });
@@ -15,7 +15,7 @@ router.post("/add-current-alumni-details", async (req, res) => {
 });
 
 // Get all alumni details
-router.get("/get-all-current-alumni-details", async (req, res) => {
+router.get("/getAll", async (req, res) => {
   try {
     const alumni = await getAllAlumni();
     res.status(200).json(alumni);
@@ -25,7 +25,7 @@ router.get("/get-all-current-alumni-details", async (req, res) => {
 });
 
 // Get alumni detail by ID
-router.get("/get-current-alumni-details/:id", async (req, res) => {
+router.get("/getById/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
     if (isNaN(id)) return res.status(400).json({ error: "Invalid alumni ID" });
@@ -38,7 +38,7 @@ router.get("/get-current-alumni-details/:id", async (req, res) => {
 });
 
 // Update alumni detail by ID
-router.put("/update-current-alumni-details/:id", async (req, res) => {
+router.put("/updateById/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
     if (isNaN(id)) return res.status(400).json({ error: "Invalid alumni ID" });
@@ -51,7 +51,7 @@ router.put("/update-current-alumni-details/:id", async (req, res) => {
 });
 
 // Delete alumni detail by ID
-router.delete("/delete-current-alumni-details/:id", async (req, res) => {
+router.delete("/deleteById/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
     if (isNaN(id)) return res.status(400).json({ error: "Invalid alumni ID" });

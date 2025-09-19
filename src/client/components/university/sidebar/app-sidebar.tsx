@@ -32,6 +32,7 @@ import { NavUser } from "./nav-user"
 import { NavSecondary } from "./nav-secondary"
 import logo from '../../../../client/assets/skcet-logo.jpg'
 import { BellPlus, GraduationCap, HandCoins, House, MessageCircle, Users } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 
 const data = {
@@ -188,6 +189,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
+        {/* <Button variant="ghost" className="items-start">Logout</Button> */}
       </SidebarFooter>
     </Sidebar>
   )

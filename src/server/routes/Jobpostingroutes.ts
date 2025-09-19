@@ -1,10 +1,10 @@
 import express from "express";
-import { createJobPosting, deleteJobPosting, getAllJobPostings, getJobPostingById, updateJobPosting } from "../models/JobpostingSchema.js";
+import { createJobPosting, deleteJobPosting, getAllJobPostings, getJobPostingById, updateJobPosting } from "../models/Jobpostingschema.js";
 
 
 const router = express.Router();
 
-router.post("/addjob", async (req, res) => {
+router.post("/add", async (req, res) => {
   try {
     const id = await createJobPosting(req.body);
     res.status(201).json({ id, message: "Job posting created successfully" });
@@ -22,7 +22,7 @@ router.post("/addjob", async (req, res) => {
 });
 
 // Get all job postings
-router.get("/getalljobs", async (req, res) => {
+router.get("/getAll", async (req, res) => {
   try {
     const jobs = await getAllJobPostings();
     res.status(200).json(jobs);
@@ -36,7 +36,7 @@ router.get("/getalljobs", async (req, res) => {
 });
 
 // Get a job posting by ID
-router.get("/getjob/:id", async (req, res) => {
+router.get("/getById/:id", async (req, res) => {
   try {
     const jobId = Number(req.params.id);
     if (isNaN(jobId)) return res.status(400).json({ error: "Invalid job ID" });
@@ -50,7 +50,7 @@ router.get("/getjob/:id", async (req, res) => {
 
 
 // Update a job posting by ID
-router.put("/updatejob/:id", async (req, res) => {
+router.put("/updateById/:id", async (req, res) => {
   try {
     const jobId = Number(req.params.id);
     if (isNaN(jobId)) return res.status(400).json({ error: "Invalid job ID" });
@@ -69,7 +69,7 @@ router.put("/updatejob/:id", async (req, res) => {
 });
 
 // Delete a job posting by ID
-router.delete("/deletejob/:id", async (req, res) => {
+router.delete("/deleteById/:id", async (req, res) => {
   try {
     const jobId = Number(req.params.id);
     if (isNaN(jobId)) return res.status(400).json({ error: "Invalid job ID" });

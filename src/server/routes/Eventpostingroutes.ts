@@ -4,7 +4,7 @@ import { createEvent, deleteEvent, getAllEvents, getEventById, updateEvent } fro
 const router = express.Router();
 
 // Create event
-router.post("/addevent", async (req, res) => {
+router.post("/add", async (req, res) => {
   try {
     const id = await createEvent(req.body);
     res.status(201).json({ id, message: "Event created successfully" });
@@ -14,7 +14,7 @@ router.post("/addevent", async (req, res) => {
 });
 
 // Get all events
-router.get("/getallevent", async (req, res) => {
+router.get("/getAll", async (req, res) => {
   try {
     const events = await getAllEvents();
     res.status(200).json(events);
@@ -24,7 +24,7 @@ router.get("/getallevent", async (req, res) => {
 });
 
 // Get event by ID
-router.get("/getevent/:id", async (req, res) => {
+router.get("/getById/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
     if (isNaN(id)) return res.status(400).json({ error: "Invalid event ID" });
@@ -37,7 +37,7 @@ router.get("/getevent/:id", async (req, res) => {
 });
 
 // Update event by ID
-router.put("/getevent/:id", async (req, res) => {
+router.put("/updateById/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
     if (isNaN(id)) return res.status(400).json({ error: "Invalid event ID" });
@@ -50,7 +50,7 @@ router.put("/getevent/:id", async (req, res) => {
 });
 
 // Delete event by ID
-router.delete("/deleteevent/:id", async (req, res) => {
+router.delete("/deleteById/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
     if (isNaN(id)) return res.status(400).json({ error: "Invalid event ID" });
