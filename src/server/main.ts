@@ -9,6 +9,7 @@ import currentalumnidetailsRoutes from "./routes/Alumnicurrentdetailsroutes.js"
 import alumnidetailsRoutes from "./routes/Alumnidetailsroutes.js"
 import studentsRoutes from "./routes/Studentdetailsroutes.js"
 import fundrequestRoutes from "./routes/fundrequestroutes.js"
+import authRoutes from "./routes/AuthRoutes.js";
 
 const app = express();
 app.use(express.json());
@@ -28,6 +29,7 @@ app.use("/current-alumni-details", currentalumnidetailsRoutes);
 app.use("/alumni-details", alumnidetailsRoutes);
 app.use("/student-details", studentsRoutes);
 app.use("/fund-request", fundrequestRoutes);
+app.use("/auth", authRoutes);
 
 ViteExpress.listen(app, 3000, () =>
   console.log("Server is listening on port 3000..."),

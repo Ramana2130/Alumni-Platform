@@ -163,21 +163,21 @@ export function FundAllList() {
           <Table>
             <TableHeader>
               <TableRow className="bg-muted/50">
-                <TableHead className="font-semibold">Request ID</TableHead>
-                {/* <TableHead className="font-semibold">Student Name</TableHead> */}
+                <TableHead className="font-semibold">Reg No</TableHead>
+                <TableHead className="font-semibold">Student Name</TableHead>
                 <TableHead className="font-semibold">Fund Amount</TableHead>
                 <TableHead className="font-semibold">Fund Type</TableHead>
                 <TableHead className="font-semibold">Requested Date</TableHead>
                 <TableHead className="font-semibold">Status</TableHead>
                 <TableHead className="font-semibold">Progress</TableHead>
-                <TableHead className="font-semibold text-center">Actions</TableHead>
+                {/* <TableHead className="font-semibold text-center">Actions</TableHead> */}
               </TableRow>
             </TableHeader>
             <TableBody>
               {currentData.map((request) => (
                 <TableRow key={request.id} className="hover:bg-muted/30">
                   <TableCell className="font-medium">{request.id}</TableCell>
-                  {/* <TableCell>{request.studentName}</TableCell> */}
+                  <TableCell>{request.studentName}</TableCell>
                   <TableCell className="font-semibold text-primary">{formatCurrency(request.fundAmount)}</TableCell>
                   <TableCell>{request.fundType}</TableCell>
                   <TableCell>{formatDate(request.requestedDate)}</TableCell>
@@ -194,7 +194,7 @@ export function FundAllList() {
                       <span className="text-sm text-muted-foreground">N/A</span>
                     )}
                   </TableCell>
-                  <TableCell>
+                  {/* <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-8 w-8 p-0">
@@ -220,7 +220,7 @@ export function FundAllList() {
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

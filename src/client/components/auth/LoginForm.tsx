@@ -9,22 +9,46 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { GraduationCap, Building2, Users } from "lucide-react"
 import { useNavigate } from "react-router-dom"
+import { toast } from "sonner"
 
 export function LoginForm() {
   const [activeTab, setActiveTab] = useState("student");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent, userType: string) => {
-    e.preventDefault();
-    if (userType === "student") {
-      navigate("/students/dashboard");
-    } else if (userType === "university") {
-      navigate("/university/dashboard");
-    } else if (userType === "alumni") {
-      navigate("/alumni/dashboard");
+const handleSubmit = async (e: React.FormEvent, userType: string) => {
+  e.preventDefault();
+
+  const email = (document.getElementById(`${userType}-email`) as HTMLInputElement).value;
+  const password = (document.getElementById(`${userType}-password`) as HTMLInputElement).value;
+
+  try {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      toast.error(data.error || "Login failed");
+      return;
     }
-    console.log(`${userType} login submitted`);
-  };
+
+    toast.success("Login successful");    
+
+    // Save JWT
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("role", userType);
+
+    if (userType === "student") navigate("/students/dashboard");
+    else if (userType === "university") navigate("/university/dashboard");
+    else if (userType === "alumni") navigate("/alumni/dashboard");
+
+  } catch (err: any) {
+    toast.error("An error occurred during login");
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 flex items-center justify-center p-4">

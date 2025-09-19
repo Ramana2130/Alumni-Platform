@@ -32,6 +32,7 @@ import { NavUser } from "./nav-user"
 import { NavSecondary } from "./nav-secondary"
 import logo from '../../../../client/assets/skcet-logo.jpg'
 import { BellPlus, GraduationCap, Hand, HandCoins, House, MessageCircle, Users } from "lucide-react"
+import { useAuthUser } from "@/app/useAuthUser"
 
 
 const data = {
@@ -167,6 +168,8 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    const email = useAuthUser();
+  
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -193,7 +196,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={data.navSecondary}  />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={{
+                  email: email ?? "",
+                  avatar: "/avatars/shadcn.jpg"
+                }} />
       </SidebarFooter>
     </Sidebar>
   )
