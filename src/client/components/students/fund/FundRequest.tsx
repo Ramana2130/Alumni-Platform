@@ -143,26 +143,13 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
                     <SelectValue placeholder="Select your year" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="freshman">Freshman</SelectItem>
-                    <SelectItem value="sophomore">Sophomore</SelectItem>
-                    <SelectItem value="junior">Junior</SelectItem>
-                    <SelectItem value="senior">Senior</SelectItem>
-                    <SelectItem value="graduate">Graduate Student</SelectItem>
+                    <SelectItem value="i">I year</SelectItem>
+                    <SelectItem value="ii">II</SelectItem>
+                    <SelectItem value="iii">III</SelectItem>
+                    <SelectItem value="iv">IV</SelectItem>
+                    <SelectItem value="v">V</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="gpa">Current GPA</Label>
-                <Input
-                  id="gpa"
-                  value={formData.gpa}
-                  onChange={(e) => handleInputChange("gpa", e.target.value)}
-                  placeholder="3.75"
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  max="4"
-                />
               </div>
             </CardContent>
           </Card>
@@ -181,7 +168,7 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
             <CardContent className="space-y-6 p-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="requestAmount">Requested Amount (USD) *</Label>
+                  <Label htmlFor="requestAmount">Requested Amount *</Label>
                   <Input
                     id="requestAmount"
                     value={formData.requestAmount}
@@ -203,9 +190,7 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="tuition">Tuition Assistance</SelectItem>
-                      <SelectItem value="emergency">Emergency Fund</SelectItem>
                       <SelectItem value="research">Research Project</SelectItem>
-                      <SelectItem value="living">Living Expenses</SelectItem>
                       <SelectItem value="books">Books & Supplies</SelectItem>
                       <SelectItem value="technology">Technology/Equipment</SelectItem>
                       <SelectItem value="other">Other</SelectItem>
@@ -213,20 +198,7 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
                   </Select>
                 </div>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="urgency">Urgency Level *</Label>
-                <Select value={formData.urgency} onValueChange={(value) => handleInputChange("urgency", value)}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select urgency level" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="immediate">Immediate (within 1 week)</SelectItem>
-                    <SelectItem value="urgent">Urgent (within 1 month)</SelectItem>
-                    <SelectItem value="moderate">Moderate (within 3 months)</SelectItem>
-                    <SelectItem value="flexible">Flexible (no specific deadline)</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+
               <div className="space-y-2">
                 <Label htmlFor="description" className="text-slate-700 font-medium">
                   Request Description *
@@ -238,49 +210,6 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
                   placeholder="Provide a detailed explanation of why you need this funding..."
                   className="min-h-[120px] border-slate-300 focus:border-blue-500 focus:ring-blue-500"
                   required
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Additional Information */}
-          <Card className="bg-white border-slate-200 shadow-sm">
-            <CardHeader className="bg-slate-50 border-b border-slate-200">
-              <CardTitle className="flex items-center text-slate-900">
-                <FileText className="h-5 w-5 mr-2 text-purple-600" />
-                Additional Information
-              </CardTitle>
-              <CardDescription className="text-slate-600">Help us understand your situation better</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6 p-6">
-              <div className="space-y-2">
-                <Label htmlFor="financialSituation">Financial Situation</Label>
-                <Textarea
-                  id="financialSituation"
-                  value={formData.financialSituation}
-                  onChange={(e) => handleInputChange("financialSituation", e.target.value)}
-                  placeholder="Describe your current financial circumstances..."
-                  className="min-h-[100px]"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="academicGoals">Academic Goals</Label>
-                <Textarea
-                  id="academicGoals"
-                  value={formData.academicGoals}
-                  onChange={(e) => handleInputChange("academicGoals", e.target.value)}
-                  placeholder="How will this funding help you achieve your academic goals?"
-                  className="min-h-[100px]"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="repaymentPlan">Repayment Plan (if applicable)</Label>
-                <Textarea
-                  id="repaymentPlan"
-                  value={formData.repaymentPlan}
-                  onChange={(e) => handleInputChange("repaymentPlan", e.target.value)}
-                  placeholder="If this is a loan, describe your repayment plan..."
-                  className="min-h-[100px]"
                 />
               </div>
             </CardContent>

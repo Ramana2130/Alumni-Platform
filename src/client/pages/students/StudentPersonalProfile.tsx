@@ -50,6 +50,36 @@ export default function StudentPersonalProfile() {
           {/* Personal Information Section */}
           <Card className="bg-gray-50">
             <CardHeader>
+              <CardTitle className="text-primary">Settings</CardTitle>
+              <CardDescription>Save the details, if you change your credentials.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="alumni_name">Username</Label>
+                  <Input
+                    id="alumni_name"
+                    value={formData.alumni_name}
+                    onChange={(e) => handleInputChange("alumni_name", e.target.value)}
+                    placeholder="username"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="alumni_location">Password</Label>
+                  <Input
+                    id="alumni_location"
+                    value={formData.alumni_location}
+                    onChange={(e) => handleInputChange("alumni_location", e.target.value)}
+                    placeholder="**********"
+                    required
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="bg-gray-50">
+            <CardHeader>
               <CardTitle className="text-primary">Personal Information</CardTitle>
               <CardDescription>Basic details about yourself</CardDescription>
             </CardHeader>

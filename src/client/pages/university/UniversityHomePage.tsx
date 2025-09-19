@@ -6,6 +6,7 @@ import { AmountBasedChart } from "@/components/university/charts/AmountBasedChar
 import { FundChart } from "@/components/university/charts/FundChart";
 import { JobStudiesCompareCharts } from "@/components/university/charts/JobStudiesComapreCharts";
 import { PositionChart } from "@/components/university/charts/PositionChart";
+import { FundAllList } from "@/components/university/fund/FundAllList";
 import { DataTable } from "@/components/university/sidebar/data-table";
 import { SectionCards } from "@/components/university/sidebar/section-cards";
 import { UniversityJobList } from "@/components/university/UniversityJobList";
@@ -27,6 +28,9 @@ export default function UniversityHomePage() {
         <div>
           <h1 className="px-8 text-2xl font-bold tracking-tight py-2 text-emerald-700">Job List</h1>
           <UniversityJobList />
+          <div className="py-6">
+          <FundAllList />
+          </div>
         </div>
       </div>
     </div>

@@ -6,8 +6,8 @@ import pool from "../config/db.js";
 export async function createStudent(data: any) {
   const sql = `
     INSERT INTO student_details (
-      student_name, reg_no, department, email, year_of_joining, year_of_passing
-    ) VALUES (?, ?, ?, ?, ?, ?)
+      student_name, reg_no, department, email, year_of_joining, year_of_passing, academic_year
+    ) VALUES (?, ?, ?, ?, ?, ?, ?)
   `;
   const values = [
     data.studentName,
@@ -16,11 +16,13 @@ export async function createStudent(data: any) {
     data.email,
     data.yearOfJoining,
     data.yearOfPassing,
+    data.academicYear, // <-- new column
   ];
 
   const [result] = await pool.query<ResultSetHeader>(sql, values);
   return result.insertId;
 }
+
 
 // Get all students
 export async function getAllStudents() {
@@ -44,7 +46,8 @@ export async function updateStudent(id: number, data: any) {
       department = ?,
       email = ?,
       year_of_joining = ?,
-      year_of_passing = ?
+      year_of_passing = ?,
+      academic_year = ?
     WHERE id = ?
   `;
   const values = [
@@ -54,6 +57,7 @@ export async function updateStudent(id: number, data: any) {
     data.email,
     data.yearOfJoining,
     data.yearOfPassing,
+    data.academicYear, // <-- new column
     id,
   ];
   const [result] = await pool.query<ResultSetHeader>(sql, values);

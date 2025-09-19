@@ -148,11 +148,11 @@ const data = {
       url: "/students/fund-request",
       icon: HandCoins,
     },
-    {
-      name: "Chat",
-      url: "/students/chat",
-      icon: MessageCircle,
-    },
+    // {
+    //   name: "Chat",
+    //   url: "/students/chat",
+    //   icon: MessageCircle,
+    // },
   ],
 }
 
