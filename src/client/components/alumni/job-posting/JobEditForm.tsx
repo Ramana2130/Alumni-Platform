@@ -1,6 +1,4 @@
-"use client"
-
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -8,41 +6,27 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Badge } from "@/components/ui/badge"
-import { Building2, MapPin, DollarSign, FileText, Users } from "lucide-react"
+import { Building2, FileText, Users } from "lucide-react"
+import { getJobPostingById, updateJobPosting } from "@/services/jobservices"
+import { useNavigate, useParams } from "react-router-dom"
+import { toast } from "sonner"
 
 interface JobFormData {
-  jobTitle: string
+  job_title: string
   department: string
-  jobType: string[]
+  job_type: string[]
   location: string
-  salaryMin: string
-  salaryMax: string
+  salary_package: string
   overview: string
   responsibilities: string
-  requiredQualifications: string
-  preferredQualifications: string
+  required_qualifications: string
+  preferred_qualifications: string
   benefits: string[]
-  applicationDeadline: string
-  contactEmail: string
-  contactPhone: string
-}
-
-const initialFormData: JobFormData = {
-  jobTitle: "",
-  department: "",
-  jobType: [],
-  location: "",
-  salaryMin: "",
-  salaryMax: "",
-  overview: "",
-  responsibilities: "",
-  requiredQualifications: "",
-  preferredQualifications: "",
-  benefits: [],
-  applicationDeadline: "",
-  contactEmail: "",
-  contactPhone: "",
+  application_deadline: string
+  contact_email: string
+  contact_phone: string
+  application_number: string
+  job_status?: string
 }
 
 const departments = [
@@ -78,28 +62,95 @@ const benefitOptions = [
 ]
 
 export function JobEditForm() {
-  const [formData, setFormData] = useState<JobFormData>(initialFormData)
+  const { id } = useParams()
+  const [formData, setFormData] = useState<JobFormData | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  // ✅ Fetch job details
+  useEffect(() => {
+    if (!id) return
+    const fetchJob = async () => {
+      try {
+        const job = await getJobPostingById(Number(id))
+        setFormData({
+          job_title: job.job_title,
+          department: job.department,
+          job_type: job.job_type ? job.job_type.split(",") : [],
+          location: job.location,
+          salary_package: job.salary_package || "",
+          overview: job.overview,
+          responsibilities: job.responsibilities,
+          required_qualifications: job.required_qualifications,
+          preferred_qualifications: job.preferred_qualifications,
+          benefits: job.benefits ? job.benefits.split(",") : [],
+          application_deadline: job.application_deadline?.split("T")[0] || "",
+          contact_email: job.contact_email,
+          contact_phone: job.contact_phone,
+          application_number: job.application_number || "",
+          job_status: job.job_status || "active",
+        })
+      } catch (error) {
+        console.error("Error fetching job:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchJob()
+  }, [id])
 
   const updateFormData = (field: keyof JobFormData, value: string | string[]) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
+    if (!formData) return
+    setFormData((prev) => (prev ? { ...prev, [field]: value } : prev))
   }
 
-  const handleJobTypeChange = (typeId: string, checked: boolean) => {
-    const updatedTypes = checked ? [...formData.jobType, typeId] : formData.jobType.filter((type) => type !== typeId)
-    updateFormData("jobType", updatedTypes)
+  const handlejobTypeChange = (typeId: string, checked: boolean) => {
+    if (!formData) return
+    const updatedTypes = checked
+      ? [...formData.job_type, typeId]
+      : formData.job_type.filter((type) => type !== typeId)
+    updateFormData("job_type", updatedTypes)
   }
 
   const handleBenefitChange = (benefitId: string, checked: boolean) => {
+    if (!formData) return
     const updatedBenefits = checked
       ? [...formData.benefits, benefitId]
       : formData.benefits.filter((benefit) => benefit !== benefitId)
     updateFormData("benefits", updatedBenefits)
   }
 
-  const handleSubmit = () => {
-    console.log("Job posting submitted:", formData)
-    // send to backend here
+  const navigate = useNavigate();
+  // ✅ Submit updated details
+  const handleSubmit = async () => {
+    if (!formData) return
+    try {
+      const payload = {
+        jobTitle: formData.job_title,
+      department: formData.department,
+      jobType: formData.job_type, // already array
+      location: formData.location,
+      salaryPackage: formData.salary_package,
+      overview: formData.overview,
+      responsibilities: formData.responsibilities,
+      requiredQualifications: formData.required_qualifications,
+      preferredQualifications: formData.preferred_qualifications,
+      benefits: formData.benefits, // already array
+      applicationDeadline: formData.application_deadline,
+      contactEmail: formData.contact_email,
+      contactPhone: formData.contact_phone,
+      jobStatus: formData.job_status,
+      applicationNumber: formData.application_number,
+      }
+
+      await updateJobPosting(Number(id), payload)
+      toast.success("Job updated successfully");
+      navigate("/alumni/job-posting")
+    } catch (error) {
+      console.error("Error updating job:", error)
+    }
   }
+
+  if (loading || !formData) return <p>Loading...</p>
 
   return (
     <div className="w-[1200px] mx-auto space-y-6 py-5">
@@ -111,7 +162,7 @@ export function JobEditForm() {
         </p>
       </div>
 
-      <Card className="">
+      <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Building2 className="h-5 w-5" /> Job Posting Form
@@ -122,15 +173,17 @@ export function JobEditForm() {
         <CardContent className="space-y-8">
           {/* Job Details */}
           <div className="space-y-6">
-            <h2 className="text-lg font-semibold flex items-center gap-2"><Building2 className="h-4 w-4"/> Job Details</h2>
+            <h2 className="text-lg font-semibold flex items-center gap-2">
+              <Building2 className="h-4 w-4"/> Job Details
+            </h2>
 
             <div className="grid gap-2">
-              <Label htmlFor="jobTitle">Job Title *</Label>
+              <Label htmlFor="jo.job_title">Job Title *</Label>
               <Input
-                id="jobTitle"
+                id="jo.job_title"
                 placeholder="e.g. Senior Software Engineer"
-                value={formData.jobTitle}
-                onChange={(e) => updateFormData("jobTitle", e.target.value)}
+                value={formData.job_title}
+                onChange={(e) => updateFormData("job_title", e.target.value)}
               />
             </div>
 
@@ -155,8 +208,8 @@ export function JobEditForm() {
                   <div key={type.id} className="flex items-center space-x-2">
                     <Checkbox
                       id={type.id}
-                      checked={formData.jobType.includes(type.id)}
-                      onCheckedChange={(checked) => handleJobTypeChange(type.id, checked as boolean)}
+                      checked={formData.job_type.includes(type.id)}
+                      onCheckedChange={(checked) => handlejobTypeChange(type.id, checked as boolean)}
                     />
                     <Label htmlFor={type.id} className="text-sm font-normal">{type.label}</Label>
                   </div>
@@ -174,27 +227,24 @@ export function JobEditForm() {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="salaryMin">Minimum Salary</Label>
-                <Input
-                  id="salaryMin"
-                  type="number"
-                  placeholder="80000"
-                  value={formData.salaryMin}
-                  onChange={(e) => updateFormData("salaryMin", e.target.value)}
-                />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="salaryMax">Maximum Salary</Label>
-                <Input
-                  id="salaryMax"
-                  type="number"
-                  placeholder="120000"
-                  value={formData.salaryMax}
-                  onChange={(e) => updateFormData("salaryMax", e.target.value)}
-                />
-              </div>
+            <div className="grid gap-2">
+              <Label htmlFor="sa.salary_package">Salary Package *</Label>
+              <Input
+                id="sa.salary_package"
+                placeholder="e.g. 8 LPA"
+                value={formData.salary_package}
+                onChange={(e) => updateFormData("salary_package", e.target.value)}
+              />
+            </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="application_number">Application Number *</Label>
+              <Input
+                id="application_number"
+                placeholder="Enter unique application number"
+                value={formData.application_number}
+                onChange={(e) => updateFormData("application_number", e.target.value)}
+              />
             </div>
           </div>
 
@@ -225,24 +275,24 @@ export function JobEditForm() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="requiredQualifications">Required Qualifications *</Label>
+              <Label htmlFor="required_qualifications">Required Qualifications *</Label>
               <Textarea
-                id="requiredQualifications"
+                id="required_qualifications"
                 placeholder="• Bachelor's degree in CS&#10;• 5+ years in software dev"
                 className="min-h-[120px]"
-                value={formData.requiredQualifications}
-                onChange={(e) => updateFormData("requiredQualifications", e.target.value)}
+                value={formData.required_qualifications}
+                onChange={(e) => updateFormData("required_qualifications", e.target.value)}
               />
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="preferredQualifications">Preferred Qualifications</Label>
+              <Label htmlFor="preferred_qualifications">Preferred Qualifications</Label>
               <Textarea
-                id="preferredQualifications"
+                id="preferred_qualifications"
                 placeholder="• Experience with cloud&#10;• Open source contributions"
                 className="min-h-[100px]"
-                value={formData.preferredQualifications}
-                onChange={(e) => updateFormData("preferredQualifications", e.target.value)}
+                value={formData.preferred_qualifications}
+                onChange={(e) => updateFormData("preferred_qualifications", e.target.value)}
               />
             </div>
           </div>
@@ -268,34 +318,34 @@ export function JobEditForm() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="applicationDeadline">Application Deadline</Label>
+              <Label htmlFor="application_deadline">Application Deadline</Label>
               <Input
-                id="applicationDeadline"
+                id="application_deadline"
                 type="date"
-                value={formData.applicationDeadline}
-                onChange={(e) => updateFormData("applicationDeadline", e.target.value)}
+                value={formData.application_deadline}
+                onChange={(e) => updateFormData("application_deadline", e.target.value)}
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-2">
-                <Label htmlFor="contactEmail">Contact Email *</Label>
+                <Label htmlFor="contact_email">Contact Email *</Label>
                 <Input
-                  id="contactEmail"
+                  id="contact_email"
                   type="email"
                   placeholder="hiring@company.com"
-                  value={formData.contactEmail}
-                  onChange={(e) => updateFormData("contactEmail", e.target.value)}
+                  value={formData.contact_email}
+                  onChange={(e) => updateFormData("contact_email", e.target.value)}
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="contactPhone">Contact Phone</Label>
+                <Label htmlFor="contact_phone">Contact Phone</Label>
                 <Input
-                  id="contactPhone"
+                  id="contact_phone"
                   type="tel"
                   placeholder="+1 (555) 123-4567"
-                  value={formData.contactPhone}
-                  onChange={(e) => updateFormData("contactPhone", e.target.value)}
+                  value={formData.contact_phone}
+                  onChange={(e) => updateFormData("contact_phone", e.target.value)}
                 />
               </div>
             </div>

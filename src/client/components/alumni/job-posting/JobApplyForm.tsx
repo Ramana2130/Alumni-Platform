@@ -8,16 +8,17 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Badge } from "@/components/ui/badge"
-import { Building2, MapPin, DollarSign, FileText, Users } from "lucide-react"
+import { Building2, FileText, Users } from "lucide-react"
+import { createJobPosting } from "@/services/jobservices"
+import { toast } from "sonner"
+import { useNavigate } from "react-router-dom"
 
 interface JobFormData {
-  jobTitle: string
+   jobTitle: string
   department: string
   jobType: string[]
   location: string
-  salaryMin: string
-  salaryMax: string
+  salaryPackage: string
   overview: string
   responsibilities: string
   requiredQualifications: string
@@ -26,6 +27,7 @@ interface JobFormData {
   applicationDeadline: string
   contactEmail: string
   contactPhone: string
+  applicationNumber: string
 }
 
 const initialFormData: JobFormData = {
@@ -33,8 +35,7 @@ const initialFormData: JobFormData = {
   department: "",
   jobType: [],
   location: "",
-  salaryMin: "",
-  salaryMax: "",
+  salaryPackage: "",
   overview: "",
   responsibilities: "",
   requiredQualifications: "",
@@ -43,6 +44,7 @@ const initialFormData: JobFormData = {
   applicationDeadline: "",
   contactEmail: "",
   contactPhone: "",
+  applicationNumber: "0",
 }
 
 const departments = [
@@ -95,15 +97,20 @@ export function JobApplyForm() {
       : formData.benefits.filter((benefit) => benefit !== benefitId)
     updateFormData("benefits", updatedBenefits)
   }
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    console.log("Job posting submitted:", formData)
-    // send to backend here
+  const handleSubmit = async () => {
+  try {
+    const result = await createJobPosting(formData)
+    toast.success("Job created successfully!")
+    navigate("/alumni/dashboard");
+  } catch (err: any) {
+    toast.error("Failed to create job")
   }
+}
 
   return (
     <div className="w-[1200px] mx-auto space-y-6">
-      {/* Header */}
       <div className="text-start space-y-2">
         <h1 className="text-2xl font-bold text-orange-600">Create Job Posting</h1>
         <p className="text-muted-foreground">
@@ -111,7 +118,7 @@ export function JobApplyForm() {
         </p>
       </div>
 
-      <Card className="">
+      <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Building2 className="h-5 w-5" /> Job Posting Form
@@ -176,23 +183,23 @@ export function JobApplyForm() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-2">
-                <Label htmlFor="salaryMin">Minimum Salary</Label>
+                <Label htmlFor="salaryPackage">Salary Package</Label>
                 <Input
-                  id="salaryMin"
-                  type="number"
-                  placeholder="80000"
-                  value={formData.salaryMin}
-                  onChange={(e) => updateFormData("salaryMin", e.target.value)}
+                  id="salaryPackage"
+                  type="text"
+                  placeholder="8 LPA"
+                  value={formData.salaryPackage}
+                  onChange={(e) => updateFormData("salaryPackage", e.target.value)}
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="salaryMax">Maximum Salary</Label>
+                <Label htmlFor="applicationNumber">No. of Applications</Label>
                 <Input
-                  id="salaryMax"
+                  id="applicationNumber"
                   type="number"
-                  placeholder="120000"
-                  value={formData.salaryMax}
-                  onChange={(e) => updateFormData("salaryMax", e.target.value)}
+                  placeholder="0"
+                  value={formData.applicationNumber}
+                  onChange={(e) => updateFormData("applicationNumber", e.target.value)}
                 />
               </div>
             </div>
@@ -303,7 +310,6 @@ export function JobApplyForm() {
         </CardContent>
       </Card>
 
-      {/* Submit */}
       <div className="flex justify-end">
         <Button onClick={handleSubmit} size="lg" className="bg-[#d56f2c]">
           Submit Job Posting
