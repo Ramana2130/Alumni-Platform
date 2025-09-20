@@ -1,13 +1,50 @@
-"use client"
+"use client";
 
-import { useState, useMemo } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Search, Filter, MapPin, Calendar, DollarSign, Building2, ChevronUp, ChevronDown, Plus } from "lucide-react"
+import { useState, useMemo } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Search,
+  Filter,
+  MapPin,
+  Calendar,
+  DollarSign,
+  Building2,
+  ChevronUp,
+  ChevronDown,
+  Plus,
+  BookCheck,
+  Trash,
+  Pencil,
+} from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 // Sample job data
 const sampleJobs = [
@@ -89,95 +126,116 @@ const sampleJobs = [
     department: "Engineering",
     experience: "Senior",
   },
-]
+];
 
-type SortField = "title" | "company" | "postedDate" | "applicants" | "salary"
-type SortDirection = "asc" | "desc"
+type SortField = "title" | "company" | "postedDate" | "applicants" | "salary";
+type SortDirection = "asc" | "desc";
 
 export function JobList() {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [statusFilter, setStatusFilter] = useState("all")
-  const [typeFilter, setTypeFilter] = useState("all")
-  const [departmentFilter, setDepartmentFilter] = useState("all")
-  const [sortField, setSortField] = useState<SortField>("postedDate")
-  const [sortDirection, setSortDirection] = useState<SortDirection>("desc")
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [typeFilter, setTypeFilter] = useState("all");
+  const [departmentFilter, setDepartmentFilter] = useState("all");
+  const [sortField, setSortField] = useState<SortField>("postedDate");
+  const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
 
   const filteredAndSortedJobs = useMemo(() => {
     const filtered = sampleJobs.filter((job) => {
       const matchesSearch =
         job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.location.toLowerCase().includes(searchTerm.toLowerCase())
+        job.location.toLowerCase().includes(searchTerm.toLowerCase());
 
-      const matchesStatus = statusFilter === "all" || job.status.toLowerCase() === statusFilter.toLowerCase()
-      const matchesType = typeFilter === "all" || job.type.toLowerCase() === typeFilter.toLowerCase()
+      const matchesStatus =
+        statusFilter === "all" ||
+        job.status.toLowerCase() === statusFilter.toLowerCase();
+      const matchesType =
+        typeFilter === "all" ||
+        job.type.toLowerCase() === typeFilter.toLowerCase();
       const matchesDepartment =
-        departmentFilter === "all" || job.department.toLowerCase() === departmentFilter.toLowerCase()
+        departmentFilter === "all" ||
+        job.department.toLowerCase() === departmentFilter.toLowerCase();
 
-      return matchesSearch && matchesStatus && matchesType && matchesDepartment
-    })
+      return matchesSearch && matchesStatus && matchesType && matchesDepartment;
+    });
 
     // Sort the filtered results
     filtered.sort((a, b) => {
-      let aValue: any = a[sortField]
-      let bValue: any = b[sortField]
+      let aValue: any = a[sortField];
+      let bValue: any = b[sortField];
 
       if (sortField === "postedDate") {
-        aValue = new Date(aValue).getTime()
-        bValue = new Date(bValue).getTime()
+        aValue = new Date(aValue).getTime();
+        bValue = new Date(bValue).getTime();
       } else if (sortField === "salary") {
         // Extract first number from salary range for sorting
-        aValue = Number.parseInt(aValue.replace(/[^0-9]/g, ""))
-        bValue = Number.parseInt(bValue.replace(/[^0-9]/g, ""))
+        aValue = Number.parseInt(aValue.replace(/[^0-9]/g, ""));
+        bValue = Number.parseInt(bValue.replace(/[^0-9]/g, ""));
       }
 
       if (sortDirection === "asc") {
-        return aValue > bValue ? 1 : -1
+        return aValue > bValue ? 1 : -1;
       } else {
-        return aValue < bValue ? 1 : -1
+        return aValue < bValue ? 1 : -1;
       }
-    })
+    });
 
-    return filtered
-  }, [searchTerm, statusFilter, typeFilter, departmentFilter, sortField, sortDirection])
+    return filtered;
+  }, [
+    searchTerm,
+    statusFilter,
+    typeFilter,
+    departmentFilter,
+    sortField,
+    sortDirection,
+  ]);
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
-      setSortDirection(sortDirection === "asc" ? "desc" : "asc")
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {
-      setSortField(field)
-      setSortDirection("asc")
+      setSortField(field);
+      setSortDirection("asc");
     }
-  }
+  };
 
   const getSortIcon = (field: SortField) => {
-    if (sortField !== field) return null
-    return sortDirection === "asc" ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
-  }
+    if (sortField !== field) return null;
+    return sortDirection === "asc" ? (
+      <ChevronUp className="w-4 h-4" />
+    ) : (
+      <ChevronDown className="w-4 h-4" />
+    );
+  };
 
   const getStatusBadgeVariant = (status: string) => {
     switch (status.toLowerCase()) {
       case "active":
-        return "default"
+        return { variant: "default", className: "bg-green-500 text-white" };
       case "paused":
-        return "secondary"
+        return { variant: "default", className: "bg-yellow-500 text-white" };
       case "closed":
-        return "destructive"
+        return { variant: "default", className: "bg-red-500 text-white" };
       default:
-        return "outline"
+        return { variant: "outline", className: "" };
     }
-  }
+  };
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
       year: "numeric",
-    })
-  }
+    });
+  };
 
   return (
-    <div className="space-y-6 px-8">
+    <div className="space-y-3 px-4">
+      <div className="flex items-center gap-1 text-black tracking-tight">
+        <BookCheck />
+        <h1 className="text-2xl font-bold tracking-tight">Job List</h1>
+      </div>
+        <p className="text-red-500">Note: Once the application closing date is reached, it will be automatically removed from our server within 24 hours.</p>
       {/* Header with Add Job Button */}
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
@@ -236,8 +294,13 @@ export function JobList() {
               </Select>
             </div>
             <div>
-              <label className="text-sm font-medium mb-2 block">Department</label>
-              <Select value={departmentFilter} onValueChange={setDepartmentFilter}>
+              <label className="text-sm font-medium mb-2 block">
+                Department
+              </label>
+              <Select
+                value={departmentFilter}
+                onValueChange={setDepartmentFilter}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="All Departments" />
                 </SelectTrigger>
@@ -322,11 +385,18 @@ export function JobList() {
               </TableHeader>
               <TableBody>
                 {filteredAndSortedJobs.map((job) => (
-                  <TableRow key={job.id} className="hover:bg-muted/30 transition-colors">
+                  <TableRow
+                    key={job.id}
+                    className="hover:bg-muted/30 transition-colors"
+                  >
                     <TableCell>
                       <div>
-                        <div className="font-semibold text-foreground">{job.title}</div>
-                        <div className="text-sm text-muted-foreground">{job.experience}</div>
+                        <div className="font-semibold text-foreground">
+                          {job.title}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          {job.experience}
+                        </div>
                       </div>
                     </TableCell>
                     <TableCell>
@@ -352,8 +422,12 @@ export function JobList() {
                     </TableCell> */}
                     <TableCell>
                       <div className="text-center">
-                        <span className="font-semibold text-lg">{job.applicants}</span>
-                        <div className="text-xs text-muted-foreground">applicants</div>
+                        <span className="font-semibold text-lg">
+                          {job.applicants}
+                        </span>
+                        <div className="text-xs text-muted-foreground">
+                          applicants
+                        </div>
                       </div>
                     </TableCell>
                     <TableCell>
@@ -363,16 +437,43 @@ export function JobList() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Badge variant={getStatusBadgeVariant(job.status)}>{job.status}</Badge>
+                      {(() => {
+                        const { variant, className } = getStatusBadgeVariant(job.status);
+                        return (
+                          <Badge variant={variant} className={className}>
+                            {job.status}
+                          </Badge>
+                        );
+                      })()}
                     </TableCell>
                     <TableCell>
                       <div className="flex gap-2">
                         <Button variant="outline" size="sm">
-                          <a href="/job-description">View</a>
+                          <a href="/alumni/job-editing"><Pencil className="text-blue-600"/></a>
                         </Button>
-                        <Button variant="outline" size="sm">
-                          Edit
-                        </Button>
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button variant="outline">
+                              <Trash className="text-red-500" />
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>
+                                Are you absolutely sure?
+                              </AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This action cannot be undone. This will
+                                permanently delete your account and remove your
+                                data from our servers.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction className="bg-red-500 text-white">Delete</AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
                       </div>
                     </TableCell>
                   </TableRow>
@@ -395,5 +496,5 @@ export function JobList() {
         </Card>
       )}
     </div>
-  )
+  );
 }

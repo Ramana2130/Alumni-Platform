@@ -39,16 +39,16 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-8">
-      <div className="mx-auto max-w-6xl">
+    <div className="min-h-screen bg-gray-100 p-4 md:p-8">
+      <div className="mx-auto w-[1200px]">
         <div className="mb-8 text-start">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Profile</h1>
+          <h1 className="text-2xl font-bold text-orange-600 mb-2">Profile</h1>
           <p className="text-muted-foreground">Please fill out your details to complete your alumni profile</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Personal Information Section */}
-          <Card className="bg-[#fff5ed]">
+          <Card className="">
             <CardHeader>
               <CardTitle className="text-primary">Personal Information</CardTitle>
               <CardDescription>Basic details about yourself</CardDescription>
@@ -80,7 +80,7 @@ export default function ProfilePage() {
           </Card>
 
           {/* Academic Details Section */}
-          <Card className="bg-[#fff5ed]">
+          <Card className="">
             <CardHeader>
               <CardTitle className="text-primary">Academic Details</CardTitle>
               <CardDescription>Information about your academic journey</CardDescription>
@@ -146,7 +146,7 @@ export default function ProfilePage() {
           </Card>
 
           {/* Career Information Section */}
-          <Card className="bg-[#fff5ed]">
+          <Card className="">
             <CardHeader>
               <CardTitle className="text-primary">Career Information</CardTitle>
               <CardDescription>Details about your professional journey</CardDescription>
@@ -200,7 +200,7 @@ export default function ProfilePage() {
           </Card>
 
           {/* Success Stories Section */}
-          <Card className="bg-[#fff5ed]">
+          <Card className="">
             <CardHeader>
               <CardTitle className="text-primary">Success Stories</CardTitle>
               <CardDescription>Share your achievements and inspiring moments</CardDescription>
@@ -220,16 +220,39 @@ export default function ProfilePage() {
             </CardContent>
           </Card>
 
+                    <Card className="">
+            <CardHeader>
+              <CardTitle className="text-primary">Login Crendentials</CardTitle>
+              <CardDescription>Privacy details here submit the button, if you change your details</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="alumni_name">Username</Label>
+                  <Input
+                    id="alumni_name"
+                    value={formData.alumni_name}
+                    onChange={(e) => handleInputChange("alumni_name", e.target.value)}
+                    placeholder="Enter your full name"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="alumni_location">Password</Label>
+                  <Input
+                    id="alumni_location"
+                    value={formData.alumni_location}
+                    onChange={(e) => handleInputChange("alumni_location", e.target.value)}
+                    placeholder="********"
+                    required
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-end">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={handleSaveProgress}
-              className="w-full sm:w-auto bg-transparent"
-            >
-              Save Progress
-            </Button>
             <Button type="submit" className="w-full sm:w-auto bg-[#d56f2c] text-white hover:bg-[#bf5e26]">
               Submit Profile
             </Button>

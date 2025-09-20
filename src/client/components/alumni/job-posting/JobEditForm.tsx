@@ -77,7 +77,7 @@ const benefitOptions = [
   { id: "stock-options", label: "Stock Options" },
 ]
 
-export function JobApplyForm() {
+export function JobEditForm() {
   const [formData, setFormData] = useState<JobFormData>(initialFormData)
 
   const updateFormData = (field: keyof JobFormData, value: string | string[]) => {
@@ -102,12 +102,12 @@ export function JobApplyForm() {
   }
 
   return (
-    <div className="w-[1200px] mx-auto space-y-6">
+    <div className="w-[1200px] mx-auto space-y-6 py-5">
       {/* Header */}
       <div className="text-start space-y-2">
-        <h1 className="text-2xl font-bold text-orange-600">Create Job Posting</h1>
+        <h1 className="text-2xl font-bold text-orange-600">Edit Job details</h1>
         <p className="text-muted-foreground">
-          Fill out all the details below to create a comprehensive job listing.
+          Fill out all the details below to edit a comprehensive job listing.
         </p>
       </div>
 

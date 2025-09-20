@@ -120,13 +120,13 @@ export default function FundDonate({ onBack }: AlumniPortalProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-50">
-      <div className="container max-w-6xl mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gray-100">
+      <div className="container mx-auto px-4 py-4">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center">           
             <div className="pl-2">
-              <h1 className="text-3xl font-bold text-slate-900">Fund Details</h1>
+              <h1 className="text-2xl font-bold text-orange-600">Fund Details</h1>
               <p className="text-slate-600 mt-1">Support students by contributing to verified fund requests</p>
             </div>
           </div>

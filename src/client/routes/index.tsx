@@ -1,3 +1,5 @@
+import { EventEditForm } from "@/components/alumni/job-posting/EventEditForm";
+import { JobEditForm } from "@/components/alumni/job-posting/JobEditForm";
 import DashboardLayout from "@/components/alumni/sidebar/layout";
 import AlumniDesp from "@/components/common/AlumniDesp";
 import JobDesp from "@/components/common/JobDesp";
@@ -65,6 +67,10 @@ const router = createBrowserRouter([
                 element: <JobPostingPage />
             },
             {
+                path: "job-editing",
+                element: <JobEditForm />
+            },
+            {
                 path: "chat",
                 element: <AlumniChatPage />
             },
@@ -83,6 +89,10 @@ const router = createBrowserRouter([
             {
                 path: "event-posting",
                 element: <EventPostingPage />
+            },
+            {
+                path: "event-editing",
+                element: <EventEditForm />
             },
             {
                 path: "payment-gateway",

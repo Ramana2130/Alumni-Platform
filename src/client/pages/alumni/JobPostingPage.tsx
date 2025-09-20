@@ -7,7 +7,7 @@ import { JobList } from '@/components/alumni/job-posting/JobList'
 
 const JobPostingPage = () => {
   return (
-    <div className='py-6'>
+    <div className='py-6 bg-gray-100'>
         {/* <JobApplyForm /> */}
         <div className='px-4 pb-12'>
         <JobList />

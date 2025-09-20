@@ -31,7 +31,7 @@ export function AlumniProfileSummary({
   location,
 }: AlumniProfileSummaryProps) {
   return (
-    <Card className="w-full max-w-4xl mx-auto shadow-lg border-0 bg-amber-50 text-amber-950">
+    <Card className="w-[1200px] mx-auto shadow-lg border-0 bg-amber-50 text-black">
       <CardHeader className="pb-4">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-4">
@@ -54,7 +54,7 @@ export function AlumniProfileSummary({
         {/* Academic Information */}
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold flex items-center gap-2 text-amber-700">
+            <h3 className="text-lg font-semibold flex items-center gap-2 text-black">
               <GraduationCap className="w-5 h-5" />
               Academic Details
             </h3>
@@ -79,7 +79,7 @@ export function AlumniProfileSummary({
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold flex items-center gap-2 text-amber-700">
+            <h3 className="text-lg font-semibold flex items-center gap-2 text-black">
               <Briefcase className="w-5 h-5" />
               Professional Details
             </h3>
@@ -103,7 +103,7 @@ export function AlumniProfileSummary({
         {/* Success Stories */}
         {success_stories && (
           <div className="space-y-3">
-            <h3 className="text-lg font-semibold flex items-center gap-2 text-amber-700">
+            <h3 className="text-lg font-semibold flex items-center gap-2 text-black">
               <Trophy className="w-5 h-5" />
               Success Stories & Achievements
             </h3>
@@ -119,10 +119,10 @@ export function AlumniProfileSummary({
             <MessageSquare className="w-4 h-4 mr-2" />
             Chat
           </Button>
-          <Button variant="outline" className="flex-1 bg-transparent border-amber-600 text-amber-700 hover:bg-amber-50">
+          {/* <Button variant="outline" className="flex-1 bg-transparent border-amber-600 text-amber-700 hover:bg-amber-50">
             <Phone className="w-4 h-4 mr-2" />
             Call
-          </Button>
+          </Button> */}
         </div>
       </CardContent>
     </Card>

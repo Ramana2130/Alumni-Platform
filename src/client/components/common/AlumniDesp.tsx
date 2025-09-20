@@ -19,11 +19,11 @@ const sampleAlumniData = {
 const AlumniDesp = () => {
   return (
     <div>
-        <main className="min-h-screen bg-background p-0">
-      <div className="container mx-auto space-y-12">
-        <div className="text-center mb-4">
+        <main className="min-h-screen bg-gray-100 p-0">
+      <div className="container mx-auto space-y-6">
+        <div className="text-start px-8">
           {/* <h1 className="text-3xl font-bold text-foreground mb-2">Professional Summary</h1> */}
-          <p className="font-semibold text-2xl pt-3">Alumni profile summary</p>
+          <p className="font-bold text-2xl pt-3">Alumni profile summary</p>
         </div>
 
         <section>

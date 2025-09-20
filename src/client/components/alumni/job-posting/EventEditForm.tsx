@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox"
 import { CalendarIcon, ClockIcon, UserIcon, LinkIcon, TagIcon, MailIcon } from "lucide-react"
 
-export function EventPostingForm() {
+export function EventEditForm() {
   const [formData, setFormData] = useState({
     title: "",
     date: "",
@@ -39,7 +39,7 @@ export function EventPostingForm() {
       <CardHeader className="bg-orange-50 border-b border-orange-200">
         <CardTitle className="text-2xl font-bold text-card-foreground flex items-center gap-2">
           <CalendarIcon className="h-6 w-6 text-orange-600" />
-          Post Your Event or Webinar
+          Edit Your Event details
         </CardTitle>
         <CardDescription className="text-muted-foreground">
           Fill out the details below to share your event with the alumni community

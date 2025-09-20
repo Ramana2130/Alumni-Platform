@@ -24,7 +24,7 @@ export default function Page() {
         </div>
         {/* <DataTable data={data} /> */}
         <div className="">
-            <h1 className="px-8 font-bold tracking-tight text-2xl py-2">Job List</h1>
+            {/* <h1 className="px-8 font-bold tracking-tight text-2xl py-2">Job List</h1> */}
           <JobList />
         </div>
       </div>
