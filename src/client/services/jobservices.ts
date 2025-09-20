@@ -1,6 +1,4 @@
-// src/services/jobService.js
 import axios from "axios";
-import dotenv from "dotenv";
 
 // Add Job Posting
 export const createJobPosting = async (jobData: any) => {

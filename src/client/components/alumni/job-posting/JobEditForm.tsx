@@ -144,7 +144,7 @@ export function JobEditForm() {
 
       await updateJobPosting(Number(id), payload)
       toast.success("Job updated successfully");
-      navigate("/alumni/job-posting")
+      navigate("/alumni/dashboard")
     } catch (error) {
       console.error("Error updating job:", error)
     }

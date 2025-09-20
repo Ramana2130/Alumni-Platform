@@ -91,7 +91,7 @@ const router = createBrowserRouter([
                 element: <EventPostingPage />
             },
             {
-                path: "event-editing",
+                path: "event-editing/:id",
                 element: <EventEditForm />
             },
             {

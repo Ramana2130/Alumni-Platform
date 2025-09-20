@@ -1,6 +1,7 @@
-import type React from "react"
+"use client"
 
-import { useState } from "react"
+import type React from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -9,215 +10,204 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { CalendarIcon, ClockIcon, UserIcon, LinkIcon, TagIcon, MailIcon } from "lucide-react"
+import { getEventById, updateEvent } from "@/services/eventservices"
+import { useNavigate, useParams } from "react-router-dom"
+import { toast } from "sonner"
 
 export function EventEditForm() {
+  const { id } = useParams()
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true)
   const [formData, setFormData] = useState({
     title: "",
     date: "",
     time: "",
     description: "",
-    speakerName: "",
-    speakerBio: "",
-    registrationLink: "",
+    speaker_name: "",
+    speaker_bio: "",
+    registration_link: "",
     category: "",
-    sendNotification: false,
+    send_notification: false,
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Load existing event
+  useEffect(() => {
+    const fetchEvent = async () => {
+      try {
+        const event = await getEventById(Number(id))
+        setFormData({
+          title: event.title || "",
+          date: event.date?.split("T")[0] || "",
+          time: event.time || "",
+          description: event.description || "",
+          speaker_name: event.speaker_name || "",
+          speaker_bio: event.speaker_bio || "",
+          registration_link: event.registration_link || "",
+          category: event.category || "",
+          send_notification: event.send_notification || false,
+        })
+      } catch (err) {
+        console.error("Failed to load event:", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    if (id) fetchEvent()
+  }, [id])
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Event submitted:", formData)
-    // Handle form submission here
+    try {
+      await updateEvent(Number(id), formData)
+      toast.success("Event updated successfully")
+      navigate("/alumni/event-posting")
+    } catch (err) {
+      console.error("Update failed:", err)
+      toast.error("Failed to update event")
+    }
   }
 
-  const handleInputChange = (field: string, value: string | boolean) => {
+  const handleInputChange = (field: keyof typeof formData, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
+  if (loading) return <p className="text-center mt-6">Loading event...</p>
+
   return (
-    <div className=" mx-auto p-4">
-    <Card className="w-[1200px] mx-auto bg-card  shadow-lg">
-      <CardHeader className="bg-orange-50 border-b border-orange-200">
-        <CardTitle className="text-2xl font-bold text-card-foreground flex items-center gap-2">
-          <CalendarIcon className="h-6 w-6 text-orange-600" />
-          Edit Your Event details
-        </CardTitle>
-        <CardDescription className="text-muted-foreground">
-          Fill out the details below to share your event with the alumni community
-        </CardDescription>
-      </CardHeader>
+    <div className="mx-auto p-4">
+      <Card className="w-[1200px] mx-auto bg-card shadow-lg">
+        <CardHeader className="bg-orange-50 border-b border-orange-200">
+          <CardTitle className="text-2xl font-bold flex items-center gap-2">
+            <CalendarIcon className="h-6 w-6 text-orange-600" />
+            Edit Event
+          </CardTitle>
+          <CardDescription>Update your event details below</CardDescription>
+        </CardHeader>
 
-      <CardContent className="p-6">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Event Title */}
-          <div className="space-y-2">
-            <Label htmlFor="title" className="text-sm font-semibold text-foreground">
-              Event Title *
-            </Label>
-            <Input
-              id="title"
-              placeholder="Enter your event title"
-              value={formData.title}
-              onChange={(e) => handleInputChange("title", e.target.value)}
-              className="text-lg h-12 bg-input border-border focus:ring-orange-500 focus:border-orange-500"
-              required
-            />
-          </div>
-
-          {/* Date and Time Row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <CardContent className="p-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Event Title */}
             <div className="space-y-2">
-              <Label htmlFor="date" className="text-sm font-semibold text-foreground flex items-center gap-2">
-                <CalendarIcon className="h-4 w-4 text-orange-600" />
-                Event Date *
-              </Label>
+              <Label htmlFor="title">Event Title *</Label>
               <Input
-                id="date"
-                type="date"
-                value={formData.date}
-                onChange={(e) => handleInputChange("date", e.target.value)}
-                className="bg-input border-border focus:ring-orange-500 focus:border-orange-500"
+                id="title"
+                value={formData.title}
+                onChange={(e) => handleInputChange("title", e.target.value)}
                 required
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="time" className="text-sm font-semibold text-foreground flex items-center gap-2">
-                <ClockIcon className="h-4 w-4 text-orange-600" />
-                Event Time *
-              </Label>
-              <Input
-                id="time"
-                type="time"
-                value={formData.time}
-                onChange={(e) => handleInputChange("time", e.target.value)}
-                className="bg-input border-border focus:ring-orange-500 focus:border-orange-500"
-                required
-              />
-            </div>
-          </div>
-
-          {/* Category Selection */}
-          <div className="space-y-2">
-            <Label htmlFor="category" className="text-sm font-semibold text-foreground flex items-center gap-2">
-              <TagIcon className="h-4 w-4 text-orange-600" />
-              Event Category *
-            </Label>
-            <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
-              <SelectTrigger className="bg-input border-border focus:ring-orange-500 focus:border-orange-500">
-                <SelectValue placeholder="Select event category" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="networking">Networking Event</SelectItem>
-                <SelectItem value="workshop">Workshop</SelectItem>
-                <SelectItem value="webinar">Webinar</SelectItem>
-                <SelectItem value="panel">Panel Discussion</SelectItem>
-                <SelectItem value="career">Career Development</SelectItem>
-                <SelectItem value="industry">Industry Insights</SelectItem>
-                <SelectItem value="social">Social Gathering</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Event Description */}
-          <div className="space-y-2">
-            <Label htmlFor="description" className="text-sm font-semibold text-foreground">
-              Event Description *
-            </Label>
-            <Textarea
-              id="description"
-              placeholder="Provide a detailed description of your event, including what attendees will learn or gain from participating..."
-              value={formData.description}
-              onChange={(e) => handleInputChange("description", e.target.value)}
-              className="min-h-32 bg-input border-border focus:ring-orange-500 focus:border-orange-500 resize-none"
-              required
-            />
-          </div>
-
-          {/* Speaker Information */}
-          <div className="space-y-4 p-4 bg-orange-50 rounded-lg border border-orange-200">
-            <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-              <UserIcon className="h-5 w-5 text-orange-600" />
-              Speaker Information
-            </h3>
-
-            <div className="space-y-2">
-              <Label htmlFor="speakerName" className="text-sm font-semibold text-foreground">
-                Speaker Name(s)
-              </Label>
-              <Input
-                id="speakerName"
-                placeholder="Enter speaker name(s)"
-                value={formData.speakerName}
-                onChange={(e) => handleInputChange("speakerName", e.target.value)}
-                className="bg-input border-border focus:ring-orange-500 focus:border-orange-500"
-              />
+            {/* Date & Time */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="date" className="flex items-center gap-2">
+                  <CalendarIcon className="h-4 w-4 text-orange-600" /> Event Date *
+                </Label>
+                <Input
+                  id="date"
+                  type="date"
+                  value={formData.date}
+                  onChange={(e) => handleInputChange("date", e.target.value)}
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="time" className="flex items-center gap-2">
+                  <ClockIcon className="h-4 w-4 text-orange-600" /> Event Time *
+                </Label>
+                <Input
+                  id="time"
+                  type="time"
+                  value={formData.time}
+                  onChange={(e) => handleInputChange("time", e.target.value)}
+                  required
+                />
+              </div>
             </div>
 
+            {/* Category */}
             <div className="space-y-2">
-              <Label htmlFor="speakerBio" className="text-sm font-semibold text-foreground">
-                Speaker Bio/Background
+              <Label htmlFor="category" className="flex items-center gap-2">
+                <TagIcon className="h-4 w-4 text-orange-600" /> Event Category *
               </Label>
+              <Select
+                value={formData.category}
+                onValueChange={(val) => handleInputChange("category", val)}
+              >
+                <SelectTrigger><SelectValue placeholder="Select category" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="networking">Networking Event</SelectItem>
+                  <SelectItem value="workshop">Workshop</SelectItem>
+                  <SelectItem value="webinar">Webinar</SelectItem>
+                  <SelectItem value="panel">Panel Discussion</SelectItem>
+                  <SelectItem value="career">Career Development</SelectItem>
+                  <SelectItem value="industry">Industry Insights</SelectItem>
+                  <SelectItem value="social">Social Gathering</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Description */}
+            <div className="space-y-2">
+              <Label htmlFor="description">Event Description *</Label>
               <Textarea
-                id="speakerBio"
-                placeholder="Brief background about the speaker(s), their expertise, and credentials..."
-                value={formData.speakerBio}
-                onChange={(e) => handleInputChange("speakerBio", e.target.value)}
-                className="min-h-24 bg-input border-border focus:ring-orange-500 focus:border-orange-500 resize-none"
+                id="description"
+                value={formData.description}
+                onChange={(e) => handleInputChange("description", e.target.value)}
+                required
               />
             </div>
-          </div>
 
-          {/* Registration Link */}
-          <div className="space-y-2">
-            <Label htmlFor="registrationLink" className="text-sm font-semibold text-foreground flex items-center gap-2">
-              <LinkIcon className="h-4 w-4 text-orange-600" />
-              Registration Link
-            </Label>
-            <Input
-              id="registrationLink"
-              type="url"
-              placeholder="https://your-registration-link.com"
-              value={formData.registrationLink}
-              onChange={(e) => handleInputChange("registrationLink", e.target.value)}
-              className="bg-input border-border focus:ring-orange-500 focus:border-orange-500"
-            />
-            <p className="text-xs text-muted-foreground">
-              Optional: Provide a link where alumni can register for your event
-            </p>
-          </div>
+            {/* Speaker Info */}
+            <div className="space-y-4 p-4 bg-orange-50 rounded-lg border border-orange-200">
+              <h3 className="font-semibold flex items-center gap-2">
+                <UserIcon className="h-5 w-5 text-orange-600" /> Speaker Information
+              </h3>
+              <Input
+                id="speaker_name"
+                placeholder="Speaker Name"
+                value={formData.speaker_name}
+                onChange={(e) => handleInputChange("speaker_name", e.target.value)}
+              />
+              <Textarea
+                id="speaker_bio"
+                placeholder="Speaker Bio"
+                value={formData.speaker_bio}
+                onChange={(e) => handleInputChange("speaker_bio", e.target.value)}
+              />
+            </div>
 
-          {/* Notification Checkbox */}
-          <div className="flex items-center space-x-2 p-4 bg-orange-50 rounded-lg border border-orange-200">
-            <Checkbox
-              id="sendNotification"
-              checked={formData.sendNotification}
-              onCheckedChange={(checked) => handleInputChange("sendNotification", checked as boolean)}
-              className="border-border data-[state=checked]:bg-orange-600 data-[state=checked]:border-orange-600"
-            />
-            <Label
-              htmlFor="sendNotification"
-              className="text-sm text-foreground flex items-center gap-2 cursor-pointer"
-            >
-              <MailIcon className="h-4 w-4 text-orange-600" />
-              Send email notification to alumni network
-            </Label>
-          </div>
+            {/* Registration Link */}
+            <div className="space-y-2">
+              <Label htmlFor="registration_link" className="flex items-center gap-2">
+                <LinkIcon className="h-4 w-4 text-orange-600" /> Registration Link
+              </Label>
+              <Input
+                id="registration_link"
+                value={formData.registration_link}
+                onChange={(e) => handleInputChange("registration_link", e.target.value)}
+              />
+            </div>
 
-          {/* Submit Button */}
-          <div className="pt-4">
-            <Button
-              type="submit"
-              className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 text-lg transition-colors"
-            >
-              Submit Event for Review
+            {/* Notification */}
+            <div className="flex items-center gap-2">
+              <Checkbox
+                id="send_notification"
+                checked={formData.send_notification}
+                onCheckedChange={(val) => handleInputChange("send_notification", val as boolean)}
+              />
+              <Label htmlFor="send_notification" className="flex items-center gap-2">
+                <MailIcon className="h-4 w-4 text-orange-600" /> Send email notification
+              </Label>
+            </div>
+
+            {/* Submit */}
+            <Button type="submit" className="w-full bg-orange-600 text-white">
+              Update Event
             </Button>
-            <p className="text-xs text-muted-foreground text-center mt-2">
-              Your event will be reviewed and published within 24 hours
-            </p>
-          </div>
-        </form>
-      </CardContent>
-    </Card>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   )
 }

@@ -3,8 +3,11 @@ import { loginUser, registerUser } from "../models/authschema.js";
 import { blacklistedTokens } from "../models/blacklist.js";
 import bcrypt from "bcryptjs";
 import pool from "../config/db.js";
+import jwt from "jsonwebtoken";
 
 const router = express.Router();
+const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
+
 
 router.post("/register", async (req, res) => {
   try {
@@ -44,5 +47,27 @@ router.post("/logout", (req, res) => {
 
   blacklistedTokens.push(token); // save to blacklist
   res.json({ message: "Logged out successfully" });
+});
+
+router.get("/me", async (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) return res.status(401).json({ error: "No token" });
+
+  const token = authHeader.split(" ")[1];
+  if (blacklistedTokens.includes(token)) {
+    return res.status(401).json({ error: "Token expired or logged out" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET) as { id: number };
+    const [rows] = await pool.query("SELECT id, email, password, role FROM users WHERE id = ?", [decoded.id]) as [any[], any];
+    const user = rows[0];
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    const { password, ...userData } = user;
+    res.json(userData);
+  } catch (err) {
+    res.status(401).json({ error: "Invalid token" });
+  }
 });
 export default router;

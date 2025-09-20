@@ -9,8 +9,11 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { CalendarIcon, ClockIcon, UserIcon, LinkIcon, TagIcon, MailIcon } from "lucide-react"
+import { toast } from "sonner"
+import { addEvent } from "@/services/eventservices"
 
 export function EventPostingForm() {
+  const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     title: "",
     date: "",
@@ -23,11 +26,30 @@ export function EventPostingForm() {
     sendNotification: false,
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Event submitted:", formData)
-    // Handle form submission here
+    setLoading(true)
+    try {
+      const res = await addEvent(formData) // call backend
+      toast.success("Event created successfully")
+      setFormData({
+        title: "",
+        date: "",
+        time: "",
+        description: "",
+        speakerName: "",
+        speakerBio: "",
+        registrationLink: "",
+        category: "",
+        sendNotification: false,
+      }) // reset form
+    } catch (err: any) {
+      toast.error("Failed to create event")
+    } finally {
+      setLoading(false)
+    }
   }
+  
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }))

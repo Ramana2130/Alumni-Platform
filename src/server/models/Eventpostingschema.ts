@@ -13,11 +13,11 @@ export async function createEvent(data: any) {
     data.date,
     data.time,
     data.description || null,
-    data.speakerName || null,
-    data.speakerBio || null,
-    data.registrationLink || null,
+    data.speaker_name  || null,
+    data.speaker_bio  || null,
+    data.registration_link  || null,
     data.category,
-    data.sendNotification ? 1 : 0,
+    data.send_notification  ? 1 : 0,
   ];
   const [result]: any = await pool.query(sql, values);
   return result.insertId;
@@ -55,11 +55,11 @@ export async function updateEvent(id:number, data: any) {
     data.date,
     data.time,
     data.description || null,
-    data.speakerName || null,
-    data.speakerBio || null,
-    data.registrationLink || null,
+    data.speaker_name  || null,
+    data.speaker_bio  || null,
+    data.registration_link  || null,
     data.category,
-    data.sendNotification ? 1 : 0,
+    data.send_notification  ? 1 : 0,
     id,
   ];
    const [result] = await pool.query<ResultSetHeader>(sql, values);
