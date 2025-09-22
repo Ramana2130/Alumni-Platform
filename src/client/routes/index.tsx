@@ -10,6 +10,7 @@ import StudentAlumniDesp from "@/components/students/StudentAlumniDesp";
 import UniversityAlumniDesp from "@/components/university/alumnidetails/UniversityAlumniDesp";
 import { AlumniEditForm } from "@/components/university/AlumniEditForm";
 import UniversityDashboardLayout from "@/components/university/sidebar/layout";
+import { StudentEditForm } from "@/components/university/studentdetails/StudentEditForm";
 import UniversityStudentDesp from "@/components/university/studentdetails/UniversityStudentDesp";
 import AlumniChatPage from "@/pages/alumni/AlumniChatPage";
 import AlumniHomePage from "@/pages/alumni/AlumniHomePage";
@@ -145,7 +146,7 @@ const router = createBrowserRouter([
             {
                 path: "student-personal-details",
                 element: <StudentPersonalProfile />
-            }
+            },            
         ]
     },
     {
@@ -181,12 +182,16 @@ const router = createBrowserRouter([
                 element: <UniversityAlumniDesp />
             },
             {
-                path: "student-personal-details",
+                path: "student-personal-details/:id",
                 element: <UniversityStudentDesp />
             },
             {
                 path: "settings",
                 element: <UniversityProfilePage />
+            },
+            {
+                path: "edit-personal-details/:id",
+                element: <StudentEditForm />
             }
         ]
     }

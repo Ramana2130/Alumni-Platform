@@ -23,7 +23,7 @@ router.post("/add", async (req, res) => {
 
         // Insert into users (link with alumniId)
         await pool.query(
-          `INSERT INTO users (alumniId, username, password, role) VALUES (?, ?, ?, ?)`,
+          `INSERT INTO users (alumniId, email, password, role) VALUES (?, ?, ?, ?)`,
           [alumniId, email, hashedPassword, "alumni"]
         );
       } catch (err: any) {

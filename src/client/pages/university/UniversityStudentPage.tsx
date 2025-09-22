@@ -1,5 +1,5 @@
 import { UniversityStudentProfile } from '@/components/university/studentdetails/UniversityStudentProfile'
-import { StudentsAddForm } from '@/components/university/StudentsAddForm'
+import { StudentAddForm } from '@/components/university/StudentsAddForm'
 import { GraduationCap, UserRound } from 'lucide-react'
 
 const UniverSityStudentPage = () => {
@@ -9,7 +9,7 @@ const UniverSityStudentPage = () => {
         <UserRound className='size-8 ' />
         <h1 className='text-2xl font-bold tracking-tight  pb-4'>Student details</h1>
       </div>
-            <StudentsAddForm />
+            <StudentAddForm />
           <div className='py-3'>
           <UniversityStudentProfile />
           </div>

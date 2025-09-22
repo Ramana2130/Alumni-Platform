@@ -1,5 +1,5 @@
-"use client"
-import * as React from "react"
+"use client";
+import * as React from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -11,10 +11,16 @@ import {
   SortingState,
   useReactTable,
   VisibilityState,
-} from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+} from "@tanstack/react-table";
+import {
+  ArrowUpDown,
+  MoreHorizontal,
+  Check,
+  ChevronsUpDown,
+  Trash,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -23,8 +29,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -32,159 +38,63 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Check, ChevronsUpDown } from "lucide-react"
-import { cn } from "@/lib/utils"
+} from "@/components/ui/table";
+import { deleteStudent, getAllStudents } from "@/services/studentservices";
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-
-const departments = [
-  "Computer Science",
-  "Electrical Engineering",
-  "Mechanical Engineering",
-  "Civil Engineering",
-  "Chemical Engineering",
-]
-
-const yearsOfJoin = [2018, 2019, 2020, 2021, 2022, 2023]
-
-const data = [
-  {
-    name: "Amit Sharma",
-    email: "amit.sharma@example.com",
-    department: "Computer Science",
-    registerNumber: "CS2018001",
-    yearOfJoin: 2018,
-    passedOutYear: 2022,
-  },
-  {
-    name: "Neha Singh",
-    email: "neha.singh@example.com",
-    department: "Electrical Engineering",
-    registerNumber: "EE2019005",
-    yearOfJoin: 2019,
-    passedOutYear: 2023,
-  },
-  {
-    name: "Ravi Kumar",
-    email: "ravi.kumar@example.com",
-    department: "Mechanical Engineering",
-    registerNumber: "ME2020002",
-    yearOfJoin: 2020,
-    passedOutYear: 2024,
-  },
-  {
-    name: "Pooja Verma",
-    email: "pooja.verma@example.com",
-    department: "Civil Engineering",
-    registerNumber: "CE2021009",
-    yearOfJoin: 2021,
-    passedOutYear: 2025,
-  },
-  {
-    name: "Sanjay Rao",
-    email: "sanjay.rao@example.com",
-    department: "Chemical Engineering",
-    registerNumber: "CH2023003",
-    yearOfJoin: 2023,
-    passedOutYear: null,
-  },
-  // Add more data to have enough rows for multiple pages
-  {
-    name: "Anita Desai",
-    email: "anita.desai@example.com",
-    department: "Computer Science",
-    registerNumber: "CS2018002",
-    yearOfJoin: 2018,
-    passedOutYear: 2022,
-  },
-  {
-    name: "Rahul Yadav",
-    email: "rahul.yadav@example.com",
-    department: "Mechanical Engineering",
-    registerNumber: "ME2020003",
-    yearOfJoin: 2020,
-    passedOutYear: 2024,
-  },
-  {
-    name: "Deepa Nair",
-    email: "deepa.nair@example.com",
-    department: "Electrical Engineering",
-    registerNumber: "EE2019006",
-    yearOfJoin: 2019,
-    passedOutYear: 2023,
-  },
-  {
-    name: "Suresh Patil",
-    email: "suresh.patil@example.com",
-    department: "Chemical Engineering",
-    registerNumber: "CH2023004",
-    yearOfJoin: 2023,
-    passedOutYear: null,
-  },
-  {
-    name: "Suresh Patil",
-    email: "suresh.patil@example.com",
-    department: "Chemical Engineering",
-    registerNumber: "CH2023004",
-    yearOfJoin: 2023,
-    passedOutYear: null,
-  },
-  {
-    name: "Suresh Patil",
-    email: "suresh.patil@example.com",
-    department: "Chemical Engineering",
-    registerNumber: "CH2023004",
-    yearOfJoin: 2023,
-    passedOutYear: null,
-  },
-  {
-    name: "Suresh Patil",
-    email: "suresh.patil@example.com",
-    department: "Chemical Engineering",
-    registerNumber: "CH2023004",
-    yearOfJoin: 2023,
-    passedOutYear: null,
-  },
-  {
-    name: "Suresh Patil",
-    email: "suresh.patil@example.com",
-    department: "Chemical Engineering",
-    registerNumber: "CH2023004",
-    yearOfJoin: 2023,
-    passedOutYear: null,
-  },
-  {
-    name: "Kavita Joshi",
-    email: "kavita.joshi@example.com",
-    department: "Civil Engineering",
-    registerNumber: "CE2021010",
-    yearOfJoin: 2021,
-    passedOutYear: 2025,
-  },
-]
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
 
 export type Student = {
-  name: string
-  email: string
-  department: string
-  registerNumber: string
-  yearOfJoin: number
-  passedOutYear: number | null
-}
+  id: number;
+  student_name: string;
+  email: string;
+  department: string;
+  reg_no: string;
+  year_of_joining: number;
+  year_of_passing: number | null;
+  academic_year?: string | null;
+};
 
-export const columns: ColumnDef<Student>[] = [
+
+export function UniversityStudentProfile() {
+  const [students, setStudents] = React.useState<Student[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  const [departmentFilter, setDepartmentFilter] = React.useState("");
+  const [yearFilter, setYearFilter] = React.useState<number | null>(null);
+  const [nameFilter, setNameFilter] = React.useState("");
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
+  const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
+  const [searchInput, setSearchInput] = React.useState("");
+
+
+
+  // Inside your UniversityStudentProfile component
+const handleDelete = async (studentId: number) => {
+  try {
+    await deleteStudent(studentId); // API call to delete from DB
+    setStudents((prev) => prev.filter((s) => s.id !== studentId)); // remove locally
+    toast.success("Student deleted successfully");
+  } catch (error: any) {
+    toast.error(error.response?.data?.error || "Failed to delete student");
+  }
+};
+
+  const columns: ColumnDef<Student>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -208,23 +118,28 @@ export const columns: ColumnDef<Student>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "name",
-    header: () => <div className="">Name</div>,
-    cell: ({ row }) => <div><a href="/university/student-personal-details" className="underline">{row.getValue("name")}</a></div>,
+    accessorKey: "student_name",
+    header: "Name",
+    cell: ({ row }) => (
+      <a
+        href={`/university/student-personal-details/${row.original.id}`}
+        className="underline"
+      >
+        {row.getValue("student_name")}
+      </a>
+    ),
   },
   {
     accessorKey: "email",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <ArrowUpDown />
-        </Button>
-      )
-    },
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Email
+        <ArrowUpDown />
+      </Button>
+    ),
     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
   },
   {
@@ -232,23 +147,27 @@ export const columns: ColumnDef<Student>[] = [
     header: "Department",
   },
   {
-    accessorKey: "registerNumber",
+    accessorKey: "reg_no",
     header: "Register Number",
   },
   {
-    accessorKey: "yearOfJoin",
-    header: () => <div>Year Of Join</div>,
+    accessorKey: "academic_year",
+    header: "Academic Year",
   },
   {
-    accessorKey: "passedOutYear",
-    header: () => <div>Passed Out Year</div>,
+    accessorKey: "year_of_joining",
+    header: "Year Of Join",
+  },
+  {
+    accessorKey: "year_of_passing",
+    header: "Passed Out Year",
   },
   {
     id: "actions",
     header: "Actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const student = row.original
+      const student = row.original;
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -260,41 +179,69 @@ export const columns: ColumnDef<Student>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(student.registerNumber)}
+              onClick={() => navigator.clipboard.writeText(student.reg_no)}
             >
               Copy Register Number
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Edit Details</DropdownMenuItem>
-            <DropdownMenuItem>Delete Account</DropdownMenuItem>
+            <a href={`/university/edit-personal-details/${student.id}`}>
+              <DropdownMenuItem>Edit Details</DropdownMenuItem>
+            </a>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="ghost" className="text-red-500"> <Trash />delete</Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    your account and remove your data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction className="text-white bg-red-500" onClick={() => handleDelete(student.id)}>delete</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
-]
+];
 
-export function UniversityStudentProfile() {
-  const [departmentFilter, setDepartmentFilter] = React.useState("")
-  const [yearFilter, setYearFilter] = React.useState<number | null>(null)
-  const [nameFilter, setNameFilter] = React.useState("")
-  const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
-  const [searchInput, setSearchInput] = React.useState("")
+  // ✅ Fetch students from API
+  React.useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const res = await getAllStudents();
+        setStudents(res); // assuming API returns an array of students
+      } catch (err) {
+        console.error("Failed to fetch students:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchStudents();
+  }, []);
 
-  // Filter data based on departmentFilter, yearFilter and nameFilter
+  // ✅ Apply filters
   const filteredData = React.useMemo(() => {
-    return data.filter((student) => {
-      const departmentMatches = departmentFilter ? student.department === departmentFilter : true
-      const yearMatches = yearFilter ? student.yearOfJoin === yearFilter : true
+    return students.filter((student) => {
+      const departmentMatches = departmentFilter
+        ? student.department === departmentFilter
+        : true;
+      const yearMatches = yearFilter
+        ? student.year_of_joining === yearFilter
+        : true;
       const nameMatches = nameFilter
-        ? student.name.toLowerCase().includes(nameFilter.toLowerCase())
-        : true
-      return departmentMatches && yearMatches && nameMatches
-    })
-  }, [departmentFilter, yearFilter, nameFilter])
+        ? student.student_name.toLowerCase().includes(nameFilter.toLowerCase())
+        : true;
+      return departmentMatches && yearMatches && nameMatches;
+    });
+  }, [students, departmentFilter, yearFilter, nameFilter]);
 
   const table = useReactTable({
     data: filteredData,
@@ -316,133 +263,52 @@ export function UniversityStudentProfile() {
     initialState: {
       pagination: {
         pageSize: 10,
-      }
-    }
-  })
+      },
+    },
+  });
 
-  // Popovers open state
-  const [openDept, setOpenDept] = React.useState(false)
-  const [openYear, setOpenYear] = React.useState(false)
-
-  // Handle search button click
-  const onSearch = () => {
-    setNameFilter(searchInput.trim())
+  if (loading) {
+    return <div className="p-4">Loading students...</div>;
   }
+
+
 
   return (
     <div className="w-full">
+      {/* Search and Filters */}
       <div className="flex items-center py-4 space-x-4 flex-wrap">
-        {/* Search by name input and button */}
         <div className="flex items-center space-x-2">
           <Input
             placeholder="Search by student name"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && onSearch()}
+            onKeyDown={(e) =>
+              e.key === "Enter" && setNameFilter(searchInput.trim())
+            }
             className="max-w-sm"
           />
-          <Button onClick={onSearch}>Search</Button>
+          <Button onClick={() => setNameFilter(searchInput.trim())}>
+            Search
+          </Button>
         </div>
-
-        {/* Department filter popover */}
-        <Popover open={openDept} onOpenChange={setOpenDept}>
-          <PopoverTrigger asChild>
-            <Button
-              variant="outline"
-              role="combobox"
-              aria-expanded={openDept}
-              className="w-[200px] justify-between"
-            >
-              {departmentFilter || "Select Department..."}
-              <ChevronsUpDown className="opacity-50" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-[200px] p-0">
-            <Command>
-              <CommandInput placeholder="Search department..." className="h-9" />
-              <CommandList>
-                <CommandEmpty>No department found.</CommandEmpty>
-                <CommandGroup>
-                  {departments.map((dept) => (
-                    <CommandItem
-                      key={dept}
-                      value={dept}
-                      onSelect={(value) => {
-                        setDepartmentFilter(value === departmentFilter ? "" : value)
-                        setOpenDept(false)
-                      }}
-                    >
-                      {dept}
-                      {departmentFilter === dept && (
-                        <Check className="ml-auto" />
-                      )}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              </CommandList>
-            </Command>
-          </PopoverContent>
-        </Popover>
-
-        {/* Year of join filter popover */}
-        <Popover open={openYear} onOpenChange={setOpenYear}>
-          <PopoverTrigger asChild>
-            <Button
-              variant="outline"
-              role="combobox"
-              aria-expanded={openYear}
-              className="w-[200px] justify-between"
-            >
-              {yearFilter ? yearFilter : "Select Year Of Join..."}
-              <ChevronsUpDown className="opacity-50" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-[200px] p-0">
-            <Command>
-              <CommandInput placeholder="Search year..." className="h-9" />
-              <CommandList>
-                <CommandEmpty>No year found.</CommandEmpty>
-                <CommandGroup>
-                  {yearsOfJoin.map((year) => (
-                    <CommandItem
-                      key={year}
-                      value={year.toString()}
-                      onSelect={(value) => {
-                        const parsed = parseInt(value)
-                        setYearFilter(parsed === yearFilter ? null : parsed)
-                        setOpenYear(false)
-                      }}
-                    >
-                      {year}
-                      {yearFilter === year && (
-                        <Check className="ml-auto" />
-                      )}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              </CommandList>
-            </Command>
-          </PopoverContent>
-        </Popover>
       </div>
-      {/* Table container with fixed height to prevent layout shifts */}
-      <div className="">
-        <Table >
+
+      {/* Table */}
+      <div>
+        <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id} style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  )
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
@@ -454,15 +320,21 @@ export function UniversityStudentProfile() {
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
                   No results.
                 </TableCell>
               </TableRow>
@@ -470,6 +342,8 @@ export function UniversityStudentProfile() {
           </TableBody>
         </Table>
       </div>
+
+      {/* Pagination */}
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="text-muted-foreground flex-1 text-sm">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
@@ -495,5 +369,5 @@ export function UniversityStudentProfile() {
         </div>
       </div>
     </div>
-  )
+  );
 }

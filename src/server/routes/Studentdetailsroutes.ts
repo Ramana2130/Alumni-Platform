@@ -1,7 +1,11 @@
 import express from "express";
+import multer from "multer";
+import xlsx from "xlsx";
 import { createStudent, deleteStudent, getAllStudents, getStudentById, updateStudent } from "../models/Studentdetails.js";
 
 const router = express.Router();
+const upload = multer({ storage: multer.memoryStorage() });
+
 
 // Create student
 router.post("/add", async (req, res) => {
@@ -65,6 +69,48 @@ router.delete("/deleteById/:id", async (req, res) => {
     res.status(200).json({ message: "Student deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: err instanceof Error ? err.message : "Error deleting student details" });
+  }
+});
+
+// Excel Upload
+router.post("/uploadExcel", upload.single("file"), async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).json({ error: "No file uploaded" });
+
+    const workbook = xlsx.read(req.file.buffer, { type: "buffer" });
+    const sheetName = workbook.SheetNames[0];
+    const sheet = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
+
+    const insertedIds: number[] = [];
+
+    for (const row of sheet) {
+      const typedRow = row as {
+          studentName: string;
+  regNo: string;
+  department: string;
+  email: string;
+  yearOfJoining: string;
+  yearOfPassing: string;
+  academicYear?: string | null;
+      };
+
+      const studentData = {
+        studentName: typedRow.studentName,
+        regNo: typedRow.regNo,
+        department: typedRow.department,
+        email: typedRow.email,
+        yearOfJoining: typedRow.yearOfJoining,
+        yearOfPassing: typedRow.yearOfPassing,
+        academicYear: typedRow.academicYear,
+      };
+
+      const id = await createStudent(studentData);
+      insertedIds.push(id);
+    }
+
+    res.status(201).json({ message: "Excel processed successfully", insertedIds });
+  } catch (err) {
+    res.status(500).json({ error: err instanceof Error ? err.message : "Error processing Excel" });
   }
 });
 

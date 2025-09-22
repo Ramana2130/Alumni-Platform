@@ -5,20 +5,20 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "supersecret"; // keep safe
 
-export async function registerUser(username: string, password: string, role: string, alumniId?: number | null) {
+export async function registerUser(email: string, password: string, role: string, alumniId?: number | null) {
   // check if user exists
   const [rows]: any = await pool.query(
-    "SELECT * FROM users WHERE username = ?",
-    [username]
+    "SELECT * FROM users WHERE email = ?",
+    [email]
   );
 
   if (rows.length > 0) {
-    throw new Error("User already exists with this username");
+    throw new Error("User already exists with this email");
   }
 
-    // validate alumniId depending on role
+  // validate alumniId depending on role
   if (role === "admin") {
-    alumniId = null; // force undefined for admins
+    alumniId = null; // force null for admins
   } else if (role === "alumni") {
     if (!alumniId) {
       throw new Error("alumniId is required for alumni role");
@@ -30,16 +30,14 @@ export async function registerUser(username: string, password: string, role: str
 
   // insert into users
   const [result] = await pool.query(
-    "INSERT INTO users (alumniId, username, password, role) VALUES (?, ?, ?, ?)",
-    [alumniId || null, username, hashedPassword, role]
+    "INSERT INTO users (alumniId, email, password, role) VALUES (?, ?, ?, ?)",
+    [alumniId, email, hashedPassword, role]
   );
 
   return (result as any).insertId;
 }
 
-
-
-// login
+//login
 export async function loginUser(email: string, password: string) {
   const [rows] = await pool.query<RowDataPacket[]>(
     "SELECT * FROM users WHERE email = ?",
@@ -60,4 +58,5 @@ export async function loginUser(email: string, password: string) {
 
   return { token, user };
 }
+
 
