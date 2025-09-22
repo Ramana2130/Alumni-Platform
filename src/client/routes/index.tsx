@@ -8,6 +8,7 @@ import StudentsJobDesp from "@/components/students/job/StudentsJobDesp";
 import StudentDashboardLayout from "@/components/students/sidebar/layout";
 import StudentAlumniDesp from "@/components/students/StudentAlumniDesp";
 import UniversityAlumniDesp from "@/components/university/alumnidetails/UniversityAlumniDesp";
+import { AlumniEditForm } from "@/components/university/AlumniEditForm";
 import UniversityDashboardLayout from "@/components/university/sidebar/layout";
 import UniversityStudentDesp from "@/components/university/studentdetails/UniversityStudentDesp";
 import AlumniChatPage from "@/pages/alumni/AlumniChatPage";
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
             {
                 path: "personal-details",
                 element: <AlumniDesp />
+            },
+            {
+                path:  "edit-personal-details/:id",
+                element: <AlumniEditForm />
             },
             {
                 path: "fund-donated",
@@ -172,7 +177,7 @@ const router = createBrowserRouter([
                 element: <FundPage />
             },
             {
-                path: "alumni-personal-details",
+                path: "alumni-personal-details/:id",
                 element: <UniversityAlumniDesp />
             },
             {

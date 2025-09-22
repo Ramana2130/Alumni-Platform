@@ -5,31 +5,39 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "supersecret"; // keep safe
 
-export async function registerUser(email: any, password: any, role: any) {
+export async function registerUser(username: string, password: string, role: string, alumniId?: number | null) {
   // check if user exists
   const [rows]: any = await pool.query(
-    "SELECT * FROM users WHERE email = ?",
-    [email]
+    "SELECT * FROM users WHERE username = ?",
+    [username]
   );
+
   if (rows.length > 0) {
-    throw new Error("User already exists with this email");
+    throw new Error("User already exists with this username");
   }
 
-  // hash password
-  const hashedPassword = await bcrypt.hash(password, 10);
+    // validate alumniId depending on role
+  if (role === "admin") {
+    alumniId = null; // force undefined for admins
+  } else if (role === "alumni") {
+    if (!alumniId) {
+      throw new Error("alumniId is required for alumni role");
+    }
+  }
 
-  // insert into db
-  const [result]: any = await pool.query(
-    "INSERT INTO users ( email, password, role) VALUES ( ?, ?, ?)",
-    [ email, hashedPassword, role]
+  // hash the password
+  const hashedPassword = await bcrypt.hash(password.toString(), 10);
+
+  // insert into users
+  const [result] = await pool.query(
+    "INSERT INTO users (alumniId, username, password, role) VALUES (?, ?, ?, ?)",
+    [alumniId || null, username, hashedPassword, role]
   );
 
-  return {
-    id: (result as { insertId: number }).insertId,
-    email,
-    role,
-  };
+  return (result as any).insertId;
 }
+
+
 
 // login
 export async function loginUser(email: string, password: string) {

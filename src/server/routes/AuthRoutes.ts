@@ -11,13 +11,13 @@ const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
 
 router.post("/register", async (req, res) => {
   try {
-    const {  email, password, role } = req.body;
+    const {  email, registerNumber, role } = req.body;
 
-    if (!email || !password || !role) {
+    if (!email || !registerNumber || !role) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
-    const user = await registerUser( email, password, role);
+    const user = await registerUser( email, registerNumber, role);
     res.status(201).json({ message: "User registered successfully", user });
   } catch (err) {
     res.status(400).json({ error: err instanceof Error ? err.message : "Registration failed" });

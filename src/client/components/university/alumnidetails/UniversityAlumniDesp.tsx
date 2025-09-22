@@ -1,33 +1,68 @@
-import React from 'react'
-import { UniversityAlumniProfileSummary } from './UniversityAlumniProfileSummary'
+import React, { useEffect, useState } from "react";
+import { UniversityAlumniProfileSummary } from "./UniversityAlumniProfileSummary";
+import { getAlumniFullProfile } from "@/services/alumniservices";
+import { useParams } from "react-router-dom";
 
-const sampleAlumniData = {
-    name: "Sarah Johnson",
-    dept: "Computer Science Engineering",
-    reg_no: "CS2019001",
-    year_of_joining: "2019",
-    year_of_passing: "2023",
-    current_status: "Working Professional",
-    company_name: "TechCorp Solutions",
-    designation: "Senior Software Engineer",
-    job_location: "San Francisco, CA",
-    success_stories:
-      "Led the development of a revolutionary AI-powered analytics platform that increased client efficiency by 40%. Mentored 15+ junior developers and successfully transitioned the entire team to modern cloud architecture. Recognized as 'Employee of the Year' for outstanding technical leadership and innovation.",
-    location: "San Francisco, CA",
-  }
+type AlumniProfile = {
+  name: string;
+  department: string;
+  registerNumber: string;
+  yearOfJoining: number;
+  yearOfPassing: number | null;
+  currentStatus?: string;
+  companyName?: string;
+  designation?: string;
+  jobLocation?: string;
+  successStories?: string;
+  currentLocation?: string;
+};
 
 const UniversityAlumniDesp = () => {
+    const { id } = useParams<{ id: string }>();
+  const [alumni, setAlumni] = useState<AlumniProfile | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchAlumni() {
+      try {
+        if(!id) return;
+        const data = await getAlumniFullProfile(Number(id)); // ✅ call service
+        setAlumni(data);
+        console.log("Fetched alumni data:", data);
+      } catch (error) {
+        console.error("Error fetching alumni:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchAlumni();
+  }, [id]);
+
+  if (loading) return <p className="text-center">Loading...</p>;
+  if (!alumni) return <p className="text-center">No alumni found.</p>;
+
   return (
-    <div>
-        <main className=" bg-background">
-      <div className="container mx-auto space-y-12 p-5">       
+    <main className="bg-background">
+      <div className="container mx-auto space-y-12 p-5">
         <section>
-          <UniversityAlumniProfileSummary {...sampleAlumniData} />
+          {/* ✅ Spread props to ProfileSummary */}
+          <UniversityAlumniProfileSummary
+            name={alumni.name}
+            department={alumni.department}
+            registerNumber={alumni.registerNumber}
+            yearOfJoining={alumni.yearOfJoining}
+            yearOfPassing={alumni.yearOfPassing}
+            currentStatus={alumni.currentStatus ?? "N/A"}
+            companyName={alumni.companyName ?? ""}
+            designation={alumni.designation ?? ""}
+            jobLocation={alumni.jobLocation ?? ""}
+            successStories={alumni.successStories ?? ""}
+            location={alumni.currentLocation ?? ""}
+          />
         </section>
       </div>
     </main>
-    </div>
-  )
-}
+  );
+};
 
-export default UniversityAlumniDesp
+export default UniversityAlumniDesp;
