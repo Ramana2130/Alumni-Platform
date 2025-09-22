@@ -170,7 +170,7 @@ const router = createBrowserRouter([
                 element: <UniversityJobPage />
             },
             {
-                path:"job-description",
+                path:"job-description/:id",
                 element: <JobDesp />
             },
             {

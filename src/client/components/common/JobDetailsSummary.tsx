@@ -6,31 +6,25 @@ import { Building2, MapPin, Calendar, DollarSign, GraduationCap, User, Hash, Clo
 
 interface JobDetailsSummaryProps {
   companyName: string
+  job_title: string
   location: string
   jobDescription: string
   applyLink: string
   applyLastDate: string
   jobRole: string
   salary: string
-  alumniName: string
-  registerNo: string
-  passedOutYear: string
-  department: string
   otherStuff?: string[]
 }
 
 export function JobDetailsSummary({
   companyName,
+  job_title,
   location,
   jobDescription,
   applyLink,
   applyLastDate,
   jobRole,
   salary,
-  alumniName,
-  registerNo,
-  passedOutYear,
-  department,
   otherStuff = [],
 }: JobDetailsSummaryProps) {
   return (
@@ -43,7 +37,7 @@ export function JobDetailsSummary({
                 <Building2 className="w-6 h-6 text-emerald-600" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">{companyName}</h1>
+                <h1 className="text-xl font-bold text-gray-900">{job_title}</h1>
                 <div className="flex items-center gap-2 text-gray-600">
                   <MapPin className="w-4 h-4" />
                   <span className="text-sm">{location}</span>
@@ -70,9 +64,13 @@ export function JobDetailsSummary({
         </div>
 
         <Separator className="bg-gray-200" />
+        <div className="space-y-3">
+          <h3 className="text-base font-semibold text-gray-900">Job Description</h3>
+          <p className="text-sm text-gray-600 leading-relaxed">{jobDescription}</p>
+        </div>
 
         {/* Alumni Information Section */}
-        <div className="space-y-4">
+        {/* <div className="space-y-4">
           <h3 className="text-base font-semibold text-gray-900 flex items-center gap-2">
             <GraduationCap className="w-4 h-4 text-emerald-600" />
             Alumni Connection
@@ -109,7 +107,7 @@ export function JobDetailsSummary({
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <Separator className="bg-gray-200" />
 

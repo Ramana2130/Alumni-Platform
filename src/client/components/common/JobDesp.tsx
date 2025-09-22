@@ -1,21 +1,24 @@
+import { useEffect, useState } from "react"
 import { JobDetailsSummary } from "./JobDetailsSummary"
+import { getJobPostingById } from "@/services/jobservices"
+import { useParams } from "react-router-dom"
 
 export default function JobDesp() {
-  const sampleJobData = {
-    companyName: "TechCorp Solutions",
-    location: "San Francisco, CA",
-    jobDescription:
-      "We are seeking a talented Software Engineer to join our dynamic team. You will be responsible for developing scalable web applications, collaborating with cross-functional teams, and contributing to our innovative products. The ideal candidate should have strong problem-solving skills and experience with modern web technologies.",
-    applyLink: "https://example.com/apply",
-    applyLastDate: "December 31, 2024",
-    jobRole: "Senior Software Engineer",
-    salary: "Salary : 10LPA - 17LPA",
-    alumniName: "Sarah Johnson",
-    registerNo: "CS2019001",
-    passedOutYear: "2023",
-    department: "Computer Science Engineering",
-    otherStuff: ["Remote Work Available", "Health Insurance", "Stock Options", "Flexible Hours", "Learning Budget"],
-  }
+  const [job, setJob] = useState<any>(null)
+  const {id} = useParams<{ id: string }>();
+
+  useEffect(() => {
+    const fetchJob = async () => {
+      try {
+        const data = await getJobPostingById(Number(id)) // pass jobId dynamically
+        setJob(data)
+        console.log(data)
+      } catch (err) {
+        console.error("Error fetching job:", err)
+      }
+    }
+    fetchJob()
+  }, [])
 
   return (
     <main className="min-h-screen bg-background p-1">
@@ -25,7 +28,16 @@ export default function JobDesp() {
           <p className="text-muted-foreground">Professional job listing with alumni connections</p>
         </div> */}
 
-        <JobDetailsSummary {...sampleJobData} />
+        <JobDetailsSummary
+          companyName={job?.job_title}
+          job_title={job?.job_title}
+          location={job?.location}
+          jobDescription={job?.overview}
+          applyLink={job?.apply_url}
+          applyLastDate={job?.application_deadline}
+          jobRole={job?.role}
+          salary={job?.salary_package}
+        />
       </div>
     </main>
   )
