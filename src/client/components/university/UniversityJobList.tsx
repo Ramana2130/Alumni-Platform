@@ -146,7 +146,7 @@ export function UniversityJobList() {
   };
 
   return (
-    <div className="space-y-3 px-4">
+    <div className="space-y-3 px-8 py-6">
       <div className="flex items-center gap-1 text-black tracking-tight">
         <BookCheck />
         <h1 className="text-2xl font-bold tracking-tight">Job List</h1>

@@ -1,5 +1,5 @@
 import express from "express";
-import { createAlumni, deleteAlumni, getAllAlumni, getAlumniById, getAlumniFullProfile, updateAlumni } from "../models/Alumnidetails.js";
+import { createAlumni, deleteAlumni, getAllAlumni, getAlumniByEmail, getAlumniById, getAlumniFullProfile, updateAlumni } from "../models/Alumnidetails.js";
 import multer from "multer";
 import xlsx from "xlsx";
 import pool from "../config/db.js";
@@ -186,6 +186,20 @@ router.post("/uploadExcel", upload.single("file"), async (req, res) => {
   } catch (error: any) {
     console.error("❌ Error uploading Excel:", error.message, error);
     return res.status(500).json({ error: error.message || "Error processing Excel file" });
+  }
+});
+
+// GET alumni by email
+router.get("/getByEmail/:email", async (req, res) => {
+  try {
+    const email = req.params.email;
+    const alumni = await getAlumniByEmail(email);
+    if (!alumni) {
+      return res.status(404).json({ message: "Alumni not found" });
+    }
+    res.status(200).json(alumni);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching alumni by email" });
   }
 });
 

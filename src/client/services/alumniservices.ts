@@ -50,3 +50,11 @@ export async function uploadAlumniExcel(file: File) {
   );
   return res.data;
 }
+
+// Get Alumni By Email
+export async function getAlumniByEmail(email: string) {
+  const res = await axios.get(
+    `${import.meta.env.VITE_BACKEND_URL}/alumni-details/getByEmail/${encodeURIComponent(email)}`
+  );
+  return res.data;
+}

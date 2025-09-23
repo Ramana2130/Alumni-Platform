@@ -1,5 +1,5 @@
 import express from "express";
-import { createAlumni, deleteAlumni, getAllAlumni, getAlumniById, updateAlumni } from "../models/Alumnicurrentdetails.js";
+import { createAlumni, deleteAlumni, getAllAlumni, getAlumniById, getCurrentDetailsByAlumniId, updateAlumni } from "../models/Alumnicurrentdetails.js";
 
 
 const router = express.Router();
@@ -63,4 +63,17 @@ router.delete("/deleteById/:id", async (req, res) => {
   }
 });
 
+// Get current details by alumni_id
+router.get("/getCurrentDetailsByAlumniId/:id", async (req, res) => {
+  try {
+    const alumniId = Number(req.params.id);
+    if (isNaN(alumniId)) return res.status(400).json({ error: "Invalid alumni ID" });
+    const currentDetails = await getCurrentDetailsByAlumniId(alumniId);
+    if (!currentDetails) return res.status(404).json({ error: "Current details not found" });
+    res.status(200).json(currentDetails);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to get current details" });
+  }
+});
 export default router;
+

@@ -11,7 +11,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { toast } from "sonner"
 
 export function Universitysetting() {
-  const [email, setEmail] = useState("university@example.edu")
+  const [email, setEmail] = useState("college@gmail.com")
   const [currentPassword, setCurrentPassword] = useState("")
   const [newPassword, setNewPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")

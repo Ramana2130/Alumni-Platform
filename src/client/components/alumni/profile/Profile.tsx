@@ -19,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { getAlumniByEmail } from "@/services/alumniservices";
 
 export default function ProfilePage() {
     const [user, setUser] = useState<{ email: string; role: string; password: string } | null>(null)
@@ -36,7 +37,6 @@ export default function ProfilePage() {
         if (res.ok) {
           const data = await res.json()
           setUser(data)
-          console.log("Fetched user:", data)
         }
       } catch (err) {
         console.error("Fetch user failed:", err)
@@ -45,9 +45,33 @@ export default function ProfilePage() {
     fetchUser()
   }, [])
 
+  useEffect(() => {
+  const fetchAlumniDetails = async () => {
+    if (user?.email) {
+      try {
+        const alumni = await getAlumniByEmail(user.email);
+        setFormData((prev) => ({
+          ...prev,
+          alumni_name: alumni.Name || "",
+          alumni_email: alumni.Email || "",
+          alumni_dept: alumni.Department || "",
+          alumni_reg_no: alumni.RegisterNumber || "",
+          alumni_year_of_joining: alumni.YearOfJoining ? String(alumni.YearOfJoining) : "",
+          alumni_year_of_passing: alumni.YearOfPassing ? String(alumni.YearOfPassing) : "",
+          // You can map more fields if needed
+        }));
+      } catch (err) {
+        console.error("Failed to fetch alumni details:", err);
+      }
+    }
+  };
+  fetchAlumniDetails();
+}, [user?.email]);
+
   const [formData, setFormData] = useState({
     alumni_name: "",
     alumni_dept: "",
+    alumni_email:"",
     alumni_reg_no: "",
     alumni_year_of_joining: "",
     alumni_year_of_passing: "",
@@ -105,18 +129,22 @@ export default function ProfilePage() {
                     }
                     placeholder="Enter your full name"
                     required
+                    readOnly
+                    className="cursor-not-allowed bg-gray-100"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="alumni_location">Current Location *</Label>
+                  <Label htmlFor="alumni_email">Email *</Label>
                   <Input
-                    id="alumni_location"
-                    value={formData.alumni_location}
+                    id="alumni_email"
+                    value={formData.alumni_email}
                     onChange={(e) =>
-                      handleInputChange("alumni_location", e.target.value)
+                      handleInputChange("alumni_email", e.target.value)
                     }
                     placeholder="City, Country"
                     required
+                    readOnly
+                    className="cursor-not-allowed bg-gray-100"
                   />
                 </div>
               </div>
@@ -135,31 +163,17 @@ export default function ProfilePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="alumni_dept">Department *</Label>
-                  <Select
-                    onValueChange={(value) =>
-                      handleInputChange("alumni_dept", value)
+                  <Input
+                    id="alumni_dept"
+                    value={formData.alumni_dept}
+                    onChange={(e) =>
+                      handleInputChange("alumni_dept", e.target.value)
                     }
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select your department" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="computer-science">
-                        Computer Science
-                      </SelectItem>
-                      <SelectItem value="electrical">
-                        Electrical Engineering
-                      </SelectItem>
-                      <SelectItem value="mechanical">
-                        Mechanical Engineering
-                      </SelectItem>
-                      <SelectItem value="civil">Civil Engineering</SelectItem>
-                      <SelectItem value="business">
-                        Business Administration
-                      </SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
+                    placeholder="Enter your department"
+                    required
+                    readOnly
+                    className="cursor-not-allowed bg-gray-100"
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="alumni_reg_no">Registration Number *</Label>
@@ -171,6 +185,8 @@ export default function ProfilePage() {
                     }
                     placeholder="Enter your registration number"
                     required
+                    readOnly
+                    className="cursor-not-allowed bg-gray-100"
                   />
                 </div>
               </div>
@@ -193,6 +209,8 @@ export default function ProfilePage() {
                     }
                     placeholder="2020"
                     required
+                    readOnly
+                    className="cursor-not-allowed bg-gray-100"
                   />
                 </div>
                 <div className="space-y-2">
@@ -213,6 +231,8 @@ export default function ProfilePage() {
                     }
                     placeholder="2024"
                     required
+                    readOnly
+                    className="cursor-not-allowed bg-gray-100 disabled:cursor-not-allowed"
                   />
                 </div>
               </div>

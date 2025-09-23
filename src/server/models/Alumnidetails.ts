@@ -87,3 +87,11 @@ export async function getAlumniFullProfile(id: number) {
   const [rows] = await pool.query<RowDataPacket[]>(sql, [id]);
   return (rows as RowDataPacket[])[0];
 }
+
+export async function getAlumniByEmail(email: string) {
+  const [rows] = await pool.query<RowDataPacket[]>(
+    "SELECT * FROM alumni_details WHERE email = ?",
+    [email]
+  );
+  return (rows as RowDataPacket[])[0];
+}
