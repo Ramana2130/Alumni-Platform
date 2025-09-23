@@ -5,13 +5,11 @@ import pool from "../config/db.js";
 export async function createAlumni(data :any) {
   const sql = `
     INSERT INTO alumni_current_details 
-      (alumni_id, fullname, current_location, current_status, company_name, designation, job_location, success_stories)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      (alumni_id, current_status, company_name, designation, job_location, success_stories)
+    VALUES ( ?, ?, ?, ?, ?, ?)
   `;
   const values = [
     data.alumniId,
-    data.fullname,
-    data.currentLocation || null,
     data.currentStatus,
     data.companyName || null,
     data.designation || null,
@@ -40,8 +38,6 @@ export async function getAlumniById(id: number) {
 export async function updateAlumni(id: number, data: any) {
   const sql = `
     UPDATE alumni_current_details SET
-      fullname = ?,
-      current_location = ?,
       current_status = ?,
       company_name = ?,
       designation = ?,

@@ -1,5 +1,6 @@
 import express from "express";
 import { createAlumni, deleteAlumni, getAllAlumni, getAlumniById, getCurrentDetailsByAlumniId, updateAlumni } from "../models/Alumnicurrentdetails.js";
+import pool from "../config/db.js";
 
 
 const router = express.Router();
@@ -10,6 +11,7 @@ router.post("/add", async (req, res) => {
     const id = await createAlumni(req.body);
     res.status(201).json({ id, message: "Alumni detail created successfully" });
   } catch (err) {
+        console.error("❌ Error inserting alumni_current_details:", err);
     res.status(500).json({ error:  "Failed to create alumni detail" });
   }
 });
@@ -77,3 +79,34 @@ router.get("/getCurrentDetailsByAlumniId/:id", async (req, res) => {
 });
 export default router;
 
+router.get("/counts", async (req, res) => {
+  try {
+    // Query all counts in parallel
+    const [
+      [eventsResult],
+      [connectionsResult],
+      [jobsResult],
+      [fundResult]
+    ] = await Promise.all([
+      pool.query("SELECT COUNT(*) AS totalEvents FROM events_posting"),
+      pool.query("SELECT COUNT(*) AS totalConnections FROM alumni_details"),
+      pool.query("SELECT COUNT(*) AS totalJobPostings FROM job_postings"),
+      pool.query("SELECT COUNT(*) AS totalFundDonated FROM fund_requests"),
+    ]);
+
+    const eventsRows = eventsResult as any[];
+    const connectionsRows = connectionsResult as any[];
+    const jobsRows = jobsResult as any[];
+    const fundRows = fundResult as any[];
+
+    res.json({
+      totalEvents: eventsRows[0]?.totalEvents ?? 0,
+      totalConnections: connectionsRows[0]?.totalConnections ?? 0,
+      totalJobPostings: jobsRows[0]?.totalJobPostings ?? 0,
+      totalFundDonated: fundRows[0]?.totalFundDonated ?? 0,
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch dashboard counts" });
+    console.log("failed count: " , err)
+  }
+});

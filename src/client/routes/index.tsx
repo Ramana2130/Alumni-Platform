@@ -81,7 +81,7 @@ const router = createBrowserRouter([
                 element: <AlumniPersonalProfile />
             },
             {
-                path: "personal-details",
+                path: "personal-details/:id",
                 element: <AlumniDesp />
             },
             {

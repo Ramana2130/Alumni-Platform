@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
+import React, { useEffect, useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 import {
   Search,
   Users,
@@ -13,227 +13,116 @@ import {
   MapPin,
   MessageSquare,
   ArrowRight,
-} from "lucide-react"
-
-// Mock data for alumni friends
-const mockFriends = [
-  {
-    id: 1,
-    name: "Sarah Johnson",
-    avatar: "/professional-woman-smiling.png",
-    title: "Senior Software Engineer",
-    company: "Google",
-    location: "San Francisco, CA",
-    graduationYear: "B.Tech - IT",
-    major: "Computer Science",
-    mutualFriends: 12,
-    isOnline: true,
-    tags: ["Tech", "AI/ML", "Leadership"],
-  },
-  {
-    id: 2,
-    name: "Michael Chen",
-    avatar: "/professional-asian-man.png",
-    title: "Product Manager",
-    company: "Meta",
-    location: "Menlo Park, CA",
-    graduationYear: "BE - CSE",
-    major: "Business Administration",
-    mutualFriends: 8,
-    isOnline: false,
-    tags: ["Product", "Strategy", "Growth"],
-  },
-  {
-    id: 3,
-    name: "Emily Rodriguez",
-    avatar: "/professional-latina-woman.png",
-    title: "UX Design Lead",
-    company: "Airbnb",
-    location: "Austin, TX",
-    graduationYear: "BE - MECH",
-    major: "Design",
-    mutualFriends: 15,
-    isOnline: true,
-    tags: ["Design", "UX", "Research"],
-  },
-  {
-    id: 4,
-    name: "David Kim",
-    avatar: "/professional-korean-man-glasses.jpg",
-    title: "Data Scientist",
-    company: "Netflix",
-    location: "Los Angeles, CA",
-    graduationYear: "BE - EEE",
-    major: "Statistics",
-    mutualFriends: 6,
-    isOnline: true,
-    tags: ["Data Science", "Analytics", "ML"],
-  },
-  {
-    id: 5,
-    name: "Jessica Thompson",
-    avatar: "/professional-blonde-woman.png",
-    title: "Marketing Director",
-    company: "Spotify",
-    location: "New York, NY",
-    graduationYear: "BE - CSE",
-    major: "Marketing",
-    mutualFriends: 20,
-    isOnline: false,
-    tags: ["Marketing", "Brand", "Growth"],
-  },
-  {
-    id: 6,
-    name: "Alex Patel",
-    avatar: "/professional-indian-man-beard.jpg",
-    title: "DevOps Engineer",
-    company: "Amazon",
-    location: "Seattle, WA",
-    graduationYear: "BE - CSE",
-    major: "Computer Engineering",
-    mutualFriends: 9,
-    isOnline: true,
-    tags: ["DevOps", "Cloud", "Infrastructure"],
-  },
-  {
-    id: 7,
-    name: "Rachel Green",
-    avatar: "/professional-redhead-woman.jpg",
-    title: "Financial Analyst",
-    company: "Goldman Sachs",
-    location: "New York, NY",
-    graduationYear: "BE - ECE",
-    major: "Finance",
-    mutualFriends: 11,
-    isOnline: false,
-    tags: ["Finance", "Investment", "Analysis"],
-  },
-  {
-    id: 8,
-    name: "James Wilson",
-    avatar: "/professional-black-man-suit.jpg",
-    title: "Startup Founder",
-    company: "TechStart Inc.",
-    location: "San Diego, CA",
-    graduationYear: "BTech - AIDS",
-    major: "Entrepreneurship",
-    mutualFriends: 25,
-    isOnline: true,
-    tags: ["Startup", "Founder", "Innovation"],
-  },
-  {
-    id: 9,
-    name: "Lisa Wang",
-    avatar: "/professional-chinese-woman.png",
-    title: "Research Scientist",
-    company: "Microsoft Research",
-    location: "Redmond, WA",
-    graduationYear: "BE - CSE",
-    major: "Computer Science PhD",
-    mutualFriends: 7,
-    isOnline: true,
-    tags: ["Research", "AI", "Publications"],
-  },
-  {
-    id: 10,
-    name: "Carlos Martinez",
-    avatar: "/professional-hispanic-man.png",
-    title: "Solutions Architect",
-    company: "Salesforce",
-    location: "San Francisco, CA",
-    graduationYear: "BE - CSE",
-    major: "Information Systems",
-    mutualFriends: 14,
-    isOnline: false,
-    tags: ["Architecture", "Cloud", "Enterprise"],
-  },
-  {
-    id: 11,
-    name: "Amanda Foster",
-    avatar: "/professional-brunette-woman.jpg",
-    title: "VP of Engineering",
-    company: "Stripe",
-    location: "San Francisco, CA",
-    graduationYear: "BE - CSE",
-    major: "Computer Science",
-    mutualFriends: 18,
-    isOnline: true,
-    tags: ["Leadership", "Engineering", "Fintech"],
-  },
-  {
-    id: 12,
-    name: "Robert Taylor",
-    avatar: "/professional-white-man-glasses.jpg",
-    title: "Cybersecurity Specialist",
-    company: "Palantir",
-    location: "Denver, CO",
-    graduationYear: "BE - CSE",
-    major: "Cybersecurity",
-    mutualFriends: 5,
-    isOnline: false,
-    tags: ["Security", "Privacy", "Defense"],
-  },
-  {
-    id: 13,
-    name: "Robert Taylor",
-    avatar: "/professional-white-man-glasses.jpg",
-    title: "Cybersecurity Specialist",
-    company: "Palantir",
-    location: "Denver, CO",
-    graduationYear: "BE - CSE",
-    major: "Cybersecurity",
-    mutualFriends: 5,
-    isOnline: false,
-    tags: ["Security", "Privacy", "Defense"],
-  },
-]
+  ChevronsUpDown,
+  Check,
+} from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { cn } from "@/lib/utils";
+import { getAllAlumniFullDetails } from "@/services/alumniservices";
 
 export function AlumniList() {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [selectedFilter, setSelectedFilter] = useState("all")
+  const [alumniList, setAlumniList] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedFilter, setSelectedFilter] = useState("all");
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState("");
+  const [selectedYear, setSelectedYear] = useState("");
+  const [selectedDepartment, setSelectedDepartment] = useState("");
+  const [openYear, setOpenYear] = useState(false);
+  const [openDept, setOpenDept] = useState(false);
 
   // Pagination state
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 12
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
 
-  const filteredFriends = mockFriends.filter((friend) => {
+  useEffect(() => {
+    const fetchAlumni = async () => {
+      try {
+        const res = await getAllAlumniFullDetails();
+        console.log("Fetched alumni:", res);
+        // If API wraps the data
+        if (Array.isArray(res)) {
+          setAlumniList(res);
+        } else if (Array.isArray(res.data)) {
+          setAlumniList(res.data);
+        } else {
+          setAlumniList([]); // fallback
+        }
+      } catch (err) {
+        console.error("Error fetching alumni:", err);
+        setAlumniList([]);
+      }
+    };
+    fetchAlumni();
+  }, []);
+
+  const filteredFriends = alumniList.filter((friend) => {
     const matchesSearch =
       friend.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      friend.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      friend.title.toLowerCase().includes(searchQuery.toLowerCase())
+      (friend.company_name || "")
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
+      (friend.designation || "")
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
 
-    if (selectedFilter === "online") return matchesSearch && friend.isOnline
-    if (selectedFilter === "recent") {
-      // Extract only the year from graduationYear string and compare
-      // Handles formats like "B.Tech - IT" which won't parse to number (skip those)
-      const year = parseInt(friend.graduationYear.match(/\d{4}/)?.[0] || "0")
-      return matchesSearch && year >= 2018
-    }
-    return matchesSearch
-  })
+    const matchesYear = selectedYear
+      ? String(friend.yearOfPassing || friend.year_of_passing) === selectedYear
+      : true;
+
+    const matchesDepartment = selectedDepartment
+      ? friend.department === selectedDepartment
+      : true;
+
+    return matchesSearch && matchesYear && matchesDepartment;
+  });
 
   // Calculate total pages
-  const totalPages = Math.ceil(filteredFriends.length / itemsPerPage)
+  const totalPages = Math.ceil(filteredFriends.length / itemsPerPage);
 
   // Get current page's alumni slice
   const displayedFriends = filteredFriends.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
-  )
+  );
+
+  const years = Array.from(
+    new Set(
+      alumniList
+        .map((a) => a.yearOfPassing || a.year_of_passing)
+        .filter(Boolean)
+    )
+  ).sort();
+
+  const departments = Array.from(
+    new Set(alumniList.map((a) => a.department).filter(Boolean))
+  ).sort();
 
   // Handle page change
   const goToPage = (page: number) => {
-    if (page < 1) page = 1
-    else if (page > totalPages) page = totalPages
-    setCurrentPage(page)
-  }
+    if (page < 1) page = 1;
+    else if (page > totalPages) page = totalPages;
+    setCurrentPage(page);
+  };
 
   // Reset page to 1 when filters or searchQuery changes
   // so user doesn't land on empty page after filtering
   // Using useEffect to track changes
   useEffect(() => {
-    setCurrentPage(1)
-  }, [searchQuery, selectedFilter])
+    setCurrentPage(1);
+  }, [searchQuery, selectedFilter]);
 
   return (
     <div className="w-[1200px] mx-auto space-y-6">
@@ -246,12 +135,14 @@ export function AlumniList() {
         <div className="flex items-center justify-start gap-6 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <Users className="h-4 w-4" />
-            <span>{mockFriends.length} Alumni Connected</span>
+            <span>{alumniList.length} Alumni</span>
           </div>
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <div className="h-2 w-2 bg-green-500 rounded-full"></div>
-            <span>{mockFriends.filter((f) => f.isOnline).length} Online Now</span>
-          </div>
+            <span>
+              {alumniList.filter((f) => f.isOnline).length} Online Now
+            </span>
+          </div> */}
         </div>
       </div>
 
@@ -266,7 +157,103 @@ export function AlumniList() {
             className="pl-10"
           />
         </div>
-
+        <div>
+          <Popover open={openYear} onOpenChange={setOpenYear}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                role="combobox"
+                aria-expanded={openYear}
+                className="w-[200px] justify-between"
+              >
+                {selectedYear ? selectedYear : "Select year"}
+                <ChevronsUpDown className="opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[200px] p-0">
+              <Command>
+                <CommandInput placeholder="Search year..." className="h-9" />
+                <CommandList>
+                  <CommandEmpty>No year found.</CommandEmpty>
+                  <CommandGroup>
+                    {years.map((year) => (
+                      <CommandItem
+                        key={year}
+                        value={year}
+                        onSelect={(currentValue) => {
+                          setSelectedYear(
+                            currentValue === selectedYear ? "" : currentValue
+                          );
+                          setOpenYear(false);
+                        }}
+                      >
+                        {year}
+                        <Check
+                          className={cn(
+                            "ml-auto",
+                            selectedYear === year ? "opacity-100" : "opacity-0"
+                          )}
+                        />
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+        </div>
+        <div>
+          <Popover open={openDept} onOpenChange={setOpenDept}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                role="combobox"
+                aria-expanded={openDept}
+                className="w-[200px] justify-between"
+              >
+                {selectedDepartment ? selectedDepartment : "Select department"}
+                <ChevronsUpDown className="opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[200px] p-0">
+              <Command>
+                <CommandInput
+                  placeholder="Search department..."
+                  className="h-9"
+                />
+                <CommandList>
+                  <CommandEmpty>No department found.</CommandEmpty>
+                  <CommandGroup>
+                    {departments.map((dept) => (
+                      <CommandItem
+                        key={dept}
+                        value={dept}
+                        onSelect={(currentValue) => {
+                          setSelectedDepartment(
+                            currentValue === selectedDepartment
+                              ? ""
+                              : currentValue
+                          );
+                          setOpenDept(false);
+                        }}
+                      >
+                        {dept}
+                        <Check
+                          className={cn(
+                            "ml-auto",
+                            selectedDepartment === dept
+                              ? "opacity-100"
+                              : "opacity-0"
+                          )}
+                        />
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+        </div>
         <div className="flex items-center gap-2">
           <Filter className="h-4 w-4 text-muted-foreground" />
           <div className="flex gap-2">
@@ -278,13 +265,13 @@ export function AlumniList() {
             >
               All
             </Button>
-            <Button
+            {/* <Button
               variant={selectedFilter === "online" ? "default" : "outline"}
               size="sm"
               onClick={() => setSelectedFilter("online")}
             >
               Online
-            </Button>
+            </Button> */}
             <Button
               variant={selectedFilter === "recent" ? "default" : "outline"}
               size="sm"
@@ -301,19 +288,22 @@ export function AlumniList() {
         {displayedFriends.map((friend) => (
           <Card
             key={friend.id}
-            className="group hover:shadow-lg transition-all duration-200 border-border bg-gray-50"
+            className="group hover:shadow-lg transition-all duration-200 border-border"
           >
             <CardContent className="p-6">
               <div className="space-y-4">
                 {/* Avatar and Online Status */}
                 <div className="flex items-start justify-between">
                   <div className="relative">
-                    <Avatar className="h-16 w-16">
-                      <AvatarImage src={friend.avatar || "/placeholder.svg"} alt={friend.name} />
+                    <Avatar className="h-16 w-16 uppercase">
+                      <AvatarImage
+                        src={friend.avatar || "/placeholder.svg"}
+                        alt={friend.name}
+                      />
                       <AvatarFallback className="text-lg font-semibold">
                         {friend.name
                           .split(" ")
-                          .map((n) => n[0])
+                          .map((n: any) => n[0])
                           .join("")}
                       </AvatarFallback>
                     </Avatar>
@@ -321,54 +311,66 @@ export function AlumniList() {
                       <div className="absolute -bottom-1 -right-1 h-4 w-4 bg-green-500 border-2 border-background rounded-full"></div>
                     )}
                   </div>
-                  <Badge variant="secondary" className="text-xs">
-                    Class of {friend.graduationYear}
+                  <Badge
+                    variant="outline"
+                    className="text-xs border-orange-200"
+                  >
+                    PassedOutYear : {friend.yearOfPassing}
                   </Badge>
                 </div>
 
                 {/* Name and Title */}
                 <div className="space-y-1">
-                  <h3 className="font-semibold text-lg text-foreground leading-tight">{friend.name}</h3>
-                  <p className="text-sm text-muted-foreground font-medium">{friend.title}</p>
+                  <h3 className="font-semibold text-lg text-foreground leading-tight uppercase">
+                    {friend.name}
+                  </h3>
+                  <p className="text-sm text-black font-medium">
+                    {friend.department}
+                  </p>
                 </div>
 
                 {/* Company and Location */}
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2 text-sm text-black">
                     <Building2 className="h-4 w-4 flex-shrink-0" />
-                    <span className="truncate">{friend.company}</span>
+                    <span className="truncate">{friend.companyName}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2 text-sm text-black">
                     <MapPin className="h-4 w-4 flex-shrink-0" />
-                    <span className="truncate">{friend.location}</span>
+                    <span className="truncate">{friend.jobLocation}</span>
                   </div>
                 </div>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-1">
-                  {friend.tags.slice(0, 2).map((tag) => (
-                    <Badge key={tag} variant="outline" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
+                {/* <div className="flex flex-wrap gap-1">
+                   {(friend.tags || []).slice(0, 2).map((tag: any) => (
+    <Badge key={tag} variant="outline" className="text-xs">
+      {tag}
+    </Badge>
+  ))}
                   {friend.tags.length > 2 && (
                     <Badge variant="outline" className="text-xs">
                       +{friend.tags.length - 2}
                     </Badge>
                   )}
-                </div>
+                </div> */}
 
                 {/* Mutual Friends */}
-                <div className="text-xs text-muted-foreground">{friend.mutualFriends} mutual connections</div>
+                <div className="text-xs text-black whitespace-pre-line break-words">
+                  Designation : {friend.designation}
+                </div>
 
                 {/* Action Buttons */}
                 <div className="flex gap-2 pt-2 ">
-                  <Button size="sm" className="flex-1 bg-[#da7d40] hover:bg-[#e88c50]">
+                  <Button
+                    size="sm"
+                    className="flex-1 bg-[#da7d40] hover:bg-[#e88c50]"
+                  >
                     <MessageSquare className="h-4 w-4 mr-2" />
                     Chat
                   </Button>
                   <Button size="sm" variant="outline">
-                    <a href="/alumni/personal-details">
+                    <a href={`/alumni/personal-details/${friend.alumniId}`}>
                       <ArrowRight className="h-4 w-4" />
                     </a>
                   </Button>
@@ -392,7 +394,7 @@ export function AlumniList() {
           </Button>
 
           {[...Array(totalPages)].map((_, idx) => {
-            const pageNum = idx + 1
+            const pageNum = idx + 1;
             return (
               <Button
                 key={pageNum}
@@ -402,7 +404,7 @@ export function AlumniList() {
               >
                 {pageNum}
               </Button>
-            )
+            );
           })}
 
           <Button
@@ -420,10 +422,14 @@ export function AlumniList() {
       {filteredFriends.length === 0 && (
         <div className="text-center py-12">
           <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-foreground mb-2">No alumni found</h3>
-          <p className="text-muted-foreground">Try adjusting your search terms or filters to find more connections.</p>
+          <h3 className="text-lg font-semibold text-foreground mb-2">
+            No alumni found
+          </h3>
+          <p className="text-muted-foreground">
+            Try adjusting your search terms or filters to find more connections.
+          </p>
         </div>
       )}
     </div>
-  )
+  );
 }

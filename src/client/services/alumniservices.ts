@@ -58,3 +58,23 @@ export async function getAlumniByEmail(email: string) {
   );
   return res.data;
 }
+
+export async function addAlumniCurrentDetails(data: any) {
+  const res = await axios.post(
+    `${import.meta.env.VITE_BACKEND_URL}/current-alumni-details/add`,
+    data
+  );
+  return res.data;
+}
+
+export async function getAllAlumniFullDetails() {
+  const res = await axios.get(
+    `${import.meta.env.VITE_BACKEND_URL}/alumni-details/full-details`
+  );
+  return res.data;
+}
+
+export async function getDashboardCounts() {
+  const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/current-alumni-details/counts`);
+  return res.data;
+}

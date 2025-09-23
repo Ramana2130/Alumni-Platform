@@ -1,5 +1,5 @@
 import express from "express";
-import { createAlumni, deleteAlumni, getAllAlumni, getAlumniByEmail, getAlumniById, getAlumniFullProfile, updateAlumni } from "../models/Alumnidetails.js";
+import { createAlumni, deleteAlumni, getAllAlumni, getAllAlumniFullDetails, getAlumniByEmail, getAlumniById, getAlumniFullProfile, updateAlumni } from "../models/Alumnidetails.js";
 import multer from "multer";
 import xlsx from "xlsx";
 import pool from "../config/db.js";
@@ -203,6 +203,15 @@ router.get("/getByEmail/:email", async (req, res) => {
   }
 });
 
+router.get("/full-details", async (req, res) => {
+  try {
+    const alumni = await getAllAlumniFullDetails();
+    res.json(alumni);
+  } catch (err) {
+    console.error("Error fetching alumni details:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 
 export default router;

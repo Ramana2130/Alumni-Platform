@@ -72,16 +72,14 @@ export async function getAlumniFullProfile(id: number) {
       ad.yearOfPassing,
       ad.registerNumber,
       ad.email,
-      acd.fullname,
-      acd.current_location AS currentLocation,
-      acd.current_status AS currentStatus,
-      acd.company_name AS companyName,
+      acd.current_status,
+      acd.company_name,
       acd.designation,
-      acd.job_location AS jobLocation,
-      acd.success_stories AS successStories
+      acd.job_location,
+      acd.success_stories
     FROM alumni_details ad
     LEFT JOIN alumni_current_details acd 
-      ON ad.id = acd.id
+      ON ad.id = acd.alumni_id
     WHERE ad.id = ?
   `;
   const [rows] = await pool.query<RowDataPacket[]>(sql, [id]);
@@ -94,4 +92,27 @@ export async function getAlumniByEmail(email: string) {
     [email]
   );
   return (rows as RowDataPacket[])[0];
+}
+
+export async function getAllAlumniFullDetails() {
+  const sql = `
+    SELECT 
+      ad.id AS alumniId,
+      ad.name,
+      ad.department,
+      ad.yearOfJoining,
+      ad.yearOfPassing,
+      ad.registerNumber,
+      ad.email,
+      acd.current_status AS currentStatus,
+      acd.company_name AS companyName,
+      acd.designation,
+      acd.job_location AS jobLocation,
+      acd.success_stories AS successStories
+    FROM alumni_details ad
+    LEFT JOIN alumni_current_details acd 
+      ON ad.id = acd.alumni_id
+  `;
+  const [rows] = await pool.query<RowDataPacket[]>(sql);
+  return rows as RowDataPacket[];
 }

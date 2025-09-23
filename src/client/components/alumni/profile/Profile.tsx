@@ -19,11 +19,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getAlumniByEmail } from "@/services/alumniservices";
+import { addAlumniCurrentDetails, getAlumniByEmail } from "@/services/alumniservices";
+import { toast } from "sonner";
 
 export default function ProfilePage() {
     const [user, setUser] = useState<{ email: string; role: string; password: string } | null>(null)
-
+    const [alumniId, setAlumniId] = useState<number | null>(null);
 
     useEffect(() => {
     const fetchUser = async () => {
@@ -50,6 +51,7 @@ export default function ProfilePage() {
     if (user?.email) {
       try {
         const alumni = await getAlumniByEmail(user.email);
+        setAlumniId(alumni.Id);
         setFormData((prev) => ({
           ...prev,
           alumni_name: alumni.Name || "",
@@ -75,30 +77,41 @@ export default function ProfilePage() {
     alumni_reg_no: "",
     alumni_year_of_joining: "",
     alumni_year_of_passing: "",
-    alumni_current_status: "",
-    alumni_company_name: "",
-    alumni_designation: "",
-    alumni_job_location: "",
+    current_status: "",
+    company_name: "",
+    designation: "",
+    job_location: "",
     success_stories: "",
-    alumni_location: "",
-  });
+    });
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Alumni Profile Data:", formData);
-    // Handle form submission here
-  };
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (!alumniId) {
+    alert("Alumni ID not found!");
+    return;
+  }
+  const currentDetails = {
+  alumniId: alumniId,
+  currentStatus: formData.current_status,
+  companyName: formData.company_name,
+  designation: formData.designation,
+  jobLocation: formData.job_location,
+  successStories: formData.success_stories,
+};
 
-  const handleSaveProgress = () => {
-    console.log("Progress saved:", formData);
-    // Handle save progress here
-  };
+  try {
+    await addAlumniCurrentDetails(currentDetails);
+    toast.success("Current details saved successfully!");
+  } catch (err) {
+    toast.error("Failed to save current details.");
+  }
+};
 
-  return (
+ return (
     <div className="min-h-screen bg-gray-100 p-4 md:p-8">
       <div className="mx-auto w-[1200px]">
         <div className="mb-8 text-start">
@@ -249,57 +262,56 @@ export default function ProfilePage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="alumni_current_status">Current Status *</Label>
+                <Label id="current_status" htmlFor="current_status">Current Status *</Label>
                 <Select
+                value={formData.current_status}
                   onValueChange={(value) =>
-                    handleInputChange("alumni_current_status", value)
+                    handleInputChange("current_status", value)
                   }
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select your current status" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="employed">Employed</SelectItem>
-                    <SelectItem value="self-employed">Self-Employed</SelectItem>
-                    <SelectItem value="unemployed">Unemployed</SelectItem>
-                    <SelectItem value="student">Further Studies</SelectItem>
-                    <SelectItem value="entrepreneur">Entrepreneur</SelectItem>
+                    <SelectItem value="job">Job</SelectItem>
+                    <SelectItem value="higher-studeis">Higher Studeis</SelectItem>
+                    <SelectItem value="business">Business</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="alumni_company_name">Company Name</Label>
+                  <Label htmlFor="company_name">Company Name</Label>
                   <Input
-                    id="alumni_company_name"
-                    value={formData.alumni_company_name}
+                    id="company_name"
+                    value={formData.company_name}
                     onChange={(e) =>
-                      handleInputChange("alumni_company_name", e.target.value)
+                      handleInputChange("company_name", e.target.value)
                     }
                     placeholder="Enter company name"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="alumni_designation">
+                  <Label htmlFor="designation">
                     Job Title/Designation
                   </Label>
                   <Input
-                    id="alumni_designation"
-                    value={formData.alumni_designation}
+                    id="designation"
+                    value={formData.designation}
                     onChange={(e) =>
-                      handleInputChange("alumni_designation", e.target.value)
+                      handleInputChange("designation", e.target.value)
                     }
                     placeholder="Enter your job title"
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="alumni_job_location">Job Location</Label>
+                <Label htmlFor="job_location">Job Location</Label>
                 <Input
-                  id="alumni_job_location"
-                  value={formData.alumni_job_location}
+                  id="job_location"
+                  value={formData.job_location}
                   onChange={(e) =>
-                    handleInputChange("alumni_job_location", e.target.value)
+                    handleInputChange("job_location", e.target.value)
                   }
                   placeholder="City, Country"
                 />
@@ -332,7 +344,7 @@ export default function ProfilePage() {
             </CardContent>
           </Card>
 
-          <Card className="">
+          {/* <Card className="">
             <CardHeader>
               <CardTitle className="text-primary">Login Crendentials</CardTitle>
               <CardDescription>
@@ -368,7 +380,7 @@ export default function ProfilePage() {
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-end">
