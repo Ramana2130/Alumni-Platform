@@ -6,16 +6,18 @@ import pool from "../config/db.js";
 export async function createJobPosting(data: any) {
   const sql = `
   INSERT INTO job_postings (
-    job_title, department, job_type, location, salary_package, overview,
+    job_title, company_name, department, job_type, apply_link, location, salary_package, overview,
     responsibilities, required_qualifications, preferred_qualifications,
     benefits, application_deadline, contact_email, contact_phone, job_status, application_number
-  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
   const values = [
     data.jobTitle,
+    data.companyName,
     data.department,
     data.jobType.join(','),   // array → string
+    data.applyLink,
     data.location,
     data.salaryPackage,       // new field
     data.overview,
@@ -56,8 +58,10 @@ export async function updateJobPosting(id: number, data: any) {
   const sql = `
   UPDATE job_postings SET
     job_title = ?,
+    company_name = ?,
     department = ?,
     job_type = ?,
+    apply_link = ?,
     location = ?,
     salary_package = ?,
     overview = ?,
@@ -75,8 +79,10 @@ export async function updateJobPosting(id: number, data: any) {
 
   const values = [
     data.jobTitle,
+    data.companyName,
     data.department,
     data.jobType.join(','),
+    data.applyLink,
     data.location,
     data.salaryPackage,       // updated
     data.overview,

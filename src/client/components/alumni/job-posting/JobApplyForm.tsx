@@ -14,7 +14,9 @@ import { toast } from "sonner"
 import { useNavigate } from "react-router-dom"
 
 interface JobFormData {
-   jobTitle: string
+  jobTitle: string
+  companyName: string
+  applyLink: string
   department: string
   jobType: string[]
   location: string
@@ -32,6 +34,8 @@ interface JobFormData {
 
 const initialFormData: JobFormData = {
   jobTitle: "",
+  companyName: "",
+  applyLink: "",
   department: "",
   jobType: [],
   location: "",
@@ -132,12 +136,30 @@ export function JobApplyForm() {
             <h2 className="text-lg font-semibold flex items-center gap-2"><Building2 className="h-4 w-4"/> Job Details</h2>
 
             <div className="grid gap-2">
+              <Label htmlFor="companyName">Company Name *</Label>
+              <Input
+                id="companyName"
+                placeholder="e.g. Google, Amazon"
+                value={formData.companyName}
+                onChange={(e) => updateFormData("companyName", e.target.value)}
+              />
+            </div>
+            <div className="grid gap-2">
               <Label htmlFor="jobTitle">Job Title *</Label>
               <Input
                 id="jobTitle"
                 placeholder="e.g. Senior Software Engineer"
                 value={formData.jobTitle}
                 onChange={(e) => updateFormData("jobTitle", e.target.value)}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="applyLink">Job Apply Link *</Label>
+              <Input
+                id="applyLink"
+                placeholder="e.g. www.google.com/carrers"
+                value={formData.applyLink}
+                onChange={(e) => updateFormData("applyLink", e.target.value)}
               />
             </div>
 

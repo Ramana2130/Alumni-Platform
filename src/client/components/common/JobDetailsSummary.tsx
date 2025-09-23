@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator"
 import { Building2, MapPin, Calendar, DollarSign, GraduationCap, User, Hash, Clock, ExternalLink, BadgeCheckIcon } from "lucide-react"
 
 interface JobDetailsSummaryProps {
-  companyName: string
+  company_name: string
   job_title: string
   location: string
   jobDescription: string
@@ -13,20 +13,30 @@ interface JobDetailsSummaryProps {
   applyLastDate: string
   jobRole: string
   salary: string
-  otherStuff?: string[]
+  required_qualifications: string
+  benefits?: string[]
 }
 
 export function JobDetailsSummary({
-  companyName,
+  company_name,
   job_title,
   location,
   jobDescription,
   applyLink,
   applyLastDate,
   jobRole,
+  required_qualifications,
   salary,
-  otherStuff = [],
+  benefits = [],
 }: JobDetailsSummaryProps) {
+  // Format date to dd-mm-yyyy
+function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
+}
   return (
     <Card className="w-[1200px] mx-auto bg-white border-gray-200 shadow-lg">
       <CardHeader className="pb-4">
@@ -37,14 +47,14 @@ export function JobDetailsSummary({
                 <Building2 className="w-6 h-6 text-emerald-600" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">{job_title}</h1>
+                <h1 className="text-xl font-bold text-gray-900">{company_name}</h1>
                 <div className="flex items-center gap-2 text-gray-600">
                   <MapPin className="w-4 h-4" />
                   <span className="text-sm">{location}</span>
                 </div>
               </div>
             </div>
-            <h2 className="text-lg font-semibold text-emerald-700">{jobRole}</h2>
+            <h2 className="text-lg font-semibold text-emerald-700">{job_title}</h2>
           </div>
           <Badge variant="secondary" className="bg-emerald-50 text-emerald-700 border-emerald-200">
             <BadgeCheckIcon className="size-6 pr-2" />
@@ -65,8 +75,8 @@ export function JobDetailsSummary({
 
         <Separator className="bg-gray-200" />
         <div className="space-y-3">
-          <h3 className="text-base font-semibold text-gray-900">Job Description</h3>
-          <p className="text-sm text-gray-600 leading-relaxed">{jobDescription}</p>
+          <h3 className="text-base font-semibold text-gray-900">Required Qualifications</h3>
+          <p className="text-sm text-gray-600 leading-relaxed">{required_qualifications}</p>
         </div>
 
         {/* Alumni Information Section */}
@@ -118,7 +128,7 @@ export function JobDetailsSummary({
             <div className="flex items-center gap-2 text-sm text-gray-600">
               <Clock className="w-4 h-4" />
               <span>
-                Apply by: <span className="font-medium text-gray-900">{applyLastDate}</span>
+                Apply by: <span className="font-medium text-gray-900">{formatDate(applyLastDate)}</span>
               </span>
             </div>
             <Button asChild className="bg-emerald-600 hover:bg-emerald-700 text-white">
@@ -131,17 +141,17 @@ export function JobDetailsSummary({
         </div>
 
         {/* Additional Information Section */}
-        {otherStuff && otherStuff.length > 0 && (
+        {benefits && benefits.length > 0 && (
           <>
             <Separator className="bg-gray-200" />
             <div className="space-y-3">
               <h3 className="text-base font-semibold text-gray-900">Additional Information</h3>
               <div className="flex flex-wrap gap-2">
-                {otherStuff.map((item, index) => (
-                  <Badge key={index} variant="outline" className="text-xs border-gray-300 text-gray-700">
-                    {item}
+                {/* {benefits.map((item, index) => ( */}
+                  <Badge  variant="outline" className="text-xs border-gray-300 text-gray-700">
+                    {benefits}
                   </Badge>
-                ))}
+                {/* ))} */}
               </div>
             </div>
           </>

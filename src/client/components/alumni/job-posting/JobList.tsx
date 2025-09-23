@@ -47,10 +47,12 @@ import {
 } from "@/components/ui/alert-dialog";
 import { deleteJobPosting, getAllJobPostings } from "@/services/jobservices";
 import { toast } from "sonner";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
 type Job = {
   id: number;
   job_title: string;
+  company_name: string;
   department: string;
   job_type: string;
   location: string;
@@ -81,6 +83,8 @@ export function JobList() {
   const [departmentFilter, setDepartmentFilter] = useState("all");
   const [sortField, setSortField] = useState<SortField>("created_at");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
+    const [currentPage, setCurrentPage] = useState(1);
+    const jobsPerPage = 10;
 
   // ✅ Fetch jobs from DB
   useEffect(() => {
@@ -156,6 +160,12 @@ export function JobList() {
     sortDirection,
   ]);
 
+  // ✅ Pagination slice
+  const indexOfLastJob = currentPage * jobsPerPage;
+  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+  const currentJobs = filteredAndSortedJobs.slice(indexOfFirstJob, indexOfLastJob);
+  const totalPages = Math.ceil(filteredAndSortedJobs.length / jobsPerPage);
+
   const handleSort = (field: SortField) => {
     if (sortField === field) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
@@ -229,10 +239,10 @@ export function JobList() {
             <Table>
               <TableHeader>
                 <TableRow className="bg-muted/50">
+                  <TableHead>Company Name</TableHead>
                   <TableHead onClick={() => handleSort("job_title")} className="cursor-pointer">
                     Job Title {getSortIcon("job_title")}
                   </TableHead>
-                  <TableHead>Department</TableHead>
                   <TableHead>Location</TableHead>
                   <TableHead>Type</TableHead>
                   <TableHead onClick={() => handleSort("salary_package")} className="cursor-pointer">
@@ -243,14 +253,15 @@ export function JobList() {
                     Closed Date {getSortIcon("application_deadline")}
                   </TableHead>
                   <TableHead>Status</TableHead>
-                  <TableHead className="text-center">Actions</TableHead>
+                  <TableHead className="text-start">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredAndSortedJobs.map((job) => (
                   <TableRow key={job.id}>
-                    <TableCell className="font-semibold">{job.job_title}</TableCell>
-                    <TableCell>{job.department}</TableCell>
+                    <TableCell className="font-semibold">{job.company_name}</TableCell>
+                    <TableCell >{job.job_title}</TableCell>
+                    {/* <TableCell>{job.department}</TableCell> */}
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <MapPin className="w-4 h-4 text-muted-foreground" />
@@ -317,6 +328,45 @@ export function JobList() {
           </div>
         </CardContent>
       </Card>
+
+            {totalPages > 1 && (
+              <Pagination>
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (currentPage > 1) setCurrentPage(currentPage - 1);
+                      }}
+                    />
+                  </PaginationItem>
+                  {Array.from({ length: totalPages }, (_, i) => (
+                    <PaginationItem key={i + 1}>
+                      <PaginationLink
+                        href="#"
+                        isActive={currentPage === i + 1}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setCurrentPage(i + 1);
+                        }}
+                      >
+                        {i + 1}
+                      </PaginationLink>
+                    </PaginationItem>
+                  ))}
+                  <PaginationItem>
+                    <PaginationNext
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                      }}
+                    />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
+            )}
     </div>
   );
 }

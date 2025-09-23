@@ -140,7 +140,7 @@ export function FundAllList() {
   }
 
   return (
-    <Card className="w-[1200px] mx-auto py-6">
+    <Card className="w-[1200px] mx-auto">
       <CardHeader className=" text-black">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <CardTitle className="text-xl font-semibold">Fund Requests</CardTitle>

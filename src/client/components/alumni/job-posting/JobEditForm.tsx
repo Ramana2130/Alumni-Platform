@@ -15,6 +15,8 @@ interface JobFormData {
   job_title: string
   department: string
   job_type: string[]
+  company_name: string
+  apply_link: string
   location: string
   salary_package: string
   overview: string
@@ -74,6 +76,8 @@ export function JobEditForm() {
         const job = await getJobPostingById(Number(id))
         setFormData({
           job_title: job.job_title,
+          company_name: job.company_name,
+          apply_link: job.apply_link,
           department: job.department,
           job_type: job.job_type ? job.job_type.split(",") : [],
           location: job.location,
@@ -125,9 +129,11 @@ export function JobEditForm() {
     if (!formData) return
     try {
       const payload = {
-        jobTitle: formData.job_title,
+      jobTitle: formData.job_title,
+      companyName: formData.company_name,
       department: formData.department,
       jobType: formData.job_type, // already array
+      applyLink: formData.apply_link,
       location: formData.location,
       salaryPackage: formData.salary_package,
       overview: formData.overview,
@@ -178,12 +184,30 @@ export function JobEditForm() {
             </h2>
 
             <div className="grid gap-2">
+              <Label htmlFor="company_name">Company Name *</Label>
+              <Input
+                id="company_name"
+                placeholder="e.g. Senior Software Engineer"
+                value={formData.company_name}
+                onChange={(e) => updateFormData("company_name", e.target.value)}
+              />
+            </div>
+            <div className="grid gap-2">
               <Label htmlFor="jo.job_title">Job Title *</Label>
               <Input
                 id="jo.job_title"
                 placeholder="e.g. Senior Software Engineer"
                 value={formData.job_title}
                 onChange={(e) => updateFormData("job_title", e.target.value)}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="apply_link">Apply Link *</Label>
+              <Input
+                id="apply_link"
+                placeholder="e.g. Senior Software Engineer"
+                value={formData.apply_link}
+                onChange={(e) => updateFormData("apply_link", e.target.value)}
               />
             </div>
 

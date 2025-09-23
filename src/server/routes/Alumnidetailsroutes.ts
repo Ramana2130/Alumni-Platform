@@ -176,7 +176,7 @@ router.post("/uploadExcel", upload.single("file"), async (req, res) => {
         const hashedPassword = await bcrypt.hash(alumni_reg_no.toString(), 10);
 
         await pool.query(
-          `INSERT INTO users (alumniId, username, password, role) VALUES (?, ?, ?, ?)`,
+          `INSERT INTO users (alumniId, email, password, role) VALUES (?, ?, ?, ?)`,
           [alumniId, alumni_email, hashedPassword, "alumni"]
         );
       }

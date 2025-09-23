@@ -4,7 +4,7 @@ import  data from "@/components/data/data.json";
 import { AllComapreCharts } from "@/components/university/charts/AllCompareCharts";
 import { AmountBasedChart } from "@/components/university/charts/AmountBasedChart";
 import { FundChart } from "@/components/university/charts/FundChart";
-import { JobStudiesCompareCharts } from "@/components/university/charts/JobStudiesComapreCharts";
+// import { JobStudiesCompareCharts } from "@/components/university/charts/JobStudiesComapreCharts";
 import { PositionChart } from "@/components/university/charts/PositionChart";
 import { FundAllList } from "@/components/university/fund/FundAllList";
 import { DataTable } from "@/components/university/sidebar/data-table";
@@ -26,7 +26,7 @@ export default function UniversityHomePage() {
         </div>
         {/* <DataTable data={data} /> */}
         <div>
-          <h1 className="px-8 text-2xl font-bold tracking-tight py-2 text-emerald-700">Job List</h1>
+          {/* <h1 className="px-8 text-2xl font-bold tracking-tight py-2 text-emerald-700">Job List</h1> */}
           <UniversityJobList />
           <div className="py-6">
           <FundAllList />

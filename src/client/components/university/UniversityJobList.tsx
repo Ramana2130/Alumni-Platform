@@ -1,17 +1,7 @@
-"use client";
-
 import { useState, useMemo, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -20,37 +10,22 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Search,
-  Filter,
-  MapPin,
-  Calendar,
-  DollarSign,
-  Building2,
-  ChevronUp,
-  ChevronDown,
-  BookCheck,
-  Trash,
-  Pencil,
-  IndianRupee,
-} from "lucide-react";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { deleteJobPosting, getAllJobPostings } from "@/services/jobservices";
+import { Search, MapPin, ChevronUp, ChevronDown, BookCheck, IndianRupee } from "lucide-react";
+import { getAllJobPostings, deleteJobPosting } from "@/services/jobservices";
 import { toast } from "sonner";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 type Job = {
   id: number;
   job_title: string;
+  company_name: string;
   department: string;
   job_type: string;
   location: string;
@@ -68,21 +43,26 @@ type Job = {
   created_at: string;
 };
 
-type SortField = "job_title" | "department" | "application_number" | "salary_package" | "created_at" | "application_deadline";
+type SortField =
+  | "job_title"
+  | "department"
+  | "application_number"
+  | "salary_package"
+  | "created_at"
+  | "application_deadline";
 type SortDirection = "asc" | "desc";
-
-
 
 export function UniversityJobList() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
-  const [typeFilter, setTypeFilter] = useState("all");
-  const [departmentFilter, setDepartmentFilter] = useState("all");
   const [sortField, setSortField] = useState<SortField>("created_at");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
 
-  // ✅ Fetch jobs from DB
+  // ✅ Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const jobsPerPage = 10;
+
+  // ✅ Fetch jobs
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -96,36 +76,25 @@ export function UniversityJobList() {
   }, []);
 
   const handleDelete = async (id: number) => {
-  try {
-    await deleteJobPosting(id)
-    toast.success("Job deleted successfully");
-  } catch (error) {
-    console.error("Error deleting job:", error)
+    try {
+      await deleteJobPosting(id);
+      toast.success("Job deleted successfully");
+      setJobs((prev) => prev.filter((job) => job.id !== id));
+    } catch (error) {
+      console.error("Error deleting job:", error);
       toast.error("Try Again");
-  }
-}
+    }
+  };
 
   const filteredAndSortedJobs = useMemo(() => {
     const filtered = jobs.filter((job) => {
-      const matchesSearch =
+      return (
         job.job_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.department.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.location.toLowerCase().includes(searchTerm.toLowerCase());
-
-      const matchesStatus =
-        statusFilter === "all" ||
-        job.job_status.toLowerCase() === statusFilter.toLowerCase();
-      const matchesType =
-        typeFilter === "all" ||
-        job.job_type.toLowerCase() === typeFilter.toLowerCase();
-      const matchesDepartment =
-        departmentFilter === "all" ||
-        job.department.toLowerCase() === departmentFilter.toLowerCase();
-
-      return matchesSearch && matchesStatus && matchesType && matchesDepartment;
+        job.location.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     });
 
-    // Sorting
     filtered.sort((a, b) => {
       let aValue: any = a[sortField];
       let bValue: any = b[sortField];
@@ -138,23 +107,17 @@ export function UniversityJobList() {
         bValue = Number.parseInt(bValue.replace(/[^0-9]/g, "")) || 0;
       }
 
-      if (sortDirection === "asc") {
-        return aValue > bValue ? 1 : -1;
-      } else {
-        return aValue < bValue ? 1 : -1;
-      }
+      return sortDirection === "asc" ? aValue - bValue : bValue - aValue;
     });
 
     return filtered;
-  }, [
-    jobs,
-    searchTerm,
-    statusFilter,
-    typeFilter,
-    departmentFilter,
-    sortField,
-    sortDirection,
-  ]);
+  }, [jobs, searchTerm, sortField, sortDirection]);
+
+  // ✅ Pagination slice
+  const indexOfLastJob = currentPage * jobsPerPage;
+  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+  const currentJobs = filteredAndSortedJobs.slice(indexOfFirstJob, indexOfLastJob);
+  const totalPages = Math.ceil(filteredAndSortedJobs.length / jobsPerPage);
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
@@ -174,21 +137,6 @@ export function UniversityJobList() {
     );
   };
 
-  const getStatusBadgeVariant = (
-    status: string
-  ): { variant: "default" | "outline" | "secondary" | "destructive"; className: string } => {
-    switch (status.toLowerCase()) {
-      case "active":
-        return { variant: "default", className: "bg-green-500 text-white" };
-      case "paused":
-        return { variant: "default", className: "bg-yellow-500 text-white" };
-      case "closed":
-        return { variant: "default", className: "bg-red-500 text-white" };
-      default:
-        return { variant: "outline", className: "" };
-    }
-  };
-
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       month: "short",
@@ -203,57 +151,64 @@ export function UniversityJobList() {
         <BookCheck />
         <h1 className="text-2xl font-bold tracking-tight">Job List</h1>
       </div>
-      <p className="text-red-500">
-        Note: Once the application closing date is reached, it will be automatically removed from our server within 24 hours.
-      </p>
 
-      {/* Search Bar */}
-      <div className="flex justify-between items-center">
-        <div className="flex items-center gap-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-            <Input
-              placeholder="Search jobs, companies, or locations..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 w-80"
-            />
-          </div>
+      {/* Search */}
+      <div className="flex items-center gap-4">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+          <Input
+            placeholder="Search jobs, companies, or locations..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1); // reset to page 1 when searching
+            }}
+            className="pl-10 w-80"
+          />
         </div>
       </div>
 
-      {/* Job Listings Table */}
+      {/* Table */}
       <Card>
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow className="bg-muted/50">
-                  <TableHead onClick={() => handleSort("job_title")} className="cursor-pointer">
+                  <TableHead>Company</TableHead>
+                  <TableHead
+                    onClick={() => handleSort("job_title")}
+                    className="cursor-pointer"
+                  >
                     Job Title {getSortIcon("job_title")}
                   </TableHead>
-                  <TableHead>Department</TableHead>
                   <TableHead>Location</TableHead>
                   <TableHead>Type</TableHead>
-                  <TableHead onClick={() => handleSort("salary_package")} className="cursor-pointer">
+                  <TableHead
+                    onClick={() => handleSort("salary_package")}
+                    className="cursor-pointer"
+                  >
                     Salary {getSortIcon("salary_package")}
                   </TableHead>
                   <TableHead>Applicants</TableHead>
-                  <TableHead onClick={() => handleSort("application_deadline")} className="cursor-pointer text-start">
+                  <TableHead
+                    onClick={() => handleSort("application_deadline")}
+                    className="cursor-pointer"
+                  >
                     Closed Date {getSortIcon("application_deadline")}
                   </TableHead>
                   <TableHead>Status</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredAndSortedJobs.map((job) => (
+                {currentJobs.map((job) => (
                   <TableRow key={job.id}>
                     <TableCell className="font-semibold">
                       <a href={`/university/job-description/${job.id}`} className="underline">
-                      {job.job_title}
+                        {job.company_name}
                       </a>
-                      </TableCell>
-                    <TableCell>{job.department}</TableCell>
+                    </TableCell>
+                    <TableCell>{job.job_title}</TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <MapPin className="w-4 h-4 text-muted-foreground" />
@@ -269,19 +224,10 @@ export function UniversityJobList() {
                         {job.salary_package}
                       </div>
                     </TableCell>
-                    <TableCell className="text-center">
-                      {job.application_number}
-                    </TableCell>
+                    <TableCell className="text-center">{job.application_number}</TableCell>
                     <TableCell>{formatDate(job.application_deadline)}</TableCell>
                     <TableCell>
-                      {(() => {
-                        const { variant, className } = getStatusBadgeVariant(job.job_status);
-                        return (
-                          <Badge variant={variant} className={className}>
-                            {job.job_status}
-                          </Badge>
-                        );
-                      })()}
+                      <Badge className="bg-green-500 text-white">{job.job_status}</Badge>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -290,6 +236,46 @@ export function UniversityJobList() {
           </div>
         </CardContent>
       </Card>
+
+      {/* ✅ Pagination Controls */}
+      {totalPages > 1 && (
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (currentPage > 1) setCurrentPage(currentPage - 1);
+                }}
+              />
+            </PaginationItem>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <PaginationItem key={i + 1}>
+                <PaginationLink
+                  href="#"
+                  isActive={currentPage === i + 1}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCurrentPage(i + 1);
+                  }}
+                >
+                  {i + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                }}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
 }

@@ -29,14 +29,16 @@ export default function JobDesp() {
         </div> */}
 
         <JobDetailsSummary
-          companyName={job?.job_title}
+          company_name={job?.company_name}
           job_title={job?.job_title}
           location={job?.location}
           jobDescription={job?.overview}
-          applyLink={job?.apply_url}
+          applyLink={job?.apply_link}
           applyLastDate={job?.application_deadline}
           jobRole={job?.role}
           salary={job?.salary_package}
+          required_qualifications={job?.required_qualifications}
+          benefits={job?.benefits}
         />
       </div>
     </main>
