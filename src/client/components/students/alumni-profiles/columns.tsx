@@ -1,15 +1,13 @@
-"use client"
+"use client";
 
-import { ColumnDef } from "@tanstack/react-table"
+import { ColumnDef } from "@tanstack/react-table";
 
-import { Badge } from "@/components/ui/badge"
-import { Checkbox } from "@/components/ui/checkbox"
-import { DataTableColumnHeader } from "./data-table-column-header"
-import { DataTableRowActions } from "./data-table-row-actions"
-import { Task } from "@/components/data/alumni-profiles/schema"
-import { labels, priorities, statuses } from "./data"
-
-
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
+import { DataTableColumnHeader } from "./data-table-column-header";
+import { DataTableRowActions } from "./data-table-row-actions";
+import { Task } from "@/components/data/alumni-profiles/schema";
+import { labels, priorities, statuses } from "./data";
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -51,7 +49,7 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Title" />
     ),
     cell: ({ row }) => {
-      const label = labels.find((label) => label.value === row.original.label)
+      const label = labels.find((label) => label.value === row.original.label);
 
       return (
         <div className="flex gap-2">
@@ -60,7 +58,7 @@ export const columns: ColumnDef<Task>[] = [
             {row.getValue("title")}
           </span>
         </div>
-      )
+      );
     },
   },
   {
@@ -71,10 +69,10 @@ export const columns: ColumnDef<Task>[] = [
     cell: ({ row }) => {
       const status = statuses.find(
         (status) => status.value === row.getValue("status")
-      )
+      );
 
       if (!status) {
-        return null
+        return null;
       }
 
       return (
@@ -84,10 +82,10 @@ export const columns: ColumnDef<Task>[] = [
           )}
           <span>{status.label}</span>
         </div>
-      )
+      );
     },
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
+      return value.includes(row.getValue(id));
     },
   },
   {
@@ -98,10 +96,10 @@ export const columns: ColumnDef<Task>[] = [
     cell: ({ row }) => {
       const priority = priorities.find(
         (priority) => priority.value === row.getValue("priority")
-      )
+      );
 
       if (!priority) {
-        return null
+        return null;
       }
 
       return (
@@ -111,14 +109,14 @@ export const columns: ColumnDef<Task>[] = [
           )}
           <span>{priority.label}</span>
         </div>
-      )
+      );
     },
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
+      return value.includes(row.getValue(id));
     },
   },
   {
     id: "actions",
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
-]
+];

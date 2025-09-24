@@ -370,7 +370,9 @@ export function AlumniList() {
                     Chat
                   </Button>
                   <Button size="sm" variant="outline">
-                    <a href={`/students/student-alumni-details/${friend.alumniId}`}>
+                    <a
+                      href={`/students/student-alumni-details/${friend.alumniId}`}
+                    >
                       <ArrowRight className="h-4 w-4" />
                     </a>
                   </Button>

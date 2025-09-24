@@ -1,19 +1,29 @@
-"use client"
+import type React from "react";
 
-import type React from "react"
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ArrowLeft, Upload, DollarSign, FileText, User } from "lucide-react"
-import { toast } from "sonner"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { ArrowLeft, Upload, DollarSign, FileText, User } from "lucide-react";
+import { toast } from "sonner";
 
 interface StudentRequestFormProps {
-  onBack: () => void
+  onBack: () => void;
 }
 
 export default function FundRequest({ onBack }: StudentRequestFormProps) {
@@ -32,12 +42,14 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
     financialSituation: "",
     academicGoals: "",
     repaymentPlan: "",
-  })
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Mock submission - in real app would send to API
-    toast.success("Request Submitted Successfully your fund request has been submitted for university review. You'll receive an email confirmation shortly.")
+    toast.success(
+      "Request Submitted Successfully your fund request has been submitted for university review. You'll receive an email confirmation shortly."
+    );
 
     // Reset form
     setFormData({
@@ -55,12 +67,12 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
       financialSituation: "",
       academicGoals: "",
       repaymentPlan: "",
-    })
-  }
+    });
+  };
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -68,8 +80,12 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
         {/* Header */}
         <div className="flex items-center mb-4">
           <div className="px-4">
-            <h1 className="text-2xl font-bold text-[#e7000b]">Student Fund Request Form</h1>
-            <p className="text-slate-600 mt-1">Complete all sections to submit your funding request</p>
+            <h1 className="text-2xl font-bold text-[#e7000b]">
+              Student Fund Request Form
+            </h1>
+            <p className="text-slate-600 mt-1">
+              Complete all sections to submit your funding request
+            </p>
           </div>
         </div>
 
@@ -91,7 +107,9 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
                 <Input
                   id="studentId"
                   value={formData.studentId}
-                  onChange={(e) => handleInputChange("studentId", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("studentId", e.target.value)
+                  }
                   placeholder="Enter your student ID"
                   required
                 />
@@ -101,7 +119,9 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
                 <Input
                   id="fullName"
                   value={formData.fullName}
-                  onChange={(e) => handleInputChange("fullName", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("fullName", e.target.value)
+                  }
                   placeholder="Enter your full name"
                   required
                 />
@@ -138,7 +158,10 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="year">Academic Year *</Label>
-                <Select value={formData.year} onValueChange={(value) => handleInputChange("year", value)}>
+                <Select
+                  value={formData.year}
+                  onValueChange={(value) => handleInputChange("year", value)}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Select your year" />
                   </SelectTrigger>
@@ -172,7 +195,9 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
                   <Input
                     id="requestAmount"
                     value={formData.requestAmount}
-                    onChange={(e) => handleInputChange("requestAmount", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("requestAmount", e.target.value)
+                    }
                     placeholder="5000"
                     type="number"
                     min="1"
@@ -183,16 +208,22 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
                   <Label htmlFor="fundingType">Funding Type *</Label>
                   <Select
                     value={formData.fundingType}
-                    onValueChange={(value) => handleInputChange("fundingType", value)}
+                    onValueChange={(value) =>
+                      handleInputChange("fundingType", value)
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select funding type" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="tuition">Tuition Assistance</SelectItem>
+                      <SelectItem value="tuition">
+                        Tuition Assistance
+                      </SelectItem>
                       <SelectItem value="research">Research Project</SelectItem>
                       <SelectItem value="books">Books & Supplies</SelectItem>
-                      <SelectItem value="technology">Technology/Equipment</SelectItem>
+                      <SelectItem value="technology">
+                        Technology/Equipment
+                      </SelectItem>
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
@@ -200,13 +231,18 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="description" className="text-slate-700 font-medium">
+                <Label
+                  htmlFor="description"
+                  className="text-slate-700 font-medium"
+                >
                   Request Description *
                 </Label>
                 <Textarea
                   id="description"
                   value={formData.description}
-                  onChange={(e) => handleInputChange("description", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("description", e.target.value)
+                  }
                   placeholder="Provide a detailed explanation of why you need this funding..."
                   className="min-h-[120px] border-slate-300 focus:border-blue-500 focus:ring-blue-500"
                   required
@@ -229,7 +265,9 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
             <CardContent className="p-6">
               <div className="border-2 border-dashed border-slate-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors">
                 <Upload className="h-12 w-12 text-slate-400 mx-auto mb-4" />
-                <p className="text-slate-600 mb-2">Upload supporting documents</p>
+                <p className="text-slate-600 mb-2">
+                  Upload supporting documents
+                </p>
                 <p className="text-sm text-slate-500 mb-4">
                   Accepted formats: PDF, DOC, DOCX, JPG, PNG (Max 10MB each)
                 </p>
@@ -242,7 +280,9 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
                 </Button>
               </div>
               <div className="mt-4 text-sm text-slate-600">
-                <p className="font-medium mb-2 text-slate-700">Recommended documents:</p>
+                <p className="font-medium mb-2 text-slate-700">
+                  Recommended documents:
+                </p>
                 <ul className="list-disc list-inside space-y-1">
                   <li>Academic transcript</li>
                   <li>Financial aid documents</li>
@@ -264,12 +304,15 @@ export default function FundRequest({ onBack }: StudentRequestFormProps) {
             >
               Cancel
             </Button>
-            <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white px-8 shadow-sm">
+            <Button
+              type="submit"
+              className="bg-red-600 hover:bg-red-700 text-white px-8 shadow-sm"
+            >
               Submit Request
             </Button>
           </div>
         </form>
       </div>
     </div>
-  )
+  );
 }

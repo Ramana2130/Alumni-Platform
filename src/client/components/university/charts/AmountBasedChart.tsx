@@ -1,7 +1,5 @@
-"use client"
-
-import { TrendingUp } from "lucide-react"
-import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts"
+import { TrendingUp } from "lucide-react";
+import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
 
 import {
   Card,
@@ -10,15 +8,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 
-export const description = "A radar chart with dots"
+export const description = "A radar chart with dots";
 
 const chartData = [
   { month: "January", fund: 186 },
@@ -27,14 +25,14 @@ const chartData = [
   { month: "April", fund: 273 },
   { month: "May", fund: 209 },
   { month: "June", fund: 214 },
-]
+];
 
 const chartConfig = {
   fund: {
     label: "fund",
     color: "var(--chart-1)",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 export function AmountBasedChart() {
   return (
@@ -75,5 +73,5 @@ export function AmountBasedChart() {
         </div>
       </CardFooter>
     </Card>
-  )
+  );
 }

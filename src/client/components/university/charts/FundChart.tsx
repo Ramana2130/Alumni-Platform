@@ -1,8 +1,6 @@
-"use client"
-
-import * as React from "react"
-import { TrendingUp } from "lucide-react"
-import { Label, Pie, PieChart } from "recharts"
+import * as React from "react";
+import { TrendingUp } from "lucide-react";
+import { Label, Pie, PieChart } from "recharts";
 
 import {
   Card,
@@ -11,15 +9,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 
-export const description = "A donut chart with text"
+export const description = "A donut chart with text";
 
 const chartData = [
   { browser: "IT", visitors: 275, fill: "#46edd5" },
@@ -27,7 +25,7 @@ const chartData = [
   { browser: "corecompany", visitors: 287, fill: "#009689" },
   { browser: "business", visitors: 173, fill: "#00786f" },
   { browser: "other", visitors: 190, fill: "#005f5a" },
-]
+];
 
 const chartConfig = {
   visitors: {
@@ -53,12 +51,12 @@ const chartConfig = {
     label: "Other",
     color: "var(--chart-5)",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 export function FundChart() {
   const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
-  }, [])
+    return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
+  }, []);
 
   return (
     <Card className="flex flex-col">
@@ -108,7 +106,7 @@ export function FundChart() {
                           Donators
                         </tspan>
                       </text>
-                    )
+                    );
                   }
                 }}
               />
@@ -125,5 +123,5 @@ export function FundChart() {
         </div>
       </CardFooter>
     </Card>
-  )
+  );
 }

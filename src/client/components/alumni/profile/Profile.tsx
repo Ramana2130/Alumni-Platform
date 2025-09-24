@@ -19,61 +19,72 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { addAlumniCurrentDetails, getAlumniByEmail } from "@/services/alumniservices";
+import {
+  addAlumniCurrentDetails,
+  getAlumniByEmail,
+} from "@/services/alumniservices";
 import { toast } from "sonner";
 
 export default function ProfilePage() {
-    const [user, setUser] = useState<{ email: string; role: string; password: string } | null>(null)
-    const [alumniId, setAlumniId] = useState<number | null>(null);
+  const [user, setUser] = useState<{
+    email: string;
+    role: string;
+    password: string;
+  } | null>(null);
+  const [alumniId, setAlumniId] = useState<number | null>(null);
 
-    useEffect(() => {
+  useEffect(() => {
     const fetchUser = async () => {
       try {
-        const token = localStorage.getItem("token") // 👈 from login
-        if (!token) return
+        const token = localStorage.getItem("token"); // 👈 from login
+        if (!token) return;
 
         const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/me`, {
           headers: { Authorization: `Bearer ${token}` },
-        })
+        });
         if (res.ok) {
-          const data = await res.json()
-          setUser(data)
+          const data = await res.json();
+          setUser(data);
         }
       } catch (err) {
-        console.error("Fetch user failed:", err)
+        console.error("Fetch user failed:", err);
       }
-    }
-    fetchUser()
-  }, [])
+    };
+    fetchUser();
+  }, []);
 
   useEffect(() => {
-  const fetchAlumniDetails = async () => {
-    if (user?.email) {
-      try {
-        const alumni = await getAlumniByEmail(user.email);
-        setAlumniId(alumni.Id);
-        setFormData((prev) => ({
-          ...prev,
-          alumni_name: alumni.Name || "",
-          alumni_email: alumni.Email || "",
-          alumni_dept: alumni.Department || "",
-          alumni_reg_no: alumni.RegisterNumber || "",
-          alumni_year_of_joining: alumni.YearOfJoining ? String(alumni.YearOfJoining) : "",
-          alumni_year_of_passing: alumni.YearOfPassing ? String(alumni.YearOfPassing) : "",
-          // You can map more fields if needed
-        }));
-      } catch (err) {
-        console.error("Failed to fetch alumni details:", err);
+    const fetchAlumniDetails = async () => {
+      if (user?.email) {
+        try {
+          const alumni = await getAlumniByEmail(user.email);
+          setAlumniId(alumni.Id);
+          setFormData((prev) => ({
+            ...prev,
+            alumni_name: alumni.Name || "",
+            alumni_email: alumni.Email || "",
+            alumni_dept: alumni.Department || "",
+            alumni_reg_no: alumni.RegisterNumber || "",
+            alumni_year_of_joining: alumni.YearOfJoining
+              ? String(alumni.YearOfJoining)
+              : "",
+            alumni_year_of_passing: alumni.YearOfPassing
+              ? String(alumni.YearOfPassing)
+              : "",
+            // You can map more fields if needed
+          }));
+        } catch (err) {
+          console.error("Failed to fetch alumni details:", err);
+        }
       }
-    }
-  };
-  fetchAlumniDetails();
-}, [user?.email]);
+    };
+    fetchAlumniDetails();
+  }, [user?.email]);
 
   const [formData, setFormData] = useState({
     alumni_name: "",
     alumni_dept: "",
-    alumni_email:"",
+    alumni_email: "",
     alumni_reg_no: "",
     alumni_year_of_joining: "",
     alumni_year_of_passing: "",
@@ -82,36 +93,36 @@ export default function ProfilePage() {
     designation: "",
     job_location: "",
     success_stories: "",
-    });
+  });
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
- const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  if (!alumniId) {
-    alert("Alumni ID not found!");
-    return;
-  }
-  const currentDetails = {
-  alumniId: alumniId,
-  currentStatus: formData.current_status,
-  companyName: formData.company_name,
-  designation: formData.designation,
-  jobLocation: formData.job_location,
-  successStories: formData.success_stories,
-};
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!alumniId) {
+      alert("Alumni ID not found!");
+      return;
+    }
+    const currentDetails = {
+      alumniId: alumniId,
+      currentStatus: formData.current_status,
+      companyName: formData.company_name,
+      designation: formData.designation,
+      jobLocation: formData.job_location,
+      successStories: formData.success_stories,
+    };
 
-  try {
-    await addAlumniCurrentDetails(currentDetails);
-    toast.success("Current details saved successfully!");
-  } catch (err) {
-    toast.error("Failed to save current details.");
-  }
-};
+    try {
+      await addAlumniCurrentDetails(currentDetails);
+      toast.success("Current details saved successfully!");
+    } catch (err) {
+      toast.error("Failed to save current details.");
+    }
+  };
 
- return (
+  return (
     <div className="min-h-screen bg-gray-100 p-4 md:p-8">
       <div className="mx-auto w-[1200px]">
         <div className="mb-8 text-start">
@@ -262,9 +273,11 @@ export default function ProfilePage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label id="current_status" htmlFor="current_status">Current Status *</Label>
+                <Label id="current_status" htmlFor="current_status">
+                  Current Status *
+                </Label>
                 <Select
-                value={formData.current_status}
+                  value={formData.current_status}
                   onValueChange={(value) =>
                     handleInputChange("current_status", value)
                   }
@@ -274,7 +287,9 @@ export default function ProfilePage() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="job">Job</SelectItem>
-                    <SelectItem value="higher-studeis">Higher Studeis</SelectItem>
+                    <SelectItem value="higher-studeis">
+                      Higher Studeis
+                    </SelectItem>
                     <SelectItem value="business">Business</SelectItem>
                   </SelectContent>
                 </Select>
@@ -292,9 +307,7 @@ export default function ProfilePage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="designation">
-                    Job Title/Designation
-                  </Label>
+                  <Label htmlFor="designation">Job Title/Designation</Label>
                   <Input
                     id="designation"
                     value={formData.designation}

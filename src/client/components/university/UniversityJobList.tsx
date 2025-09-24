@@ -10,7 +10,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Search, MapPin, ChevronUp, ChevronDown, BookCheck, IndianRupee } from "lucide-react";
+import {
+  Search,
+  MapPin,
+  ChevronUp,
+  ChevronDown,
+  BookCheck,
+  IndianRupee,
+} from "lucide-react";
 import { getAllJobPostings, deleteJobPosting } from "@/services/jobservices";
 import { toast } from "sonner";
 import {
@@ -116,7 +123,10 @@ export function UniversityJobList() {
   // ✅ Pagination slice
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
-  const currentJobs = filteredAndSortedJobs.slice(indexOfFirstJob, indexOfLastJob);
+  const currentJobs = filteredAndSortedJobs.slice(
+    indexOfFirstJob,
+    indexOfLastJob
+  );
   const totalPages = Math.ceil(filteredAndSortedJobs.length / jobsPerPage);
 
   const handleSort = (field: SortField) => {
@@ -204,7 +214,10 @@ export function UniversityJobList() {
                 {currentJobs.map((job) => (
                   <TableRow key={job.id}>
                     <TableCell className="font-semibold">
-                      <a href={`/university/job-description/${job.id}`} className="underline">
+                      <a
+                        href={`/university/job-description/${job.id}`}
+                        className="underline"
+                      >
                         {job.company_name}
                       </a>
                     </TableCell>
@@ -224,10 +237,16 @@ export function UniversityJobList() {
                         {job.salary_package}
                       </div>
                     </TableCell>
-                    <TableCell className="text-center">{job.application_number}</TableCell>
-                    <TableCell>{formatDate(job.application_deadline)}</TableCell>
+                    <TableCell className="text-center">
+                      {job.application_number}
+                    </TableCell>
                     <TableCell>
-                      <Badge className="bg-green-500 text-white">{job.job_status}</Badge>
+                      {formatDate(job.application_deadline)}
+                    </TableCell>
+                    <TableCell>
+                      <Badge className="bg-green-500 text-white">
+                        {job.job_status}
+                      </Badge>
                     </TableCell>
                   </TableRow>
                 ))}

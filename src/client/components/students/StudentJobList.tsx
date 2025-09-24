@@ -10,7 +10,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Search, MapPin, ChevronUp, ChevronDown, BookCheck, IndianRupee } from "lucide-react";
+import {
+  Search,
+  MapPin,
+  ChevronUp,
+  ChevronDown,
+  BookCheck,
+  IndianRupee,
+} from "lucide-react";
 import { getAllJobPostings, deleteJobPosting } from "@/services/jobservices";
 import { toast } from "sonner";
 import {
@@ -116,7 +123,10 @@ export function StudentJobList() {
   // ✅ Pagination slice
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
-  const currentJobs = filteredAndSortedJobs.slice(indexOfFirstJob, indexOfLastJob);
+  const currentJobs = filteredAndSortedJobs.slice(
+    indexOfFirstJob,
+    indexOfLastJob
+  );
   const totalPages = Math.ceil(filteredAndSortedJobs.length / jobsPerPage);
 
   const handleSort = (field: SortField) => {
@@ -151,8 +161,9 @@ export function StudentJobList() {
         <BookCheck />
         <h1 className="text-2xl font-bold tracking-tight">Job List</h1>
       </div>
-        <p className="text-red-500">
-        Note: Once the application closing date is reached, it will be automatically removed from our server within 24 hours.
+      <p className="text-red-500">
+        Note: Once the application closing date is reached, it will be
+        automatically removed from our server within 24 hours.
       </p>
 
       {/* Search */}
@@ -207,7 +218,10 @@ export function StudentJobList() {
                 {currentJobs.map((job) => (
                   <TableRow key={job.id}>
                     <TableCell className="font-semibold">
-                      <a href={`/students/job-description/${job.id}`} className="underline">
+                      <a
+                        href={`/students/job-description/${job.id}`}
+                        className="underline"
+                      >
                         {job.company_name}
                       </a>
                     </TableCell>
@@ -227,10 +241,16 @@ export function StudentJobList() {
                         {job.salary_package}
                       </div>
                     </TableCell>
-                    <TableCell className="text-center">{job.application_number}</TableCell>
-                    <TableCell>{formatDate(job.application_deadline)}</TableCell>
+                    <TableCell className="text-center">
+                      {job.application_number}
+                    </TableCell>
                     <TableCell>
-                      <Badge className="bg-green-500 text-white">{job.job_status}</Badge>
+                      {formatDate(job.application_deadline)}
+                    </TableCell>
+                    <TableCell>
+                      <Badge className="bg-green-500 text-white">
+                        {job.job_status}
+                      </Badge>
                     </TableCell>
                   </TableRow>
                 ))}

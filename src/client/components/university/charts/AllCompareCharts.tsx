@@ -1,6 +1,4 @@
-"use client"
-
-import { Pie, PieChart } from "recharts"
+import { Pie, PieChart } from "recharts";
 
 import {
   Card,
@@ -8,21 +6,21 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 
-export const description = "A pie chart with a legend"
+export const description = "A pie chart with a legend";
 
 const chartData = [
   { browser: "job", visitors: 275, fill: "#4bd5c5" },
   { browser: "higherstudies", visitors: 200, fill: "#00bba7" },
-  { browser: "business", visitors: 187, fill: "#005f5a" },  
-]
+  { browser: "business", visitors: 187, fill: "#005f5a" },
+];
 
 const chartConfig = {
   visitors: {
@@ -48,7 +46,7 @@ const chartConfig = {
     label: "Other",
     color: "var(--chart-5)",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 export function AllComapreCharts() {
   return (
@@ -72,5 +70,5 @@ export function AllComapreCharts() {
         </ChartContainer>
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -1,28 +1,27 @@
-
-import type React from "react"
-import { useState } from "react"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Send, Search, MoreVertical } from "lucide-react"
+import type React from "react";
+import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Send, Search, MoreVertical } from "lucide-react";
 
 interface User {
-  id: string
-  name: string
-  avatar: string
-  lastMessage: string
-  timestamp: string
-  online: boolean
-  unreadCount?: number
+  id: string;
+  name: string;
+  avatar: string;
+  lastMessage: string;
+  timestamp: string;
+  online: boolean;
+  unreadCount?: number;
 }
 
 interface Message {
-  id: string
-  senderId: string
-  content: string
-  timestamp: string
-  isOwn: boolean
+  id: string;
+  senderId: string;
+  content: string;
+  timestamp: string;
+  isOwn: boolean;
 }
 
 const mockUsers: User[] = [
@@ -68,7 +67,7 @@ const mockUsers: User[] = [
     timestamp: "2d ago",
     online: true,
   },
-]
+];
 
 const mockMessages: Record<string, Message[]> = {
   "1": [
@@ -126,29 +125,31 @@ const mockMessages: Record<string, Message[]> = {
       isOwn: false,
     },
   ],
-}
+};
 
 export function ChatSystem() {
-  const [selectedUser, setSelectedUser] = useState<User | null>(mockUsers[0])
-  const [message, setMessage] = useState("")
-  const [searchQuery, setSearchQuery] = useState("")
+  const [selectedUser, setSelectedUser] = useState<User | null>(mockUsers[0]);
+  const [message, setMessage] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredUsers = mockUsers.filter((user) => user.name.toLowerCase().includes(searchQuery.toLowerCase()))
+  const filteredUsers = mockUsers.filter((user) =>
+    user.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const handleSendMessage = () => {
     if (message.trim() && selectedUser) {
       // In a real app, this would send the message to the backend
-      console.log("Sending message:", message, "to user:", selectedUser.name)
-      setMessage("")
+      console.log("Sending message:", message, "to user:", selectedUser.name);
+      setMessage("");
     }
-  }
+  };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault()
-      handleSendMessage()
+      e.preventDefault();
+      handleSendMessage();
     }
-  }
+  };
 
   return (
     <div className="flex h-full bg-background">
@@ -156,7 +157,9 @@ export function ChatSystem() {
       <div className="w-70 bg-sidebar border-r border-sidebar-border flex flex-col">
         {/* Header */}
         <div className="p-4 border-b border-sidebar-border">
-          <h1 className="text-xl font-bold text-sidebar-foreground mb-4">Chats</h1>
+          <h1 className="text-xl font-bold text-sidebar-foreground mb-4">
+            Chats
+          </h1>
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
             <Input
@@ -183,7 +186,10 @@ export function ChatSystem() {
               >
                 <div className="relative">
                   <Avatar className="h-12 w-12">
-                    <AvatarImage src={user.avatar || "/placeholder.svg"} alt={user.name} />
+                    <AvatarImage
+                      src={user.avatar || "/placeholder.svg"}
+                      alt={user.name}
+                    />
                     <AvatarFallback>
                       {user.name
                         .split(" ")
@@ -200,7 +206,9 @@ export function ChatSystem() {
                     <h3 className="font-semibold truncate">{user.name}</h3>
                     <span className="text-xs opacity-70">{user.timestamp}</span>
                   </div>
-                  <p className="text-sm opacity-70 truncate">{user.lastMessage}</p>
+                  <p className="text-sm opacity-70 truncate">
+                    {user.lastMessage}
+                  </p>
                 </div>
                 {user.unreadCount && (
                   <div className="bg-sidebar-accent text-sidebar-accent-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
@@ -223,7 +231,10 @@ export function ChatSystem() {
                 <div className="flex items-center gap-3">
                   <div className="relative">
                     <Avatar className="h-10 w-10">
-                      <AvatarImage src={selectedUser.avatar || "/placeholder.svg"} alt={selectedUser.name} />
+                      <AvatarImage
+                        src={selectedUser.avatar || "/placeholder.svg"}
+                        alt={selectedUser.name}
+                      />
                       <AvatarFallback>
                         {selectedUser.name
                           .split(" ")
@@ -236,7 +247,9 @@ export function ChatSystem() {
                     )}
                   </div>
                   <div>
-                    <h2 className="font-semibold text-card-foreground">{selectedUser.name}</h2>
+                    <h2 className="font-semibold text-card-foreground">
+                      {selectedUser.name}
+                    </h2>
                     <p className="text-sm text-muted-foreground">
                       {selectedUser.online ? "Online" : "Last seen recently"}
                     </p>
@@ -252,10 +265,18 @@ export function ChatSystem() {
             <ScrollArea className="flex-1 p-4">
               <div className="space-y-4">
                 {(mockMessages[selectedUser.id] || []).map((msg) => (
-                  <div key={msg.id} className={`flex gap-3 ${msg.isOwn ? "justify-end" : "justify-start"}`}>
+                  <div
+                    key={msg.id}
+                    className={`flex gap-3 ${
+                      msg.isOwn ? "justify-end" : "justify-start"
+                    }`}
+                  >
                     {!msg.isOwn && (
                       <Avatar className="h-8 w-8">
-                        <AvatarImage src={selectedUser.avatar || "/placeholder.svg"} alt={selectedUser.name} />
+                        <AvatarImage
+                          src={selectedUser.avatar || "/placeholder.svg"}
+                          alt={selectedUser.name}
+                        />
                         <AvatarFallback>
                           {selectedUser.name
                             .split(" ")
@@ -264,15 +285,25 @@ export function ChatSystem() {
                         </AvatarFallback>
                       </Avatar>
                     )}
-                    <div className={`max-w-xs lg:max-w-md ${msg.isOwn ? "order-first" : ""}`}>
+                    <div
+                      className={`max-w-xs lg:max-w-md ${
+                        msg.isOwn ? "order-first" : ""
+                      }`}
+                    >
                       <div
                         className={`rounded-lg px-4 py-2 ${
-                          msg.isOwn ? "bg-primary text-primary-foreground ml-auto" : "bg-card text-card-foreground"
+                          msg.isOwn
+                            ? "bg-primary text-primary-foreground ml-auto"
+                            : "bg-card text-card-foreground"
                         }`}
                       >
                         <p className="text-sm">{msg.content}</p>
                       </div>
-                      <p className={`text-xs text-muted-foreground mt-1 ${msg.isOwn ? "text-right" : "text-left"}`}>
+                      <p
+                        className={`text-xs text-muted-foreground mt-1 ${
+                          msg.isOwn ? "text-right" : "text-left"
+                        }`}
+                      >
                         {msg.timestamp}
                       </p>
                     </div>
@@ -291,7 +322,11 @@ export function ChatSystem() {
                   onKeyPress={handleKeyPress}
                   className="flex-1"
                 />
-                <Button onClick={handleSendMessage} size="icon" disabled={!message.trim()}>
+                <Button
+                  onClick={handleSendMessage}
+                  size="icon"
+                  disabled={!message.trim()}
+                >
                   <Send className="h-4 w-4" />
                 </Button>
               </div>
@@ -300,12 +335,16 @@ export function ChatSystem() {
         ) : (
           <div className="flex-1 flex items-center justify-center">
             <div className="text-center">
-              <h2 className="text-2xl font-semibold text-muted-foreground mb-2">Welcome to Chat</h2>
-              <p className="text-muted-foreground">Select a conversation to start messaging</p>
+              <h2 className="text-2xl font-semibold text-muted-foreground mb-2">
+                Welcome to Chat
+              </h2>
+              <p className="text-muted-foreground">
+                Select a conversation to start messaging
+              </p>
             </div>
           </div>
         )}
       </div>
     </div>
-  )
+  );
 }

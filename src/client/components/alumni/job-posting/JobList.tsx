@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -47,7 +45,14 @@ import {
 } from "@/components/ui/alert-dialog";
 import { deleteJobPosting, getAllJobPostings } from "@/services/jobservices";
 import { toast } from "sonner";
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 type Job = {
   id: number;
@@ -70,10 +75,14 @@ type Job = {
   created_at: string;
 };
 
-type SortField = "job_title" | "department" | "application_number" | "salary_package" | "created_at" | "application_deadline";
+type SortField =
+  | "job_title"
+  | "department"
+  | "application_number"
+  | "salary_package"
+  | "created_at"
+  | "application_deadline";
 type SortDirection = "asc" | "desc";
-
-
 
 export function JobList() {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -83,8 +92,8 @@ export function JobList() {
   const [departmentFilter, setDepartmentFilter] = useState("all");
   const [sortField, setSortField] = useState<SortField>("created_at");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
-    const [currentPage, setCurrentPage] = useState(1);
-    const jobsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const jobsPerPage = 10;
 
   // ✅ Fetch jobs from DB
   useEffect(() => {
@@ -100,14 +109,14 @@ export function JobList() {
   }, []);
 
   const handleDelete = async (id: number) => {
-  try {
-    await deleteJobPosting(id)
-    toast.success("Job deleted successfully");
-  } catch (error) {
-    console.error("Error deleting job:", error)
+    try {
+      await deleteJobPosting(id);
+      toast.success("Job deleted successfully");
+    } catch (error) {
+      console.error("Error deleting job:", error);
       toast.error("Try Again");
-  }
-}
+    }
+  };
 
   const filteredAndSortedJobs = useMemo(() => {
     const filtered = jobs.filter((job) => {
@@ -163,7 +172,10 @@ export function JobList() {
   // ✅ Pagination slice
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
-  const currentJobs = filteredAndSortedJobs.slice(indexOfFirstJob, indexOfLastJob);
+  const currentJobs = filteredAndSortedJobs.slice(
+    indexOfFirstJob,
+    indexOfLastJob
+  );
   const totalPages = Math.ceil(filteredAndSortedJobs.length / jobsPerPage);
 
   const handleSort = (field: SortField) => {
@@ -186,7 +198,10 @@ export function JobList() {
 
   const getStatusBadgeVariant = (
     status: string
-  ): { variant: "default" | "outline" | "secondary" | "destructive"; className: string } => {
+  ): {
+    variant: "default" | "outline" | "secondary" | "destructive";
+    className: string;
+  } => {
     switch (status.toLowerCase()) {
       case "active":
         return { variant: "default", className: "bg-green-500 text-white" };
@@ -214,7 +229,8 @@ export function JobList() {
         <h1 className="text-2xl font-bold tracking-tight">Job List</h1>
       </div>
       <p className="text-red-500">
-        Note: Once the application closing date is reached, it will be automatically removed from our server within 24 hours.
+        Note: Once the application closing date is reached, it will be
+        automatically removed from our server within 24 hours.
       </p>
 
       {/* Search Bar */}
@@ -240,16 +256,25 @@ export function JobList() {
               <TableHeader>
                 <TableRow className="bg-muted/50">
                   <TableHead>Company Name</TableHead>
-                  <TableHead onClick={() => handleSort("job_title")} className="cursor-pointer">
+                  <TableHead
+                    onClick={() => handleSort("job_title")}
+                    className="cursor-pointer"
+                  >
                     Job Title {getSortIcon("job_title")}
                   </TableHead>
                   <TableHead>Location</TableHead>
                   <TableHead>Type</TableHead>
-                  <TableHead onClick={() => handleSort("salary_package")} className="cursor-pointer">
+                  <TableHead
+                    onClick={() => handleSort("salary_package")}
+                    className="cursor-pointer"
+                  >
                     Salary {getSortIcon("salary_package")}
                   </TableHead>
                   <TableHead>Applicants</TableHead>
-                  <TableHead onClick={() => handleSort("application_deadline")} className="cursor-pointer text-start">
+                  <TableHead
+                    onClick={() => handleSort("application_deadline")}
+                    className="cursor-pointer text-start"
+                  >
                     Closed Date {getSortIcon("application_deadline")}
                   </TableHead>
                   <TableHead>Status</TableHead>
@@ -259,8 +284,10 @@ export function JobList() {
               <TableBody>
                 {filteredAndSortedJobs.map((job) => (
                   <TableRow key={job.id}>
-                    <TableCell className="font-semibold">{job.company_name}</TableCell>
-                    <TableCell >{job.job_title}</TableCell>
+                    <TableCell className="font-semibold">
+                      {job.company_name}
+                    </TableCell>
+                    <TableCell>{job.job_title}</TableCell>
                     {/* <TableCell>{job.department}</TableCell> */}
                     <TableCell>
                       <div className="flex items-center gap-2">
@@ -280,10 +307,14 @@ export function JobList() {
                     <TableCell className="text-center">
                       {job.application_number}
                     </TableCell>
-                    <TableCell>{formatDate(job.application_deadline)}</TableCell>
+                    <TableCell>
+                      {formatDate(job.application_deadline)}
+                    </TableCell>
                     <TableCell>
                       {(() => {
-                        const { variant, className } = getStatusBadgeVariant(job.job_status);
+                        const { variant, className } = getStatusBadgeVariant(
+                          job.job_status
+                        );
                         return (
                           <Badge variant={variant} className={className}>
                             {job.job_status}
@@ -293,11 +324,11 @@ export function JobList() {
                     </TableCell>
                     <TableCell>
                       <div className="flex gap-2">
-                          <a href={`/alumni/job-editing/${job.id}`}>
-                        <Button variant="outline" size="sm">
-                          <Pencil className="text-blue-600" />
-                        </Button>
-                          </a>
+                        <a href={`/alumni/job-editing/${job.id}`}>
+                          <Button variant="outline" size="sm">
+                            <Pencil className="text-blue-600" />
+                          </Button>
+                        </a>
                         <AlertDialog>
                           <AlertDialogTrigger asChild>
                             <Button variant="outline">
@@ -308,14 +339,18 @@ export function JobList() {
                             <AlertDialogHeader>
                               <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                               <AlertDialogDescription>
-                                This action cannot be undone. This will permanently delete the job posting.
+                                This action cannot be undone. This will
+                                permanently delete the job posting.
                               </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
                               <AlertDialogCancel>Cancel</AlertDialogCancel>
-                              <AlertDialogAction className="bg-red-500 text-white"
-                              onClick={() => handleDelete(Number(job.id))}
-                              >Delete</AlertDialogAction>
+                              <AlertDialogAction
+                                className="bg-red-500 text-white"
+                                onClick={() => handleDelete(Number(job.id))}
+                              >
+                                Delete
+                              </AlertDialogAction>
                             </AlertDialogFooter>
                           </AlertDialogContent>
                         </AlertDialog>
@@ -329,44 +364,44 @@ export function JobList() {
         </CardContent>
       </Card>
 
-            {totalPages > 1 && (
-              <Pagination>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        if (currentPage > 1) setCurrentPage(currentPage - 1);
-                      }}
-                    />
-                  </PaginationItem>
-                  {Array.from({ length: totalPages }, (_, i) => (
-                    <PaginationItem key={i + 1}>
-                      <PaginationLink
-                        href="#"
-                        isActive={currentPage === i + 1}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setCurrentPage(i + 1);
-                        }}
-                      >
-                        {i + 1}
-                      </PaginationLink>
-                    </PaginationItem>
-                  ))}
-                  <PaginationItem>
-                    <PaginationNext
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-                      }}
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-            )}
+      {totalPages > 1 && (
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (currentPage > 1) setCurrentPage(currentPage - 1);
+                }}
+              />
+            </PaginationItem>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <PaginationItem key={i + 1}>
+                <PaginationLink
+                  href="#"
+                  isActive={currentPage === i + 1}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCurrentPage(i + 1);
+                  }}
+                >
+                  {i + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                }}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
 }

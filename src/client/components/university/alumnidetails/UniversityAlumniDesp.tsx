@@ -18,14 +18,14 @@ type AlumniProfile = {
 };
 
 const UniversityAlumniDesp = () => {
-    const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>();
   const [alumni, setAlumni] = useState<AlumniProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchAlumni() {
       try {
-        if(!id) return;
+        if (!id) return;
         const data = await getAlumniFullProfile(Number(id)); // ✅ call service
         setAlumni(data);
         console.log("Fetched alumni data:", data);

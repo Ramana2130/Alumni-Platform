@@ -1,13 +1,6 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -68,15 +61,17 @@ export function AlumniEditForm() {
       try {
         const data = await getAlumniById(Number(id));
         setFormData({
-         alumni_name: data.Name || "",
-        alumni_dept: data.Department || "",
-        alumni_reg_no: data.RegisterNumber || "",
-        alumni_year_of_joining: data.YearOfJoining?.toString() || "",
-        alumni_year_of_passing: data.YearOfPassing?.toString() || "",
-        alumni_email: data.Email || "",
+          alumni_name: data.Name || "",
+          alumni_dept: data.Department || "",
+          alumni_reg_no: data.RegisterNumber || "",
+          alumni_year_of_joining: data.YearOfJoining?.toString() || "",
+          alumni_year_of_passing: data.YearOfPassing?.toString() || "",
+          alumni_email: data.Email || "",
         });
       } catch (error: any) {
-        toast.error(error.response?.data?.error || "Failed to load alumni data");
+        toast.error(
+          error.response?.data?.error || "Failed to load alumni data"
+        );
       }
     }
     if (id) fetchAlumni();
@@ -130,7 +125,9 @@ export function AlumniEditForm() {
                 <Input
                   id="alumni_name"
                   value={formData.alumni_name}
-                  onChange={(e) => handleInputChange("alumni_name", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("alumni_name", e.target.value)
+                  }
                   required
                 />
               </div>
@@ -140,7 +137,9 @@ export function AlumniEditForm() {
                 <Input
                   id="alumni_reg_no"
                   value={formData.alumni_reg_no}
-                  onChange={(e) => handleInputChange("alumni_reg_no", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("alumni_reg_no", e.target.value)
+                  }
                   required
                 />
               </div>
@@ -150,7 +149,9 @@ export function AlumniEditForm() {
                 <Input
                   id="alumni_email"
                   value={formData.alumni_email}
-                  onChange={(e) => handleInputChange("alumni_email", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("alumni_email", e.target.value)
+                  }
                 />
               </div>
             </div>
@@ -194,7 +195,9 @@ export function AlumniEditForm() {
                               <Check
                                 className={cn(
                                   "ml-auto",
-                                  formData.alumni_dept === dept ? "opacity-100" : "opacity-0"
+                                  formData.alumni_dept === dept
+                                    ? "opacity-100"
+                                    : "opacity-0"
                                 )}
                               />
                             </CommandItem>
@@ -212,17 +215,23 @@ export function AlumniEditForm() {
                   id="alumni_year_of_joining"
                   type="number"
                   value={formData.alumni_year_of_joining}
-                  onChange={(e) => handleInputChange("alumni_year_of_joining", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("alumni_year_of_joining", e.target.value)
+                  }
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="alumni_year_of_passing">Year of Passing *</Label>
+                <Label htmlFor="alumni_year_of_passing">
+                  Year of Passing *
+                </Label>
                 <Input
                   id="alumni_year_of_passing"
                   type="number"
                   value={formData.alumni_year_of_passing}
-                  onChange={(e) => handleInputChange("alumni_year_of_passing", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("alumni_year_of_passing", e.target.value)
+                  }
                   required
                 />
               </div>

@@ -1,20 +1,31 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { User, GraduationCap, Building2, MapPin, Briefcase, Trophy, Mail, Phone, BadgeCheck, MessageSquare } from "lucide-react"
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  User,
+  GraduationCap,
+  Building2,
+  MapPin,
+  Briefcase,
+  Trophy,
+  Mail,
+  Phone,
+  BadgeCheck,
+  MessageSquare,
+} from "lucide-react";
 
 interface AlumniProfileSummaryProps {
-  name: string
-  dept: string
-  reg_no: string
-  year_of_joining: string
-  year_of_passing: string
-  current_status: string
-  company_name: string
-  designation: string
-  job_location: string
-  success_stories: string
-  location: string
+  name: string;
+  dept: string;
+  reg_no: string;
+  year_of_joining: string;
+  year_of_passing: string;
+  current_status: string;
+  company_name: string;
+  designation: string;
+  job_location: string;
+  success_stories: string;
+  location: string;
 }
 
 export function UniversityStudentProfileSummary({
@@ -39,12 +50,19 @@ export function UniversityStudentProfileSummary({
               <User className="w-8 h-8" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-balance text-emerald-950">{name}</h2>
-              <p className="text-lg font-medium text-emerald-800">{designation}</p>
+              <h2 className="text-2xl font-bold text-balance text-emerald-950">
+                {name}
+              </h2>
+              <p className="text-lg font-medium text-emerald-800">
+                {designation}
+              </p>
               <p className="text-sm opacity-80">{company_name}</p>
             </div>
           </div>
-          <Badge variant="secondary" className="text-white font-medium bg-green-500">
+          <Badge
+            variant="secondary"
+            className="text-white font-medium bg-green-500"
+          >
             <BadgeCheck className="size-6 pr-2" /> Verified
           </Badge>
         </div>
@@ -60,19 +78,27 @@ export function UniversityStudentProfileSummary({
             </h3>
             <div className="space-y-3 pl-7">
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium opacity-70">Department:</span>
+                <span className="text-sm font-medium opacity-70">
+                  Department:
+                </span>
                 <span className="text-sm font-semibold">{dept}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium opacity-70">Register No:</span>
+                <span className="text-sm font-medium opacity-70">
+                  Register No:
+                </span>
                 <span className="text-sm font-semibold">{reg_no}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium opacity-70">Joining Year:</span>
+                <span className="text-sm font-medium opacity-70">
+                  Joining Year:
+                </span>
                 <span className="text-sm font-semibold">{year_of_joining}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium opacity-70">Passing Year:</span>
+                <span className="text-sm font-medium opacity-70">
+                  Passing Year:
+                </span>
                 <span className="text-sm font-semibold">{year_of_passing}</span>
               </div>
             </div>
@@ -119,12 +145,15 @@ export function UniversityStudentProfileSummary({
             <MessageSquare className="w-4 h-4 mr-2" />
             Chat
           </Button>
-          <Button variant="outline" className="flex-1 bg-transparent border-emerald-600 text-emerald-800 hover:bg-emerald-50 cursor-not-allowed">
+          <Button
+            variant="outline"
+            className="flex-1 bg-transparent border-emerald-600 text-emerald-800 hover:bg-emerald-50 cursor-not-allowed"
+          >
             <Phone className="w-4 h-4 mr-2" />
             Call
           </Button>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

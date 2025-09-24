@@ -1,35 +1,45 @@
-"use client"
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Building2, FileText, Users } from "lucide-react"
-import { createJobPosting } from "@/services/jobservices"
-import { toast } from "sonner"
-import { useNavigate } from "react-router-dom"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Building2, FileText, Users } from "lucide-react";
+import { createJobPosting } from "@/services/jobservices";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 interface JobFormData {
-  jobTitle: string
-  companyName: string
-  applyLink: string
-  department: string
-  jobType: string[]
-  location: string
-  salaryPackage: string
-  overview: string
-  responsibilities: string
-  requiredQualifications: string
-  preferredQualifications: string
-  benefits: string[]
-  applicationDeadline: string
-  contactEmail: string
-  contactPhone: string
-  applicationNumber: string
+  jobTitle: string;
+  companyName: string;
+  applyLink: string;
+  department: string;
+  jobType: string[];
+  location: string;
+  salaryPackage: string;
+  overview: string;
+  responsibilities: string;
+  requiredQualifications: string;
+  preferredQualifications: string;
+  benefits: string[];
+  applicationDeadline: string;
+  contactEmail: string;
+  contactPhone: string;
+  applicationNumber: string;
 }
 
 const initialFormData: JobFormData = {
@@ -49,7 +59,7 @@ const initialFormData: JobFormData = {
   contactEmail: "",
   contactPhone: "",
   applicationNumber: "0",
-}
+};
 
 const departments = [
   "Engineering",
@@ -62,7 +72,7 @@ const departments = [
   "Finance",
   "Customer Success",
   "Legal",
-]
+];
 
 const jobTypes = [
   { id: "full-time", label: "Full-time" },
@@ -70,7 +80,7 @@ const jobTypes = [
   { id: "contract", label: "Contract" },
   { id: "internship", label: "Internship" },
   { id: "remote", label: "Remote" },
-]
+];
 
 const benefitOptions = [
   { id: "health-insurance", label: "Health Insurance" },
@@ -81,42 +91,49 @@ const benefitOptions = [
   { id: "remote-work", label: "Remote Work Options" },
   { id: "professional-development", label: "Professional Development" },
   { id: "stock-options", label: "Stock Options" },
-]
+];
 
 export function JobApplyForm() {
-  const [formData, setFormData] = useState<JobFormData>(initialFormData)
+  const [formData, setFormData] = useState<JobFormData>(initialFormData);
 
-  const updateFormData = (field: keyof JobFormData, value: string | string[]) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
+  const updateFormData = (
+    field: keyof JobFormData,
+    value: string | string[]
+  ) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
   const handleJobTypeChange = (typeId: string, checked: boolean) => {
-    const updatedTypes = checked ? [...formData.jobType, typeId] : formData.jobType.filter((type) => type !== typeId)
-    updateFormData("jobType", updatedTypes)
-  }
+    const updatedTypes = checked
+      ? [...formData.jobType, typeId]
+      : formData.jobType.filter((type) => type !== typeId);
+    updateFormData("jobType", updatedTypes);
+  };
 
   const handleBenefitChange = (benefitId: string, checked: boolean) => {
     const updatedBenefits = checked
       ? [...formData.benefits, benefitId]
-      : formData.benefits.filter((benefit) => benefit !== benefitId)
-    updateFormData("benefits", updatedBenefits)
-  }
+      : formData.benefits.filter((benefit) => benefit !== benefitId);
+    updateFormData("benefits", updatedBenefits);
+  };
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-  try {
-    const result = await createJobPosting(formData)
-    toast.success("Job created successfully!")
-    navigate("/alumni/dashboard");
-  } catch (err: any) {
-    toast.error("Failed to create job")
-  }
-}
+    try {
+      const result = await createJobPosting(formData);
+      toast.success("Job created successfully!");
+      navigate("/alumni/dashboard");
+    } catch (err: any) {
+      toast.error("Failed to create job");
+    }
+  };
 
   return (
     <div className="w-[1200px] mx-auto space-y-6">
       <div className="text-start space-y-2">
-        <h1 className="text-2xl font-bold text-orange-600">Create Job Posting</h1>
+        <h1 className="text-2xl font-bold text-orange-600">
+          Create Job Posting
+        </h1>
         <p className="text-muted-foreground">
           Fill out all the details below to create a comprehensive job listing.
         </p>
@@ -127,13 +144,17 @@ export function JobApplyForm() {
           <CardTitle className="flex items-center gap-2">
             <Building2 className="h-5 w-5" /> Job Posting Form
           </CardTitle>
-          <CardDescription>Enter complete job details in the form below</CardDescription>
+          <CardDescription>
+            Enter complete job details in the form below
+          </CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-8">
           {/* Job Details */}
           <div className="space-y-6">
-            <h2 className="text-lg font-semibold flex items-center gap-2"><Building2 className="h-4 w-4"/> Job Details</h2>
+            <h2 className="text-lg font-semibold flex items-center gap-2">
+              <Building2 className="h-4 w-4" /> Job Details
+            </h2>
 
             <div className="grid gap-2">
               <Label htmlFor="companyName">Company Name *</Label>
@@ -165,13 +186,18 @@ export function JobApplyForm() {
 
             <div className="grid gap-2">
               <Label htmlFor="department">Department *</Label>
-              <Select value={formData.department} onValueChange={(value) => updateFormData("department", value)}>
+              <Select
+                value={formData.department}
+                onValueChange={(value) => updateFormData("department", value)}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select department" />
                 </SelectTrigger>
                 <SelectContent>
                   {departments.map((dept) => (
-                    <SelectItem key={dept} value={dept}>{dept}</SelectItem>
+                    <SelectItem key={dept} value={dept}>
+                      {dept}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -185,9 +211,13 @@ export function JobApplyForm() {
                     <Checkbox
                       id={type.id}
                       checked={formData.jobType.includes(type.id)}
-                      onCheckedChange={(checked) => handleJobTypeChange(type.id, checked as boolean)}
+                      onCheckedChange={(checked) =>
+                        handleJobTypeChange(type.id, checked as boolean)
+                      }
                     />
-                    <Label htmlFor={type.id} className="text-sm font-normal">{type.label}</Label>
+                    <Label htmlFor={type.id} className="text-sm font-normal">
+                      {type.label}
+                    </Label>
                   </div>
                 ))}
               </div>
@@ -211,7 +241,9 @@ export function JobApplyForm() {
                   type="text"
                   placeholder="8 LPA"
                   value={formData.salaryPackage}
-                  onChange={(e) => updateFormData("salaryPackage", e.target.value)}
+                  onChange={(e) =>
+                    updateFormData("salaryPackage", e.target.value)
+                  }
                 />
               </div>
               <div className="grid gap-2">
@@ -221,7 +253,9 @@ export function JobApplyForm() {
                   type="number"
                   placeholder="0"
                   value={formData.applicationNumber}
-                  onChange={(e) => updateFormData("applicationNumber", e.target.value)}
+                  onChange={(e) =>
+                    updateFormData("applicationNumber", e.target.value)
+                  }
                 />
               </div>
             </div>
@@ -229,7 +263,9 @@ export function JobApplyForm() {
 
           {/* Job Description */}
           <div className="space-y-6">
-            <h2 className="text-lg font-semibold flex items-center gap-2"><FileText className="h-4 w-4"/> Job Description</h2>
+            <h2 className="text-lg font-semibold flex items-center gap-2">
+              <FileText className="h-4 w-4" /> Job Description
+            </h2>
 
             <div className="grid gap-2">
               <Label htmlFor="overview">Job Overview *</Label>
@@ -249,36 +285,48 @@ export function JobApplyForm() {
                 placeholder="• Lead development of new features&#10;• Collaborate with teams"
                 className="min-h-[120px]"
                 value={formData.responsibilities}
-                onChange={(e) => updateFormData("responsibilities", e.target.value)}
+                onChange={(e) =>
+                  updateFormData("responsibilities", e.target.value)
+                }
               />
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="requiredQualifications">Required Qualifications *</Label>
+              <Label htmlFor="requiredQualifications">
+                Required Qualifications *
+              </Label>
               <Textarea
                 id="requiredQualifications"
                 placeholder="• Bachelor's degree in CS&#10;• 5+ years in software dev"
                 className="min-h-[120px]"
                 value={formData.requiredQualifications}
-                onChange={(e) => updateFormData("requiredQualifications", e.target.value)}
+                onChange={(e) =>
+                  updateFormData("requiredQualifications", e.target.value)
+                }
               />
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="preferredQualifications">Preferred Qualifications</Label>
+              <Label htmlFor="preferredQualifications">
+                Preferred Qualifications
+              </Label>
               <Textarea
                 id="preferredQualifications"
                 placeholder="• Experience with cloud&#10;• Open source contributions"
                 className="min-h-[100px]"
                 value={formData.preferredQualifications}
-                onChange={(e) => updateFormData("preferredQualifications", e.target.value)}
+                onChange={(e) =>
+                  updateFormData("preferredQualifications", e.target.value)
+                }
               />
             </div>
           </div>
 
           {/* Additional Info */}
           <div className="space-y-6">
-            <h2 className="text-lg font-semibold flex items-center gap-2"><Users className="h-4 w-4"/> Additional Information</h2>
+            <h2 className="text-lg font-semibold flex items-center gap-2">
+              <Users className="h-4 w-4" /> Additional Information
+            </h2>
 
             <div className="grid gap-2">
               <Label>Benefits</Label>
@@ -288,9 +336,13 @@ export function JobApplyForm() {
                     <Checkbox
                       id={benefit.id}
                       checked={formData.benefits.includes(benefit.id)}
-                      onCheckedChange={(checked) => handleBenefitChange(benefit.id, checked as boolean)}
+                      onCheckedChange={(checked) =>
+                        handleBenefitChange(benefit.id, checked as boolean)
+                      }
                     />
-                    <Label htmlFor={benefit.id} className="text-sm font-normal">{benefit.label}</Label>
+                    <Label htmlFor={benefit.id} className="text-sm font-normal">
+                      {benefit.label}
+                    </Label>
                   </div>
                 ))}
               </div>
@@ -302,7 +354,9 @@ export function JobApplyForm() {
                 id="applicationDeadline"
                 type="date"
                 value={formData.applicationDeadline}
-                onChange={(e) => updateFormData("applicationDeadline", e.target.value)}
+                onChange={(e) =>
+                  updateFormData("applicationDeadline", e.target.value)
+                }
               />
             </div>
 
@@ -314,7 +368,9 @@ export function JobApplyForm() {
                   type="email"
                   placeholder="hiring@company.com"
                   value={formData.contactEmail}
-                  onChange={(e) => updateFormData("contactEmail", e.target.value)}
+                  onChange={(e) =>
+                    updateFormData("contactEmail", e.target.value)
+                  }
                 />
               </div>
               <div className="grid gap-2">
@@ -324,7 +380,9 @@ export function JobApplyForm() {
                   type="tel"
                   placeholder="+1 (555) 123-4567"
                   value={formData.contactPhone}
-                  onChange={(e) => updateFormData("contactPhone", e.target.value)}
+                  onChange={(e) =>
+                    updateFormData("contactPhone", e.target.value)
+                  }
                 />
               </div>
             </div>
@@ -338,5 +396,5 @@ export function JobApplyForm() {
         </Button>
       </div>
     </div>
-  )
+  );
 }

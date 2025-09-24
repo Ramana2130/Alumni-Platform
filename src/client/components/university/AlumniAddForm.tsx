@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 import { useState } from "react";
@@ -148,28 +146,30 @@ export function AlumniAddForm() {
     }
   };
 
-const handleFileSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  if (!selectedFile) {
-    toast.error("No File Selected. Please select an Excel file to upload.");
-    return;
-  }
+  const handleFileSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedFile) {
+      toast.error("No File Selected. Please select an Excel file to upload.");
+      return;
+    }
 
-  setIsSubmitting(true);
-  try {
-    const res = await uploadAlumniExcel(selectedFile);
-    toast.success(res.message || "File Uploaded Successfully!");
-    setSelectedFile(null);
+    setIsSubmitting(true);
+    try {
+      const res = await uploadAlumniExcel(selectedFile);
+      toast.success(res.message || "File Uploaded Successfully!");
+      setSelectedFile(null);
 
-    // Reset input
-    const fileInput = document.getElementById("excel-upload") as HTMLInputElement;
-    if (fileInput) fileInput.value = "";
-  } catch (error: any) {
-    toast.error(error.response?.data?.error || "Upload failed");
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+      // Reset input
+      const fileInput = document.getElementById(
+        "excel-upload"
+      ) as HTMLInputElement;
+      if (fileInput) fileInput.value = "";
+    } catch (error: any) {
+      toast.error(error.response?.data?.error || "Upload failed");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <Card className="w-full bg-slate-50 border-slate-200">

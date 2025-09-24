@@ -1,14 +1,28 @@
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowLeft, Shield, CheckCircle, XCircle, Clock, Eye, FileText, User } from "lucide-react"
-import { toast } from "sonner"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  ArrowLeft,
+  Shield,
+  CheckCircle,
+  XCircle,
+  Clock,
+  Eye,
+  FileText,
+  User,
+} from "lucide-react";
+import { toast } from "sonner";
 
 interface UniversityDashboardProps {
-  onBack: () => void
+  onBack: () => void;
 }
 
 // Mock data for pending requests
@@ -26,7 +40,11 @@ const mockPendingRequests = [
       "Need funding for undergraduate research project on sustainable chemistry. Will purchase lab equipment and materials for thesis research.",
     gpa: 3.85,
     submissionDate: "2024-01-20",
-    documentsUploaded: ["transcript.pdf", "research_proposal.pdf", "budget_breakdown.xlsx"],
+    documentsUploaded: [
+      "transcript.pdf",
+      "research_proposal.pdf",
+      "budget_breakdown.xlsx",
+    ],
     status: "pending",
   },
   {
@@ -42,10 +60,14 @@ const mockPendingRequests = [
       "Family emergency requiring immediate financial assistance. Father hospitalized, need to cover medical expenses and continue nursing program.",
     gpa: 3.92,
     submissionDate: "2024-01-22",
-    documentsUploaded: ["transcript.pdf", "medical_bills.pdf", "financial_statement.pdf"],
+    documentsUploaded: [
+      "transcript.pdf",
+      "medical_bills.pdf",
+      "financial_statement.pdf",
+    ],
     status: "pending",
   },
-]
+];
 
 // Mock data for verified requests (already approved)
 const mockVerifiedRequests = [
@@ -79,17 +101,18 @@ const mockVerifiedRequests = [
     status: "verified",
     raised: 800,
   },
-]
+];
 
 export default function FundList({ onBack }: UniversityDashboardProps) {
-  const [pendingRequests, setPendingRequests] = useState(mockPendingRequests)
-  const [verifiedRequests, setVerifiedRequests] = useState(mockVerifiedRequests)
+  const [pendingRequests, setPendingRequests] = useState(mockPendingRequests);
+  const [verifiedRequests, setVerifiedRequests] =
+    useState(mockVerifiedRequests);
 
   const handleApprove = (requestId: number, studentName: string) => {
-    const request = pendingRequests.find((r) => r.id === requestId)
+    const request = pendingRequests.find((r) => r.id === requestId);
     if (request) {
       // Move from pending to verified
-      setPendingRequests((prev) => prev.filter((r) => r.id !== requestId))
+      setPendingRequests((prev) => prev.filter((r) => r.id !== requestId));
       setVerifiedRequests((prev) => [
         ...prev,
         {
@@ -99,40 +122,42 @@ export default function FundList({ onBack }: UniversityDashboardProps) {
           verifiedBy: "Admin User",
           raised: 0,
         },
-      ])
+      ]);
 
       toast.success(
         `Request Approved: ${studentName}'s fund request has been verified and published to the alumni portal.`
-      )
+      );
     }
-  }
+  };
 
   const handleReject = (requestId: number, studentName: string) => {
-    setPendingRequests((prev) => prev.filter((r) => r.id !== requestId))
+    setPendingRequests((prev) => prev.filter((r) => r.id !== requestId));
     toast.error(
       `Request Rejected: ${studentName}'s fund request has been rejected. The student will be notified via email.`
-    )
-  }
+    );
+  };
 
   const getUrgencyColor = (urgency: string) => {
     switch (urgency) {
       case "immediate":
-        return "bg-red-100 text-red-800 border border-red-200"
+        return "bg-red-100 text-red-800 border border-red-200";
       case "urgent":
-        return "bg-orange-100 text-orange-800 border border-orange-200"
+        return "bg-orange-100 text-orange-800 border border-orange-200";
       case "moderate":
-        return "bg-yellow-100 text-yellow-800 border border-yellow-200"
+        return "bg-yellow-100 text-yellow-800 border border-yellow-200";
       default:
-        return "bg-slate-100 text-slate-800 border border-slate-200"
+        return "bg-slate-100 text-slate-800 border border-slate-200";
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="pb-4">
-            <h1 className="text-2xl font-bold tracking-tight text-emerald-700">Fund Reports</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-emerald-700">
+            Fund Reports
+          </h1>
         </div>
 
         <Tabs defaultValue="pending" className="space-y-6">
@@ -156,7 +181,10 @@ export default function FundList({ onBack }: UniversityDashboardProps) {
           {/* Pending Requests Tab */}
           <TabsContent value="pending" className="space-y-6">
             {pendingRequests.map((request) => (
-              <Card key={request.id} className="border-l-4 border-l-orange-500 bg-white border-slate-200 shadow-sm">
+              <Card
+                key={request.id}
+                className="border-l-4 border-l-orange-500 bg-white border-slate-200 shadow-sm"
+              >
                 <CardHeader className="border-b border-slate-100">
                   <div className="flex justify-between items-start">
                     <div>
@@ -165,18 +193,24 @@ export default function FundList({ onBack }: UniversityDashboardProps) {
                         {request.studentName}
                       </CardTitle>
                       <CardDescription className="mt-1 text-slate-600">
-                        ID: {request.studentId} • {request.program} • {request.year} • GPA: {request.gpa}
+                        ID: {request.studentId} • {request.program} •{" "}
+                        {request.year} • GPA: {request.gpa}
                       </CardDescription>
                     </div>
                     <div className="flex flex-col items-end space-y-2">
                       <Badge className={getUrgencyColor(request.urgency)}>
-                        {request.urgency.charAt(0).toUpperCase() + request.urgency.slice(1)}
+                        {request.urgency.charAt(0).toUpperCase() +
+                          request.urgency.slice(1)}
                       </Badge>
-                      <Badge variant="outline" className="border-slate-300 text-slate-700">
+                      <Badge
+                        variant="outline"
+                        className="border-slate-300 text-slate-700"
+                      >
                         {request.fundingType}
                       </Badge>
                       <span className="text-sm text-slate-500">
-                        Submitted: {new Date(request.submissionDate).toLocaleDateString()}
+                        Submitted:{" "}
+                        {new Date(request.submissionDate).toLocaleDateString()}
                       </span>
                     </div>
                   </div>
@@ -185,13 +219,21 @@ export default function FundList({ onBack }: UniversityDashboardProps) {
                   <div className="space-y-6">
                     {/* Request Details */}
                     <div>
-                      <h4 className="font-semibold text-slate-900 mb-2">Request Details</h4>
+                      <h4 className="font-semibold text-slate-900 mb-2">
+                        Request Details
+                      </h4>
                       <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
                         <div className="flex justify-between items-center mb-3">
-                          <span className="font-medium text-slate-700">Requested Amount:</span>
-                          <span className="text-lg font-bold text-purple-600">${request.amount.toLocaleString()}</span>
+                          <span className="font-medium text-slate-700">
+                            Requested Amount:
+                          </span>
+                          <span className="text-lg font-bold text-purple-600">
+                            ${request.amount.toLocaleString()}
+                          </span>
                         </div>
-                        <p className="text-slate-700 leading-relaxed">{request.description}</p>
+                        <p className="text-slate-700 leading-relaxed">
+                          {request.description}
+                        </p>
                       </div>
                     </div>
 
@@ -219,14 +261,18 @@ export default function FundList({ onBack }: UniversityDashboardProps) {
                     <div className="flex justify-end space-x-3 pt-4 border-t border-slate-200">
                       <Button
                         variant="outline"
-                        onClick={() => handleReject(request.id, request.studentName)}
+                        onClick={() =>
+                          handleReject(request.id, request.studentName)
+                        }
                         className="text-red-600 border-red-300 hover:bg-red-50 hover:border-red-400"
                       >
                         <XCircle className="h-4 w-4 mr-2" />
                         Reject
                       </Button>
                       <Button
-                        onClick={() => handleApprove(request.id, request.studentName)}
+                        onClick={() =>
+                          handleApprove(request.id, request.studentName)
+                        }
                         className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm"
                       >
                         <CheckCircle className="h-4 w-4 mr-2" />
@@ -244,7 +290,9 @@ export default function FundList({ onBack }: UniversityDashboardProps) {
                   <div className="text-slate-500">
                     <Clock className="h-12 w-12 mx-auto mb-4 opacity-50" />
                     <p className="text-lg">No pending requests</p>
-                    <p className="text-sm">All fund requests have been reviewed</p>
+                    <p className="text-sm">
+                      All fund requests have been reviewed
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -254,7 +302,10 @@ export default function FundList({ onBack }: UniversityDashboardProps) {
           {/* Verified Requests Tab */}
           <TabsContent value="verified" className="space-y-6">
             {verifiedRequests.map((request) => (
-              <Card key={request.id} className="border-l-4 border-l-emerald-500 bg-white border-slate-200 shadow-sm">
+              <Card
+                key={request.id}
+                className="border-l-4 border-l-emerald-500 bg-white border-slate-200 shadow-sm"
+              >
                 <CardHeader className="border-b border-slate-100">
                   <div className="flex justify-between items-start">
                     <div>
@@ -263,12 +314,18 @@ export default function FundList({ onBack }: UniversityDashboardProps) {
                         {request.studentName}
                       </CardTitle>
                       <CardDescription className="mt-1 text-slate-600">
-                        ID: {request.studentId} • {request.program} • {request.year} • GPA: {request.gpa}
+                        ID: {request.studentId} • {request.program} •{" "}
+                        {request.year} • GPA: {request.gpa}
                       </CardDescription>
                     </div>
                     <div className="flex flex-col items-end space-y-2">
-                      <Badge className="bg-emerald-100 text-emerald-800 border border-emerald-200">Verified</Badge>
-                      <Badge variant="outline" className="border-slate-300 text-slate-700">
+                      <Badge className="bg-emerald-100 text-emerald-800 border border-emerald-200">
+                        Verified
+                      </Badge>
+                      <Badge
+                        variant="outline"
+                        className="border-slate-300 text-slate-700"
+                      >
                         {request.fundingType}
                       </Badge>
                     </div>
@@ -279,30 +336,49 @@ export default function FundList({ onBack }: UniversityDashboardProps) {
                     {/* Verification Info */}
                     <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-200">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="font-medium text-slate-700">Requested Amount:</span>
-                        <span className="text-lg font-bold text-emerald-600">${request.amount.toLocaleString()}</span>
+                        <span className="font-medium text-slate-700">
+                          Requested Amount:
+                        </span>
+                        <span className="text-lg font-bold text-emerald-600">
+                          ${request.amount.toLocaleString()}
+                        </span>
                       </div>
                       <div className="flex justify-between items-center mb-2">
-                        <span className="font-medium text-slate-700">Amount Raised:</span>
-                        <span className="text-lg font-bold text-blue-600">${request.raised.toLocaleString()}</span>
+                        <span className="font-medium text-slate-700">
+                          Amount Raised:
+                        </span>
+                        <span className="text-lg font-bold text-blue-600">
+                          ${request.raised.toLocaleString()}
+                        </span>
                       </div>
                       <div className="text-sm text-slate-600 mt-3">
-                        Verified by {request.verifiedBy} on {new Date(request.verificationDate).toLocaleDateString()}
+                        Verified by {request.verifiedBy} on{" "}
+                        {new Date(
+                          request.verificationDate
+                        ).toLocaleDateString()}
                       </div>
                     </div>
 
                     {/* Progress */}
                     <div>
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm font-medium text-slate-700">Funding Progress</span>
+                        <span className="text-sm font-medium text-slate-700">
+                          Funding Progress
+                        </span>
                         <span className="text-sm text-slate-600">
-                          {((request.raised / request.amount) * 100).toFixed(0)}%
+                          {((request.raised / request.amount) * 100).toFixed(0)}
+                          %
                         </span>
                       </div>
                       <div className="w-full bg-slate-200 rounded-full h-2">
                         <div
                           className="bg-emerald-600 h-2 rounded-full"
-                          style={{ width: `${Math.min((request.raised / request.amount) * 100, 100)}%` }}
+                          style={{
+                            width: `${Math.min(
+                              (request.raised / request.amount) * 100,
+                              100
+                            )}%`,
+                          }}
                         ></div>
                       </div>
                     </div>
@@ -317,7 +393,9 @@ export default function FundList({ onBack }: UniversityDashboardProps) {
                   <div className="text-slate-500">
                     <CheckCircle className="h-12 w-12 mx-auto mb-4 opacity-50" />
                     <p className="text-lg">No verified requests</p>
-                    <p className="text-sm">Approved requests will appear here</p>
+                    <p className="text-sm">
+                      Approved requests will appear here
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -326,5 +404,5 @@ export default function FundList({ onBack }: UniversityDashboardProps) {
         </Tabs>
       </div>
     </div>
-  )
+  );
 }

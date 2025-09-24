@@ -1,4 +1,4 @@
-import { Pie, PieChart } from "recharts"
+import { Pie, PieChart } from "recharts";
 
 import {
   Card,
@@ -6,15 +6,15 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 
-export const description = "A pie chart with a legend"
+export const description = "A pie chart with a legend";
 
 const chartData = [
   { browser: "Job", visitors: 275, fill: "#ffb86a" },
@@ -22,7 +22,7 @@ const chartData = [
   { browser: "Business", visitors: 187, fill: "#f54a00" },
   { browser: "startupOwner", visitors: 173, fill: "#ca3500" },
   { browser: "other", visitors: 90, fill: "#9f2d00" },
-]
+];
 
 const chartConfig = {
   visitors: {
@@ -48,14 +48,16 @@ const chartConfig = {
     label: "Other",
     color: "var(--chart-5)",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 export function JobChart() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
         <CardTitle>Alumni Chart</CardTitle>
-        <CardDescription>This chart based on alumni proffesionals</CardDescription>
+        <CardDescription>
+          This chart based on alumni proffesionals
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -72,5 +74,5 @@ export function JobChart() {
         </ChartContainer>
       </CardContent>
     </Card>
-  )
+  );
 }

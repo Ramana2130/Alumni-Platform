@@ -1,24 +1,24 @@
-import { useEffect, useState } from "react"
-import { getJobPostingById } from "@/services/jobservices"
-import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { getJobPostingById } from "@/services/jobservices";
+import { useParams } from "react-router-dom";
 import { JobDetailsSummary } from "@/components/common/JobDetailsSummary";
 
 export default function StudentsJobDesp() {
-  const [job, setJob] = useState<any>(null)
-  const {id} = useParams<{ id: string }>();
+  const [job, setJob] = useState<any>(null);
+  const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const data = await getJobPostingById(Number(id)) // pass jobId dynamically
-        setJob(data)
-        console.log(data)
+        const data = await getJobPostingById(Number(id)); // pass jobId dynamically
+        setJob(data);
+        console.log(data);
       } catch (err) {
-        console.error("Error fetching job:", err)
+        console.error("Error fetching job:", err);
       }
-    }
-    fetchJob()
-  }, [])
+    };
+    fetchJob();
+  }, []);
 
   return (
     <main className="min-h-screen bg-background p-1">
@@ -42,5 +42,5 @@ export default function StudentsJobDesp() {
         />
       </div>
     </main>
-  )
+  );
 }

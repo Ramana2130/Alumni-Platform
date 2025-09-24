@@ -1,16 +1,35 @@
-"use client"
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ArrowLeft, Heart, DollarSign, Clock, GraduationCap, Filter, Search, BadgeCheck } from "lucide-react"
-import { toast } from "sonner"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  ArrowLeft,
+  Heart,
+  DollarSign,
+  Clock,
+  GraduationCap,
+  Filter,
+  Search,
+  BadgeCheck,
+} from "lucide-react";
+import { toast } from "sonner";
 
 interface AlumniPortalProps {
-  onBack: () => void
+  onBack: () => void;
 }
 
 // Mock data for verified fund requests
@@ -79,55 +98,64 @@ const mockRequests = [
     gpa: 3.7,
     verificationDate: "2024-01-10",
   },
-]
+];
 
 export default function FundDonate({ onBack }: AlumniPortalProps) {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [filterType, setFilterType] = useState("all")
-  const [filterUrgency, setFilterUrgency] = useState("all")
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterType, setFilterType] = useState("all");
+  const [filterUrgency, setFilterUrgency] = useState("all");
 
   const filteredRequests = mockRequests.filter((request) => {
     const matchesSearch =
       request.studentName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       request.program.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      request.description.toLowerCase().includes(searchTerm.toLowerCase())
+      request.description.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesType = filterType === "all" || request.fundingType.toLowerCase().includes(filterType.toLowerCase())
-    const matchesUrgency = filterUrgency === "all" || request.urgency === filterUrgency
+    const matchesType =
+      filterType === "all" ||
+      request.fundingType.toLowerCase().includes(filterType.toLowerCase());
+    const matchesUrgency =
+      filterUrgency === "all" || request.urgency === filterUrgency;
 
-    return matchesSearch && matchesType && matchesUrgency
-  })
+    return matchesSearch && matchesType && matchesUrgency;
+  });
 
   const handleDonate = (requestId: number, studentName: string) => {
-    toast.success(`Donation Initiated, Thank you for supporting ${studentName}! You'll be redirected to the secure payment portal.`);
-  }
+    toast.success(
+      `Donation Initiated, Thank you for supporting ${studentName}! You'll be redirected to the secure payment portal.`
+    );
+  };
 
   const getUrgencyColor = (urgency: string) => {
     switch (urgency) {
       case "immediate":
-        return "bg-red-100 text-red-800 border border-red-200"
+        return "bg-red-100 text-red-800 border border-red-200";
       case "urgent":
-        return "bg-orange-100 text-orange-800 border border-orange-200"
+        return "bg-orange-100 text-orange-800 border border-orange-200";
       case "moderate":
-        return "bg-yellow-100 text-yellow-800 border border-yellow-200"
+        return "bg-yellow-100 text-yellow-800 border border-yellow-200";
       default:
-        return "bg-slate-100 text-slate-800 border border-slate-200"
+        return "bg-slate-100 text-slate-800 border border-slate-200";
     }
-  }
+  };
 
   const getProgressPercentage = (raised: number, goal: number) => {
-    return Math.min((raised / goal) * 100, 100)
-  }
+    return Math.min((raised / goal) * 100, 100);
+  };
 
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto px-4 py-4">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center">           
+          <div className="flex items-center">
             <div className="pl-2">
-              <h1 className="text-2xl font-bold text-orange-600">Fund Details</h1>
-              <p className="text-slate-600 mt-1">Support students by contributing to verified fund requests</p>
+              <h1 className="text-2xl font-bold text-orange-600">
+                Fund Details
+              </h1>
+              <p className="text-slate-600 mt-1">
+                Support students by contributing to verified fund requests
+              </p>
             </div>
           </div>
         </div>
@@ -143,7 +171,9 @@ export default function FundDonate({ onBack }: AlumniPortalProps) {
           <CardContent className="p-6">
             <div className="grid md:grid-cols-3 gap-4">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-700">Search</label>
+                <label className="text-sm font-medium text-slate-700">
+                  Search
+                </label>
                 <div className="relative">
                   <Search className="h-4 w-4 absolute left-3 top-3 text-slate-400" />
                   <Input
@@ -155,7 +185,9 @@ export default function FundDonate({ onBack }: AlumniPortalProps) {
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-700">Funding Type</label>
+                <label className="text-sm font-medium text-slate-700">
+                  Funding Type
+                </label>
                 <Select value={filterType} onValueChange={setFilterType}>
                   <SelectTrigger>
                     <SelectValue />
@@ -165,12 +197,16 @@ export default function FundDonate({ onBack }: AlumniPortalProps) {
                     <SelectItem value="tuition">Tuition Assistance</SelectItem>
                     <SelectItem value="emergency">Emergency Fund</SelectItem>
                     <SelectItem value="research">Research Project</SelectItem>
-                    <SelectItem value="technology">Technology/Equipment</SelectItem>
+                    <SelectItem value="technology">
+                      Technology/Equipment
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-700">Urgency</label>
+                <label className="text-sm font-medium text-slate-700">
+                  Urgency
+                </label>
                 <Select value={filterUrgency} onValueChange={setFilterUrgency}>
                   <SelectTrigger>
                     <SelectValue />
@@ -190,7 +226,10 @@ export default function FundDonate({ onBack }: AlumniPortalProps) {
         {/* Fund Requests */}
         <div className="grid gap-6">
           {filteredRequests.map((request) => (
-            <Card key={request.id} className="hover:shadow-lg transition-shadow bg-white border-slate-200">
+            <Card
+              key={request.id}
+              className="hover:shadow-lg transition-shadow bg-white border-slate-200"
+            >
               <CardHeader className="border-b border-slate-100">
                 <div className="flex justify-between items-start">
                   <div>
@@ -204,31 +243,47 @@ export default function FundDonate({ onBack }: AlumniPortalProps) {
                   </div>
                   <div className="flex flex-col items-end space-y-2">
                     <Badge className={getUrgencyColor(request.urgency)}>
-                      {request.urgency.charAt(0).toUpperCase() + request.urgency.slice(1)}
+                      {request.urgency.charAt(0).toUpperCase() +
+                        request.urgency.slice(1)}
                     </Badge>
-                    <Badge variant="outline" className="border-slate-300 text-slate-700">
+                    <Badge
+                      variant="outline"
+                      className="border-slate-300 text-slate-700"
+                    >
                       {request.fundingType}
                     </Badge>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="p-6">
-                <p className="text-slate-700 mb-6 leading-relaxed">{request.description}</p>
+                <p className="text-slate-700 mb-6 leading-relaxed">
+                  {request.description}
+                </p>
 
                 {/* Progress Bar */}
                 <div className="mb-6">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-sm font-medium text-slate-700">
-                      ${request.raised.toLocaleString()} raised of ${request.goal.toLocaleString()} goal
+                      ${request.raised.toLocaleString()} raised of $
+                      {request.goal.toLocaleString()} goal
                     </span>
                     <span className="text-sm text-slate-600">
-                      {getProgressPercentage(request.raised, request.goal).toFixed(0)}%
+                      {getProgressPercentage(
+                        request.raised,
+                        request.goal
+                      ).toFixed(0)}
+                      %
                     </span>
                   </div>
                   <div className="w-full bg-slate-200 rounded-full h-3">
                     <div
                       className="bg-[#d56f2c] h-3 rounded-full transition-all duration-300"
-                      style={{ width: `${getProgressPercentage(request.raised, request.goal)}%` }}
+                      style={{
+                        width: `${getProgressPercentage(
+                          request.raised,
+                          request.goal
+                        )}%`,
+                      }}
                     ></div>
                   </div>
                 </div>
@@ -246,23 +301,25 @@ export default function FundDonate({ onBack }: AlumniPortalProps) {
                     </div>
                   </div>
                   <a href="/alumni/payment-gateway">
-                  <Button
-                    onClick={() => handleDonate(request.id, request.studentName)}
-                    className="bg-[#d56f2c] hover:bg-[#c65a2c] text-white shadow-sm"
-                  >
-                    <Heart className="h-4 w-4 mr-2" />
-                    Donate Now
-                      
-                  </Button>
-                    </a>
+                    <Button
+                      onClick={() =>
+                        handleDonate(request.id, request.studentName)
+                      }
+                      className="bg-[#d56f2c] hover:bg-[#c65a2c] text-white shadow-sm"
+                    >
+                      <Heart className="h-4 w-4 mr-2" />
+                      Donate Now
+                    </Button>
+                  </a>
                 </div>
 
                 {/* Verification Badge */}
                 <div className="mt-4 pt-4 border-t border-slate-200">
                   <div className="flex items-center text-sm text-green-600">
-                    <BadgeCheck className="size-4 gap-6" /> 
+                    <BadgeCheck className="size-4 gap-6" />
                     {/* <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div> */}
-                    Verified by University Administration on {new Date(request.verificationDate).toLocaleDateString()}
+                    Verified by University Administration on{" "}
+                    {new Date(request.verificationDate).toLocaleDateString()}
                   </div>
                 </div>
               </CardContent>
@@ -275,13 +332,17 @@ export default function FundDonate({ onBack }: AlumniPortalProps) {
             <CardContent>
               <div className="text-slate-500 mb-4">
                 <Search className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                <p className="text-lg">No requests found matching your criteria</p>
-                <p className="text-sm">Try adjusting your filters or search terms</p>
+                <p className="text-lg">
+                  No requests found matching your criteria
+                </p>
+                <p className="text-sm">
+                  Try adjusting your filters or search terms
+                </p>
               </div>
             </CardContent>
           </Card>
         )}
       </div>
     </div>
-  )
+  );
 }

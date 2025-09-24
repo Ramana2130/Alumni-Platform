@@ -1,20 +1,32 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { User, GraduationCap, Building2, MapPin, Briefcase, Trophy, Mail, Phone, BadgeCheck, MessageSquare, Loader } from "lucide-react"
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  User,
+  GraduationCap,
+  Building2,
+  MapPin,
+  Briefcase,
+  Trophy,
+  Mail,
+  Phone,
+  BadgeCheck,
+  MessageSquare,
+  Loader,
+} from "lucide-react";
 
 interface AlumniProfileSummaryProps {
-  name: string
-  department: string
-  registerNumber: string
-  yearOfJoining: number
-  yearOfPassing: number | null
-  currentStatus: string
-  companyName: string
-  designation: string
-  jobLocation: string
-  successStories: string
-  location: string
+  name: string;
+  department: string;
+  registerNumber: string;
+  yearOfJoining: number;
+  yearOfPassing: number | null;
+  currentStatus: string;
+  companyName: string;
+  designation: string;
+  jobLocation: string;
+  successStories: string;
+  location: string;
 }
 
 export function UniversityAlumniProfileSummary({
@@ -39,12 +51,19 @@ export function UniversityAlumniProfileSummary({
               <User className="w-8 h-8" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-emerald-950 uppercase">{name}</h2>
-              <p className="text-lg font-medium text-emerald-800">{designation}</p>
+              <h2 className="text-2xl font-bold text-emerald-950 uppercase">
+                {name}
+              </h2>
+              <p className="text-lg font-medium text-emerald-800">
+                {designation}
+              </p>
               <p className="text-sm opacity-80">{companyName}</p>
             </div>
           </div>
-          <Badge variant="secondary" className="text-white font-medium bg-green-500">
+          <Badge
+            variant="secondary"
+            className="text-white font-medium bg-green-500"
+          >
             <BadgeCheck className="size-6 pr-2" /> Verified
           </Badge>
         </div>
@@ -60,19 +79,27 @@ export function UniversityAlumniProfileSummary({
             </h3>
             <div className="space-y-3 pl-7">
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium opacity-70">Department:</span>
+                <span className="text-sm font-medium opacity-70">
+                  Department:
+                </span>
                 <span className="text-sm font-semibold">{department}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium opacity-70">Register No:</span>
+                <span className="text-sm font-medium opacity-70">
+                  Register No:
+                </span>
                 <span className="text-sm font-semibold">{registerNumber}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium opacity-70">Joining Year:</span>
+                <span className="text-sm font-medium opacity-70">
+                  Joining Year:
+                </span>
                 <span className="text-sm font-semibold">{yearOfJoining}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium opacity-70">Passing Year:</span>
+                <span className="text-sm font-medium opacity-70">
+                  Passing Year:
+                </span>
                 <span className="text-sm font-semibold">{yearOfPassing}</span>
               </div>
             </div>
@@ -133,6 +160,5 @@ export function UniversityAlumniProfileSummary({
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
-

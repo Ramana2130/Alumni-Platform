@@ -1,7 +1,5 @@
-"use client"
-
-import { TrendingUp } from "lucide-react"
-import { Pie, PieChart } from "recharts"
+import { TrendingUp } from "lucide-react";
+import { Pie, PieChart } from "recharts";
 
 import {
   Card,
@@ -10,15 +8,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 
-export const description = "A pie chart with a label"
+export const description = "A pie chart with a label";
 
 const chartData = [
   { browser: "IT", visitors: 275, fill: "#46edd5" },
@@ -26,7 +24,7 @@ const chartData = [
   { browser: "corecompany", visitors: 187, fill: "#009689" },
   { browser: "startup", visitors: 173, fill: "#00786f" },
   { browser: "patnership", visitors: 90, fill: "#005f5a" },
-]
+];
 
 const chartConfig = {
   visitors: {
@@ -52,14 +50,16 @@ const chartConfig = {
     label: "patnership",
     color: "var(--chart-5)",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 export function PositionChart() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
         <CardTitle>Students Working based on Roles</CardTitle>
-        <CardDescription>IT, Non - IT, Core Comapanies, Start-up, Paternship</CardDescription>
+        <CardDescription>
+          IT, Non - IT, Core Comapanies, Start-up, Paternship
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -81,5 +81,5 @@ export function PositionChart() {
         </div>
       </CardFooter>
     </Card>
-  )
+  );
 }

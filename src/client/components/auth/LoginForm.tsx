@@ -1,54 +1,63 @@
-"use client"
-
-import type React from "react"
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { GraduationCap, Building2, Users } from "lucide-react"
-import { useNavigate } from "react-router-dom"
-import { toast } from "sonner"
+import type React from "react";
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { GraduationCap, Building2, Users } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export function LoginForm() {
   const [activeTab, setActiveTab] = useState("student");
   const navigate = useNavigate();
 
-const handleSubmit = async (e: React.FormEvent, userType: string) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent, userType: string) => {
+    e.preventDefault();
 
-  const email = (document.getElementById(`${userType}-email`) as HTMLInputElement).value;
-  const password = (document.getElementById(`${userType}-password`) as HTMLInputElement).value;
+    const email = (
+      document.getElementById(`${userType}-email`) as HTMLInputElement
+    ).value;
+    const password = (
+      document.getElementById(`${userType}-password`) as HTMLInputElement
+    ).value;
 
-  try {
-    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/auth/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
-    const data = await res.json();
-    if (!res.ok) {
-      toast.error(data.error || "Login failed");
-      return;
+      const data = await res.json();
+      if (!res.ok) {
+        toast.error(data.error || "Login failed");
+        return;
+      }
+
+      toast.success("Login successful");
+
+      // Save JWT
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", userType);
+
+      if (userType === "student") navigate("/students/dashboard");
+      else if (userType === "university") navigate("/university/dashboard");
+      else if (userType === "alumni") navigate("/alumni/dashboard");
+    } catch (err: any) {
+      toast.error("An error occurred during login");
     }
-
-    toast.success("Login successful");    
-
-    // Save JWT
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("role", userType);
-
-    if (userType === "student") navigate("/students/dashboard");
-    else if (userType === "university") navigate("/university/dashboard");
-    else if (userType === "alumni") navigate("/alumni/dashboard");
-
-  } catch (err: any) {
-    toast.error("An error occurred during login");
-  }
-};
-
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 flex items-center justify-center p-4">
@@ -58,19 +67,27 @@ const handleSubmit = async (e: React.FormEvent, userType: string) => {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-slate-800 rounded-full mb-4">
             <GraduationCap className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-slate-800 mb-2">Alumni Association Platform</h1>
+          <h1 className="text-3xl font-bold text-slate-800 mb-2">
+            Alumni Association Platform
+          </h1>
         </div>
 
         {/* Login Card */}
         <Card className="shadow-xl border-0 bg-white/95 backdrop-blur-sm">
           <CardHeader className="space-y-1 pb-4">
-            <CardTitle className="text-2xl font-bold text-center text-slate-800">Sign In</CardTitle>
+            <CardTitle className="text-2xl font-bold text-center text-slate-800">
+              Sign In
+            </CardTitle>
             <CardDescription className="text-center text-slate-600">
               Choose your account type to continue
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <Tabs
+              value={activeTab}
+              onValueChange={setActiveTab}
+              className="w-full"
+            >
               <TabsList className="grid w-full grid-cols-3 mb-6 bg-slate-100">
                 {/* Student */}
                 <TabsTrigger
@@ -112,7 +129,10 @@ const handleSubmit = async (e: React.FormEvent, userType: string) => {
 
               {/* Student Login */}
               <TabsContent value="student" className="space-y-4">
-                <form onSubmit={(e) => handleSubmit(e, "student")} className="space-y-4">
+                <form
+                  onSubmit={(e) => handleSubmit(e, "student")}
+                  className="space-y-4"
+                >
                   <div className="space-y-2">
                     <Label htmlFor="student-email">Student Email</Label>
                     <Input
@@ -133,7 +153,10 @@ const handleSubmit = async (e: React.FormEvent, userType: string) => {
                       required
                     />
                   </div>
-                  <Button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white">
+                  <Button
+                    type="submit"
+                    className="w-full bg-red-500 hover:bg-red-600 text-white"
+                  >
                     Sign In as Student
                   </Button>
                 </form>
@@ -141,7 +164,10 @@ const handleSubmit = async (e: React.FormEvent, userType: string) => {
 
               {/* University Login */}
               <TabsContent value="university" className="space-y-4">
-                <form onSubmit={(e) => handleSubmit(e, "university")} className="space-y-4">
+                <form
+                  onSubmit={(e) => handleSubmit(e, "university")}
+                  className="space-y-4"
+                >
                   <div className="space-y-2">
                     <Label htmlFor="university-email">Institution Email</Label>
                     <Input
@@ -162,7 +188,10 @@ const handleSubmit = async (e: React.FormEvent, userType: string) => {
                       required
                     />
                   </div>
-                  <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">
+                  <Button
+                    type="submit"
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                  >
                     Sign In as University
                   </Button>
                 </form>
@@ -170,7 +199,10 @@ const handleSubmit = async (e: React.FormEvent, userType: string) => {
 
               {/* Alumni Login */}
               <TabsContent value="alumni" className="space-y-4">
-                <form onSubmit={(e) => handleSubmit(e, "alumni")} className="space-y-4">
+                <form
+                  onSubmit={(e) => handleSubmit(e, "alumni")}
+                  className="space-y-4"
+                >
                   <div className="space-y-2">
                     <Label htmlFor="alumni-email">Email Address</Label>
                     <Input
@@ -191,7 +223,10 @@ const handleSubmit = async (e: React.FormEvent, userType: string) => {
                       required
                     />
                   </div>
-                  <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600 text-white">
+                  <Button
+                    type="submit"
+                    className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+                  >
                     Sign In as Alumni
                   </Button>
                 </form>
@@ -200,12 +235,18 @@ const handleSubmit = async (e: React.FormEvent, userType: string) => {
 
             {/* Footer Links */}
             <div className="mt-6 text-center space-y-2">
-              <Button variant="link" className="text-slate-700 hover:text-slate-900 p-0 h-auto font-normal">
+              <Button
+                variant="link"
+                className="text-slate-700 hover:text-slate-900 p-0 h-auto font-normal"
+              >
                 Forgot your password?
               </Button>
               <div className="text-sm text-slate-600">
                 Need help? Contact{" "}
-                <Button variant="link" className="text-slate-700 hover:text-slate-900 p-0 h-auto font-normal text-sm">
+                <Button
+                  variant="link"
+                  className="text-slate-700 hover:text-slate-900 p-0 h-auto font-normal text-sm"
+                >
                   support@eduportal.edu
                 </Button>
               </div>
@@ -219,5 +260,5 @@ const handleSubmit = async (e: React.FormEvent, userType: string) => {
         </div>
       </div>
     </div>
-  )
+  );
 }

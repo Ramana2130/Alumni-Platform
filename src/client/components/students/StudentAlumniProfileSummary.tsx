@@ -1,19 +1,31 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { User, GraduationCap, Building2, MapPin, Briefcase, Trophy, Mail, Phone, BadgeCheck, MessageSquare, Goal } from "lucide-react"
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  User,
+  GraduationCap,
+  Building2,
+  MapPin,
+  Briefcase,
+  Trophy,
+  Mail,
+  Phone,
+  BadgeCheck,
+  MessageSquare,
+  Goal,
+} from "lucide-react";
 
 interface AlumniProfileSummaryProps {
-  name: string
-  dept: string
-  reg_no: string
-  year_of_joining: string
-  year_of_passing: string
-  current_status: string
-  companyName: string
-  designation: string
-  jobLocation: string
-  successStories: string
+  name: string;
+  dept: string;
+  reg_no: string;
+  year_of_joining: string;
+  year_of_passing: string;
+  current_status: string;
+  companyName: string;
+  designation: string;
+  jobLocation: string;
+  successStories: string;
 }
 
 export function StudentAlumniProfileSummary({
@@ -37,12 +49,17 @@ export function StudentAlumniProfileSummary({
               <User className="w-8 h-8" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-balance text-red-950">{name}</h2>
+              <h2 className="text-2xl font-bold text-balance text-red-950">
+                {name}
+              </h2>
               <p className="text-lg font-medium text-red-700">{designation}</p>
               <p className="text-sm opacity-80">{companyName}</p>
             </div>
           </div>
-          <Badge variant="secondary" className="text-white font-medium bg-green-500">
+          <Badge
+            variant="secondary"
+            className="text-white font-medium bg-green-500"
+          >
             <BadgeCheck className="size-6 pr-2" /> Verified
           </Badge>
         </div>
@@ -58,19 +75,27 @@ export function StudentAlumniProfileSummary({
             </h3>
             <div className="space-y-3 pl-7">
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium opacity-70">Department:</span>
+                <span className="text-sm font-medium opacity-70">
+                  Department:
+                </span>
                 <span className="text-sm font-semibold">{dept}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium opacity-70">Register No:</span>
+                <span className="text-sm font-medium opacity-70">
+                  Register No:
+                </span>
                 <span className="text-sm font-semibold">{reg_no}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium opacity-70">Joining Year:</span>
+                <span className="text-sm font-medium opacity-70">
+                  Joining Year:
+                </span>
                 <span className="text-sm font-semibold">{year_of_joining}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium opacity-70">Passing Year:</span>
+                <span className="text-sm font-medium opacity-70">
+                  Passing Year:
+                </span>
                 <span className="text-sm font-semibold">{year_of_passing}</span>
               </div>
             </div>
@@ -106,7 +131,9 @@ export function StudentAlumniProfileSummary({
               Success Stories & Achievements
             </h3>
             <div className="p-4 rounded-lg bg-red-100">
-              <p className="text-sm leading-relaxed text-pretty">{successStories}</p>
+              <p className="text-sm leading-relaxed text-pretty">
+                {successStories}
+              </p>
             </div>
           </div>
         )}
@@ -124,5 +151,5 @@ export function StudentAlumniProfileSummary({
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

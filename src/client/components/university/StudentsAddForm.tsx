@@ -1,11 +1,6 @@
-"use client";
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -37,7 +32,7 @@ interface StudentData {
   student_year_of_joining: string;
   student_year_of_passing: string;
   student_email: string;
-  student_academic_year: string
+  student_academic_year: string;
 }
 
 const departments = [
@@ -62,7 +57,7 @@ export function StudentAddForm() {
     student_year_of_joining: "",
     student_year_of_passing: "",
     student_email: "",
-    student_academic_year: ""
+    student_academic_year: "",
   });
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -96,15 +91,15 @@ export function StudentAddForm() {
     setIsSubmitting(true);
 
     try {
-        const payload = {
-  studentName: formData.student_name,
-  regNo: formData.student_reg_no,
-  department: formData.student_dept,
-  email: formData.student_email,
-  yearOfJoining: formData.student_year_of_joining,
-  yearOfPassing: formData.student_year_of_passing,
-  academicYear: formData.student_academic_year, // or from input
-};
+      const payload = {
+        studentName: formData.student_name,
+        regNo: formData.student_reg_no,
+        department: formData.student_dept,
+        email: formData.student_email,
+        yearOfJoining: formData.student_year_of_joining,
+        yearOfPassing: formData.student_year_of_passing,
+        academicYear: formData.student_academic_year, // or from input
+      };
 
       await addStudent(payload);
 
@@ -117,7 +112,7 @@ export function StudentAddForm() {
         student_year_of_joining: "",
         student_year_of_passing: "",
         student_email: "",
-        student_academic_year: ""
+        student_academic_year: "",
       });
     } catch (error: any) {
       toast.error(error.response?.data?.error || "Failed to add student");
@@ -139,7 +134,9 @@ export function StudentAddForm() {
       toast.success(res.message || "File Uploaded Successfully!");
       setSelectedFile(null);
 
-      const fileInput = document.getElementById("excel-upload") as HTMLInputElement;
+      const fileInput = document.getElementById(
+        "excel-upload"
+      ) as HTMLInputElement;
       if (fileInput) fileInput.value = "";
     } catch (error: any) {
       toast.error(error.response?.data?.error || "Upload failed");
@@ -179,7 +176,10 @@ export function StudentAddForm() {
                   </h3>
 
                   <div className="space-y-2">
-                    <Label htmlFor="student_name" className="text-gray-700 font-medium">
+                    <Label
+                      htmlFor="student_name"
+                      className="text-gray-700 font-medium"
+                    >
                       Full Name *
                     </Label>
                     <Input
@@ -194,7 +194,10 @@ export function StudentAddForm() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="student_reg_no" className="text-gray-700 font-medium">
+                    <Label
+                      htmlFor="student_reg_no"
+                      className="text-gray-700 font-medium"
+                    >
                       Registration Number *
                     </Label>
                     <Input
@@ -209,7 +212,10 @@ export function StudentAddForm() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="student_email" className="text-gray-700 font-medium">
+                    <Label
+                      htmlFor="student_email"
+                      className="text-gray-700 font-medium"
+                    >
                       Email
                     </Label>
                     <Input
@@ -231,7 +237,10 @@ export function StudentAddForm() {
                   </h3>
 
                   <div className="space-y-2">
-                    <Label htmlFor="student_dept" className="text-gray-700 font-medium">
+                    <Label
+                      htmlFor="student_dept"
+                      className="text-gray-700 font-medium"
+                    >
                       Department *
                     </Label>
                     <Popover open={open} onOpenChange={setOpen}>
@@ -248,7 +257,10 @@ export function StudentAddForm() {
                       </PopoverTrigger>
                       <PopoverContent className="w-[300px] p-0">
                         <Command>
-                          <CommandInput placeholder="Search department..." className="h-9" />
+                          <CommandInput
+                            placeholder="Search department..."
+                            className="h-9"
+                          />
                           <CommandList>
                             <CommandEmpty>No department found.</CommandEmpty>
                             <CommandGroup>
@@ -257,7 +269,10 @@ export function StudentAddForm() {
                                   key={dept}
                                   value={dept}
                                   onSelect={(currentValue) => {
-                                    handleInputChange("student_dept", currentValue);
+                                    handleInputChange(
+                                      "student_dept",
+                                      currentValue
+                                    );
                                     setOpen(false);
                                   }}
                                 >
@@ -280,7 +295,10 @@ export function StudentAddForm() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="student_year_of_joining" className="text-gray-700 font-medium">
+                    <Label
+                      htmlFor="student_year_of_joining"
+                      className="text-gray-700 font-medium"
+                    >
                       Year of Joining
                     </Label>
                     <Input
@@ -290,14 +308,20 @@ export function StudentAddForm() {
                       max="2030"
                       value={formData.student_year_of_joining}
                       onChange={(e) =>
-                        handleInputChange("student_year_of_joining", e.target.value)
+                        handleInputChange(
+                          "student_year_of_joining",
+                          e.target.value
+                        )
                       }
                       placeholder="e.g., 2022"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="student_year_of_passing" className="text-gray-700 font-medium">
+                    <Label
+                      htmlFor="student_year_of_passing"
+                      className="text-gray-700 font-medium"
+                    >
                       Year of Passing *
                     </Label>
                     <Input
@@ -307,21 +331,30 @@ export function StudentAddForm() {
                       max="2030"
                       value={formData.student_year_of_passing}
                       onChange={(e) =>
-                        handleInputChange("student_year_of_passing", e.target.value)
+                        handleInputChange(
+                          "student_year_of_passing",
+                          e.target.value
+                        )
                       }
                       placeholder="e.g., 2026"
                       required
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="student_academic_year" className="text-gray-700 font-medium">
+                    <Label
+                      htmlFor="student_academic_year"
+                      className="text-gray-700 font-medium"
+                    >
                       Enter the Studing Year *
                     </Label>
                     <Input
                       id="student_academic_year"
                       value={formData.student_academic_year}
                       onChange={(e) =>
-                        handleInputChange("student_academic_year", e.target.value)
+                        handleInputChange(
+                          "student_academic_year",
+                          e.target.value
+                        )
                       }
                       placeholder="e.g., I, II, III, IV, V"
                       required
@@ -380,8 +413,8 @@ export function StudentAddForm() {
                     student_reg_no, etc.
                   </li>
                   <li>
-                    • Required fields: student_name, student_dept, student_reg_no,
-                    student_year_of_passing
+                    • Required fields: student_name, student_dept,
+                    student_reg_no, student_year_of_passing
                   </li>
                   <li>• Date format: YYYY for years (e.g., 2026)</li>
                   <li>• File size limit: 10MB</li>

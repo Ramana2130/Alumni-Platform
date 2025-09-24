@@ -1,13 +1,10 @@
 
-import { JobList } from "@/components/alumni/job-posting/JobList";
-import  data from "@/components/data/data.json";
 import { Button } from "@/components/ui/button";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { AllComapreCharts } from "@/components/university/charts/AllCompareCharts";
 import { AmountBasedChart } from "@/components/university/charts/AmountBasedChart";
 import { FundChart } from "@/components/university/charts/FundChart";
-// import { JobStudiesCompareCharts } from "@/components/university/charts/JobStudiesComapreCharts";
 import { PositionChart } from "@/components/university/charts/PositionChart";
 import { FundAllList } from "@/components/university/fund/FundAllList";
 import { DataTable } from "@/components/university/sidebar/data-table";

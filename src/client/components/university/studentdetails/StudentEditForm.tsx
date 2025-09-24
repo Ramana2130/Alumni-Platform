@@ -1,13 +1,6 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -16,8 +9,19 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { getStudentById, updateStudent } from "@/services/studentservices";
 import { useParams, useNavigate } from "react-router-dom";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 
 interface StudentData {
   student_name: string;
@@ -73,7 +77,9 @@ export function StudentEditForm() {
           student_academic_year: data.academic_year || "",
         });
       } catch (error: any) {
-        toast.error(error.response?.data?.error || "Failed to load student data");
+        toast.error(
+          error.response?.data?.error || "Failed to load student data"
+        );
       }
     }
     if (id) fetchStudent();
@@ -89,13 +95,13 @@ export function StudentEditForm() {
 
     try {
       const payload = {
-         studentName: formData.student_name,
-  regNo: formData.student_reg_no,
-  department: formData.student_dept,
-  email: formData.student_email,
-  yearOfJoining: formData.student_year_of_joining,
-  yearOfPassing: formData.student_year_of_passing,
-  academicYear: formData.student_academic_year, // or from input
+        studentName: formData.student_name,
+        regNo: formData.student_reg_no,
+        department: formData.student_dept,
+        email: formData.student_email,
+        yearOfJoining: formData.student_year_of_joining,
+        yearOfPassing: formData.student_year_of_passing,
+        academicYear: formData.student_academic_year, // or from input
       };
 
       await updateStudent(Number(id), payload);
@@ -128,7 +134,9 @@ export function StudentEditForm() {
                 <Input
                   id="student_name"
                   value={formData.student_name}
-                  onChange={(e) => handleInputChange("student_name", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("student_name", e.target.value)
+                  }
                   required
                 />
               </div>
@@ -138,7 +146,9 @@ export function StudentEditForm() {
                 <Input
                   id="student_reg_no"
                   value={formData.student_reg_no}
-                  onChange={(e) => handleInputChange("student_reg_no", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("student_reg_no", e.target.value)
+                  }
                   required
                 />
               </div>
@@ -148,7 +158,9 @@ export function StudentEditForm() {
                 <Input
                   id="student_email"
                   value={formData.student_email}
-                  onChange={(e) => handleInputChange("student_email", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("student_email", e.target.value)
+                  }
                 />
               </div>
             </div>
@@ -192,7 +204,9 @@ export function StudentEditForm() {
                               <Check
                                 className={cn(
                                   "ml-auto",
-                                  formData.student_dept === dept ? "opacity-100" : "opacity-0"
+                                  formData.student_dept === dept
+                                    ? "opacity-100"
+                                    : "opacity-0"
                                 )}
                               />
                             </CommandItem>
@@ -210,17 +224,23 @@ export function StudentEditForm() {
                   id="student_year_of_joining"
                   type="number"
                   value={formData.student_year_of_joining}
-                  onChange={(e) => handleInputChange("student_year_of_joining", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("student_year_of_joining", e.target.value)
+                  }
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="student_year_of_passing">Year of Passing *</Label>
+                <Label htmlFor="student_year_of_passing">
+                  Year of Passing *
+                </Label>
                 <Input
                   id="student_year_of_passing"
                   type="number"
                   value={formData.student_year_of_passing}
-                  onChange={(e) => handleInputChange("student_year_of_passing", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("student_year_of_passing", e.target.value)
+                  }
                   required
                 />
               </div>
@@ -230,7 +250,9 @@ export function StudentEditForm() {
                 <Input
                   id="student_academic_year"
                   value={formData.student_academic_year}
-                  onChange={(e) => handleInputChange("student_academic_year", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("student_academic_year", e.target.value)
+                  }
                 />
               </div>
             </div>
