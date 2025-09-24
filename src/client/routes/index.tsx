@@ -136,11 +136,11 @@ const router = createBrowserRouter([
                 element: <FundRequestPage />
             },
             {
-                path:"job-description",
+                path:"job-description/:id",
                 element: <StudentsJobDesp />
             },
             {
-                path: "student-alumni-details",
+                path: "student-alumni-details/:id",
                 element: <StudentAlumniDesp />
             },
             {

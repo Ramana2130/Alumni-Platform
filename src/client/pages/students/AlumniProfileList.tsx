@@ -220,7 +220,7 @@ export default  function StudentAlumniProfileList() {
 
   return (
     <div className="bg-gray-100">
-      <div className="md:hidden">
+      {/* <div className="md:hidden">
         <img
           src="/examples/tasks-light.png"
           width={1280}
@@ -304,8 +304,8 @@ export default  function StudentAlumniProfileList() {
         </div>
 
 
-      </div>
-      <div className="hidden h-full flex-1 flex-col gap-8 p-8 md:flex">
+      </div> */}
+      <div className="hidden h-full flex-1 flex-col gap-8 p-4 md:flex">
         <AlumniList />
       </div>
     </div>

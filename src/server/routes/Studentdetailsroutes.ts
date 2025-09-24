@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import xlsx from "xlsx";
-import { createStudent, deleteStudent, getAllStudents, getStudentById, updateStudent } from "../models/Studentdetails.js";
+import { createStudent, deleteStudent, getAllStudents, getStudentByEmail, getStudentById, updateStudent } from "../models/Studentdetails.js";
 
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -114,4 +114,16 @@ router.post("/uploadExcel", upload.single("file"), async (req, res) => {
   }
 });
 
+router.get("/by-email/:email", async (req, res) => {
+  try {
+    const email = req.params.email;
+    const student = await getStudentByEmail(email);
+    if (!student) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+    res.json(student);
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
 export default router;

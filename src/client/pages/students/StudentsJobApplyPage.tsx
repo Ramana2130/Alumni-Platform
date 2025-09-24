@@ -6,7 +6,7 @@ import { StudentJobList } from '@/components/students/StudentJobList'
 const StudentsJobApplyPage = () => {
   return (
     <div className='py-2 bg-gray-100'>
-      <h1 className="px-8 font-bold text-2xl tracking-tight py-2 text-[#e7000b]">Job List</h1>
+      {/* <h1 className="px-8 font-bold text-2xl tracking-tight py-2 text-[#e7000b]">Job List</h1> */}
         <StudentJobList />
     </div>
   )

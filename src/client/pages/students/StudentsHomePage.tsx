@@ -12,7 +12,7 @@ export default function Page() {
       <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
         <SectionCards />        
         {/* <DataTable data={data} /> */}
-        <h1 className="px-8 font-bold text-2xl tracking-tight text-[#e7000b]">Job List</h1>
+        {/* <h1 className="px-8 font-bold text-2xl tracking-tight text-[#e7000b]">Job List</h1> */}
         <StudentJobList />
       </div>
     </div>

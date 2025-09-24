@@ -1,35 +1,52 @@
 import type React from "react"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { getStudentByEmail } from "@/services/studentservices"
 
 export default function StudentPersonalProfile() {
-  const [formData, setFormData] = useState({
-    alumni_name: "",
-    alumni_dept: "",
-    alumni_reg_no: "",
-    alumni_year_of_joining: "",
-    alumni_year_of_passing: "",
-    alumni_current_status: "",
-    alumni_company_name: "",
-    alumni_designation: "",
-    alumni_job_location: "",
-    success_stories: "",
-    alumni_location: "",
-  })
+    const [formData, setFormData] = useState({
+    email: "",
+    role: "",
+  });
+
+  useEffect(() => {
+    const fetchStudentDetails = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+        // Fetch user email from token (or /auth/me endpoint)
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!res.ok) return;
+        const user = await res.json();
+        console.log(user);
+        // Fetch alumni details by email
+        const alumni = await getStudentByEmail(user.email);
+        setFormData({
+          email: user.email || "",
+          role: user.role || "",
+        });
+      } catch (err) {
+        // handle error
+      }
+    };
+    fetchStudentDetails();
+  }, []);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
+  console.log("Alumni Profile Data:", formData)
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Alumni Profile Data:", formData)
     // Handle form submission here
   }
 
@@ -50,59 +67,31 @@ export default function StudentPersonalProfile() {
           {/* Personal Information Section */}
           <Card className="bg-gray-50">
             <CardHeader>
-              <CardTitle className="text-primary">Settings</CardTitle>
-              <CardDescription>Save the details, if you change your credentials.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="alumni_name">Username</Label>
-                  <Input
-                    id="alumni_name"
-                    value={formData.alumni_name}
-                    onChange={(e) => handleInputChange("alumni_name", e.target.value)}
-                    placeholder="username"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="alumni_location">Password</Label>
-                  <Input
-                    id="alumni_location"
-                    value={formData.alumni_location}
-                    onChange={(e) => handleInputChange("alumni_location", e.target.value)}
-                    placeholder="**********"
-                    required
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="bg-gray-50">
-            <CardHeader>
               <CardTitle className="text-primary">Personal Information</CardTitle>
               <CardDescription>Basic details about yourself</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="alumni_name">Full Name *</Label>
+                  <Label htmlFor="email">Email *</Label>
                   <Input
-                    id="alumni_name"
-                    value={formData.alumni_name}
-                    onChange={(e) => handleInputChange("alumni_name", e.target.value)}
+                    id="email"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
                     placeholder="Enter your full name"
                     required
+                    readOnly
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="alumni_location">Current Location *</Label>
+                  <Label htmlFor="role">Role *</Label>
                   <Input
-                    id="alumni_location"
-                    value={formData.alumni_location}
-                    onChange={(e) => handleInputChange("alumni_location", e.target.value)}
+                    id="role"
+                    value={formData.role}
+                    onChange={(e) => handleInputChange("role", e.target.value)}
                     placeholder="City, Country"
                     required
+                    readOnly
                   />
                 </div>
               </div>
@@ -110,7 +99,7 @@ export default function StudentPersonalProfile() {
           </Card>
 
           {/* Academic Details Section */}
-          <Card className="bg-gray-50">
+          {/* <Card className="bg-gray-50">
             <CardHeader>
               <CardTitle className="text-primary">Academic Details</CardTitle>
               <CardDescription>Information about your academic journey</CardDescription>
@@ -118,8 +107,8 @@ export default function StudentPersonalProfile() {
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="alumni_dept">Department *</Label>
-                  <Select onValueChange={(value) => handleInputChange("alumni_dept", value)}>
+                  <Label htmlFor="role">Department *</Label>
+                  <Select onValueChange={(value) => handleInputChange("role", value)}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select your department" />
                     </SelectTrigger>
@@ -173,10 +162,10 @@ export default function StudentPersonalProfile() {
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-end">
+          {/* <div className="flex flex-col sm:flex-row gap-4 justify-end">
             <Button
               type="button"
               variant="outline"
@@ -188,7 +177,7 @@ export default function StudentPersonalProfile() {
             <Button type="submit" className="w-full sm:w-auto bg-[#e7000b] text-white hover:bg-[#e7000b]">
               Submit Profile
             </Button>
-          </div>
+          </div> */}
         </form>
       </div>
     </div>

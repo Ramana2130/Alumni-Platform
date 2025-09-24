@@ -114,3 +114,11 @@ export async function deleteStudent(id: number) {
     conn.release();
   }
 }
+
+export async function getStudentByEmail(email: string) {
+  const [rows] = await pool.query<RowDataPacket[]>(
+    "SELECT * FROM student_details WHERE email = ?",
+    [email]
+  );
+  return (rows as RowDataPacket[])[0];
+}

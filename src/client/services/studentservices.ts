@@ -44,3 +44,10 @@ export async function uploadStudentExcel(file: File) {
   );
   return res.data;
 }
+
+export async function getStudentByEmail(email: string) {
+  const res = await axios.get(
+    `${import.meta.env.VITE_BACKEND_URL}/by-email/${email}`
+  );
+  return res.data;
+}

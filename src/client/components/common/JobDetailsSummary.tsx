@@ -47,7 +47,7 @@ function formatDate(dateString: string) {
                 <Building2 className="w-6 h-6 text-emerald-600" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">{company_name}</h1>
+                <h1 className="text-xl font-bold text-gray-900 uppercase">{company_name}</h1>
                 <div className="flex items-center gap-2 text-gray-600">
                   <MapPin className="w-4 h-4" />
                   <span className="text-sm">{location}</span>
