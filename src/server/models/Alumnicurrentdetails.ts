@@ -2,7 +2,7 @@ import { ResultSetHeader } from "mysql2";
 import pool from "../config/db.js";
 
 // Create alumni detail
-export async function createAlumni(data :any) {
+export async function createAlumni(data: any) {
   const sql = `
     INSERT INTO alumni_current_details 
       (alumni_id, current_status, company_name, designation, job_location, success_stories)
@@ -22,7 +22,9 @@ export async function createAlumni(data :any) {
 
 // Get all alumni details
 export async function getAllAlumni() {
-  const [rows] = await pool.query("SELECT * FROM alumni_current_details ORDER BY created_at DESC");
+  const [rows] = await pool.query(
+    "SELECT * FROM alumni_current_details ORDER BY created_at DESC"
+  );
   return rows;
 }
 
@@ -30,7 +32,10 @@ export async function getAllAlumni() {
 import { RowDataPacket } from "mysql2";
 
 export async function getAlumniById(id: number) {
-  const [rows] = await pool.query<RowDataPacket[]>("SELECT * FROM alumni_current_details WHERE id = ?", [id]);
+  const [rows] = await pool.query<RowDataPacket[]>(
+    "SELECT * FROM alumni_current_details WHERE id = ?",
+    [id]
+  );
   return (rows as RowDataPacket[])[0];
 }
 
@@ -62,13 +67,17 @@ export async function updateAlumni(id: number, data: any) {
 // Delete alumni detail by id
 
 export async function deleteAlumni(id: number) {
-  const [result] = await pool.query<ResultSetHeader>("DELETE FROM alumni_current_details WHERE id = ?", [id]);
+  const [result] = await pool.query<ResultSetHeader>(
+    "DELETE FROM alumni_current_details WHERE id = ?",
+    [id]
+  );
   return result.affectedRows;
 }
 
 export async function getCurrentDetailsByAlumniId(alumniId: number) {
   const [rows] = await pool.query<RowDataPacket[]>(
-    "SELECT * FROM alumni_current_details WHERE alumni_id = ?", [alumniId]
+    "SELECT * FROM alumni_current_details WHERE alumni_id = ?",
+    [alumniId]
   );
   return (rows as RowDataPacket[])[0];
 }

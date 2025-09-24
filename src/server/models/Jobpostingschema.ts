@@ -16,20 +16,20 @@ export async function createJobPosting(data: any) {
     data.jobTitle,
     data.companyName,
     data.department,
-    data.jobType.join(','),   // array → string
+    data.jobType.join(","), // array → string
     data.applyLink,
     data.location,
-    data.salaryPackage,       // new field
+    data.salaryPackage, // new field
     data.overview,
     data.responsibilities,
     data.requiredQualifications,
     data.preferredQualifications,
-    data.benefits.join(','),  // array → string
+    data.benefits.join(","), // array → string
     data.applicationDeadline,
     data.contactEmail,
     data.contactPhone,
-    data.jobStatus || 'active', // default to 'active'
-    data.applicationNumber || 0 // default 0 applications
+    data.jobStatus || "active", // default to 'active'
+    data.applicationNumber || 0, // default 0 applications
   ];
 
   const [result]: any = await pool.query(sql, values);
@@ -38,18 +38,26 @@ export async function createJobPosting(data: any) {
 
 // Get all jobs
 export async function getAllJobPostings() {
-  const [rows] = await pool.query("SELECT * FROM job_postings ORDER BY created_at DESC");
+  const [rows] = await pool.query(
+    "SELECT * FROM job_postings ORDER BY created_at DESC"
+  );
   return rows;
 }
 
 // Get job by id
 export async function getJobPosting(id: number) {
-  const [rows]: [any[], any] = await pool.query("SELECT * FROM job_postings WHERE id = ?", [id]);
+  const [rows]: [any[], any] = await pool.query(
+    "SELECT * FROM job_postings WHERE id = ?",
+    [id]
+  );
   return rows[0];
 }
 
 export async function getJobPostingById(id: number): Promise<any> {
-  const [rows]: [any[], any] = await pool.query("SELECT * FROM job_postings WHERE id = ?", [id]);
+  const [rows]: [any[], any] = await pool.query(
+    "SELECT * FROM job_postings WHERE id = ?",
+    [id]
+  );
   return rows[0];
 }
 
@@ -81,15 +89,15 @@ export async function updateJobPosting(id: number, data: any) {
     data.jobTitle,
     data.companyName,
     data.department,
-    data.jobType.join(','),
+    data.jobType.join(","),
     data.applyLink,
     data.location,
-    data.salaryPackage,       // updated
+    data.salaryPackage, // updated
     data.overview,
     data.responsibilities,
     data.requiredQualifications,
     data.preferredQualifications,
-    data.benefits.join(','),
+    data.benefits.join(","),
     data.applicationDeadline,
     data.contactEmail,
     data.contactPhone,

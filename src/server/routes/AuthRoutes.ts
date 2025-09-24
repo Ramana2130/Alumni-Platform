@@ -8,19 +8,22 @@ import jwt from "jsonwebtoken";
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
 
-
 router.post("/register", async (req, res) => {
   try {
-    const {  email, registerNumber, role } = req.body;
+    const { email, registerNumber, role } = req.body;
 
     if (!email || !registerNumber || !role) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
-    const user = await registerUser( email, registerNumber, role);
+    const user = await registerUser(email, registerNumber, role);
     res.status(201).json({ message: "User registered successfully", user });
   } catch (err) {
-    res.status(400).json({ error: err instanceof Error ? err.message : "Registration failed" });
+    res
+      .status(400)
+      .json({
+        error: err instanceof Error ? err.message : "Registration failed",
+      });
   }
 });
 
@@ -34,10 +37,11 @@ router.post("/login", async (req, res) => {
     const { token, user } = await loginUser(email, password);
     res.json({ token, user });
   } catch (err) {
-    res.status(401).json({ error: err instanceof Error ? err.message : "Login failed" });
+    res
+      .status(401)
+      .json({ error: err instanceof Error ? err.message : "Login failed" });
   }
 });
-
 
 router.post("/logout", (req, res) => {
   const token = req.headers.authorization?.split(" ")[1];
@@ -60,7 +64,10 @@ router.get("/me", async (req, res) => {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as { id: number };
-    const [rows] = await pool.query("SELECT id, email, password, role FROM users WHERE id = ?", [decoded.id]) as [any[], any];
+    const [rows] = (await pool.query(
+      "SELECT id, email, password, role FROM users WHERE id = ?",
+      [decoded.id]
+    )) as [any[], any];
     const user = rows[0];
     if (!user) return res.status(404).json({ error: "User not found" });
 

@@ -1,14 +1,13 @@
-import { EventsList } from '@/components/alumni/job-posting/EventList'
-import { EventPostingForm } from '@/components/alumni/job-posting/EventPostionForm'
-import React from 'react'
+import { EventsList } from "@/components/alumni/job-posting/EventList";
+import { EventPostingForm } from "@/components/alumni/job-posting/EventPostionForm";
 
 const EventPostingPage = () => {
   return (
-    <div className='py-6'>
-        <EventsList />
-        <EventPostingForm />
+    <div className="py-6">
+      <EventsList />
+      <EventPostingForm />
     </div>
-  )
-}
+  );
+};
 
-export default EventPostingPage
+export default EventPostingPage;

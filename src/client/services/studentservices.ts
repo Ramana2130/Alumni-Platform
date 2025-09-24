@@ -37,11 +37,9 @@ export async function uploadStudentExcel(file: File) {
   const formData = new FormData();
   formData.append("file", file);
 
-  const res = await axios.post(
-    `${BASE_URL}/uploadExcel`,
-    formData,
-    { headers: { "Content-Type": "multipart/form-data" } }
-  );
+  const res = await axios.post(`${BASE_URL}/uploadExcel`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
   return res.data;
 }
 

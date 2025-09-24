@@ -1,5 +1,14 @@
 import express from "express";
-import { createAlumni, deleteAlumni, getAllAlumni, getAllAlumniFullDetails, getAlumniByEmail, getAlumniById, getAlumniFullProfile, updateAlumni } from "../models/Alumnidetails.js";
+import {
+  createAlumni,
+  deleteAlumni,
+  getAllAlumni,
+  getAllAlumniFullDetails,
+  getAlumniByEmail,
+  getAlumniById,
+  getAlumniFullProfile,
+  updateAlumni,
+} from "../models/Alumnidetails.js";
 import multer from "multer";
 import xlsx from "xlsx";
 import pool from "../config/db.js";
@@ -28,7 +37,9 @@ router.post("/add", async (req, res) => {
         );
       } catch (err: any) {
         if (err.message.includes("Duplicate entry")) {
-          console.log(`⚠️ User ${email} already exists in users table, skipping`);
+          console.log(
+            `⚠️ User ${email} already exists in users table, skipping`
+          );
         } else {
           throw err;
         }
@@ -51,14 +62,20 @@ router.get("/getAll", async (req, res) => {
     const alumni = await getAllAlumni();
     res.status(200).json(alumni);
   } catch (err) {
-    res.status(500).json({ error: err instanceof Error ? err.message : "Error fetching alumni details" });
+    res
+      .status(500)
+      .json({
+        error:
+          err instanceof Error ? err.message : "Error fetching alumni details",
+      });
   }
 });
 
 router.get("/getById/:id", async (req, res) => {
   try {
     const alumniId = Number(req.params.id);
-    if (isNaN(alumniId)) return res.status(400).json({ error: "Invalid alumni ID" });
+    if (isNaN(alumniId))
+      return res.status(400).json({ error: "Invalid alumni ID" });
 
     const alumni = await getAlumniById(alumniId);
     if (!alumni) return res.status(404).json({ error: "Alumni not found" });
@@ -72,28 +89,42 @@ router.get("/getById/:id", async (req, res) => {
 router.put("/updateById/:id", async (req, res) => {
   try {
     const alumniId = Number(req.params.id);
-    if (isNaN(alumniId)) return res.status(400).json({ error: "Invalid alumni ID" });
+    if (isNaN(alumniId))
+      return res.status(400).json({ error: "Invalid alumni ID" });
 
     const affectedRows = await updateAlumni(alumniId, req.body);
-    if (affectedRows === 0) return res.status(404).json({ error: "Alumni not found or no changes" });
+    if (affectedRows === 0)
+      return res.status(404).json({ error: "Alumni not found or no changes" });
 
     res.status(200).json({ message: "Alumni details updated successfully" });
   } catch (err) {
-    res.status(500).json({ error: err instanceof Error ? err.message : "Error updating alumni details" });
+    res
+      .status(500)
+      .json({
+        error:
+          err instanceof Error ? err.message : "Error updating alumni details",
+      });
   }
 });
 
 router.delete("/deleteById/:id", async (req, res) => {
   try {
     const alumniId = Number(req.params.id);
-    if (isNaN(alumniId)) return res.status(400).json({ error: "Invalid alumni ID" });
+    if (isNaN(alumniId))
+      return res.status(400).json({ error: "Invalid alumni ID" });
 
     const affectedRows = await deleteAlumni(alumniId);
-    if (affectedRows === 0) return res.status(404).json({ error: "Alumni not found" });
+    if (affectedRows === 0)
+      return res.status(404).json({ error: "Alumni not found" });
 
     res.status(200).json({ message: "Alumni details deleted successfully" });
   } catch (err) {
-    res.status(500).json({ error: err instanceof Error ? err.message : "Error deleting alumni details" });
+    res
+      .status(500)
+      .json({
+        error:
+          err instanceof Error ? err.message : "Error deleting alumni details",
+      });
   }
 });
 
@@ -114,7 +145,6 @@ router.get("/full-details/:id", async (req, res) => {
 });
 
 const upload = multer({ dest: "uploads/" });
-
 
 router.post("/uploadExcel", upload.single("file"), async (req, res) => {
   try {
@@ -138,7 +168,12 @@ router.post("/uploadExcel", upload.single("file"), async (req, res) => {
         alumni_email,
       } = row;
 
-      if (!alumni_name || !alumni_dept || !alumni_reg_no || !alumni_year_of_passing) {
+      if (
+        !alumni_name ||
+        !alumni_dept ||
+        !alumni_reg_no ||
+        !alumni_year_of_passing
+      ) {
         return res.status(400).json({
           error: `Missing required fields in row: ${JSON.stringify(row)}`,
         });
@@ -185,7 +220,9 @@ router.post("/uploadExcel", upload.single("file"), async (req, res) => {
     return res.json({ message: "Excel data uploaded successfully" });
   } catch (error: any) {
     console.error("❌ Error uploading Excel:", error.message, error);
-    return res.status(500).json({ error: error.message || "Error processing Excel file" });
+    return res
+      .status(500)
+      .json({ error: error.message || "Error processing Excel file" });
   }
 });
 
@@ -212,6 +249,5 @@ router.get("/full-details", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-
 
 export default router;

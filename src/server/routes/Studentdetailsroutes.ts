@@ -1,11 +1,17 @@
 import express from "express";
 import multer from "multer";
 import xlsx from "xlsx";
-import { createStudent, deleteStudent, getAllStudents, getStudentByEmail, getStudentById, updateStudent } from "../models/Studentdetails.js";
+import {
+  createStudent,
+  deleteStudent,
+  getAllStudents,
+  getStudentByEmail,
+  getStudentById,
+  updateStudent,
+} from "../models/Studentdetails.js";
 
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
-
 
 // Create student
 router.post("/add", async (req, res) => {
@@ -13,7 +19,11 @@ router.post("/add", async (req, res) => {
     const id = await createStudent(req.body);
     res.status(201).json({ id, message: "Student created successfully" });
   } catch (err) {
-    res.status(500).json({ error: err instanceof Error ? err.message : "An unknown error occurred" });
+    res
+      .status(500)
+      .json({
+        error: err instanceof Error ? err.message : "An unknown error occurred",
+      });
   }
 });
 
@@ -23,7 +33,11 @@ router.get("/getAll", async (req, res) => {
     const students = await getAllStudents();
     res.status(200).json(students);
   } catch (err) {
-    res.status(500).json({ error: err instanceof Error ? err.message : "Error fetching students" });
+    res
+      .status(500)
+      .json({
+        error: err instanceof Error ? err.message : "Error fetching students",
+      });
   }
 });
 
@@ -31,7 +45,8 @@ router.get("/getAll", async (req, res) => {
 router.get("/getById/:id", async (req, res) => {
   try {
     const studentId = Number(req.params.id);
-    if (isNaN(studentId)) return res.status(400).json({ error: "Invalid student ID" });
+    if (isNaN(studentId))
+      return res.status(400).json({ error: "Invalid student ID" });
 
     const student = await getStudentById(studentId);
     if (!student) return res.status(404).json({ error: "Student not found" });
@@ -46,14 +61,21 @@ router.get("/getById/:id", async (req, res) => {
 router.put("/updateById/:id", async (req, res) => {
   try {
     const studentId = Number(req.params.id);
-    if (isNaN(studentId)) return res.status(400).json({ error: "Invalid student ID" });
+    if (isNaN(studentId))
+      return res.status(400).json({ error: "Invalid student ID" });
 
     const affectedRows = await updateStudent(studentId, req.body);
-    if (affectedRows === 0) return res.status(404).json({ error: "Student not found or no changes" });
+    if (affectedRows === 0)
+      return res.status(404).json({ error: "Student not found or no changes" });
 
     res.status(200).json({ message: "Student updated successfully" });
   } catch (err) {
-    res.status(500).json({ error: err instanceof Error ? err.message : "Error updating student details" });
+    res
+      .status(500)
+      .json({
+        error:
+          err instanceof Error ? err.message : "Error updating student details",
+      });
   }
 });
 
@@ -61,14 +83,21 @@ router.put("/updateById/:id", async (req, res) => {
 router.delete("/deleteById/:id", async (req, res) => {
   try {
     const studentId = Number(req.params.id);
-    if (isNaN(studentId)) return res.status(400).json({ error: "Invalid student ID" });
+    if (isNaN(studentId))
+      return res.status(400).json({ error: "Invalid student ID" });
 
     const affectedRows = await deleteStudent(studentId);
-    if (affectedRows === 0) return res.status(404).json({ error: "Student not found" });
+    if (affectedRows === 0)
+      return res.status(404).json({ error: "Student not found" });
 
     res.status(200).json({ message: "Student deleted successfully" });
   } catch (err) {
-    res.status(500).json({ error: err instanceof Error ? err.message : "Error deleting student details" });
+    res
+      .status(500)
+      .json({
+        error:
+          err instanceof Error ? err.message : "Error deleting student details",
+      });
   }
 });
 
@@ -85,13 +114,13 @@ router.post("/uploadExcel", upload.single("file"), async (req, res) => {
 
     for (const row of sheet) {
       const typedRow = row as {
-          studentName: string;
-  regNo: string;
-  department: string;
-  email: string;
-  yearOfJoining: string;
-  yearOfPassing: string;
-  academicYear?: string | null;
+        studentName: string;
+        regNo: string;
+        department: string;
+        email: string;
+        yearOfJoining: string;
+        yearOfPassing: string;
+        academicYear?: string | null;
       };
 
       const studentData = {
@@ -108,9 +137,15 @@ router.post("/uploadExcel", upload.single("file"), async (req, res) => {
       insertedIds.push(id);
     }
 
-    res.status(201).json({ message: "Excel processed successfully", insertedIds });
+    res
+      .status(201)
+      .json({ message: "Excel processed successfully", insertedIds });
   } catch (err) {
-    res.status(500).json({ error: err instanceof Error ? err.message : "Error processing Excel" });
+    res
+      .status(500)
+      .json({
+        error: err instanceof Error ? err.message : "Error processing Excel",
+      });
   }
 });
 

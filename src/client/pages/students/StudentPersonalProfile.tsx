@@ -1,16 +1,19 @@
-import type React from "react"
+import type React from "react";
 
-import { useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { getStudentByEmail } from "@/services/studentservices"
+import { useEffect, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { getStudentByEmail } from "@/services/studentservices";
 
 export default function StudentPersonalProfile() {
-    const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     email: "",
     role: "",
   });
@@ -41,33 +44,37 @@ export default function StudentPersonalProfile() {
   }, []);
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
-  console.log("Alumni Profile Data:", formData)
+  console.log("Alumni Profile Data:", formData);
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Handle form submission here
-  }
+  };
 
   const handleSaveProgress = () => {
-    console.log("Progress saved:", formData)
+    console.log("Progress saved:", formData);
     // Handle save progress here
-  }
+  };
 
   return (
     <div className="min-h-screen bg-background p-2 md:p-8">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 text-start">
           <h1 className="text-2xl font-bold text-[#e7000b] mb-2">Profile</h1>
-          <p className="text-muted-foreground">Please fill out your details to complete your alumni profile</p>
+          <p className="text-muted-foreground">
+            Please fill out your details to complete your alumni profile
+          </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Personal Information Section */}
           <Card className="bg-gray-50">
             <CardHeader>
-              <CardTitle className="text-primary">Personal Information</CardTitle>
+              <CardTitle className="text-primary">
+                Personal Information
+              </CardTitle>
               <CardDescription>Basic details about yourself</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -181,5 +188,5 @@ export default function StudentPersonalProfile() {
         </form>
       </div>
     </div>
-  )
+  );
 }

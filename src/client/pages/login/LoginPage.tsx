@@ -1,12 +1,9 @@
-import { LoginForm } from "@/components/auth/LoginForm"
-import { GalleryVerticalEnd } from "lucide-react"
-import logo from "../../../client/assets/skcet-logo.jpg"
-
+import { LoginForm } from "@/components/auth/LoginForm";
 
 export default function LoginPage() {
   return (
-    <div className="">        
-        <LoginForm />
+    <div className="">
+      <LoginForm />
     </div>
-  )
+  );
 }

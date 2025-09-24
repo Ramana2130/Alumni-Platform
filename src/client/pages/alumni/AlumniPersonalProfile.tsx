@@ -1,12 +1,11 @@
-import ProfilePage from '@/components/alumni/profile/Profile'
-import React from 'react'
+import ProfilePage from "@/components/alumni/profile/Profile";
 
 const AlumniPersonalProfile = () => {
   return (
     <div>
-        <ProfilePage />
+      <ProfilePage />
     </div>
-  )
-}
+  );
+};
 
-export default AlumniPersonalProfile
+export default AlumniPersonalProfile;

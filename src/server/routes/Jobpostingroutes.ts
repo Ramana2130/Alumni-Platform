@@ -1,6 +1,11 @@
 import express from "express";
-import { createJobPosting, deleteJobPosting, getAllJobPostings, getJobPostingById, updateJobPosting } from "../models/Jobpostingschema.js";
-
+import {
+  createJobPosting,
+  deleteJobPosting,
+  getAllJobPostings,
+  getJobPostingById,
+  updateJobPosting,
+} from "../models/Jobpostingschema.js";
 
 const router = express.Router();
 
@@ -48,7 +53,6 @@ router.get("/getById/:id", async (req, res) => {
   }
 });
 
-
 // Update a job posting by ID
 router.put("/updateById/:id", async (req, res) => {
   try {
@@ -56,7 +60,8 @@ router.put("/updateById/:id", async (req, res) => {
     if (isNaN(jobId)) return res.status(400).json({ error: "Invalid job ID" });
 
     const affectedRows = await updateJobPosting(jobId, req.body);
-    if (affectedRows === 0) return res.status(404).json({ error: "Job not found or no changes" });
+    if (affectedRows === 0)
+      return res.status(404).json({ error: "Job not found or no changes" });
 
     res.status(200).json({ message: "Job posting updated successfully" });
   } catch (err) {
@@ -75,7 +80,8 @@ router.delete("/deleteById/:id", async (req, res) => {
     if (isNaN(jobId)) return res.status(400).json({ error: "Invalid job ID" });
 
     const affectedRows = await deleteJobPosting(jobId);
-    if (affectedRows === 0) return res.status(404).json({ error: "Job not found" });
+    if (affectedRows === 0)
+      return res.status(404).json({ error: "Job not found" });
 
     res.status(200).json({ message: "Job posting deleted successfully" });
   } catch (err) {
@@ -86,6 +92,5 @@ router.delete("/deleteById/:id", async (req, res) => {
     }
   }
 });
-
 
 export default router;

@@ -1,33 +1,23 @@
-import { z } from "zod"
-import { taskSchema } from "../../components/data/alumni-profiles/schema"
-import { DataTable } from "@/components/alumni/alumni-profiles/data-table"
-import { columns } from "@/components/alumni/alumni-profiles/columns"
-import { useLoaderData } from "react-router-dom"
-import tasks from "../../components/data/alumni-profiles/tasks.json"
-
+import { z } from "zod";
+import { taskSchema } from "../../components/data/alumni-profiles/schema";
+import { DataTable } from "@/components/alumni/alumni-profiles/data-table";
+import { columns } from "@/components/alumni/alumni-profiles/columns";
+import { useLoaderData } from "react-router-dom";
+import tasks from "../../components/data/alumni-profiles/tasks.json";
 
 export const metadata = {
   title: "Tasks",
   description: "A task and issue tracker build using Tanstack Table.",
-}
-
-// Simulate a database read for tasks.
-// async function getTasks() {
-//   const data = await fs.readFile(
-//     path.join(process.cwd(), "components/data/alumni-profiles/tasks.json")
-//   )
-
-//   const tasks = JSON.parse(data.toString())
-
-//   return z.array(taskSchema).parse(tasks)
-// }
+};
 
 export async function alumniProfileListLoader() {
   return z.array(taskSchema).parse(tasks);
 }
 
-export default  function StudentProfileList() {
-  const tasks = useLoaderData() as Awaited<ReturnType<typeof alumniProfileListLoader>>;
+export default function StudentProfileList() {
+  const tasks = useLoaderData() as Awaited<
+    ReturnType<typeof alumniProfileListLoader>
+  >;
 
   return (
     <>
@@ -51,5 +41,5 @@ export default  function StudentProfileList() {
         <DataTable data={tasks} columns={columns} />
       </div>
     </>
-  )
+  );
 }

@@ -35,12 +35,7 @@ export async function createStudent(data: any) {
       INSERT INTO users (email, password, role, studentId)
       VALUES (?, ?, ?, ?)
     `;
-    const userValues = [
-      data.email,
-      hashedPassword,
-      "student",
-      studentId,
-    ];
+    const userValues = [data.email, hashedPassword, "student", studentId];
 
     await conn.query<ResultSetHeader>(userSql, userValues);
 
@@ -55,13 +50,18 @@ export async function createStudent(data: any) {
 }
 // Get all students
 export async function getAllStudents() {
-  const [rows] = await pool.query("SELECT * FROM student_details ORDER BY id DESC");
+  const [rows] = await pool.query(
+    "SELECT * FROM student_details ORDER BY id DESC"
+  );
   return rows;
 }
 
 // Get student by ID
 export async function getStudentById(id: number) {
-  const [rows] = await pool.query<RowDataPacket[]>("SELECT * FROM student_details WHERE id = ?", [id]);
+  const [rows] = await pool.query<RowDataPacket[]>(
+    "SELECT * FROM student_details WHERE id = ?",
+    [id]
+  );
   return (rows as RowDataPacket[])[0];
 }
 
@@ -100,10 +100,16 @@ export async function deleteStudent(id: number) {
     await conn.beginTransaction();
 
     // Delete from users table first
-    await conn.query(`DELETE FROM users WHERE alumniId = ? AND role = 'student'`, [id]);
+    await conn.query(
+      `DELETE FROM users WHERE alumniId = ? AND role = 'student'`,
+      [id]
+    );
 
     // Delete from student_details
-    const [result] = await conn.query<ResultSetHeader>(`DELETE FROM student_details WHERE id = ?`, [id]);
+    const [result] = await conn.query<ResultSetHeader>(
+      `DELETE FROM student_details WHERE id = ?`,
+      [id]
+    );
 
     await conn.commit();
     return result.affectedRows;

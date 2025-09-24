@@ -32,7 +32,8 @@ export async function getAllFundRequests() {
 // Get fund request by ID
 export async function getFundRequestById(id: number) {
   const [rows] = await pool.query<RowDataPacket[]>(
-    "SELECT * FROM fund_requests WHERE id = ?", [id]
+    "SELECT * FROM fund_requests WHERE id = ?",
+    [id]
   );
   return rows[0];
 }

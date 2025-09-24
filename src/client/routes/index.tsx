@@ -15,7 +15,9 @@ import UniversityStudentDesp from "@/components/university/studentdetails/Univer
 import AlumniChatPage from "@/pages/alumni/AlumniChatPage";
 import AlumniHomePage from "@/pages/alumni/AlumniHomePage";
 import AlumniPersonalProfile from "@/pages/alumni/AlumniPersonalProfile";
-import AlumniProfileList, { alumniProfileListLoader } from "@/pages/alumni/AlumniProfileList";
+import AlumniProfileList, {
+  alumniProfileListLoader,
+} from "@/pages/alumni/AlumniProfileList";
 import EventPostingPage from "@/pages/alumni/EventPostingPage";
 import FundDonatePage from "@/pages/alumni/FundDonatePage";
 import JobPostingPage from "@/pages/alumni/JobPostingPage";
@@ -38,163 +40,163 @@ import UniverSityStudentPage from "@/pages/university/UniversityStudentPage";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <HomePage />
-    },
-    {
-        path:"/auth/login",
-        element: <LoginPage />
-    },    
-    {
-        path: "/alumni",
-        element: <DashboardLayout />,
-        children: [
-            {
-                path: "dashboard",
-                element: <AlumniHomePage />
-            },
-            {
-                path: "alumni-profiles",
-                element: <AlumniProfileList />,
-                loader: alumniProfileListLoader
-            },
-            {
-                path: "student-profiles",
-                element: <StudentProfileList />,
-                loader: alumniProfileListLoader
-            },
-            {
-                path: "job-posting",
-                element: <JobPostingPage />
-            },
-            {
-                path: "job-editing/:id",
-                element: <JobEditForm />
-            },
-            {
-                path: "chat",
-                element: <AlumniChatPage />
-            },
-            {
-                path: "profile",
-                element: <AlumniPersonalProfile />
-            },
-            {
-                path: "personal-details/:id",
-                element: <AlumniDesp />
-            },
-            {
-                path:  "edit-personal-details/:id",
-                element: <AlumniEditForm />
-            },
-            {
-                path: "fund-donated",
-                element: <FundDonatePage />
-            },
-            {
-                path: "event-posting",
-                element: <EventPostingPage />
-            },
-            {
-                path: "event-editing/:id",
-                element: <EventEditForm />
-            },
-            {
-                path: "payment-gateway",
-                element: <Payment />
-            }
-        ],
-    },
-    {
-        path: "/students",
-        element: <StudentDashboardLayout />,
-        children: [
-            {
-                path: "dashboard",
-                element: <StudentHomePage />
-            },
-            {
-                path: "alumni-profiles",
-                element: <StudentAlumniProfileList />,
-                loader: alumniProfileListLoader,                    
-            },
-            {
-                path: "apply-job",
-                element : <StudentsJobApplyPage />
-            },
-            {
-                path: "chat",
-                element: <StudentsChatPage />
-            },
-            {
-                path: "personal-details",
-                element: <AlumniPersonalProfilePage />
-            },
-            {
-                path: "fund-request",
-                element: <FundRequestPage />
-            },
-            {
-                path:"job-description/:id",
-                element: <StudentsJobDesp />
-            },
-            {
-                path: "student-alumni-details/:id",
-                element: <StudentAlumniDesp />
-            },
-            {
-                path: "student-personal-details",
-                element: <StudentPersonalProfile />
-            },            
-        ]
-    },
-    {
-        path: "/university",
-        element: <UniversityDashboardLayout />,
-        children: [
-            {
-                path: "dashboard",
-                element: <UniversityHomePage />
-            },
-            {
-                path: "alumni-list",
-                element: <UniverSityAlumniPage />
-            },
-            {
-                path: "student-list",
-                element: <UniverSityStudentPage />
-            },
-            {
-                path: "job-list",
-                element: <UniversityJobPage />
-            },
-            {
-                path:"job-description/:id",
-                element: <JobDesp />
-            },
-            {
-                path: "fund-reports",
-                element: <FundPage />
-            },
-            {
-                path: "alumni-personal-details/:id",
-                element: <UniversityAlumniDesp />
-            },
-            {
-                path: "student-personal-details/:id",
-                element: <UniversityStudentDesp />
-            },
-            {
-                path: "settings",
-                element: <UniversityProfilePage />
-            },
-            {
-                path: "edit-personal-details/:id",
-                element: <StudentEditForm />
-            }
-        ]
-    }
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/auth/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/alumni",
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: "dashboard",
+        element: <AlumniHomePage />,
+      },
+      {
+        path: "alumni-profiles",
+        element: <AlumniProfileList />,
+        loader: alumniProfileListLoader,
+      },
+      {
+        path: "student-profiles",
+        element: <StudentProfileList />,
+        loader: alumniProfileListLoader,
+      },
+      {
+        path: "job-posting",
+        element: <JobPostingPage />,
+      },
+      {
+        path: "job-editing/:id",
+        element: <JobEditForm />,
+      },
+      {
+        path: "chat",
+        element: <AlumniChatPage />,
+      },
+      {
+        path: "profile",
+        element: <AlumniPersonalProfile />,
+      },
+      {
+        path: "personal-details/:id",
+        element: <AlumniDesp />,
+      },
+      {
+        path: "edit-personal-details/:id",
+        element: <AlumniEditForm />,
+      },
+      {
+        path: "fund-donated",
+        element: <FundDonatePage />,
+      },
+      {
+        path: "event-posting",
+        element: <EventPostingPage />,
+      },
+      {
+        path: "event-editing/:id",
+        element: <EventEditForm />,
+      },
+      {
+        path: "payment-gateway",
+        element: <Payment />,
+      },
+    ],
+  },
+  {
+    path: "/students",
+    element: <StudentDashboardLayout />,
+    children: [
+      {
+        path: "dashboard",
+        element: <StudentHomePage />,
+      },
+      {
+        path: "alumni-profiles",
+        element: <StudentAlumniProfileList />,
+        loader: alumniProfileListLoader,
+      },
+      {
+        path: "apply-job",
+        element: <StudentsJobApplyPage />,
+      },
+      {
+        path: "chat",
+        element: <StudentsChatPage />,
+      },
+      {
+        path: "personal-details",
+        element: <AlumniPersonalProfilePage />,
+      },
+      {
+        path: "fund-request",
+        element: <FundRequestPage />,
+      },
+      {
+        path: "job-description/:id",
+        element: <StudentsJobDesp />,
+      },
+      {
+        path: "student-alumni-details/:id",
+        element: <StudentAlumniDesp />,
+      },
+      {
+        path: "student-personal-details",
+        element: <StudentPersonalProfile />,
+      },
+    ],
+  },
+  {
+    path: "/university",
+    element: <UniversityDashboardLayout />,
+    children: [
+      {
+        path: "dashboard",
+        element: <UniversityHomePage />,
+      },
+      {
+        path: "alumni-list",
+        element: <UniverSityAlumniPage />,
+      },
+      {
+        path: "student-list",
+        element: <UniverSityStudentPage />,
+      },
+      {
+        path: "job-list",
+        element: <UniversityJobPage />,
+      },
+      {
+        path: "job-description/:id",
+        element: <JobDesp />,
+      },
+      {
+        path: "fund-reports",
+        element: <FundPage />,
+      },
+      {
+        path: "alumni-personal-details/:id",
+        element: <UniversityAlumniDesp />,
+      },
+      {
+        path: "student-personal-details/:id",
+        element: <UniversityStudentDesp />,
+      },
+      {
+        path: "settings",
+        element: <UniversityProfilePage />,
+      },
+      {
+        path: "edit-personal-details/:id",
+        element: <StudentEditForm />,
+      },
+    ],
+  },
 ]);
 
 export default router;

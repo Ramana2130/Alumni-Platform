@@ -5,12 +5,16 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "supersecret"; // keep safe
 
-export async function registerUser(email: string, password: string, role: string, alumniId?: number | null) {
+export async function registerUser(
+  email: string,
+  password: string,
+  role: string,
+  alumniId?: number | null
+) {
   // check if user exists
-  const [rows]: any = await pool.query(
-    "SELECT * FROM users WHERE email = ?",
-    [email]
-  );
+  const [rows]: any = await pool.query("SELECT * FROM users WHERE email = ?", [
+    email,
+  ]);
 
   if (rows.length > 0) {
     throw new Error("User already exists with this email");
@@ -58,5 +62,3 @@ export async function loginUser(email: string, password: string) {
 
   return { token, user };
 }
-
-

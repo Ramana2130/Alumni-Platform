@@ -1,7 +1,13 @@
 import express from "express";
-import { createAlumni, deleteAlumni, getAllAlumni, getAlumniById, getCurrentDetailsByAlumniId, updateAlumni } from "../models/Alumnicurrentdetails.js";
+import {
+  createAlumni,
+  deleteAlumni,
+  getAllAlumni,
+  getAlumniById,
+  getCurrentDetailsByAlumniId,
+  updateAlumni,
+} from "../models/Alumnicurrentdetails.js";
 import pool from "../config/db.js";
-
 
 const router = express.Router();
 
@@ -11,8 +17,8 @@ router.post("/add", async (req, res) => {
     const id = await createAlumni(req.body);
     res.status(201).json({ id, message: "Alumni detail created successfully" });
   } catch (err) {
-        console.error("❌ Error inserting alumni_current_details:", err);
-    res.status(500).json({ error:  "Failed to create alumni detail" });
+    console.error("❌ Error inserting alumni_current_details:", err);
+    res.status(500).json({ error: "Failed to create alumni detail" });
   }
 });
 
@@ -22,7 +28,7 @@ router.get("/getAll", async (req, res) => {
     const alumni = await getAllAlumni();
     res.status(200).json(alumni);
   } catch (err) {
-    res.status(500).json({ error:  "Failed to get alumni details" });
+    res.status(500).json({ error: "Failed to get alumni details" });
   }
 });
 
@@ -32,10 +38,11 @@ router.get("/getById/:id", async (req, res) => {
     const id = Number(req.params.id);
     if (isNaN(id)) return res.status(400).json({ error: "Invalid alumni ID" });
     const alumni = await getAlumniById(id);
-    if (!alumni) return res.status(404).json({ error: "Alumni detail not found" });
+    if (!alumni)
+      return res.status(404).json({ error: "Alumni detail not found" });
     res.status(200).json(alumni);
   } catch (err) {
-    res.status(500).json({ error:  "Failed to get alumni detail" });
+    res.status(500).json({ error: "Failed to get alumni detail" });
   }
 });
 
@@ -45,10 +52,13 @@ router.put("/updateById/:id", async (req, res) => {
     const id = Number(req.params.id);
     if (isNaN(id)) return res.status(400).json({ error: "Invalid alumni ID" });
     const affectedRows = await updateAlumni(id, req.body);
-    if (affectedRows === 0) return res.status(404).json({ error: "Alumni detail not found or no changes" });
+    if (affectedRows === 0)
+      return res
+        .status(404)
+        .json({ error: "Alumni detail not found or no changes" });
     res.status(200).json({ message: "Alumni detail updated successfully" });
   } catch (err) {
-    res.status(500).json({ error:  "Failed to update alumni detail" });
+    res.status(500).json({ error: "Failed to update alumni detail" });
   }
 });
 
@@ -58,10 +68,11 @@ router.delete("/deleteById/:id", async (req, res) => {
     const id = Number(req.params.id);
     if (isNaN(id)) return res.status(400).json({ error: "Invalid alumni ID" });
     const affectedRows = await deleteAlumni(id);
-    if (affectedRows === 0) return res.status(404).json({ error: "Alumni detail not found" });
+    if (affectedRows === 0)
+      return res.status(404).json({ error: "Alumni detail not found" });
     res.status(200).json({ message: "Alumni detail deleted successfully" });
   } catch (err) {
-    res.status(500).json({ error:  "Failed to delete alumni detail" });
+    res.status(500).json({ error: "Failed to delete alumni detail" });
   }
 });
 
@@ -69,9 +80,11 @@ router.delete("/deleteById/:id", async (req, res) => {
 router.get("/getCurrentDetailsByAlumniId/:id", async (req, res) => {
   try {
     const alumniId = Number(req.params.id);
-    if (isNaN(alumniId)) return res.status(400).json({ error: "Invalid alumni ID" });
+    if (isNaN(alumniId))
+      return res.status(400).json({ error: "Invalid alumni ID" });
     const currentDetails = await getCurrentDetailsByAlumniId(alumniId);
-    if (!currentDetails) return res.status(404).json({ error: "Current details not found" });
+    if (!currentDetails)
+      return res.status(404).json({ error: "Current details not found" });
     res.status(200).json(currentDetails);
   } catch (err) {
     res.status(500).json({ error: "Failed to get current details" });
@@ -82,17 +95,13 @@ export default router;
 router.get("/counts", async (req, res) => {
   try {
     // Query all counts in parallel
-    const [
-      [eventsResult],
-      [connectionsResult],
-      [jobsResult],
-      [fundResult]
-    ] = await Promise.all([
-      pool.query("SELECT COUNT(*) AS totalEvents FROM events_posting"),
-      pool.query("SELECT COUNT(*) AS totalConnections FROM alumni_details"),
-      pool.query("SELECT COUNT(*) AS totalJobPostings FROM job_postings"),
-      pool.query("SELECT COUNT(*) AS totalFundDonated FROM fund_requests"),
-    ]);
+    const [[eventsResult], [connectionsResult], [jobsResult], [fundResult]] =
+      await Promise.all([
+        pool.query("SELECT COUNT(*) AS totalEvents FROM events_posting"),
+        pool.query("SELECT COUNT(*) AS totalConnections FROM alumni_details"),
+        pool.query("SELECT COUNT(*) AS totalJobPostings FROM job_postings"),
+        pool.query("SELECT COUNT(*) AS totalFundDonated FROM fund_requests"),
+      ]);
 
     const eventsRows = eventsResult as any[];
     const connectionsRows = connectionsResult as any[];
@@ -107,6 +116,6 @@ router.get("/counts", async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch dashboard counts" });
-    console.log("failed count: " , err)
+    console.log("failed count: ", err);
   }
 });

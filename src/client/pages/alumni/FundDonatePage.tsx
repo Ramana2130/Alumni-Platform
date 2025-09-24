@@ -1,12 +1,16 @@
-import FundDonate from '@/components/alumni/fund/FundDonate'
-import React from 'react'
+import FundDonate from "@/components/alumni/fund/FundDonate";
+import React from "react";
 
 const FundDonatePage = () => {
   return (
     <div>
-        <FundDonate onBack={() => { /* handle back action here */ }} />
+      <FundDonate
+        onBack={() => {
+          /* handle back action here */
+        }}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default FundDonatePage
+export default FundDonatePage;
